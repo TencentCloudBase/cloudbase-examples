@@ -1,0 +1,2 @@
+<button bindtap="shouqan">订阅消息</button>
+
