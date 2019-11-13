@@ -1,0 +1,11 @@
+dist: xenial
+script:
+  - sh  .github/release.sh
+before_deploy:
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y-%m-%d')-$(git log --format=%h -1)}
+deploy:
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  file_glob: true
+  file: .zip-files/*
+  skip_cleanup: true
