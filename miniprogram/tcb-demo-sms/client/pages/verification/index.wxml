@@ -1,0 +1,67 @@
+<import src="../common/head.wxml"/>
+<import src="../common/foot.wxml"/>
+
+<view class="container">
+  <template is="head" data="{{title}}"/>
+    <view class="page__bd">
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">手机号</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input
+                  class="weui-input"
+                  placeholder="请输入手机号"
+                  bindinput="recordPhoneNumber"
+                />
+            </view>
+            <view class="weui-cell__ft">
+                <view
+                  wx:if="{{!isCountDown}}" 
+                  class="weui-vcode-btn"
+                  bindtap="getCode"
+                >
+                    获取验证码
+                  </view>
+                <view
+                  wx:if="{{isCountDown}}" 
+                  class="weui-vcode-btn"
+                >
+                  {{countDown}}
+                </view>
+            </view>
+        </view>
+      </view>
+
+      <radio-group class="radio-group" bindchange="typeChange">
+        <label class="radio">
+          <radio color='#006eff' value="normal" checked='true' />
+          普通短信
+        </label>
+        <label class="radio">
+          <radio color='#006eff' value="voice"/>
+          语音短信
+        </label>
+      </radio-group>
+
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">验证码</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input
+                  class="weui-input" 
+                  placeholder="请输入验证码" 
+                  bindinput="recordCode"
+                  value="{{code}}"
+                />
+            </view>
+        </view>
+      </view>
+
+      <button class="weui-btn verify-button" type="primary" bindtap="verifyCode">验证</button>
+    </view>
+  <template is="foot" />
+</view>

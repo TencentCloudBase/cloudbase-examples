@@ -1,0 +1,41 @@
+<import src="../common/head.wxml"/>
+<import src="../common/foot.wxml"/>
+
+<view class="container">
+  <template is="head" data="{{title}}"/>
+    <view class="page__bd">
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">手机号</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input
+                  class="weui-input"
+                  placeholder="请输入手机号"
+                  bindinput="recordPhoneNumber"
+                />
+            </view>
+        </view>
+      </view>
+
+      <radio-group class="radio-group" bindchange="typeChange">
+        <label class="radio">
+          <radio color='#006eff' value="PromptVoiceSend" checked='true' />
+          单发
+        </label>
+        <label class="radio">
+          <radio color='#006eff' value="TtsVoiceSend"/>
+          单发（指定模板）
+        </label>
+        <view class="gap"></view>
+        <label class="radio">
+          <radio color='#006eff' value="FileVoiceSend"/>
+          单发（指定语音文件）
+        </label>
+      </radio-group>
+
+      <button class="weui-btn verify-button" type="primary" bindtap="sendSMS">发送</button>
+    </view>
+  <template is="foot" />
+</view>

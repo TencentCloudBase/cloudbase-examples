@@ -1,0 +1,40 @@
+<import src="../common/head.wxml"/>
+<import src="../common/foot.wxml"/>
+
+<view class="container">
+  <template is="head" data="{{title}}"/>
+    <view class="page__bd">
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">手机号</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input
+                  class="weui-input"
+                  placeholder="请输入手机号，群发用逗号分隔"
+                  bindinput="recordPhoneNumber"
+                />
+            </view>
+        </view>
+      </view>
+
+      <radio-group class="radio-group" bindchange="typeChange">
+        <label class="radio">
+          <radio color='#006eff' value="SmsSingleSendTemplate" checked='true' />
+          单发（模板）
+        </label>
+        <label class="radio">
+          <radio color='#006eff' value="SmsMultiSend"/>
+          群发
+        </label>
+        <label class="radio">
+          <radio color='#006eff' value="SmsMultiSendTemplate"/>
+          群发（模板）
+        </label>
+      </radio-group>
+
+      <button class="weui-btn verify-button" type="primary" bindtap="sendSMS">发送</button>
+    </view>
+  <template is="foot" />
+</view>

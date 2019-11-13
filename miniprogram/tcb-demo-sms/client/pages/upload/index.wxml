@@ -1,0 +1,27 @@
+<import src="../common/head.wxml"/>
+<import src="../common/foot.wxml"/>
+
+<view class="container">
+  <template is="head" data="{{title}}"/>
+    <view class="page__bd">
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">语音文件</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input
+                  class="weui-input"
+                  placeholder="输入语音文件云开发fileID"
+                  bindinput="recordFileID"
+                />
+            </view>
+        </view>
+      </view>
+
+      <button class="weui-btn send-button" type="primary" bindtap="upload">上传</button>
+
+      <view class="fid">语音文件fid：{{fid}}</view>
+    </view>
+  <template is="foot" />
+</view>

@@ -1,0 +1,32 @@
+{
+  "name": "tcb-demo-sms",
+  "version": "0.0.1",
+  "description": "basic demo for miniprogram cloud base",
+  "main": ".eslint.js",
+  "scripts": {
+    "lint": "eslint --init",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TencentCloudBase/tcb-demo-sms.git"
+  },
+  "keywords": [
+    "tencent",
+    "cloud",
+    "base"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TencentCloudBase/tcb-demo-sms/issues"
+  },
+  "homepage": "https://github.com/TencentCloudBase/tcb-demo-sms#readme",
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1"
+  }
+}

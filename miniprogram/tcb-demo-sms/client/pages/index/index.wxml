@@ -1,0 +1,30 @@
+<!--index.wxml-->
+<view class="index">
+  <view class="index-hd">
+    <image
+      class="index-logo"      
+      src="//main.qcloudimg.com/raw/8a8f68dc1bbca344ce4046d52aea89ee.png"
+    ></image>
+    <view class="index-desc">以下将演示基于小程序·云开发所研发的短信解决方案</view>
+  </view>
+  <view class="index-bd">
+    <view class="kind-list">
+      <block wx:for-items="{{list}}" wx:key="{{item.id}}">
+        <view class="kind-list-item">
+          <view id="{{item.id}}" class="kind-list-item-hd" bindtap="jumpUrl">
+            <view class="kind-list-text">
+              {{item.name}}
+            </view>
+            <!-- <image class="kind-list-img" src="resources/kind/{{item.id}}.png"></image> -->
+          </view>
+          
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="index-bd">
+    <view class="index-desc">源码及教程：</view>
+    <view class="index-desc">https://github.com/TencentCloudBase/tcb-demo-sms</view>
+  </view>  
+</view>

@@ -1,0 +1,8 @@
+.send-button {
+  margin: 20rpx;
+}
+
+.fid {
+  margin: 0 20rpx;
+  font-size: 24rpx;
+}

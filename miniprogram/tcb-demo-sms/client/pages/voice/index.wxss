@@ -1,0 +1,11 @@
+.radio-group {
+  margin: 20rpx 0 20rpx 10rpx;
+}
+
+.verify-button {
+  margin: 20rpx;
+}
+
+.gap {
+  margin-top: 20rpx;
+}

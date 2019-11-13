@@ -1,0 +1,66 @@
+{
+	"miniprogramRoot": "client/",
+	"cloudfunctionRoot": "cloud/functions/",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"nodeModules": true
+	},
+	"appid": "wx9cf12b17b64cc203",
+	"projectname": "tcb-demo-sms",
+	"libVersion": "2.5.0",
+	"compileType": "miniprogram",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "验证码",
+					"pathName": "pages/verification/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "普通短信通知",
+					"pathName": "pages/normal/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "语音短信通知",
+					"pathName": "pages/voice/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "上传语音文件",
+					"pathName": "pages/upload/index",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}
