@@ -12,7 +12,6 @@
 - miniprogram: 存放小程序端 Demo / Workshop
 - server: 存放服务端 Demo / Workshop
 - web: 存放 Web 端 Demo / Workshop
-- cli: 存放 Cli 端 Demo / Workshop
 ```
 
 ##  联系我们
