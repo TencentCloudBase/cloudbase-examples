@@ -1,0 +1,50 @@
+.container-box {
+  background-image: url(https://mc.qcloudimg.com/static/img/7da57e0050d308e2e1b1e31afbc42929/bg.png);
+  background-color: #fff;
+  background-repeat:no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.camera-box {
+  width: 100%;
+  height: 100%;
+}
+
+#webrtcroom {
+  width: 100%;
+  height: 100%;
+}
+
+.operate {
+  position: absolute;
+  /* margin-left: auto;
+  margin-right: auto; */
+  margin:0 10vw;
+  right: 0;
+  left: 0;
+  bottom: 2vh;
+  /* width: fit-content; */
+  width:80vw;
+  height: 50px;
+}
+
+.img-box {
+  position: relative;
+  display:inline-block;
+  height: 50px;
+  width: 13.6vw;
+  vertical-align: middle;
+  margin:0 3vw;
+}
+.img-view {
+  position: relative;
+  display: block;
+  width: 50px;
+  height: 50px;
+}
+.img-view:active{
+  opacity: 0.55
+}

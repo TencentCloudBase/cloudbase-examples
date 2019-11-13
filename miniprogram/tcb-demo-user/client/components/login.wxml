@@ -1,0 +1,3 @@
+<view>
+    <button class="weui-btn" type="primary" open-type="getUserInfo"   bindgetuserinfo="bindTap">{{text}}</button>
+</view>

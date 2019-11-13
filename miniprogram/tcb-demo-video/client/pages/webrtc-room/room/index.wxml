@@ -1,0 +1,98 @@
+<view class="container-box">
+  <view class="camera-box">
+    <webrtc-room
+      id="webrtcroom"
+      wx:if="{{showRoom}}"
+      useCloud="true"
+      template="{{template}}"
+      enableCamera="true"
+      roomID="{{roomID}}"
+      roomName="{{roomID}}"
+      userID="{{userID}}"
+      userSig="{{userSig}}"
+      sdkAppID="{{sdkAppID}}"
+      accountType="{{accountType}}"
+      privateMapKey="{{privateMapKey}}"
+      beauty="{{beauty}}"
+      muted="{{muted}}"
+      debug="{{debug}}"
+      aspect="{{aspect}}"
+      bindRoomEvent="bindRoomEvent"
+      enableIM="{{enableIM}}"
+      playerBackgroundIm="{{playerBackgroundImg}}"
+      pusherBackgroundImg="{{pusherBackgroundImg}}"
+      waitingImg="{{waitingImg}}"
+      loadingImg="{{loadingImg}}"
+    >
+      <cover-view 
+        wx:if="{{template == '1v1horizontal'}}"
+        style='height:100%;width:100%;position: absolute;'
+      >
+        <cover-view class="operate">
+          <cover-view class='img-box'>
+            <cover-image
+              class='img-view'
+              src='/pages/resources/camera{{frontCamera?"":"-gray"}}.png'
+              bindtap="changeCamera"
+            ></cover-image>
+          </cover-view>
+          <cover-view class='img-box'>
+            <cover-image
+              class='img-view'
+              src='/pages/resources/{{beauty > 0? "beauty" : "beauty-dis"}}.png' 
+              bindtap="setBeauty"
+            ></cover-image>
+          </cover-view>
+          <cover-view class='img-box'>
+            <cover-image
+              class='img-view'
+              src='/pages/resources/{{muted ? "mic-dis" : "mic"}}.png' 
+              bindtap="changeMute"
+            ></cover-image>
+          </cover-view>
+          <cover-view class='img-box'>
+            <cover-image
+              class='img-view' 
+              src='/pages/resources/{{debug? "log" : "log2"}}.png' 
+              bindtap="showLog"></cover-image>
+          </cover-view>
+        </cover-view>
+      </cover-view>
+
+      <cover-view
+        wx:elif="{{template === '1v1bigsmall'}}" 
+        style='height:100%;width:100%;position: absolute;'
+      >
+        <cover-view class="operate">
+          <cover-view class='img-box'>
+            <cover-image class='img-view' 
+              src='/pages/resources/camera{{frontCamera?"":"-gray"}}.png' 
+              bindtap="changeCamera"
+            ></cover-image>
+          </cover-view>
+          <cover-view class='img-box'>
+            <cover-image 
+              class='img-view' 
+              src='/pages/resources/{{beauty > 0? "beauty" : "beauty-dis"}}.png' 
+              bindtap="setBeauty"
+            ></cover-image>
+          </cover-view>
+          <cover-view class='img-box'>
+            <cover-image
+              class='img-view' 
+              src='/pages/resources/{{muted ? "mic-dis" : "mic"}}.png' 
+              bindtap="changeMute"
+            ></cover-image>
+          </cover-view>
+          <cover-view class='img-box'>
+            <cover-image 
+              class='img-view' 
+              src='/pages/resources/{{debug? "log" : "log2"}}.png' 
+              bindtap="showLog"
+            ></cover-image>
+          </cover-view>
+        </cover-view>
+      </cover-view>
+    </webrtc-room>
+  </view>
+</view>

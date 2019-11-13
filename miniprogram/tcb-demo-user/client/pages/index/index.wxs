@@ -1,0 +1,15 @@
+var transform = function (gender) {
+  switch (gender) {
+    case 0:
+      return '未知'
+    case 1:
+      return '男'
+
+    case 2:
+      return '女'
+  }
+};
+
+module.exports = {
+  transform: transform
+};

@@ -1,0 +1,42 @@
+<import src="../common/head.wxml" />
+<import src="../common/foot.wxml" />
+<view class="container">
+  <template is="head" data="{{title}}" />
+  <view class="image-container">
+    <image class="image" src="{{fileID || imgUrl}}" mode="widthFix"></image>
+    <block wx:if="{{faceRects && faceRects.length}}">
+      <view wx:for="{{faceRects}}" wx:key="*this" class="face-result-item" style="left:{{item.rectX * 100}}%;top:{{item.rectY*100}}%;height:{{item.rectHeight*100}}%;width:{{item.rectWidth*100}}%;">
+        <view class="face-result-text">
+          <text>颜值 {{ item.FaceAttributesInfo.Beauty }} 分</text>
+          <text>年龄 {{ item.FaceAttributesInfo.Age }} 岁</text>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="button-container">
+    <button type="primary" bindtap="handleUploadTap">上传人脸</button>
+    <button type="primary" disabled="{{!hasUploaded}}" bindtap="handleRecognizeTap">开始识别</button>
+    <button type="primary" disabled="{{!(faceRects && faceRects.length)}}" bindtap="handleFilterTap">
+      添加滤镜
+    </button>
+  </view>
+  <view class="result" wx:if="{{faceRects && faceRects.length}}">
+    <view class="weui-cells__title">分析结果：</view>
+    <view class="weui-cells" wx:for="{{faceRects}}" wx:key="*this" wx:for-item="face">
+      <block wx:for="{{ ['FaceAttributesInfo', 'FaceQualityInfo'] }}" wx:key="*this" wx:for-item="attr">
+        <view class="weui-cell" wx:for="{{face[attr]}}" wx:key="*this" wx:for-index="key" wx:if="{{resMap[key]}}">
+          <view class="weui-cell__bd">
+            <p>{{ resMap[key].label }}</p>
+          </view>
+          <view class="weui-cell__ft" wx:if="{{ item === true || item === false }}">
+            {{ item ? '是' : '否' }}
+          </view>
+          <view class="weui-cell__ft" wx:else>
+            {{ resMap[key].valMap && resMap[key].valMap[item > 50 ? '1' : '0'] || item }}
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <template is="foot" />
+</view>

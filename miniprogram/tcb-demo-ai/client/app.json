@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/face-fusion/index",
+    "pages/liveness-recognition/index",
+    "pages/idcard-verification/index",
+    "pages/face-detect/index",
+    "pages/ocr-general/index",
+    "pages/ocr-idcard/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "云开发智能图像",
+    "navigationBarTextStyle": "black"
+  },
+  "cloud": true
+}

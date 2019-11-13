@@ -1,0 +1,12 @@
+<view class='album-add'>
+    <form bindsubmit='formSubmit'>
+        <view class='album-name'>
+            <input name="name" placeholder='请输入相册名' auto-focus value='{{inputValue}}' bindinput='keyInput'></input>
+        </view>
+        <view class='btn-box'>
+            <button type='primary' form-type='submit' plain='true' style='border:none;display:table-cell;text-align:center;padding-left:0'>
+                <image style='width:700rpx;height:135rpx;' src='/images/submit.png'></image>
+            </button>
+        </view>
+    </form>
+</view>

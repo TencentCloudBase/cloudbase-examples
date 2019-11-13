@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "身份证识别",
+  "usingComponents": {
+    "ocr": "/components/ocr/ocr"
+  }
+}

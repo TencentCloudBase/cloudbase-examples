@@ -1,0 +1,40 @@
+<view class="photo-add">
+    <form bindsubmit="formSubmit">
+        <view class="desc">
+            <textarea name="desc" placeholder="填写备注（可以不写）" />
+        </view>
+
+        <view class="weui-cells">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <view class="weui-uploader">
+                        <view class="weui-uploader__hd">
+                            <view class="weui-uploader__title">点击可预览选好的图片</view>
+                            <view class="weui-uploader__info"></view>
+                        </view>
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files">
+                                <block wx:for="{{photosNew}}" wx:for-item="image" wx:for-index="idx" wx:key="{{idx}}">
+                                    <view class="weui-uploader__file">
+                                        <view class="weui-uploader__img" data-src="{{image}}" bindtap="previewImage" style="background-image: url({{image.src}})"></view>
+                                        <image class="cancel" src="/images/cancel.png" bindtap="cancel" data-index="{{idx}}"></image>
+                                    </view>
+                                </block>
+                            </view>
+                            <view class="weui-uploader__input-box" wx:if="{{photosNew.length < 3}}">
+                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="btn-box">
+            <!-- <button type="primary" formType="submit" size="default">提交</button> -->
+            <button type="primary" form-type="submit" plain="true" style="border:none;display:table-cell;text-align:center;">
+                <image style="width:700rpx;height:135rpx;" src="/images/submit.png"></image>
+            </button>
+        </view>
+    </form>
+</view>

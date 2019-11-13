@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "人脸检测与分析",
+  "usingComponents": {
+    "iai": "/components/iai/iai"
+  }
+}

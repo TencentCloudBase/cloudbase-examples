@@ -1,0 +1,27 @@
+<import src="../common/head.wxml" />
+<import src="../common/foot.wxml" />
+<view class="container">
+  <template is="head" data="{{title,desc}}" />
+  <view class="image-container" style="width: {{containerWidth}}rpx;">
+    <image class="image" src="{{fileID||temUrl||thumb}}" mode="widthFix"></image>
+  </view>
+  <view class="button-container">
+    <button type="primary" disabled="{{!originLoaded || pending}}" bindtap="handleOriginTap">
+      还原
+    </button>
+    <button type="primary" disabled="{{!originLoaded || pending}}" bindtap="handleOldTap">
+      怀旧
+    </button>
+    <button type="primary" disabled="{{!originLoaded || pending}}" bindtap="handleSmoothTap">
+      毛玻璃
+    </button>
+    <button type="primary" disabled="{{!originLoaded || pending}}" bindtap="handleClipTap">
+      裁剪
+    </button>
+  </view>
+  <view class="image-container" style="width: {{containerWidth}}rpx">
+    <canvas canvas-id="origin" style="width:0px;height: 0px"></canvas>
+    <canvas canvas-id="canvas" style="height: {{containerHeight}}rpx" class="canvas"></canvas>
+  </view>
+  <template is="foot" />
+</view>

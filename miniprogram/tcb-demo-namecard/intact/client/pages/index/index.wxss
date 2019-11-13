@@ -1,0 +1,38 @@
+.namecard {
+  width: 200px;
+  height: 126px;
+  margin-top: 10px;
+}
+
+form input {
+  border: 1px solid #eee;
+  margin: 5px 0;
+  padding: 5px;
+  width: 300px;
+  font-size: 14px;
+}
+
+form textarea {
+  border: 1px solid #eee;
+  width: 300px;
+  min-height: 200px;
+  margin: 5px 0;
+  padding: 5px;
+  font-size: 14px;
+}
+
+form button {
+  width: 310px;
+  margin: 10px 0 0;
+  font-size: 14px;
+}
+
+button.upload {
+  width: 310px;
+  font-size: 14px;
+  margin: 20px 0 10px 0;
+}
+
+.label {
+  font-size: 12px;
+}

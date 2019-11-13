@@ -1,0 +1,16 @@
+@import "../common/common.wxss";
+
+button {
+  display: inline-block;
+  width: 23%;
+  margin: 0 1%;
+  font-size: 30rpx;
+}
+
+.form-container {
+  margin-top: 40rpx;
+}
+
+.image-container canvas {
+  width: 100%;
+}

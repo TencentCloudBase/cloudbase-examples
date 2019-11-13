@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="idcard-item" wx:for="{{list}}" wx:key="*this" ontap="getDetail" data-blogid="{{item._id}}">
+    <view class="idcard-image">
+      <image src="{{item.cover}}"></image>
+    </view>
+    <view class="idcard-detail">
+      <view class="title">标题: {{item.title}}</view>
+      <view class="content">内容： {{item.content}}</view>
+    </view>
+  </view>
+</view>

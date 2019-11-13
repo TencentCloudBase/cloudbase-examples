@@ -1,0 +1,36 @@
+@import "../common/common.wxss";
+
+button {
+  display: inline-block;
+  width: 31%;
+  margin: 0 1%;
+  font-size: 30rpx;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.face-result-item {
+  position: absolute;
+  border: 1px solid #1aad16;
+}
+
+.face-result-text {
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  color: #fff;
+  width: 120rpx;
+  padding: 4rpx 16rpx;
+  background: rgba(26, 173, 25, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+.face-result-text text {
+  height: 36rpx;
+  line-height: 36rpx;
+  font-size: 22rpx;
+}

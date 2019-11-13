@@ -1,0 +1,12 @@
+<import src="../common/head.wxml"/>
+<import src="../common/foot.wxml"/>
+
+<view class="container">
+  <template is="head" data="{{title}}"/>
+  <iai
+    recognizeText="进行分析"
+    mode="DetectFace"
+    bindfinish="handleFinish"
+  />
+  <template is="foot" />
+</view>

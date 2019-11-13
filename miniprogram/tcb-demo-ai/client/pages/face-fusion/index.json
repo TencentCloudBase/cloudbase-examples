@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "人脸融合",
+  "usingComponents": {
+    "face-fuse": "/components/face-fuse/face-fuse"
+  }
+}

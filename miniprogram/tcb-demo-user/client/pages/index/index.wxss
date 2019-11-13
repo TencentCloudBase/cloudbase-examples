@@ -1,0 +1,9 @@
+.img {
+  width: 300rpx;
+  height: 300rpx;
+  border-radius: 50%;
+}
+
+.container button {
+  width: 300rpx;
+}

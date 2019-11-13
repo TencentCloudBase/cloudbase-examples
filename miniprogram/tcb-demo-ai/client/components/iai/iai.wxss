@@ -1,0 +1,44 @@
+@import '/libs/weui.wxss';
+
+.image-container {
+  position: relative;
+  width: 600rpx;
+  margin: 30rpx auto 50rpx;
+}
+
+.image {
+  display: block;
+  width: 100%;
+}
+
+button {
+  display: inline-block;
+  width: 48%;
+  margin: 0 1%;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.face-result-item {
+  position: absolute;
+  border: 1px solid #1aad16;
+}
+
+.face-result-text {
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  color: #fff;
+  padding: 4rpx 16rpx;
+  background: rgba(26, 173, 25, 0.5);
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between;
+}
+.face-result-text text {
+  height: 36rpx;
+  line-height: 36rpx;
+  font-size: 22rpx;
+}

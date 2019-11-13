@@ -1,0 +1,48 @@
+<face-fuse>
+  <view wx:if="{{resultImgUrl}}" class="image-container">
+    <image
+      class="resultImage" 
+      src="{{resultImgUrl}}"
+      mode="aspectFit"
+    >
+    </image>
+  </view>
+  <view wx:else class="image-container {{hideTemplate ? 'hideTemplate' : ''}}">
+    <image
+      wx:if="{{!fileID}}" 
+      class="customImage"  
+      src="{{customImgUrl}}" 
+      mode="aspectFit"
+    >
+    </image>
+    <image
+      wx:if="{{fileID}}"
+      class="customImage"
+      src="{{fileID}}"
+      mode="aspectFit"
+    >
+    </image>
+    <image
+      class="templateImage" 
+      src="{{templateImgUrl}}"
+      mode="aspectFit"
+    >
+    </image>
+    
+  </view>
+  <view class="button-container">
+      <button
+        type="primary"
+        bindtap="handleUploadTap"
+      >
+        {{uploadText}}
+      </button>
+      <button
+        type="primary"
+        disabled="{{!hasUploaded}}"
+        bindtap="handleRecognizeTap"
+      >
+        {{recognizeText}}
+      </button>
+  </view>
+</face-fuse>

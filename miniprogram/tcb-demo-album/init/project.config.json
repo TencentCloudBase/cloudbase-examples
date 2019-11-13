@@ -1,0 +1,66 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.2.5",
+	"appid": "",
+	"projectname": "%E4%B8%AA%E4%BA%BA%E7%9B%B8%E5%86%8C",
+	"isGameTourist": false,
+	"cloudfunctionRoot": "cloud/functions/",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 3,
+			"list": [
+				{
+					"id": -1,
+					"name": "评论",
+					"pathName": "pages/review/review",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "编辑",
+					"pathName": "pages/detail/detail",
+					"query": "url=https://tcb-def7de.tcb.qcloud.la/1531733018488-1224544.png"
+				},
+				{
+					"id": 2,
+					"name": "相册详情页",
+					"pathName": "pages/photos/photos",
+					"query": "id=0"
+				},
+				{
+					"id": -1,
+					"name": "上传图片",
+					"pathName": "pages/photos/add",
+					"query": ""
+				}
+			]
+		}
+	}
+}

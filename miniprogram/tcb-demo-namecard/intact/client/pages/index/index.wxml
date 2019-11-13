@@ -1,0 +1,27 @@
+<view class="container">
+
+  <image wx-if="{{fileID}}" class="namecard" src="{{fileID}}"></image>
+  <button class="upload" type="default" bindtap="uploadFile"> 上传名片 </button>
+
+  <form
+    wx:if="{{formData.length}}"
+    bindsubmit="addNameCard"
+  >
+    <view
+      wx:for="{{formData}}"
+      wx:key="unique"
+    >
+      <view class="label">
+        {{item.item}}: 
+      </view>
+      <input
+        name="{{item.name}}"
+        type="text" 
+        placeholder="{{item.item}}"
+        value="{{item.value}}"
+      ></input>
+    </view>
+    <button form-type="submit" type="primary">提交</button>
+  </form>
+
+</view>

@@ -1,0 +1,46 @@
+{
+	"description": "description",
+	"packOptions": {
+		"ignore": [
+			"server",
+			"cloud",
+			"tcb.json"
+		]
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": false,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.2.5",
+	"appid": "",
+	"projectname": "ai-workshop",
+	"isGameTourist": false,
+	"miniprogramRoot": "client",
+	"cloudfunctionRoot": "cloud/functions",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": []
+		}
+	}
+}

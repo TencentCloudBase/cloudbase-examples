@@ -1,0 +1,71 @@
+{
+	"miniprogramRoot": "client/",
+	"cloudfunctionRoot": "cloud/functions/",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"nodeModules": true
+	},
+	"appid": "wx5a9f6a2c25353607",
+	"projectname": "tcb-demo-video",
+	"libVersion": "2.5.0",
+	"compileType": "miniprogram",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 4,
+			"list": [
+				{
+					"id": -1,
+					"name": "音视频房间列表",
+					"pathName": "pages/webrtc-room/room-list/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "手机直播房间列表",
+					"pathName": "pages/live-room/room-list/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "云函数调试",
+					"pathName": "pages/functions/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "视频客服创建房间",
+					"pathName": "pages/webrtc-room/join-room/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "直播创建房间",
+					"pathName": "pages/live-room/join-room/index",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}

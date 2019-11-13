@@ -1,0 +1,5 @@
+<button open-type="getUserInfo" bindgetuserinfo='getInfo' data-style='1'>风格1</button>
+<button open-type="getUserInfo" bindgetuserinfo='getInfo' data-style='2'>风格2</button>
+<button open-type="getUserInfo" bindgetuserinfo='getInfo' data-style='3'>风格3</button>
+<button open-type="getUserInfo" bindgetuserinfo='getInfo' data-style='4'>风格4</button>
+<image wx:if="avatarUrl" src="{{avatarUrl}}" class='avatar'></image>

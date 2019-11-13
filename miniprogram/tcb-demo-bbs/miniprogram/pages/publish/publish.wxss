@@ -1,0 +1,32 @@
+/* pages/publish/publish.wxss */
+.page{
+ padding-left: 20rpx;
+ padding-right: 20rpx;
+ padding-top: 5rpx;
+}
+.text{
+ width: 100%;
+ margin-bottom: 40px;
+ font-size: 20px;
+ padding: 5px
+}
+.image{
+ width:31%;
+ height: 100px;
+ padding: 2px
+}
+.moment_img{
+ width: 98px;
+ height: 98px;
+}
+.image_content{
+ width: 100%;
+ display: flex;
+ flex-wrap: wrap;
+ margin-bottom: 20px
+}
+.switch{
+  margin-top:10px;
+  margin-bottom:10px;
+  font-size:16px;
+}

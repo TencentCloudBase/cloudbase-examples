@@ -1,0 +1,9 @@
+<import src="../common/head.wxml" />
+<import src="../common/foot.wxml" />
+<view class="container">
+  <template is="head" data="{{title,desc}}" />
+  <view class="image-container" style="width: {{containerWidth}}rpx;">
+    <image class="image" wx:for="{{list}}" wx:for-item="item" wx:for-index="idx" wx:key="{{idx}}" src="{{item}}" mode="widthFix"></image>
+  </view>
+  <template is="foot" />
+</view>

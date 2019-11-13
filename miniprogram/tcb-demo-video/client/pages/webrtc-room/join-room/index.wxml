@@ -1,0 +1,34 @@
+<view class='container-box'>
+  <view class="input-box">
+    <input
+      wx:if="{{roomType === 'roomID'}}"
+      value="{{roomID}}"
+      maxlength="20"
+      bindinput='bindRoomID'
+      placeholder="请输入房间号"
+      placeholder-style="color:#ffffff;opacity: 0.55;"
+    />
+    <input
+      wx:if="{{roomType === 'roomName'}}"
+      value="{{roomName}}"
+      maxlength="20"
+      bindinput='bindRoomName'
+      placeholder="请输入房间名"
+      placeholder-style="color:#ffffff;opacity: 0.55;"
+    />
+  </view>
+  <radio-group class="radio-group" bindchange="radioChange">
+    <label class="radio">
+      <radio color='#006eff' value="roomID" checked='true' />
+      房间号
+    </label>
+    <label class="radio">
+      <radio color='#006eff' value="roomName"/>
+      房间名
+    </label>
+  </radio-group>
+  <view class='bottom-btn'> 
+    <button type="primary" bindtap="joinRoom" hover-class="none">进入房间</button>
+  </view> 
+
+</view>

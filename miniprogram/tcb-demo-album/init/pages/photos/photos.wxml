@@ -1,0 +1,25 @@
+<!--pages/photos/photos.wxml-->
+<view>
+    <view class="images clearfix">
+        <view class="boxleft">
+            <block wx:for="{{photos}}" wx:for-item="photo" wx:for-index="index" wx:key="{{ index }}">
+                <view class="pic" wx-if="{{ index % 2 == 0 }}" data-index="{{index}}" bindtap="previewImage" bindlongpress="longpress">
+                    <image src="{{photo}}" class="image" mode="widthFix"></image>
+                </view>
+            </block>
+        </view>
+        <view class="boxright">
+            <block wx:for="{{photos}}" wx:for-item="photo" wx:for-index="index" wx:key="{{ index }}">
+                <view class="pic" wx-if="{{ index % 2 == 1 }}" data-index="{{index}}" bindtap="previewImage" bindlongpress="longpress">
+                    <image src="{{photo}}" class="image" mode="widthFix"></image>
+                </view>
+            </block>
+        </view>
+    </view>
+
+    <view class="options">
+        <navigator class="add-item" url="/pages/photos/add?id={{albumIndex}}">
+        <image class="add-item" src="/images/addPhoto.png"></image>
+        </navigator>
+    </view>
+</view>

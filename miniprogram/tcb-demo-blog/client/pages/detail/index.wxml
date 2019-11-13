@@ -1,0 +1,10 @@
+<!--index.wxml-->
+<view class="container">  
+    <view class="title">{{title}}</view>
+    <view class="previewimg">  
+        <image src="{{cover}}" data-src="{{cover}}" bindtap="previewImage"></image>  
+    </view>
+    <view class="content">
+      {{content}}
+    </view>
+</view>

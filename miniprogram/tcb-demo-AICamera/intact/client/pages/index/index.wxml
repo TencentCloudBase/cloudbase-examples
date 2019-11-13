@@ -1,0 +1,49 @@
+<view class="index">
+  <view class="index-hd">
+    <image class="index-logo" src="/resources/images/tencentcloud.png"></image>
+    <view class="index-desc" style="text-align: center;">以下将演示基于小程序·云开发解决方案</view>
+  </view>
+  <view class="index-bd">
+    <view class="login" style='text-align: center;' wx:if="{{!userInfo}}">
+      <button
+        open-type="getUserInfo"
+        bindgetuserinfo="login"
+        class="weui-btn"
+        type="primary"
+      >
+        登陆
+      </button>
+    </view>
+    <view class="join" wx:if="{{userInfo}}">
+      <image
+        wx:if="{{userInfo}}"
+        class="userinfo-avatar"
+        src="{{userInfo.avatarUrl}}"
+        mode="cover"
+      >
+      </image>
+    
+      <view class="userinfo-userName">{{userInfo.nickName}}</view>
+      <button
+        bindtap="start"
+        class="weui-btn"
+        type="primary"
+      >
+        开始
+      </button>
+      <button
+        bindtap="history"
+        class="weui-btn"
+        type="primary"
+      >
+        相册
+      </button>
+    </view>
+  </view>
+  <view class="index-bd">
+    <view class="index-desc">开发教程及源码：</view>
+    <view class="index-desc">https://github.com/TencentCloudBase/mp-book</view>
+    <view class="index-desc" style="text-align:center; margin-top:20rpx">搜索小程序云开发了解更多实现细节</view>
+  </view>
+  <official-account></official-account>
+</view>

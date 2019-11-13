@@ -1,0 +1,25 @@
+
+
+
+<block wx:for="{{postlist}}" wx:key="*this">
+    <view class="divLine"></view>
+    <!--block不能设置css-->
+    <view class='post_list' bindtap='onItemClick' data-postid='{{item._id}}'>
+        <!--postId会默认转成lowercase-->
+        <view>
+            <text class='title'>{{item.content}}</text>
+        </view>
+        <view class="layout_horizontal">
+            <view>
+                <text class='extra_info extra_info_start'>{{item.is_anonymous?'匿名':item.author_name}}</text>
+            </view>
+            <view>
+                <text class='extra_info watch_count'>{{item.watch_count}}人浏览</text>
+            </view>
+        </view>
+    </view>
+</block>
+<!--TODO 如何使用MinUI提供的组件库-->
+<image bindtap="chooseimage" class="moment_img new_post" bindtap="newPost" src='../../images/newPost.png'></image>
+<!-- 需要使用 button 来授权登录 -->
+

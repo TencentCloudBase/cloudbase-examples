@@ -1,0 +1,29 @@
+@import "../common/weui.wxss";
+
+.page-section{
+    margin-bottom: 20rpx;
+}
+
+page{
+    background: #f2f2f2;
+}
+
+.album-add{
+    padding: 24rpx;
+}
+
+.album-name {
+    font-size: 32rpx;
+    font-weight: normal;
+    padding: 24rpx;
+    background: #fff;
+}
+
+.album-name input {
+    font-size: 32rpx;
+}
+
+.album-add .btn-box{
+    margin-top: 16rpx;
+    padding: 24rpx 0;
+}

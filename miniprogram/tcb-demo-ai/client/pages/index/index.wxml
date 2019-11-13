@@ -1,0 +1,74 @@
+<view class="index">
+  <view class="index-hd">
+    <image class="index-logo" src="/resources/images/tencentcloud.png"></image>
+    <view class="index-desc">以下将演示基于小程序·云开发所研发的智能图像解决方案</view>
+  </view>
+  <view class="index-bd">
+    <view class="kind-list">
+      <!-- 人脸融合 -->
+      <view class="weui-cells__title">人脸融合</view>
+      <view class="kind-list-item">
+        <navigator
+          url="/pages/face-fusion/index"
+          class="kind-list-item-hd"
+        >
+          <view class="kind-list-text">人脸融合</view>
+        </navigator>
+      </view>
+
+      <!-- 人脸核身 -->
+      <view class="weui-cells__title">人脸核身</view>
+      <view class="kind-list-item">
+        <navigator
+          url="/pages/liveness-recognition/index"
+          class="kind-list-item-hd"
+        >
+          <view class="kind-list-text">活体人脸核身</view>
+        </navigator>
+        <navigator
+          url="/pages/idcard-verification/index"
+          class="kind-list-item-hd"
+        >
+          <view class="kind-list-text">身份信息认证</view>
+        </navigator>
+      </view>
+
+      <!-- 人脸识别 -->
+      <view class="weui-cells__title">人脸识别</view>
+      <view class="kind-list-item">
+        <navigator
+          url="/pages/face-detect/index"
+          class="kind-list-item-hd"
+        >
+          <view class="kind-list-text">人脸检测与分析</view>
+        </navigator>
+      </view>
+
+      <!-- 文字识别（OCR） -->
+      <view class="weui-cells__title">文字识别（OCR）</view>
+      <view class="kind-list-item">
+        <navigator
+          url="/pages/ocr-general/index"
+          class="kind-list-item-hd"
+        >
+          <view class="kind-list-text">通用印刷体识别</view>
+        </navigator>
+        <navigator
+          url="/pages/ocr-idcard/index"
+          class="kind-list-item-hd"
+        >
+          <view class="kind-list-text">身份证识别</view>
+        </navigator>
+      </view>
+
+    </view>
+  </view>
+
+  <view class="index-bd">
+    <view class="index-desc">开发教程及源码：</view>
+    <view class="index-desc">https://github.com/TencentCloudBase/mp-book</view>
+  </view>
+
+  <official-account></official-account>
+  
+</view>

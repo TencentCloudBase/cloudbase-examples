@@ -1,0 +1,11 @@
+@import "../common/common.wxss";
+
+image{
+  margin-bottom: 30rpx
+}
+
+
+.form-container {
+  margin-top: 40rpx;
+}
+

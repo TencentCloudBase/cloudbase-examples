@@ -1,0 +1,76 @@
+<view class="page">
+  <live-room-push
+    wx-if="{{isPushShow}}"
+    id="live-room-push"
+    liveAppID="{{liveAppID}}"
+    pushUrl="{{pushUrl}}"
+    orientation="{{orientation}}"
+    muted="{{muted}}"
+    mode="{{mode}}"
+    waitingImage="{{waitingImage}}"
+    enableCamera="{{enableCamera}}" 
+    beauty="{{beauty}}"
+    whiteness="{{whiteness}}"
+    backgroundMute="{{backgroundMute}}"
+    debug="{{debug}}"
+    autoFocus="{{autoFocus}}"
+    aspect="{{aspect}}"
+    minBitrate="{{minBitrate}}"
+    maxBitrate="{{maxBitrate}}"
+    zoom="{{zoom}}"
+    devicePosition="{{devicePosition}}"
+    waitingImage="{{waitingImage}}"
+    bindPushEvent="bindPushEvent"
+  >
+    <cover-view
+      style='height:100%;width:100%;position: absolute;'
+    >
+      <cover-view class="operate">
+        <cover-view class='img-box'>
+          <cover-image class='img-view' 
+            src='/pages/resources/camera{{(devicePosition === "font" )? "":"-gray"}}.png' 
+            bindtap="changeCamera"
+          ></cover-image>
+        </cover-view>
+        <cover-view class='img-box'>
+          <cover-image 
+            class='img-view' 
+            src='/pages/resources/{{beauty > 0? "beauty" : "beauty-dis"}}.png' 
+            bindtap="setBeauty"
+          ></cover-image>
+        </cover-view>
+        <cover-view class='img-box'>
+          <cover-image
+            class='img-view' 
+            src='/pages/resources/{{muted ? "mic-dis" : "mic"}}.png' 
+            bindtap="changeMute"
+          ></cover-image>
+        </cover-view>
+        <cover-view class='img-box'>
+          <cover-image 
+            class='img-view' 
+            src='/pages/resources/{{debug? "log" : "log2"}}.png' 
+            bindtap="showLog"
+          ></cover-image>
+        </cover-view>
+      </cover-view>
+    </cover-view>
+  </live-room-push>
+  <live-room-play
+    wx-if="{{isPlayShow}}"
+    id="live-room-play"
+    liveAppID="{{liveAppID}}"
+    playUrl="{{playUrl}}"
+    orientation="{{orientation}}"
+    objectFit="{{objectFit}}"
+    minCache="{{minCache}}"
+    maxCache="{{maxCache}}"
+    muted="{{muted}}"
+    debug="{{debug}}"
+    roomID="{{roomID}}"
+    nickName="{{nickName}}"
+    avatar="{{avatar}}"
+    bindPlayEvent="bindPlayEvent"
+  >
+  </live-room-play>
+</view>

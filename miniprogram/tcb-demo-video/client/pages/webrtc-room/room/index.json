@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "视频客服",
+  "usingComponents": {
+    "webrtc-room": "plugin://webRtcRoomPlugin/webrtc-room"
+  }
+}

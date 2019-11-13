@@ -1,0 +1,59 @@
+<view class='postdetail' wx:if='{{contentLoaded && imagesLoaded && commentLoaded}}'>
+    <view class='title_area'>
+        <view class='avatar_area'>
+            <image class='avatar' src="{{detail.is_anonymous?'../../images/headimg.jpg':detail.author_avatar_url}}"/>
+        </view>
+        <view class='text_area'>
+            <view>
+                <text class='author_name'>{{detail.is_anonymous?'匿名':detail.author_name}}</text>
+            </view>
+            <view class='publish_time'>
+                <text class='publish_time'>发表于{{detail.publish_time}}</text>
+            </view>
+        </view>
+    </view>
+    <view class='content'>
+        <view class='text'>
+            <text>{{detail.content}}</text>
+        </view>
+        <view class='image_area'>
+            <view class='image' wx:for='{{imageUrls}}' wx:key='*this'>
+                <image src='{{item}}' mode='widthFix'></image>
+            </view>
+        </view>
+    </view>
+    <view style='background: red' wx:if='{{false}}'>数据展示区：浏览数，关注数，评论数等等</view>
+    <view class='all_comment' style='background: #EDEDED' wx:if='{{imagesLoaded}}'>
+        <text class='all_comment_text'>全部评论</text>
+    </view>
+    <view class='all_comment_list'>
+        <view class='comment_list' wx:for="{{comments}}" wx:key="this">
+            <view class='comment_item'>
+                <view class='comment_item_head'>
+                    <view class='avatar_area'>
+                        <image class="userinfo-avatar avatar" src="{{item.avatarUrl}}" background-size="cover"></image>
+                    </view>
+                    <view class='text_area'>
+                        <view>
+                            <text class='author_name comment_author_name'>{{item.name}}</text>
+                        </view>
+                        <view class='publish_time'>
+                            <text class='publish_time'>发表于{{item.time}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view>
+                    <text class='comment_content'>{{item.content}}</text>
+                </view>
+            </view>
+            <view class='divLine' wx:if='{{index < comments.length-1}}'></view>
+        </view>
+    </view>
+    <!-- 评论框 -->
+    <view class='send_comment_container'>
+        <view class='input-box'>
+            <textarea class="textarea" id="inputComment" value='{{comment_value}}' bindinput='input' placeholder="请输入你的看法" fixed="true" maxlength="-1" show-confirm-bar="false" cursor-spacing="15" auto-height="true"/>
+            <view class='send' bindtap='sendComment'>发送</view>
+        </view>
+    </view>
+</view>

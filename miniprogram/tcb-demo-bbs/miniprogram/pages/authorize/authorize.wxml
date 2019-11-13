@@ -1,0 +1,4 @@
+<view class='container'>
+  <button class='authorize' type="primary" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信登陆</button>
+  <text class='tips'>Tips: 必须授权才能使用全部功能</text>
+</view>

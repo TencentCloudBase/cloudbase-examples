@@ -1,0 +1,47 @@
+<view class="video-container">
+  <view
+    class="camera-wrapper"
+    wx-if="{{!src}}"
+  >
+    <camera
+      device-position="front"
+      flash="off"
+      binderror="error"
+    >
+      <cover-view class="camera-cover">
+      <cover-image 
+        class="camera-image"    
+src="https://imgcache.qq.com/open_proj/proj_qcloud_v2/rocket_images/1530689345795_90ce5ftwihrqrxjemi.png"></cover-image>
+    </cover-view>
+    <cover-view
+      class="number"
+      wx-if="{{isRecording}}"
+  >
+    请念数字：{{number}}
+  </cover-view>
+    </camera>
+  </view>
+  <video
+    wx-if="{{src}}"
+    src="{{src}}"
+    objectFit="cover"
+  ></video>
+</view>
+<button
+  class="record"
+  type="{{buttonType}}"
+  bindtap="toggleRecord"
+>{{action}}</button>
+
+<view
+  class="info"
+  wx-if="{{src}}"
+>
+  <input class="name"  placeholder="姓名" type="text" bindinput="getName"></input>
+  <input class="idcard" placeholder="身份证" type="text" bindinput="getIdCard"></input>
+  <button
+    class="verify"
+    type="primary"
+    bindtap="submit"
+  >验证</button>
+</view>

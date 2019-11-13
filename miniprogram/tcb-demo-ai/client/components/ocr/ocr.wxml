@@ -1,0 +1,51 @@
+<ocr>
+  <view class="image-container">
+    <div wx-if="{{imgUrl && !fileID}}" class="image" style="background-image: url({{imgUrl}})"/>
+    <image wx-if="{{fileID}}" src="{{fileID}}" mode="aspectFit"></image>
+  </view>
+
+  <view class="button-container">
+      <button
+        type="primary"
+        bindtap="handleUploadTap"
+      >
+        {{uploadText}}
+      </button>
+      <button
+        type="primary"
+        disabled="{{!hasUploaded}}"
+        bindtap="handleRecognizeTap"
+      >
+        {{recognizeText}}
+      </button>
+  </view>
+
+  <!-- 通用文本信息 -->
+  <block wx:if="{{ mode ==='GeneralBasicOCR' || mode === 'GeneralFastOCR' }}">
+    <view class="result" wx:if="{{result && result.TextDetections.length}}">
+      <view class="weui-cells__title">识别结果：</view>
+      <view class="weui-cells">
+        <view class="weui-cell" wx:for="{{result.TextDetections}}" wx:key="*this" wx:for-item="text">
+            <view class="weui-cell__bd">
+                <p>{{ text.DetectedText }}</p>
+            </view>
+            <view class="weui-cell__ft">{{ text.Confidence }} 置信度</view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <!-- 身份证信息 -->
+  <block wx:elif="{{ mode === 'IDCardOCR' }}">
+    <view class="result" wx:if="{{result}}">
+      <view class="weui-cells__title">识别结果：</view>
+      <view class="weui-cells">
+        <view class="weui-cell" wx:for="{{result}}" wx:key="*this" wx:for-index="key" wx:if="{{ idcardResMap[key] && item }}">
+            <view class="weui-cell__bd">
+                <p>{{ idcardResMap[key].label }}</p>
+            </view>
+            <view class="weui-cell__ft">{{ idcardResMap[key].valMap['item'] || item }}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+</ocr>

@@ -1,0 +1,39 @@
+.image-container {
+  padding: 30rpx;
+}
+
+.customImage {
+  display: inline-block;
+  width: 50%;
+  height: 270px;
+}
+
+.templateImage {
+  display: inline-block;
+  width: 50%;
+  height: 270px;
+}
+
+.resultImage {
+  display: inline-block;
+  width: 100%;
+  height: 270px;
+}
+
+.hideTemplate .customImage {
+  width: 100%;
+}
+
+.hideTemplate .templateImage {
+  display: none;
+}
+
+button {
+  display: inline-block;
+  width: 48%;
+  margin: 0 1%;
+}
+
+.button-container {
+  text-align: center;
+}

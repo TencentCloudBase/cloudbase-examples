@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/postlist/postlist",
+    "pages/logs/logs",
+    "pages/publish/publish",
+    "pages/postdetail/postdetail",
+    "pages/authorize/authorize"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#00BFFF",
+    "navigationBarTitleText": "交大树洞",
+    "navigationBarTextStyle": "white"
+  },
+  "cloud": true,
+  "sitemapLocation": "sitemap.json"
+}

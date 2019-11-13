@@ -1,0 +1,5 @@
+**/node_modules
+cloud/functions/**/config/index.js
+.DS_Store
+apiclient_cert.p12
+private_key

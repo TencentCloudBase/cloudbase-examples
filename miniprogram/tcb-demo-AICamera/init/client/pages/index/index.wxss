@@ -1,0 +1,23 @@
+.form-container {
+  margin-top: 40rpx;
+}
+
+.userinfo-avatar {
+  width:128rpx;
+  height:128rpx;
+  margin:20rpx;
+  border-radius:50%;
+}
+
+.userinfo-userName {
+  width: 600rpx;
+  margin: 0 0 20rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.index-bd>view {
+  text-align: center;
+}

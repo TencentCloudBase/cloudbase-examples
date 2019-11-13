@@ -1,0 +1,29 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/webrtc-room/room-list/index",
+    "pages/webrtc-room/join-room/index",
+    "pages/webrtc-room/room/index",
+    "pages/live-room/room-list/index",
+    "pages/live-room/join-room/index",
+    "pages/live-room/room/index"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "云开发可视通话",
+    "navigationBarTextStyle": "black"
+  },
+  "plugins": {
+    "liveRoomPlugin": {
+      "version": "1.0.3",
+      "provider": "wxdeb4d0128d24a52c"
+    },
+    "webRtcRoomPlugin": {
+      "version": "1.0.2",
+      "provider": "wxc297db62adbdb10c"
+    }
+  },
+  "cloud": true
+}

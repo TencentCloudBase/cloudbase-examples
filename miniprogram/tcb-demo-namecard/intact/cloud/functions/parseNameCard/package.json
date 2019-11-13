@@ -1,0 +1,14 @@
+{
+  "name": "addNameCard",
+  "version": "1.0.0",
+  "description": "add name card",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "heyli",
+  "license": "MIT",
+  "dependencies": {
+    "image-node-sdk": "^1.0.4"
+  }
+}

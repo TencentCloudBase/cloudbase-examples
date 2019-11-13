@@ -1,0 +1,24 @@
+/**index.wxss**/
+
+.container {  
+    box-sizing:border-box;  
+    padding:20px;  
+}   
+.previewimg{  
+    float:left;  
+    width:100%;  
+    height:200px;  
+    margin:2%;
+}  
+.previewimg image{  
+    width:100%;  
+    height:100%;  
+}
+
+view.content {
+  width:100%;
+  margin: 10px 20px;
+  margin-left: 35px;
+  text-align: left;
+  word-wrap:break-word; 
+}

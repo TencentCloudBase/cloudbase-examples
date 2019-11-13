@@ -1,0 +1,25 @@
+@import '/libs/weui.wxss';
+
+.image-container {
+  padding: 30rpx;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  padding-bottom: 75%;
+  height: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+button {
+  display: inline-block;
+  width: 48%;
+  margin: 0 1%;
+}
+
+.button-container {
+  text-align: center;
+}

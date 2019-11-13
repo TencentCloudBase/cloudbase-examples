@@ -1,0 +1,120 @@
+/* pages/postdetail/postdetail.wxss */
+/*
+这个页面结构比较复杂，css有许多可以优化的地方
+*/
+
+.title_area{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+.text_area {
+  margin-left: 30rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.publish_time{
+  font-size: 8pt;
+  color: gray;
+  margin-top: 1rpx;
+}
+.all_comment{
+  padding-bottom: 10rpx;
+  padding-top: 10rpx;
+}
+.all_comment_text{
+  font-size: 10pt;
+  color: gray;
+  margin: 10px;
+}
+.avatar{
+  width: 80rpx;
+  height: 80rpx;
+}
+.comment_item{
+  padding-top: 10rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+.comment_item_head{
+  display: flex;
+  flex-direction: row;
+}
+.author_name{
+  font-size: 14pt;
+}
+.comment_author_name{
+  font-size: 12pt;
+}
+
+.all_comment_list{
+  margin-bottom: 102rpx;
+}
+
+.comment_content{
+  font-size: 12pt;
+}
+.content{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20rpx;
+  margin-bottom: 40rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+.text{
+  margin-bottom: 20rpx;
+}
+.image_area{
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+}
+
+.input-box{
+  margin-top: 34rpx;
+  display: flex;
+  align-items: flex-end; /*底部对齐*/
+  justify-content: space-between; /*两端对齐*/
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 18rpx 0 18rpx 30rpx;
+  background-color: #F7F8F7;
+  font-size: 28rpx;
+  z-index: 999;
+}
+.divLine{
+ background: #EEEDEE;
+ width: 100%;
+ height: 10rpx;
+}
+
+.input-box .textarea {
+width: 604rpx;
+min-height: 34rpx;
+max-height: 102rpx; /*最多显示三行*/
+border-width: 15rpx 20rpx; /*使用padding与预期留白不一致，故使用border*/
+border-style: solid;
+border-color: #ffffff;
+line-height: 34rpx;
+font-size: 28rpx;
+background-color: #ffffff;
+border-radius: 4rpx;
+}
+
+.send {
+ width: 116rpx;
+height: 64rpx;
+line-height: 64rpx;
+text-align: center;
+color: #66CC00;
+
+}

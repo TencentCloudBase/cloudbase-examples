@@ -1,0 +1,37 @@
+.page {
+  height: 100%;
+  width: 100%;
+}
+
+#live-room-push {
+  height: 100%;
+  width: 100%;
+}
+
+.operate {
+  position: absolute;
+  margin:0 10vw;
+  right: 0;
+  left: 0;
+  bottom: 2vh;
+  width:80vw;
+  height: 50px;
+}
+
+.img-box {
+  position: relative;
+  display:inline-block;
+  height: 50px;
+  width: 13.6vw;
+  vertical-align: middle;
+  margin:0 3vw;
+}
+.img-view {
+  position: relative;
+  display: block;
+  width: 50px;
+  height: 50px;
+}
+.img-view:active {
+  opacity: 0.55
+}

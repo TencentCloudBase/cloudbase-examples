@@ -1,0 +1,18 @@
+<view class="container">  
+    <view class="previewimg">  
+        <image
+          src="{{cover}}"
+          data-src="{{cover}}"
+          bindtap="previewImage"
+        ></image>  
+    </view>
+    <view
+      class="info"
+      wx:for="{{namecard}}"
+      wx:for-index="key"
+      wx:for-item="value"
+      wx:key="unique"
+    >
+      <text>{{key}}:</text> {{value}}
+    </view>
+</view>

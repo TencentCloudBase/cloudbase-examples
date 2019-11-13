@@ -1,0 +1,16 @@
+<import src="../common/head.wxml" />
+<import src="../common/foot.wxml" />
+<view class="container">
+  <template is="head" data="{{title,desc}}"  />
+  <view class="image-container">
+    <image class="image" src="{{filterTemUrl || fileID || thumb}}" mode="widthFix"></image>
+    <canvas canvas-id="filter" style="width: {{filterImageInfo.width / sysInfo.pixelRatio}}px; height: {{filterImageInfo.height / sysInfo.pixelRatio}}px; position: absolute; top:0;left:0;z-index:10;" class="canvas"></canvas>
+  </view>
+  <view class="preview-container">
+    <canvas wx:for="{{clipSizes}}" wx:for-item="size" wx:key="{{size[0]/size[1]}}" style="width: {{size[0]}}rpx; height: {{size[1]}}rpx; background-image: url({{filterTemUrl}})" canvas-id="canvas-{{size[0]/size[1]}}" class="canvas"></canvas>
+  </view>
+  <view class="button-container">
+    <button type="primary" disabled="{{!clipPxData}}" bindtap="handleSaveTap">保存云端</button>
+  </view>
+  <template is="foot" />
+</view>

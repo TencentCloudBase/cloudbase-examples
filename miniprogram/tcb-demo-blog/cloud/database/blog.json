@@ -1,0 +1,27 @@
+[
+    {
+        "content": "机器人",
+        "cover": "https://<%=env%>.tcb.qcloud.la/cloud/storage/1533263330129-537643.jpg",
+        "title": "机器人"
+    },
+    {
+        "content": "人工智能",
+        "cover": "https://<%=env%>.tcb.qcloud.la/cloud/storage/1533260567578-3537830.jpg",
+        "title": "人工智能"
+    },
+    {
+        "content": "大脑神经",
+        "cover": "https://<%=env%>.tcb.qcloud.la/cloud/storage/1533261779102-6823878.jpg",
+        "title": "大脑神经"
+    },
+    {
+        "content": "数据库",
+        "cover": "https://<%=env%>.tcb.qcloud.la/cloud/storage/1533263628575-4864324.jpg",
+        "title": "数据库"
+    },
+    {
+        "content": "云端",
+        "cover": "https://<%=env%>.tcb.qcloud.la/cloud/storage/1533263647209-3015523.png",
+        "title": "云端"
+    }
+]

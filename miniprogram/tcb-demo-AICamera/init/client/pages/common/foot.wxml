@@ -1,0 +1,8 @@
+<template name="foot">
+  <view class="page-foot">
+    <view class="index-desc" style="text-align:center; margin-top: 20rpx">搜索小程序云开发了解更多实现细节</view>
+    <navigator openType="reLaunch" url="/pages/index/index" hover-class="none">
+      <view>回到首页</view>
+    </navigator>
+  </view>
+</template>

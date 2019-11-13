@@ -1,0 +1,39 @@
+<import src="../common/head.wxml"/>
+<import src="../common/foot.wxml"/>
+
+<view class="container">
+  <template is="head" data="{{title}}"/>
+    <view class="page__bd">
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">姓名</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input
+                  class="weui-input"
+                  placeholder="请输入姓名"
+                  bindinput="getName"
+                />
+            </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">身份证</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input
+                  class="weui-input"
+                  placeholder="请输入身份证号码"
+                  bindinput="getIDCard"
+                />
+            </view>
+        </view>
+      </view>
+
+
+      <button class="weui-btn verify-button" type="primary" bindtap="verify">验证</button>
+    </view>
+  <template is="foot" />
+</view>
