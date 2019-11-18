@@ -1,0 +1,19 @@
+name: build release zip file
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: build package
+      run: bash .github/release.sh
+    - name: upload file 
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: fnkr/github-action-ghr@v1
+      env:
+          GHR_PATH: .zip-files/
+          GITHUB_TOKEN : ${{ secrets.GITHUB_TOKEN }}
