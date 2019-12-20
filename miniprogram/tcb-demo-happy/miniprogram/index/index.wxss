@@ -1,0 +1,63 @@
+.mywish{
+  font-size: 25px;
+  color: #ecb444;
+  font-weight: 900;
+  text-align: center;
+}
+
+.myblessbox{
+  margin:25px 12px;
+  color: white;
+  font-size: 12px;
+}
+
+.myblessitem{
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.mytouch{
+  margin-top: 25px;
+  width: 75%;
+  font-size: 15px;
+  font-weight: 900;
+  background-color: #30c07a;
+  color: #fdf8e5;
+}
+
+.mycard{
+  width: 75%;
+  margin: 25px auto;
+  padding: 15px;
+  background-color: rgb(238, 231, 234);
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.mycard_text{
+  font-size: 13px;
+  height: calc(100% - 30px);
+  padding: 10px;
+  border: 5px solid #f3302d;
+  color: rgb(95, 90, 78);
+}
+
+.card_title{
+  line-height: 4;
+  font-weight:bold;
+}
+
+.card_text{
+  line-height: 1.8;
+}
+
+.card_bottom{
+  line-height: 4;
+  text-align: right;
+  font-weight:bold;
+}
+
+.myimage{
+  width: 100%;
+  position: fixed;
+  bottom:0;
+}

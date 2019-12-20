@@ -1,0 +1,15 @@
+<view class="mywish">Merry Christmas!</view>
+
+<button class="mytouch" bindtap="Getbless">来个圣诞祝福</button>
+
+<view class="mycard">
+  <view class="mycard_text">
+    <view class="card_title">{{dear}}</view>
+    <view class="card_text">{{message}}</view>
+    <view class="card_bottom">{{me}}</view>
+  </view>
+</view>
+
+<image  class="myimage" 
+        src="cloud://cloud-cmm55.636c-cloud-cmm55-1300478727/happy/bottom.png"        
+        mode="widthFix"></image>
