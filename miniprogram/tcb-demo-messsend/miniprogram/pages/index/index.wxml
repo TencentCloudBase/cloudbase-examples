@@ -1,0 +1,5 @@
+<view class="container">
+  <textarea class="textinput" bindinput="textin"></textarea>
+  <button class="submitbtn" bindtap="onSubscribe">提醒我</button>
+  <view class='tips'>此为示例，约定均是5秒后发送消息</view>
+</view>

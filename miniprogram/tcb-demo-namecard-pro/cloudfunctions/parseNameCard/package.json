@@ -1,0 +1,15 @@
+{
+  "name": "parseNameCard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "image-node-sdk": "^1.0.7",
+    "wx-server-sdk": "latest"
+  }
+}
