@@ -10,6 +10,9 @@
 - 将申请到的模板ID复制到miniprogram/pages/index/index.js文件的第2行，lessonTmplId后面
 - 将cloudfunctions文件夹内的2个云函数创建并部署，并将send云函数上传触发器
 
+## 项目源码下载
+- [源码下载](https://github.com/TencentCloudBase/Cloudbase-Examples/releases/download/WeChat/tcb-demo-messsend.zip)
+
 ## 实战作者
 - 腾讯云·云开发团队（[bestony](https://github.com/bestony)、[lidongyx](https://github.com/lidongyx)、[Zira](https://github.com/wasfzxt)）
 
