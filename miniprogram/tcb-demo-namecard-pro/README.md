@@ -12,6 +12,9 @@
 - 将cloudfunctions文件夹内的4个云函数创建并部署（需要注意parseNameCard有image-node-sdk引用）
 - 重新编译执行，即可完整体验整个小程序功能
 
+## 项目源码下载
+- [源码下载](https://github.com/TencentCloudBase/Cloudbase-Examples/releases/download/WeChat/tcb-demo-namecard-pro.zip)
+
 ## 实战作者
 - 腾讯云·云开发团队（[bestony](https://github.com/bestony)、[lidongyx](https://github.com/lidongyx)、[Zira](https://github.com/wasfzxt)）
 
