@@ -1,0 +1,36 @@
+Page{
+  background-color:#f2f2f2;
+}
+.textinput{
+  background-color: white;
+  width: 650rpx;
+  margin: 40rpx;
+  padding: 10rpx;
+  line-height: 50rpx;
+  font-size: 34rpx;
+}
+.textbtn , .imagebtn{
+  color: white;
+  width: 650rpx;
+}
+.textbtn{
+  background-color: #286dee;
+}
+.imagebtn{
+  background-color: #f17a72;
+}
+.tips{
+  color:#898989;
+  font-size:25rpx;
+  width: 650rpx;
+  margin: 10rpx 50rpx;
+  text-align: center;
+}
+.front{
+  margin-top: 50px;
+}
+.imageshow{
+  width: 650rpx;
+  margin: 10px 50rpx;
+  height: 0;
+}

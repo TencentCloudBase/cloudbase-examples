@@ -1,0 +1,39 @@
+page{
+  width: 100%;
+  background-color: #242b36;
+}
+
+.title{
+  width: 90%;
+  margin: 30px auto;
+  color: white;
+}
+
+.big{
+  font-size:70rpx;
+}
+
+.small{
+  margin-top:15px;
+  font-size: 32rpx;
+}
+
+.des{
+  width: calc(90% - 10px);
+  margin: 10px auto;
+  padding: 10px;
+  background-color: #242b36;
+}
+
+.item{
+  font-size: 34rpx;
+  line-height: 35px;
+  color: white;
+}
+
+.btn{
+  min-width: 90%;
+  background-color: #186bf1;
+  border-radius: 0px;
+  color: white;
+}

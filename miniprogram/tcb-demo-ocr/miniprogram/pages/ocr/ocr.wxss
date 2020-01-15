@@ -1,0 +1,33 @@
+.imglist{
+  width: 100%;
+}
+.images{
+  width: calc(50% - 4px);
+  height: 375rpx;
+  margin: 2px;
+  background-color: #f8f8f8;
+  float: left;
+}
+.addbtn{
+  position: fixed;
+  bottom:15px;
+  min-width: 700rpx;
+  left:25rpx;
+  color: #b6c4ff;
+  background-color: #186bf1;
+  color: white;
+  border-radius: 0px;
+}
+.intro{
+  width:90%;
+  margin:10px auto;
+}
+.intro_item{
+  font-size: 30rpx;
+  line-height: 70rpx;
+  color:#242b36;
+  font-weight:900;
+}
+.carve{
+  margin-top: 40px;
+}

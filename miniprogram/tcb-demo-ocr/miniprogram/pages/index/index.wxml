@@ -1,0 +1,10 @@
+<view class="title">
+  <view class="big">小程序·云开发</view>
+  <view class="small">微信与腾讯云联合开发的原生 serverless 云服务，具备简化运维、高效鉴权等优势，让你零门槛快速上线小程序。</view>
+</view>
+<view class="des">
+  <view class="item">✔  快速实现业务需求</view>
+  <view class="item">✔  复杂开发轻松搞定</view>
+  <view class="item">✔  集成多方面AI能力</view>
+</view>
+<button class="btn" bindtap="toocr">开始探索</button>

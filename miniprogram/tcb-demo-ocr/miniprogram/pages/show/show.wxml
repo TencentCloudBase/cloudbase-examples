@@ -1,0 +1,21 @@
+<view class="topshow">
+  <image  class="topimg" 
+          src="{{imgdata.src}}"
+          mode="aspectFit"
+          bindtap="showimg"></image>
+</view>
+<view class="btngroup">
+  <button class="rebtn reocr" bindtap="reocr">重新识别</button>
+  <button class="rebtn" type="primary" bindtap="copytext">复制文字</button>
+</view>
+<view class="content">
+  <view class="textitem" 
+        wx:for="{{imgdata.content.items}}"
+        wx:key="index">
+    {{item.text}}
+  </view>
+  <view class="textitem" 
+        wx:if="{{imgdata.content==-1}}">
+    识别失败！请打开cloudfunctions/addimg/index.js文件34行，按照前后说明将其修复，以此来体验云开发的开发过程。
+  </view>
+</view>

@@ -1,0 +1,23 @@
+<view class="imglist" wx:if="{{imglist.length!=0}}">
+  <image  class="images"
+          wx:for="{{imglist}}"
+          wx:key="index"
+          mode='aspectFit' 
+          src="{{item.src}}"
+          bindtap="toimgshow"
+          bindlongpress="removeimg"
+          data-img="{{item.src}}"
+          data-i="{{index}}"
+          ></image>
+</view>
+<view class="intro" wx:if="{{imglist.length==0}}">
+  <view class="intro_item">这里使用了腾讯云AI图片文字识别能力</view>
+  <view class="intro_item">你可以点击上传图片进行功能体验</view>
+  <view class="intro_item carve">3行代码完成图片上传（小程序ocr.js第67行）</view>
+  <view class="intro_item">1行代码完成文字识别（云函数reorc第44行）</view>
+  <view class="intro_item">从图片上传到识别、列表管理、删除图片整个流程</view>
+  <view class="intro_item">只需要20分钟的开发时长</view>
+</view>
+<button   class="addbtn"
+          bindtap="chooseimg"
+         >上传图片</button>

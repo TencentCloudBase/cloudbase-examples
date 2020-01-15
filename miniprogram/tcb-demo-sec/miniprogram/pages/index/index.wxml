@@ -1,0 +1,9 @@
+<view class="container">
+  <textarea class="textinput" bindinput="textin"></textarea>
+  <button class="textbtn" bindtap="textcheck">文字安全检查</button>
+  <view class='tips'>检测输入文本是否含有违规内容</view>
+
+  <button class="imagebtn front" bindtap="imgcheck">图片安全检查</button>
+  <view class='tips'>检测上传的图片是否违规</view>
+  <image class="imageshow" src="{{showimg}}" mode="widthFix"/>
+</view>
