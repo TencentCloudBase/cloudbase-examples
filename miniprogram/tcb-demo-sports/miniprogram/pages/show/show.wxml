@@ -1,0 +1,15 @@
+<view class="model">
+  <view class="stepshow">
+    <view class="stepnumber">{{Rnow}}</view>
+    <view class="steptips">今日运动步数</view>
+  </view>
+  <ec-canvas class="charts" id="mychart-dom-line2" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+</view>
+<view class="pushshow">
+  <view class="splaceitem personitem">
+    <image class="avatarimg" src="{{avatarUrl}}"></image>
+    <view class="itemtext">{{runtext}}</view>
+    <image class="itemimg" src="{{perimg}}" mode="aspectFill" bindtap="topreview"></image>
+  </view>
+  <button class="star" wx:if="{{starbtn}}" bindtap="tostar" loading="{{starload}}">{{starflag?'取消赞':'给赞'}}({{starnum}})</button>
+</view>

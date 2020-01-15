@@ -1,0 +1,6 @@
+var date = function (data) {
+  return data.slice(5, 7) + "月" + data.slice(8, 10) + "日"+data.slice(11, 19);
+}
+module.exports = {
+  date:date
+};

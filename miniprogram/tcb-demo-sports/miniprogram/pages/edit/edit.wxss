@@ -1,0 +1,51 @@
+button{
+    background-color: #ff2245;
+    color: white;
+    width: 300rpx;
+    height: 40px;
+    line-height: 40px;
+    font-size: 12px;
+    padding: 0;
+    letter-spacing: 2px;
+    border-radius: 3px;
+}
+.myupimg{
+    margin: 20px 0;
+}
+.mytext{
+    background-color: #2D313C;
+    width: 690rpx;
+    padding: 30rpx 30rpx;
+    color:white;
+    font-size: 13px;
+    height: 70px;
+}
+.topimage{
+    width: 100%;
+    height: 450rpx;
+    /* filter: blur(3px); */
+}
+.setitem{
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    height: 100rpx;
+    background-color: #2D313C;
+  }
+.setitem_name{
+    margin-left: 30rpx;
+    height: 50px;
+    font-size: 13px;
+    color:white;
+    line-height: 100rpx;
+  }
+.setitem_switch{
+    margin: auto;
+    margin-right: 30rpx;
+  }
+  .tips{
+    color: #8c8D90;
+    font-size: 11px;
+    margin-top: 10px;
+    padding-left: 10px;    
+  }

@@ -1,0 +1,50 @@
+<wxs src="tools.wxs" module="tools" />
+
+<view class="loadshow" wx:if="{{model==0}}">准备中</view>
+
+<view class="model" wx:if="{{model==1}}">
+  <view class="foodshow">
+    <image src="{{foodimg}}" mode="aspectFill" class="foodimg"></image>
+    <view class="fooddes">{{fooddes}}</view>
+  </view>
+  <button class="selectbtn" bindtap="select">开始订餐</button>
+</view>
+
+<view class="model" wx:if="{{model==2}}">
+  <view class="M_title">早餐预定单</view>
+  <view class="M_item"><span class="blob">预定状态：</span>{{state==0?'已预定，等待确认':(state==1?'已确认，正在送货':'配送完成，已支付')}}</view>
+  <view class="M_item"><span class="blob">预定编号：</span>{{SID}}</view>
+  <view class="M_item" wx:if="{{state==0}}"><span class="blob">预定时间：</span>{{tools.date(submittime)}}</view>
+  <view class="M_item" wx:if="{{state==1}}"><span class="blob">确定时间：</span>{{tools.date(statetime)}}</view>
+  <view class="M_item" wx:if="{{state==1}}"><span class="blob">配餐电话：</span>{{tel}}</view>
+  <view class="M_item" wx:if="{{state==2}}"><span class="blob">送达时间：</span>{{tools.date(donetime)}}</view>
+  <button class="M_btn" type="warn" wx:if="{{state==0}}" bindtap="cancel">取消预定</button>
+  <button class="M_btn" type="primary" wx:if="{{state!=0}}" open-type="contact" bindcontact="handleContact">联系客服</button>
+</view>
+
+
+
+<half
+  bindbuttontap="submit"
+  show="{{sale}}"
+  mask="{{true}}"
+  maskClosable="{{true}}" 
+  title="订餐须知"
+  desc="{{desc}}"
+  tips="{{tips}}">
+  <button slot="footer" type="primary" open-type="getUserInfo" bindgetuserinfo="submit">确认餐品</button>
+</half>
+<half
+  bindbuttontap="submit"
+  show="{{conf}}"
+  mask="{{true}}"
+  maskClosable="{{true}}" 
+  title="确认配送地址"
+  desc="{{tname}}({{ttel}})"
+  tips="{{taddress}}">
+  <view slot="footer" class="conffooter">
+    <button type="primary" class="confbtn" bindtap="confirm" wx:if="{{!nosubmit}}">确认订餐</button>
+    <button type="warn" class="confbtn" bindtap="reset">取消返回</button>
+  </view>
+  
+</half>

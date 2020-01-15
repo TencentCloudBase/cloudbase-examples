@@ -1,0 +1,51 @@
+button{
+  background-color: #ff2245;
+  color: white;
+  width: 300rpx;
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+  padding: 0;
+  letter-spacing: 2px;
+  border-radius: 3px;
+}
+.getrunbtn{
+  margin: 30px 0;
+}
+.ranklist{
+  width: 650rpx;
+  margin:20px auto 0 auto;
+  background-color: #2D313C;
+}
+.rankitem{
+  display: flex;
+  height: 60px;
+}
+.ranknumber{
+  line-height: 60px;
+  width: 50px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+.rankimg{
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin:auto 5px;
+}
+.rankname{
+  line-height: 60px;
+  width: 50px;
+  text-align: center;
+  color: white;
+  font-size: 13px;
+}
+.rankdata{
+  line-height: 60px;
+  text-align: center;
+  color: #ff2245;
+  font-weight: bold;
+  font-size: 20px;
+  margin:0 10px 0 auto;
+}

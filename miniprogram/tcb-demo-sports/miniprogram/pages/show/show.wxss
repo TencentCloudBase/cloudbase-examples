@@ -1,0 +1,10 @@
+.star{
+  margin: 20px auto;
+  min-width: 650rpx;
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+  padding: 0;
+  letter-spacing: 2px;
+  border-radius: 3px;
+}

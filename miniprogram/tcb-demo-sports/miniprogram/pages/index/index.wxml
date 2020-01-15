@@ -1,0 +1,30 @@
+<view class="model">
+  <view wx:if="{{runauth}}" class="stepshow">
+    <view class="stepnumber">{{rundata[today]?rundata[today].step:0}}</view>
+    <view class="steptips">今日运动步数</view>
+  </view>
+  <view wx:else class="stepshow">
+    <view class="authtips">记录你的脚步</view>
+    <button class="getrunbtn" bindtap="toGetRunData">获取运动数据</button>
+  </view>
+  <ec-canvas wx:if="{{runauth}}" class="charts" id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+</view>
+<view wx:if="{{runauth}}" class="pushshow">
+  <view class="splaceitem" wx:if="{{avatarUrl==null}}">
+    <view class="splacetips">还没有自己的封面，如何上榜?</view>
+    <button  class="createnote" bindtap="tocreate">去设置</button>
+  </view>
+  <view class="splaceitem personitem" wx:else>
+    <image class="avatarimg" src="{{avatarUrl}}"></image>
+    <view class="itemtext">{{runtext}}</view>
+    <image class="itemimg" src="{{runimg}}" mode="aspectFill" bindtap="tocreate"></image>
+  </view>
+  <view class="ranklist">
+    <view class="rankitem" wx:for="{{other}}" wx:key="index" bindtap="toother" data-i="{{index}}" style="{{index!=0?'border-top: 1px solid #8c8D90;':''}}">
+      <view class="ranknumber">{{index+1}}</view>
+      <image class="rankimg" src="{{item.avatarUrl}}"></image>
+      <view class="rankname">{{item.nickname}}</view>
+      <view class="rankdata">{{item.Rnow}}</view>
+    </view>
+  </view>
+</view>

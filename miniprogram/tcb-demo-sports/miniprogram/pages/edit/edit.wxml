@@ -1,0 +1,17 @@
+<button class="myupimg" wx:if="{{img==null}}" bindtap="uploadimg">上传个人封面</button>
+<view wx:else>
+    <image class="topimage" mode="aspectFill"  src="{{img}}" bindlongpress="uploadimg" bindtap="previewimg"></image>
+    <textarea class="mytext" 
+              placeholder="记录你目前的心情吧……" 
+              placeholder-style="color:#8c8D90" 
+              cursor-spacing="60" 
+              maxlength="80"
+              value="{{text}}"
+              bindinput="inmytext"></textarea>
+    <view class="setitem">
+        <view class="setitem_name">加入运动排行榜</view>
+      <switch class="setitem_switch" checked="{{inrule}}" color="#ff2245" bindchange="startset"/>
+    </view>
+    <view class="tips">长按图片可更换,点击可预览</view>
+    <button class="myupimg" open-type="getUserInfo" bindgetuserinfo="save">保存个人信息</button>
+</view>
