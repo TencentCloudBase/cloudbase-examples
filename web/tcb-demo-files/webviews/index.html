@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File-S | 跨平台文件转储工具</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" type="image/x-icon" href="asset/logo.png">
+    <link rel="mask-icon" href="asset/logo.png" color="#4C4C4C">
+    <link rel="apple-touch-icon-precomposed" href="asset/logo.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="color-scheme" content="light dark">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="文件存储由腾讯云云开发提供支持！高效稳定，更安全">
+    <meta name="author" content="腾讯云云开发">
+    <meta property="og:title" content="File-S | 跨平台文件转储工具">
+    <meta property="og:image" content="asset/logo.png">
+    <meta property="og:description" content="文件存储由腾讯云云开发提供支持！高效稳定，更安全">
+    <meta property="og:site_name" content="File-S | 跨平台文件转储工具">
+    <meta property="og:article:author" content="腾讯云云开发">
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:image" content="OVPA/0">
+    <meta property="twitter:title" content="File-S | 跨平台文件转储工具">
+    <meta property="twitter:creator" content="">
+    <meta property="twitter:site" content="腾讯云云开发">
+    <meta property="twitter:description" content="文件存储由腾讯云云开发提供支持！高效稳定，更安全">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/tcb-min.js"></script>
+    <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+</head>
+<body onselectstart ='return false'>
+    <div class="top-model">
+        <div class="top-title">File-S</div>
+        <div class="top-des font-web">跨平台文件转储工具</div>
+    </div>
+    <div class="main-model">
+        <span class="modal noShow" id="myModal">初始化未成功，请重新进入本页面！</span>
+        <div class="main-tool font-web" id="mainTool">
+            <div class="tool-item tool-item-select" id="toolItem-0" onclick="changeView(0)">存文件</div>
+            <div class="tool-item" id="toolItem-1" onclick="changeView(1)">取文件</div>
+        </div>
+        <div class="main-show" id="itemView-0">
+            <div class="setView-main" id="setView-main-0">
+                <label for="file" class="button large-btn fileSelect" id="chooseFile" style="margin: auto auto 10px;">选择文件</label>
+                <input type="file" class="noShow" name="file" id="file" onchange="getFile(this)">
+                <div class="miniBtn" id="MyFilesBtn" onclick="showMyFiles()"><u>查看我上传的文件</u></div>
+                <div class="setModel noShow" id="setModel">
+                    <div class="setItem">
+                        <div class="setName">文件名称</div>
+                        <div class="set-text" type="password" id="fileName"></div>
+                    </div>
+                    <div class="setItem">
+                        <div class="setName">存储密码</div>
+                        <input class="set-input" type="password" id="userKey">
+                    </div>
+                    <div class="setItem">
+                        <div class="setName">取后即删</div>
+                        <input class='switch-component' type='checkbox' id="oneTime">
+                    </div>
+                </div>
+                <button class="button dark large-btn upload noShow" id="upload" onclick="uploadFile()">
+                    <span class="btnText" id="uploadBtnText">存储文件</span>
+                    <span class="btnProgress" id="progress"></span>
+                </button>
+            </div>
+            <div class="setView-main noShow" id="setView-main-1">
+                <div class="setModel" id="showDes" style="margin-top: 30px;">
+                    <div class="setItem">
+                        <div class="setName">文件名称</div>
+                        <div class="set-text" id="DesFileName"></div>
+                    </div>
+                    <div class="setItem">
+                        <div class="setName">取件号码</div>
+                        <div class="set-text Number" id="DesFileNo"></div>
+                    </div>
+                    <div class="setItem">
+                        <div class="setName">验证密码</div>
+                        <div class="set-text" id="DesFileKey"></div>
+                    </div>
+                </div>
+                <div class="btnGroup">
+                    <button class="button dark default-btn" style="margin-right: auto;" onclick="CopyLink()">复制凭证</button>
+                    <button class="button default-btn" style="margin-left: auto;" onclick="toUpload()">继续存储</button>
+                </div>
+            </div>
+            <div class="setView-main ListItem noShow" id="setView-main-2" style="width: 100%;max-width: 100%;">
+                <table>
+                    <thead>
+                        <th>文件名称</th>
+                        <th>取件号码</th>
+                        <th>取件密码</th>
+                        <th>剩余时间</th>
+                    </thead>
+                    <tbody id="FileList">
+                        <td>拉取文件列表中…</td>
+                    </tbody>
+                </table>
+            </div>
+            <div class="setView-des" id="setView-des-0">
+                <div class="desItem">1.本工具不会对您上传的文件任何形式查看、保留、转存和再传播，如果您对文件有安全顾虑，建议压缩后添加密码。</div>
+                <div class="desItem">2.工具默认存储时长为6小时，上传文件6小时之后自动删除文件；在此期间您可以随时下载（取后即删除外）</div>
+                <div class="desItem">3.如果你勾选【取后即删】，则文件将在下载后删除，服务上不会有任何保留。</div>
+                <div class="desItem">4.为了防止穷举攻击，您上传的所有文件都需要自设密码；如果您对密码不在意可以为空，但会有风险存在。</div>
+                <div class="desItem">5.本工具由腾讯云云开发提供服务，安全稳定且弹性，详情请访问腾讯云官网。</div>
+            </div>
+        </div>
+        <div class="main-show block noShow" id="itemView-1">
+            <div class="setView-main toFloat" id="setView-main-3">
+                <div class="setModel seizeTop">
+                    <div class="setItem">
+                        <div class="setName">取件号码</div>
+                        <input class="set-input" type="number" id="downNo" oninput="getFileNo(this)">
+                    </div>
+                    <div class="setItem">
+                        <div class="setName">存储密码</div>
+                        <input class="set-input" type="password" id="downKey">
+                    </div>
+                </div>
+                <button class="button dark large-btn upload" disabled id="TencentCaptcha" data-appid="腾讯验证码aid" data-cbfn="downloadFile">
+                    <span class="btnText" id="downloadBtnText">下载文件</span>
+                    <span class="btnProgress" id="downProgress"></span>
+                </button>
+            </div>
+            <div class="setView-des" style="border-right: 1px solid #EEE;">
+                <div class="desItem">1.请正确输入取件号码验证下载文件，取件号码可向文件上传者获取。</div>
+                <div class="desItem">2.如密码提示无，则不需要输入密码，只需要输入取件号码下载。</div>
+                <div class="desItem">3.若文件上传者设置了取后即删，则文件只能被下载一次，请注意！</div>
+                <div class="desItem">4.本服务有防穷举攻击策略，如果你不知道取件号码请不要试探下载，以免被封禁。</div>
+                <div class="desItem">5.本工具由腾讯云云开发提供服务，安全稳定且弹性，详情请访问腾讯云官网。</div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">Copyright ©2020 云开发. All rights reserved. 辽ICP备17020257号-1</div>
+    <script>
+        let modalFlag = false;
+        let viewFlag = 0;
+        let initFlag = false;
+        let fileSaver = null;
+        let uid = null;
+        let app = null;
+    </script>
+    <script src="js/util-min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
