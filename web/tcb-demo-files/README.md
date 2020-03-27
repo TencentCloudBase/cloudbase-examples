@@ -56,7 +56,7 @@ GitHub: [tcb-demo-files](https://github.com/TencentCloudBase/Cloudbase-Examples/
 -- cloudfunctions/cloudbaserc.js 第2行
 -- webviews/js/index.js 第1行
 
-- 前往[腾讯验证码官网](https://007.qq.com/captcha)创建验证码应用，获得aid和AppSecretKey；并打开cloudfunctions/functions/getFile/index.js，在第3行TCaptchaID中填充自己项目的aid和AppSecretKey；另外在webviews/index.html大约119行，id为**TencentCaptcha**的button元素，将属性**data-appid**填写为【应用验证码aid】。
+- 前往[腾讯验证码官网](https://console.cloud.tencent.com/captcha)创建验证码应用，获得aid和AppSecretKey；并打开cloudfunctions/functions/getFile/index.js，在第3行TCaptchaID中填充自己项目的aid和AppSecretKey；另外在webviews/index.html大约119行，id为**TencentCaptcha**的button元素，将属性**data-appid**填写为【应用验证码aid】。
 
 - 前往[静态网站控制台](https://console.cloud.tencent.com/tcb/hosting)-设置，复制域名信息下的默认域名；粘贴至cloudfunctions/functions/getFile/index.js第9行AllowOriginList数组中第1项。
 
@@ -64,8 +64,9 @@ GitHub: [tcb-demo-files](https://github.com/TencentCloudBase/Cloudbase-Examples/
 - 确定本机已经安装了nodejs和npm，如果没有安装请自行下载安装
 - 命令行进入cloudfunctions/functions下的每个文件目录，每个目录均执行一遍以下代码：
 ``` bash
-$ npm install
+$ npm install tcb-admin-node
 ```
+注意：getFile文件夹下需要安装request
 
 ##### 五、上传并部署云函数
 
@@ -77,7 +78,7 @@ $ cloudbase functions:deploy -e envID downFile
 $ cloudbase functions:deploy -e envID getFile
 $ cloudbase functions:deploy -e envID myfile
 $ cloudbase functions:deploy -e envID upload
-$ cloudbase service:create -e envID -p getFile -f getFile
+$ cloudbase service:create -e envID -p /getFile -f getFile
 $ cloudbase functions:trigger:create -e envID delete
 ```
 - 上面最后两行是为 getFile云函数创建HTTP服务 和 为delete创建触发器
@@ -91,6 +92,12 @@ $ cloudbase hosting:deploy -e envID webviews
 ```
 
 到这里，整个项目就部署完毕，你可以访问静态网站服务默认域名访问使用了。如果你要对外使用，需要将域名换成自己已经备案的域名。
+### 错误
+1. 如果云函数访问提示找不到tcb-admin-node,则使用代码更新命令重新更新即可
+``` bash
+$ cloudbase functions:code:update -e envID fun
+```
+2. 如果上传文件提示同源限制，则在环境设置中重新配置一下静态托管域名（删掉重新安装）
 
 ### 自定义域名
 
