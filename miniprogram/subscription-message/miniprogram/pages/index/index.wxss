@@ -1,0 +1,18 @@
+Page{
+  background-color:#f2f2f2;
+}
+.textinput{
+  background-color: white;
+  width: 650rpx;
+  margin: 40rpx;
+  padding: 10rpx;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 17px;
+}
+.submitbtn{
+  background-color: #286dee;
+  color: white;
+  min-width: 650rpx;
+  font-weight: 400;
+}

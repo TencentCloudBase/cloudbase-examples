@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#006eff",
+    "navigationBarTitleText": "订阅消息"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}
