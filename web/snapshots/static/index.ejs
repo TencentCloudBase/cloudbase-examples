@@ -84,7 +84,7 @@
             break
         }
 
-        let src = '<%= path ? path : (envId + ".service.tcloudbase.com/snapshots")%>?width=' + width + '&url=' + encodeURIComponent(url) + '&type=' + type
+        let src = '<%= path ? path : ("//" + envId + ".service.tcloudbase.com/snapshots")%>?width=' + width + '&url=' + encodeURIComponent(url) + '&type=' + type
 
         showEl.src = src
         showEl.hidden = false
