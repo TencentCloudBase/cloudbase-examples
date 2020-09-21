@@ -13,6 +13,6 @@
   "license": "ISC",
   "devDependencies": {
     "ejs": "^3.1.5",
-    "@cloudbase/cli": "latest"
+    "@cloudbase/cli": "^1.0.0"
   }
 }

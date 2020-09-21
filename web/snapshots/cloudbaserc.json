@@ -17,7 +17,8 @@
               "runtime": "Nodejs10.15",
               "memory": 512,
               "handler": "index.main",
-              "installDependency": false
+              "installDependency": false,
+              "ignore": ["node_modules/**/*"]
             }
           ],
           "servicePaths" :{

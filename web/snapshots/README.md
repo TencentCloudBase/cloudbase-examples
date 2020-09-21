@@ -39,6 +39,6 @@
 - [cloudbase framework]
 - [puppetter]
 
-[云开发]:(https://cloudbase.net/)
-[cloudbase framework]:(https://github.com/TencentCloudBase/cloudbase-framework)
-[puppetter]:(https://github.com/puppeteer/puppeteer)
+[云开发]: https://cloudbase.net/
+[cloudbase framework]: https://github.com/TencentCloudBase/cloudbase-framework
+[puppetter]: https://github.com/puppeteer/puppeteer
