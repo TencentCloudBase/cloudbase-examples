@@ -1,0 +1,19 @@
+{
+  "envId": "{{env.ENV_ID}}",
+  "version": "2.0",
+  "functionRoot": "./functions",
+  "functions": [],
+  "framework": {
+    "name": "php-fpm",
+    "plugins": {
+      "container": {
+        "use": "@cloudbase/framework-plugin-container",
+        "inputs": {
+          "serviceName": "php-fpm",
+          "servicePath": "/php-fpm",
+          "containerPort": 80
+        }
+      }
+    }
+  }
+}
