@@ -1,0 +1,19 @@
+{
+  "envId": "{{env.ENV_ID}}",
+  "version": "2.0",
+  "functionRoot": "./functions",
+  "functions": [],
+  "framework": {
+    "name": "lnmp_wordpress",
+    "plugins": {
+      "container": {
+        "use": "@cloudbase/framework-plugin-container",
+        "inputs": {
+          "serviceName": "lnmp_wordpress",
+          "servicePath": "/lnmp_wordpress",
+          "containerPort": 80
+        }
+      }
+    }
+  }
+}
