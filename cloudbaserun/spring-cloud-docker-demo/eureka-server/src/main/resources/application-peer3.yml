@@ -1,0 +1,15 @@
+spring:
+  profiles: peer3
+
+server:
+  port: 8283
+
+eureka:
+  instance:
+    hostname: peer3
+  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+    service-url:
+      defaultZone:  http://localhost:8281/eureka/,http://localhost:8282/eureka/,http://localhost:8283/eureka/
+

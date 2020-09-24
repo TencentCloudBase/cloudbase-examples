@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      label: master
+      server:
+        git:
+          uri: https://gitee.com/hwlin/SpringCloudConfig.git
+          search-paths:  repo
+
+server:
+  port: 8210
+eureka:
+  instance:
+    hostname: config-server
+    prefer-ip-address: true
+#    ip-address: ${eureka.instance.hostname} #只有当prefer-ip-address: true 时才生效
+#    instance-id: ${eureka.instance.hostname}:${server.port}  # 将Instance ID设置成IP:端口的形式
+  client:
+    service-url:
+      defaultZone: http://10.0.0.60:8280/eureka

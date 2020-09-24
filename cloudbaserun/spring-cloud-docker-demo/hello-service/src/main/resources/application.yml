@@ -1,0 +1,16 @@
+server:
+  port:  8270
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    #hostname: ${spring.cloud.client.ip-address}
+    #instance-id: ${spring.cloud.client.ip-address}:${server.port}  # 将Instance ID设置成IP:端口的形式
+  client:
+    service-url:
+      defaultZone: http://10.0.0.60:8280/eureka
+spring:
+  application:
+    name: hello-service
+
+
