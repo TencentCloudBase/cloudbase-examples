@@ -1,0 +1,4 @@
+module.exports = {
+  SecretID: '',
+  SecretKey: ''
+};
