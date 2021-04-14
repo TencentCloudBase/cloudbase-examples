@@ -46,4 +46,10 @@
 		</plugins>
 	</build>
 
+	<repositories>
+		<repository>
+			<id>tencent-cloud-maven</id>
+			<url>http://mirrors.cloud.tencent.com/nexus/repository/maven-public</url>
+		</repository>
+	</repositories>
 </project>
