@@ -27,10 +27,10 @@
 ```
 ## 本地开发调试
 
-1. 下载本仓库到本地，并在当前目前启用终端。
+1. 下载本仓库到本地，并在当前目录启用命令行终端。
 2. 安装开发依赖：命令行运行`npm i` or `yarn`。
 3. 使用你习惯的编辑器来做些前端或者服务函数的编辑或者查看。
-4. 本地运行：命令行运行 `npm run dev`，访问本地地址，默认为 `http://127.0.0.1:3000`。
+4. 本地运行：命令行运行 `npm run dev`，访问本地地址，默认为 `http://127.0.0.1:3000/snapshot`。
 5. 发布云端：命令行运行 `npm run deploy -- -e YOUR_ENV_HERE`。
 
 ### 相关链接
@@ -39,6 +39,6 @@
 - [cloudbase framework]
 - [puppetter]
 
-[云开发]:(https://cloudbase.net/)
-[cloudbase framework]:(https://github.com/TencentCloudBase/cloudbase-framework)
-[puppetter]:(https://github.com/puppeteer/puppeteer)
+[云开发]: https://cloudbase.net/
+[cloudbase framework]: https://github.com/TencentCloudBase/cloudbase-framework
+[puppetter]: https://github.com/puppeteer/puppeteer

@@ -231,7 +231,7 @@ git --version
 ```
 如果显示的形式为git version 2.20.1（版本可能有所不同，但是没有关系），就表示你的Git安装好啦。
 
-## 一键部署AI ##
+## 开通部署AI ##
 ### 登录腾讯云控制台 ###
 
 首先我们使用小程序的账号登录[腾讯云控制台](https://cloud.tencent.com/login)，选择**其他登录方式**下的**微信公众号**，然后点击**前往公众号授权**，然后使用手机扫描二维码，就会进入一个账号的选择页面，选择你的小程序账号确认即可。
@@ -242,12 +242,7 @@ git --version
 
 ### 开通 AI 人脸特征检测与分析 ###
 
-点击腾讯云控制台顶部工具栏的**云产品**，在列表中找到云开发（在最后一列的**移动服务**下面），也可以直接点击[云开发控制台](https://cloud.tencent.com/login)，就会看到**环境**和**拓展能力解决方案**两个标签。
-
-![云开发控制台开通拓展服务](https://hackwork-1251009918.cos.ap-shanghai.myqcloud.com/posts/tcb/WechatIMG85.png)
-- 在**环境**标签页，可以看到我们之前使用微信开发者工具创建的环境；
-- 点击**拓展能力解决方案**标签，如果AI人脸特征检测与分析在待开通的分类下点击**立即开通**，开通之后，点击**授权以部署**，然后点击**一键部署**，将AI人脸特征检测与分析的云函数部署到小程序的环境里。 再点一下**一键部署**，如果看到部署状态显示为已部署，说明云函数已经部署成功啦。
->之前我们使用开发者工具部署云函数时，都是需要先使用npm下载依赖包，然后点击部署上传，但是有了一键部署，不仅云函数、依赖包都自动在云端部署好了，而且还可以免鉴权调用AI服务（之前我们使用云数据库、云存储都是需要有openid等的鉴权），是不是非常方便？
+首次访问[开通腾讯云人脸检测服务](https://console.cloud.tencent.com/aiface)，开通后可查看腾讯云人脸检测服务相关使用概况。
 
 ## 下载任务源代码 ##
 在电脑上新建一个文件夹，比如AICamera，然后打开终端命令行（Windows电脑为**cmd命令提示符**，Mac电脑为**终端Terminal**），先cd进该文件夹，
@@ -288,11 +283,11 @@ git clone https://github.com/TencentCloudBase/tcb-Demo-AICamera.git
 
 ![结合模拟器来梳理AI项目源代码](https://hackwork-1251009918.cos.ap-shanghai.myqcloud.com/posts/tcb/WechatIMG86.png)
 
-在**cloudfunctionRoot**配置项我们可以看到云函数的目录被指定为cloud/functions，我们可以在当前小程序（也就是现在这个小程序）的根目录下新建一个**cloud**文件夹，再在cloud文件夹下建一个**functions**文件夹，建完之后看functions文件夹有什么变化（会有特殊的小图标）。
+在**cloudfunctionRoot**配置项我们可以看到云函数的目录被指定为cloud/functions，当前小程序（也就是现在这个小程序）的根目录下**cloud**文件夹内包含**functions**文件夹，其会有特殊的小图标。
 
-鼠标右键functions文件夹（也就是**云函数根目录**），选择**同步云函数列表**，就能在本地看到**tcbService-ai-detectFace**云函数。
+在**functions**文件夾下包含**tcbService-ai-detectFace**云函数，右鍵点击函数目录可选择部署函数到云端，部署可选择云端部署并安装依赖自动安装函数所需的各种依赖。也可在本地已有node_modules 并安装完依赖后选择全量部署所有文件，使用本地安装的依赖。
 
->之前我们在云开发控制台使用一键部署的方式把AI 人脸特征检测与分析部署到了小程序的云端环境之中，当时部署的AI服务就是tcbService-ai-detectFace云函数。
+若**functions**文件夾下未找到**tcbService-ai-detectFace**云函数，可[由此](./tcbService-ai-detectFace.zip)获取。
 
 ### 修改环境ID ###
 

@@ -6,7 +6,7 @@
 
 # 资料下载
 ### 课程教材PDF下载
-https://github.com/TencentCloudBase/tcb-demo-album
+https://github.com/TencentCloudBase/cloudbase-examples/blob/master/miniprogram/tcb-demo-album/%E7%9B%B8%E5%86%8C%20-%20%E6%95%99%E6%9D%90.pdf
 
 ![](https://puui.qpic.cn/vupload/0/20190612_1560305785509_n4j9zqick4n.png/0)
 ![](https://puui.qpic.cn/vupload/0/20190612_1560306036362_xq3r7uar1h.png/0)
@@ -16,7 +16,7 @@ https://github.com/TencentCloudBase/tcb-demo-album
 
 ### 课程初始源码
 
-https://github.com/TencentCloudBase/tcb-demo-album/tree/master/init
+https://github.com/TencentCloudBase/cloudbase-examples/tree/master/miniprogram/tcb-demo-album/init
 
 # 联系我们
 更多云开发使用技巧及 大前端Serverless 行业动态，扫码关注我们~

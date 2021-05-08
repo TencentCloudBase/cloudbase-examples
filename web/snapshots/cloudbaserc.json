@@ -16,7 +16,9 @@
               "envVariables": {},
               "runtime": "Nodejs10.15",
               "memory": 512,
-              "handler": "index.main"
+              "handler": "index.main",
+              "installDependency": false,
+              "ignore": ["node_modules/**/*"]
             }
           ],
           "servicePaths" :{

@@ -1,0 +1,17 @@
+{
+  "name": "DetectFace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cos-nodejs-sdk-v5": "^2.5.9",
+    "request": "^2.88.0",
+    "tcb-service-sdk": "0.1.1-beta.0",
+    "wx-server-sdk": "latest"
+  }
+}

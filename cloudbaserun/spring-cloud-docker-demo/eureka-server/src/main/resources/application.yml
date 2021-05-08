@@ -1,0 +1,13 @@
+server:
+  port: 8280
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: eurekaServer
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+

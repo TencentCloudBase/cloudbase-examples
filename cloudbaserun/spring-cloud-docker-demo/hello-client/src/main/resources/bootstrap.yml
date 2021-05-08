@@ -1,0 +1,29 @@
+#      直接指定uri
+spring:
+  cloud:
+    config:
+      label: master
+      profile: dev
+      uri: http://10.0.0.48:8210/
+      name: feign-hystrix-config
+  application:
+    name: hello-client
+
+#  zipkin:
+#    base-url: http://loclhost:8285
+eureka:
+  instance:
+    hostname: hello-client
+  client:
+    service-url:
+      defaultZone: http://10.0.0.60:8280/eureka
+
+management:
+  security:
+    enabled: false
+
+foo:
+  23355
+
+server:
+  port:  8215

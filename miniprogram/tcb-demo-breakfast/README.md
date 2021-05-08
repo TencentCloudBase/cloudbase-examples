@@ -16,6 +16,9 @@
 - 将项目目录下base文件夹中的food.jpg图片文件上传至云存储,并将CloudID填写到food数据库ADMIN中的img字段里;
 - 将cloudfunctions文件夹内的6个云函数创建并部署,并将donefood、sendfood云函数上传触发器;
 - 打开云开发控制台-设置tag-全局设置，添加消息推送，选择消息类型为text，环境ID选择你部署的环境ID，云函数选择contact;
+- 订阅消息模板选择请根据下图调试
+![](base/01.png)
+![](base/02.png)
 
 ## 参考文档
 
