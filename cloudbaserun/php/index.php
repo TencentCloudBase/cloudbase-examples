@@ -1,2 +1,2 @@
 <?php
-echo sprintf("Hello World!");
+echo sprintf("Hello!");
