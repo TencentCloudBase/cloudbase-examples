@@ -8,7 +8,7 @@
 
 ### 课程教材 PDF 下载
 
-[https://github.com/TencentCloudBase/tcb-demo-foodmap](https://github.com/TencentCloudBase/tcb-demo-foodmap)
+[https://github.com/TencentCloudBase/tcb-demo-foodmap](https://github.com/TencentCloudBase/Cloudbase-Examples/tree/master/miniprogram/tcb-demo-foodmap)
 
 ![](https://puui.qpic.cn/vupload/0/1566898352360_mcvc513vsa.png/0)
 ![](https://puui.qpic.cn/vupload/0/1566898496116_tlcptjed9bg.png/0)
@@ -21,11 +21,11 @@
 
 ### 课程初始源码
 
-[https://github.com/TencentCloudBase/tcb-demo-foodmap/tree/master/class](https://github.com/TencentCloudBase/tcb-demo-foodmap/tree/master/class)
+[https://github.com/TencentCloudBase/tcb-demo-foodmap/tree/master/class](https://github.com/TencentCloudBase/cloudbase-examples/tree/master/miniprogram/tcb-demo-foodmap/class)
 
 ### 课程完整源码
 
-[https://github.com/TencentCloudBase/tcb-demo-foodmap/tree/master/master](https://github.com/TencentCloudBase/tcb-demo-foodmap/tree/master/master)
+[https://github.com/TencentCloudBase/tcb-demo-foodmap/tree/master/master](https://github.com/TencentCloudBase/cloudbase-examples/tree/master/miniprogram/tcb-demo-foodmap/master)
 
 ## 联系我们
 
