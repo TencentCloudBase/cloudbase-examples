@@ -22,7 +22,7 @@
 
 # 资料下载
 ### 课程教材
-https://github.com/TencentCloudBase/tcb-demo-foodmap
+[https://github.com/TencentCloudBase/tcb-demo-foodmap](https://github.com/TencentCloudBase/Cloudbase-Examples/tree/master/miniprogram/tcb-demo-foodmap)
 
 ### 课程初始源码
 
