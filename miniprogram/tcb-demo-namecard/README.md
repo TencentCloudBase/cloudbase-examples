@@ -7,7 +7,7 @@
 
 # 资料下载
 ### 课程教材PDF下载
-https://github.com/TencentCloudBase/tcb-demo-namecard
+https://github.com/TencentCloudBase/cloudbase-examples/blob/master/miniprogram/tcb-demo-foodmap/%E7%BE%8E%E9%A3%9F%E5%9C%B0%E5%9B%BE%20-%20%E6%95%99%E6%9D%90.pdf
 
 ![](https://puui.qpic.cn/vupload/0/20190612_1560307562567_qgo8u0hxbz.png/0)
 ![](https://puui.qpic.cn/vupload/0/20190612_1560307719158_s3uzf3ro93c.png/0)
