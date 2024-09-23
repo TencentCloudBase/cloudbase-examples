@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "选择评价商品",
+  "usingComponents": {
+    "order-card": "../../../order/components/order-card",
+    "specs-goods-card": "../../../order/components/specs-goods-card/index",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-toast": "tdesign-miniprogram/toast/toast"
+  }
+}

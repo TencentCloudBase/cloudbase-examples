@@ -1,0 +1,6 @@
+<view class="comments-card-list">
+  <block wx:for="{{commentList}}" wx:key="index">
+    <comments-card userName="{{item.user}}" commentTime="{{item.createdTimeString}}" commentScore="{{item.rating}}" commentContent="{{item.content}}" sellerReply="{{item.reply || ''}}" goodsDetailInfo="{{item.desc || ''}}" />
+  </block>
+  <t-load-more t-class="no-more" status="{{loadMoreStatus}}" no-more-text="没有更多了" color="#BBBBBB" failedColor="#FA550F" />
+</view>

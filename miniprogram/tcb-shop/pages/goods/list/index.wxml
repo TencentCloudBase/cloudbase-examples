@@ -1,0 +1,10 @@
+<view class="goods-list-container">
+  <view class="empty-wrap" wx:if="{{goodsList.length === 0 && hasLoaded}}">
+    <t-empty t-class="empty-tips" size="240rpx" description="暂无相关商品" />
+  </view>
+  <view class="category-goods-list" wx:if="{{goodsList.length}}">
+    <goods-list wr-class="wr-goods-list" goodsList="{{goodsList}}" bind:click="gotoGoodsDetail" bind:addcart="handleAddCart" />
+  </view>
+  <load-more wx:if="{{goodsList.length > 0}}" status="{{loadMoreStatus}}" no-more-text="没有更多了" />
+</view>
+<t-toast id="t-toast" />

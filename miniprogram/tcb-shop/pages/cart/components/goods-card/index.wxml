@@ -1,0 +1,46 @@
+<view id="{{independentID}}" class="wr-goods-card card-class {{ layout }} {{ centered ? 'center' : ''}}" bind:tap="clickHandle" data-goods="{{ goods }}" hidden="{{hiddenInData}}">
+  <view class="wr-goods-card__main">
+    <view class="wr-goods-card__thumb thumb-class" bind:tap="clickThumbHandle">
+      <!-- data-src 是方便加购动画读取图片用的 -->
+      <t-image t-class="wr-goods-card__thumb-com" src="{{ goods.sku.image }}" mode="{{ thumbMode }}" lazy-load="{{ lazyLoad }}" />
+      <slot name="thumb-cover" />
+    </view>
+    <view class="wr-goods-card__body">
+      <view class="wr-goods-card__long_content">
+        <view class="wr-goods-card__title title-class" style="-webkit-line-clamp: {{ goods.lineClamp }};">
+          <slot name="before-title" />
+          {{ goods.sku.spu.name }}
+        </view>
+        <slot name="after-title" />
+        <slot name="after-desc" />
+        <view wx:if="{{ goods.sku.attr_value.length > 0 }}" class="wr-goods-card__specs__desc specs-class" bind:tap="clickSpecsHandle">
+          <view class="wr-goods-card__specs__desc-text">{{ attr_str }}</view>
+          <t-icon name="chevron-down" size="32rpx" color="#999999" />
+        </view>
+        <view class="goods_tips" wx:if="{{goods.sku.count !== 0 && goods.count > goods.sku.count}}">
+          库存不足
+        </view>
+      </view>
+      <view class="wr-goods-card__short_content">
+        <block wx:if="{{goods.sku.count !== 0}}">
+          <view wx:if="{{ pricePrefix }}" class="wr-goods-card__price__prefix price-prefix-class">
+            {{ pricePrefix }}
+          </view>
+          <slot name="price-prefix" />
+          <view class="wr-goods-card__price">
+            <price wr-class="price-class" symbol="{{currency}}" price="{{goods.sku.price * 100}}" fill="{{priceFill}}" decimalSmaller />
+          </view>
+        </block>
+        <block wx:else>
+          <view class="no_storage">
+            <view>请重新选择商品规格</view>
+            <view class="no_storage__right">重选</view>
+          </view>
+        </block>
+      </view>
+      <slot name="append-body" />
+    </view>
+    <slot name="footer" />
+  </view>
+  <slot name="append-card" />
+</view>

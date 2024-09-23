@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "收货地址",
+  "usingComponents": {
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-image": "/components/webp-image/index",
+    "t-toast": "tdesign-miniprogram/toast/toast",
+    "t-address-item": "../../components/ui-address-item/index",
+    "t-empty": "tdesign-miniprogram/empty/empty",
+    "loading-dialog": "../../../../components/loading-dialog/index"
+  }
+}

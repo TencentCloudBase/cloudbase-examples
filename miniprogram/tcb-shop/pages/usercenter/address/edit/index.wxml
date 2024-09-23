@@ -1,0 +1,25 @@
+<view class="address-detail">
+  <view class="divider-line" />
+  <view class="form-address">
+    <form class="form-content">
+      <t-cell-group>
+        <t-cell class="form-cell" t-class-title="t-cell-title" title="收货人" t-class-note="t-cell-note">
+          <t-input class="t-input" slot="note" t-class="field-text" borderless data-item="name" maxlength="20" type="text" value="{{name}}" placeholder="您的姓名" bind:change="onInputValue" />
+        </t-cell>
+        <t-cell class="form-cell" t-class-title="t-cell-title" title="手机号">
+          <t-input slot="note" class="t-input" t-class="field-text" borderless type="number" value="{{phone}}" maxlength="11" placeholder="联系您的手机号" bind:change="onInputValue" data-item="phone" />
+        </t-cell>
+        <t-cell class="form-cell" t-class-title="t-cell-title" title="详细地址" bordered="{{false}}">
+          <view slot="note" class="textarea__wrapper">
+            <t-textarea slot="note" type="text" value="{{detailAddress}}" placeholder="精确到门牌号" autosize bind:change="onInputValue" data-item="detailAddress" />
+          </view>
+        </t-cell>
+      </t-cell-group>
+      <view class="submit">
+        <t-button shape="round" block bind:tap="formSubmit">保存</t-button>
+      </view>
+    </form>
+  </view>
+</view>
+<t-toast id="t-toast" />
+<loading-dialog show="{{loading}}" />

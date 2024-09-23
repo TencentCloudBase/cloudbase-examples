@@ -1,0 +1,25 @@
+<wxs module="utils">
+	var hidePhoneNum = function(array) {
+	if (!array) return;
+	var mphone = array.substring(0, 3) + '****' + array.substring(7);
+	return mphone;
+	}
+	module.exports = {
+	hidePhoneNum:hidePhoneNum
+	}
+</wxs>
+<view class="address-card wr-class">
+  <t-cell wx:if="{{addressData && addressData.detailAddress}}" bindtap="onAddressTap" hover>
+    <view class="order-address" slot="title">
+      <view class="address-content">
+        <view class="detail">{{addressData.detailAddress}}</view>
+        <view class="info">{{addressData.name}} {{utils.hidePhoneNum(addressData.phone)}}</view>
+      </view>
+      <t-icon class="address__right" name="chevron-right" color="#BBBBBB" size="40rpx" />
+    </view>
+  </t-cell>
+  <t-cell wx:else bindtap="onAddTap" title="添加收货地址" hover>
+    <t-icon name="add-circle" slot="left-icon" size="40rpx" />
+  </t-cell>
+  <view class="top-line" />
+</view>

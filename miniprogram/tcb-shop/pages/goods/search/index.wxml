@@ -1,0 +1,6 @@
+<view class="search-page">
+  <t-search t-class-input-container="t-class__input-container" t-class-input="t-search__input" value="{{searchValue}}" leftIcon="" bind:submit="handleSubmit" focus>
+    <t-icon slot="left-icon" prefix="wr" name="search" size="40rpx" color="#bbb" />
+  </t-search>
+  <t-dialog visible="{{dialogShow}}" content="{{dialog.message}}" bindconfirm="confirm" bind:close="close" confirm-btn="确定" cancel-btn="{{dialog.showCancelButton ? '取消' : null}}" t-class-confirm="dialog__button-confirm" t-class-cancel="dialog__button-cancel" />
+</view>

@@ -1,0 +1,11 @@
+.loading-dialog .t-dialog{
+  width: unset;
+}
+
+.loading-dialog .t-dialog__content {
+  padding: 80rpx;
+}
+
+.loading-dialog .t-dialog__footer {
+  display: none;
+}

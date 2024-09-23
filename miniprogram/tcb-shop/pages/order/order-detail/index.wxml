@@ -1,0 +1,60 @@
+<t-pull-down-refresh id="t-pull-down-refresh" bindrefresh="onPullDownRefresh_" t-class-indicator="t-class-indicator">
+  <!-- 页面内容 -->
+  <view class="order-detail">
+    <view class="header">
+      <view class="order-detail__header">
+        <view class="title">{{order.statusDesc}}</view>
+      </view>
+      <!-- 收货地址 -->
+      <view class="order-logistics">
+        <t-icon name="location" size="40rpx" class="logistics-icon" prefix="wr" />
+        <view class="logistics-content">
+          <view>{{order.delivery_info.name + ' '}}{{order.delivery_info.phone}}</view>
+          <view class="logistics-time">{{order.delivery_info.address}}</view>
+        </view>
+        <view wx:if="{{addressEditable}}" class="edit-text" bindtap="onEditAddressTap">修改</view>
+      </view>
+    </view>
+    <!-- 店铺及商品 -->
+    <order-card order="{{order}}" use-top-right-slot>
+      <order-goods-card wx:for="{{order.orderItems}}" wx:key="id" wx:for-item="goods" wx:for-index="gIndex" goods="{{goods}}" no-top-line="{{gIndex === 0}}" bindtap="onGoodsCardTap" data-index="{{gIndex}}">
+        <order-button-bar slot="append-card" class="goods-button-bar" order="{{_order}}" bindrefresh="onRefresh" goodsIndex="{{gIndex}}" />
+      </order-goods-card>
+      <view class="pay-detail">
+        <view class="pay-item">
+          <text>商品总额</text>
+          <price fill decimalSmaller wr-class="pay-item__right font-bold" price="{{order.totalPrice * 100 || '0'}}" />
+        </view>
+        <view class="pay-item">
+          <text>{{order.isPaid ? '实付' : '应付'}}</text>
+          <price fill decimalSmaller wr-class="pay-item__right font-bold primary max-size" price="{{order.totalPrice * 100 || '0'}}" />
+        </view>
+      </view>
+    </order-card>
+    <view class="pay-detail padding-inline">
+      <view class="pay-item">
+        <text>订单编号</text>
+        <view class="pay-item__right" bindtap="onOrderNumCopy">
+          <text class="order-no">{{order._id}}</text>
+          <view class="pay-item__right__copy">复制</view>
+        </view>
+      </view>
+      <view class="pay-item">
+        <text>下单时间</text>
+        <view class="pay-item__right">
+          <text class="order-no normal-color">{{order.createdTimeString}}</text>
+        </view>
+      </view>
+      <view class="border-bottom border-bottom-margin" />
+      <view class="pay-service" wx:if="{{storeDetail && storeDetail.storeTel}}" catch:tap="clickService">
+        <t-icon name="service" size="40rpx" />
+        <text decode="{{true}}">&nbsp;联系客服</text>
+      </view>
+    </view>
+  </view>
+  <view class="bottom-bar">
+    <order-button-bar bindoperation="onOperation" order="{{order}}" isBtnMax />
+  </view>
+</t-pull-down-refresh>
+<t-toast id="t-toast" />
+<t-dialog id="t-dialog" />

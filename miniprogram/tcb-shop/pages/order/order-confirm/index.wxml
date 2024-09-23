@@ -1,0 +1,39 @@
+<view class="order-sure" wx:if="{{!loading}}">
+  <address-card addressData="{{userAddress}}" bind:addclick="onGotoAddress" bind:addressclick="onGotoAddress" />
+  <view class="order-wrapper">
+    <view wx:if="{{goodsList.length > 0}}" wx:for="{{goodsList}}" wx:for-item="goods" wx:for-index="gIndex" wx:key="id" class="goods-wrapper">
+      <t-image src="{{goods.thumb}}" t-class="goods-image" mode="aspectFill" />
+      <view class="goods-content">
+        <view class="goods-title">{{goods.title}}</view>
+        <view>{{goods.specs}}</view>
+      </view>
+      <view class="goods-right">
+        <price wr-class="goods-price" price="{{goods.price * 100}}" fill="{{true}}" decimalSmaller />
+        <view class="goods-num">x{{goods.num}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="pay-detail">
+    <view class="pay-item">
+      <text>商品总额</text>
+      <price fill decimalSmaller wr-class="pay-item__right font-bold" price="{{totalSalePrice * 100}}" />
+    </view>
+  </view>
+  <view class="amount-wrapper">
+    <view class="pay-amount">
+      <text class="order-num">共{{goodsList.length}}件</text>
+      <text>小计</text>
+      <price class="total-price" price="{{totalSalePrice * 100}}" fill="{{false}}" decimalSmaller />
+    </view>
+  </view>
+  <view class="wx-pay-cover">
+    <view class="wx-pay">
+      <price decimalSmaller fill class="price" price="{{totalSalePrice * 100}}" />
+      <view class="submit-btn {{ userAddress != null ? '' : 'btn-gray'}}" bindtap="submitOrder">
+        提交订单
+      </view>
+    </view>
+  </view>
+</view>
+<t-toast id="t-toast" />
+<t-dialog id="t-dialog" />

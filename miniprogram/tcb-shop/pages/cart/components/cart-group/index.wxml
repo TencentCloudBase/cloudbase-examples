@@ -1,0 +1,35 @@
+<wxs src="./index.wxs" module="handlePromotion" />
+<wxs src="./utils.wxs" module="utils" />
+<view class="cart-group">
+  <view class="goods-wrap">
+    <block wx:if="{{cartItems.length>0}}">
+      <view class="goods-item" wx:for="{{cartItems}}" wx:for-item="goods" wx:for-index="gi" wx:key="_id">
+        <swipeout right-width="{{ 72 }}">
+          <view class="goods-item-info">
+            <view class="check-wrap" catchtap="selectGoods" data-goods="{{goods}}">
+              <t-icon size="40rpx" color="{{goods.selected ? '#FA4126' : '#BBBBBB'}}" name="{{goods.selected ? 'check-circle-filled' : 'circle'}}" class="check" />
+            </view>
+            <view class="goods-sku-info">
+              <goods-card layout="horizontal-wrap" thumb-width="{{thumbWidth}}" thumb-height="{{thumbHeight}}" centered="{{true}}" data="{{goods}}" data-goods="{{goods}}" catchspecs="specsTap" catchclick="goGoodsDetail">
+                <view slot="thumb-cover" class="stock-mask" wx:if="{{goods.sku.count <= 3}}">
+                  仅剩{{goods.sku.count}}件
+                </view>
+                <view slot="append-body" class="goods-stepper">
+                  <t-stepper classname="stepper-info" value="{{goods.count}}" min="{{1}}" max="{{goods.sku.count}}" data-goods="{{goods}}" data-gi="{{gi}}" catchchange="changeStepper" catchblur="input" catchoverlimit="overlimit" theme="filled" />
+                </view>
+              </goods-card>
+            </view>
+          </view>
+          <view slot="right" class="swiper-right-del" bindtap="deleteGoods" data-goods="{{goods}}">
+            删除
+          </view>
+        </swipeout>
+      </view>
+      <view class="promotion-line-wrap" wx:if="{{handlePromotion.hasPromotion(promotion.promotionCode) && promoindex != (store.promotionGoodsList.length - 2)}}">
+        <view class="promotion-line" />
+      </view>
+    </block>
+  </view>
+</view>
+<specs-popup wx:if="{{currentGoods}}" goods="{{currentGoods}}" show="{{isShowSpecs}}" bindclose="hideSpecsPopup" />
+<t-toast id="t-toast" />

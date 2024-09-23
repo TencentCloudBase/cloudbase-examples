@@ -1,0 +1,13 @@
+<view class="result-container">
+  <t-search t-class="t-search" t-class-input-container="t-class__input-container" t-class-left="t-search__left-icon" t-class-input="t-search__input" value="{{keywords}}" leftIcon="" bind:submit="handleSubmit">
+    <t-icon slot="left-icon" prefix="wr" name="search" size="40rpx" color="#bbb" />
+  </t-search>
+  <view class="empty-wrap" wx:if="{{goodsList.length === 0 && hasLoaded}}">
+    <t-empty t-class="empty-tips" size="240rpx" description="暂无相关商品" />
+  </view>
+  <view class="category-goods-list" wx:if="{{goodsList.length}}">
+    <goods-list wr-class="wr-goods-list" goodsList="{{goodsList}}" bind:click="gotoGoodsDetail" bind:addcart="gotoGoodsDetail" />
+  </view>
+  <load-more wx:if="{{goodsList.length > 0}}" status="{{loadMoreStatus}}" no-more-text="没有更多了" />
+</view>
+<t-toast id="t-toast" />

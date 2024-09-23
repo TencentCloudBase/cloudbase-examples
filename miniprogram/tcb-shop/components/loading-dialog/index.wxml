@@ -1,0 +1,5 @@
+<view class="loading-dialog">
+  <t-dialog visible="{{show}}">
+    <t-loading slot="content" theme="circular" size="70rpx" class="wrapper" />
+  </t-dialog>
+</view>

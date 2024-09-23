@@ -1,0 +1,16 @@
+<t-popup close-on-overlay-click="{{true}}" visible="{{show}}" placement="bottom">
+  <view class="specs-popup">
+    <view>
+      <goods-card data="{{goodsWithoutAttrValue}}" layout="horizontal-wrap" thumb-mode="{{thumbMode}}" />
+      <view class="section">
+        <view class="title">已选规格</view>
+        <view class="options">
+          <view wx:for="{{goods.sku.attr_value}}" wx:for-item="spec" wx:key="spec" class="option">
+            {{spec.value}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="bottom-btn" hover-class="bottom-btn--active" bindtap="onClose">我知道了</view>
+  </view>
+</t-popup>

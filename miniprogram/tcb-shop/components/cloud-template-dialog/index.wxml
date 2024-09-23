@@ -1,0 +1,13 @@
+<view>
+  <t-dialog bind:close="close" close-btn="{{true}}" class="template-dialog" visible="{{show}}" title="欢迎使用云模版" content="请复制下方链接并在浏览器打开，安装模版并查看使用文档。">
+    <view class="content-container" slot="content">
+      <view class="url-container">
+        <text class="url">{{url}}</text>
+      </view>
+      <t-radio checked="{{checked}}" value="{{checked}}" bind:change="neverShowChanged" icon="dot" label="已安装，不再提醒" />
+      <view class="btns">
+        <t-button bind:tap="copy" class="template-btn" size="large" theme="primary">复制</t-button>
+      </view>
+    </view>
+  </t-dialog>
+</view>

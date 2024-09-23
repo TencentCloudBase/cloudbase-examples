@@ -1,0 +1,27 @@
+.url-container text {
+  word-break: break-all;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.template-btn {
+  flex-grow: 1;
+}
+
+.template-dialog .t-dialog {
+  margin-bottom: 20px;
+}
+
+
+.template-dialog .t-dialog__footer {
+  display: none;
+}
+
+.template-dialog .t-radio--block {
+  padding-left: 0;
+}

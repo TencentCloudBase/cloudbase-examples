@@ -1,0 +1,17 @@
+<view class="order-card wr-class" bind:tap="onOrderCardTap">
+  <view class="header header-class">
+    <view wx:if="{{!useTopLeftSlot}}" class="store-name title-class">
+      <slot name="top-left" />
+    </view>
+    <view wx:if="{{!useTopRightSlot}}" class="order-status">{{order.statusDesc}}</view>
+    <slot wx:else name="top-right" />
+  </view>
+  <view class="slot-wrapper">
+    <slot />
+  </view>
+  <view wx:if="{{goodsCount > defaultShowNum && !showAll}}" class="more-mask" catchtap="onShowMoreTap">
+    展开商品信息（共 {{goodsCount}} 个）
+    <t-icon name="chevron-down" size="32rpx" />
+  </view>
+  <slot name="more" />
+</view>

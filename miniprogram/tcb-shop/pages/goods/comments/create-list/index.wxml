@@ -1,0 +1,22 @@
+<view class="page-container">
+  <view wx:if="{{order != null}}">
+    <order-card order="{{order}}">
+      <view slot="top-left" class="order-number">
+        <text decode>订单号&nbsp;</text>
+        {{order._id}}
+      </view>
+      <view wx:for="{{order.orderItems}}" wx:key="id" wx:for-item="goods" wx:for-index="gIndex" class="order-card-inside-container">
+        <specs-goods-card data="{{goods}}" no-top-line="{{gIndex === 0}}" />
+        <view class="btn-bar">
+          <view class="right">
+            <t-button data-order-item="{{goods}}" size="extra-small" variant="base" shape="round" t-class="t-button order-btn primary" hover-class="order-btn--active" catchtap="toComment">
+              评价
+            </t-button>
+          </view>
+        </view>
+      </view>
+      <view slot="more"></view>
+    </order-card>
+  </view>
+</view>
+<t-toast id="t-toast" />

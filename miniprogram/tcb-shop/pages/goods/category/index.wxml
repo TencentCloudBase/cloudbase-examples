@@ -1,0 +1,4 @@
+<view class="wrap">
+  <goods-category level="{{2}}" custom-class="goods-category-class" category="{{cates}}" bind:changeCategory="onChange" />
+  <t-toast id="t-toast" />
+</view>

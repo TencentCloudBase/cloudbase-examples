@@ -1,0 +1,24 @@
+<view class="goods-category custom-class">
+  <c-sidebar custom-class="custom-sidebar" bindchange="onParentChange" activeKey="{{activeKey}}">
+    <c-sidebar-item wx:for="{{ category }}" wx:key="index" title="{{ item.name }}" />
+  </c-sidebar>
+  <view class="goods-category__right">
+    <c-tabbar wx:if="{{isSlotRight}}" activeKey="{{subActiveKey}}" bindchange="onChildChange" showMore>
+      <slot />
+    </c-tabbar>
+    <view wx:if="{{!isSlotRight}}" class="goods-category-normal">
+      <view class="goods-category-normal-item" wx:if="{{category[activeKey].child_cate && category[activeKey].child_cate.length > 0}}">
+        <view class="goods-category-normal-item-second-container" wx:if="{{level === 2}}">
+          <block wx:for="{{category[activeKey].child_cate}}" wx:key="index">
+            <view class="goods-category-normal-item-second-container-item" wx:for-key="index" bindtap="changCategory" data-item="{{item}}">
+              <t-image src="{{item.image}}" t-class="image" />
+              <view class="flex goods-category-normal-item-container-item-title">
+                {{item.name}}
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

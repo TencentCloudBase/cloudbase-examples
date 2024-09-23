@@ -1,0 +1,26 @@
+<view wx:if="{{sku}}" class="page-container">
+  <view class="comment-card">
+    <view class="goods-info-container">
+      <view class="goods-image-container">
+        <t-image t-class="goods-image" src="{{sku.image}}" />
+      </view>
+      <view class="goods-title-container">
+        <view class="goods-title">{{sku.spu.name}}</view>
+        <view class="goods-detail">{{sku.spec}}</view>
+      </view>
+    </view>
+    <view class="rate-container">
+      <text class="rate-title">商品评价</text>
+      <view class="rate">
+        <t-rate value="{{goodRateValue}}" bind:change="onRateChange" size="26" gap="6" color="{{['#ffc51c', '#ddd']}}" data-item="goodRateValue" />
+      </view>
+    </view>
+    <view class="textarea-container">
+      <t-textarea t-class="textarea" maxlength="{{500}}" indicator placeholder="对商品满意吗？评论一下" bind:change="onTextAreaChange" />
+    </view>
+  </view>
+</view>
+<view class="submit-button-container">
+  <t-button content="提交" block shape="round" t-class="submit-button{{isAllowedSubmit ? '' : '-disabled'}}" bind:tap="onSubmitBtnClick" />
+</view>
+<t-toast id="t-toast" />
