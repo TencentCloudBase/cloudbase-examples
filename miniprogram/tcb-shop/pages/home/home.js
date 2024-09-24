@@ -59,13 +59,9 @@ Page({
 
   async loadHomeSwiper() {
     const { images } = await getHomeSwiper();
-    const imgSrcs = (
-      await wx.cloud.getTempFileURL({
-        fileList: images,
-      })
-    ).fileList.map((x) => x.tempFileURL);
+    const handledImages = await getCloudImageTempUrl(images);
 
-    this.setData({ imgSrcs });
+    this.setData({ imgSrcs: handledImages });
   },
 
   onReTry() {
@@ -89,7 +85,7 @@ Page({
       const images = nextList.map((x) => x.cover_image);
       const handledImages = await getCloudImageTempUrl(images);
       handledImages.forEach((image, index) => (nextList[index].cover_image = image));
-      await Promise.all(nextList.map(async (spu) => (spu.price = await getPrice(spu._id))));
+      await Promise.all(nextList.map(async (spu) => (spu.price = await getPrice(spu._id).catch(() => 0.01))));
 
       const goodsList = fresh ? nextList : this.data.goodsList.concat(nextList);
 
