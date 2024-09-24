@@ -22,6 +22,7 @@ export async function getCloudImageTempUrl(images) {
 }
 
 export async function getSingleCloudImageTempUrl(image) {
+  if (!image.startsWith('cloud')) return image;
   return (
     await wx.cloud.getTempFileURL({
       fileList: [image],
