@@ -203,7 +203,7 @@ Page({
 
   async payImpl(totalPrice, orderId) {
     try {
-      await pay({ _id: orderId, totalPrice });
+      await pay({ id: orderId, totalPrice });
       try {
         await updateOrderStatus({ orderId, status: ORDER_STATUS.TO_SEND });
         this.toast('支付成功');

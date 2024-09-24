@@ -1,16 +1,15 @@
 /**
  *
- * @param {{_id: String, totalPrice: Number}} order
+ * @param {{id: String, totalPrice: Number}} order
  * @returns
  */
 export async function pay(order) {
   try {
     const res = await wx.cloud.callFunction({
       // 云函数名称
-      name: 'wxpayFunctions',
+      name: 'shop_pay',
       data: {
-        type: 'wxpay_order',
-        order,
+        orderId: order.id
       },
     });
     const paymentData = res.result?.data;
@@ -32,13 +31,15 @@ export async function pay(order) {
 }
 
 export async function refund(orderId) {
-  return wx.cloud.callFunction({
+  const res = await wx.cloud.callFunction({
     // 云函数名称
-    name: 'wxpayFunctions',
+    name: 'shop_refund',
     data: {
-      // 调用云函数中的申请退款方法
-      type: 'wxpay_refund',
       orderId,
     },
   });
+  if (!res?.result?.data) {
+    throw new Error("refund failed", res);
+  }
+  return res;
 }

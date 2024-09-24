@@ -1,0 +1,12 @@
+page,
+.page {
+  --td-font-family: PingFang SC, Microsoft YaHei, Arial Regular;
+  --td-font-family-medium: PingFang SC, Microsoft YaHei, Arial Medium;
+  --td-font-size: 20rpx;
+  --td-font-size-xs: var(--td-font-size);
+  --td-font-size-s: 24rpx;
+  --td-font-size-base: 28rpx;
+  --td-font-size-m: 32rpx;
+  --td-font-size-l: 40rpx;
+  --td-font-size-xl: 72rpx;
+}
