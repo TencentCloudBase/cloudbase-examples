@@ -17,6 +17,7 @@ Page({
     interval: 5000,
     navigation: { type: 'dots' },
     swiperImageProps: { mode: 'scaleToFill' },
+    cloudCheckerShow: false
   },
 
   goodListPagination: {
@@ -127,5 +128,15 @@ Page({
     wx.navigateTo({
       url: `/pages/promotion-detail/index?promotion_id=${promotionID}`,
     });
+  },
+
+  async onCloudCheck() {
+    try {
+      await getHomeSwiper();
+      this.setData({ cloudCheckerShow: false })
+    } catch (e) {
+      console.log(e);
+      this.setData({ cloudCheckerShow: true })
+    }
   },
 });

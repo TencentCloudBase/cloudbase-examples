@@ -1,19 +1,20 @@
-<view style="text-align: center; color: #b9b9b9" wx:if="{{pageLoading}}">
-  <t-loading theme="circular" size="40rpx" text="加载中..." inherit-color />
-</view>
-<view class="home-page-header">
-  <view class="search" bind:tap="navToSearchPage">
-    <t-search t-class-input="t-search__input" t-class-input-container="t-search__input-container" leftIcon="" disabled>
-      <t-icon slot="left-icon" prefix="wr" name="search" size="40rpx" color="#bbb" />
-    </t-search>
+<cloud-template-checker bindcheck="onCloudCheck" show="{{cloudCheckerShow}}" text="原因可能是模板未完成初始化，请参考 README.md 或打开下方使用文档。" url="https://tcb.cloud.tencent.com/cloud-admin#/cloud-template/detail?tplId=tpl-1sm7qkwQcbBUpZ&appName=electronic-business">
+  <view style="text-align: center; color: #b9b9b9" wx:if="{{pageLoading}}">
+    <t-loading theme="circular" size="40rpx" text="加载中..." inherit-color />
   </view>
-  <view class="swiper-wrap">
-    <t-swiper wx:if="{{imgSrcs.length > 0}}" current="{{current}}" autoplay="{{autoplay}}" duration="{{duration}}" interval="{{interval}}" navigation="{{navigation}}" imageProps="{{swiperImageProps}}" list="{{imgSrcs}}" />
+  <view class="home-page-header">
+    <view class="search" bind:tap="navToSearchPage">
+      <t-search t-class-input="t-search__input" t-class-input-container="t-search__input-container" leftIcon="" disabled>
+        <t-icon slot="left-icon" prefix="wr" name="search" size="40rpx" color="#bbb" />
+      </t-search>
+    </view>
+    <view class="swiper-wrap">
+      <t-swiper wx:if="{{imgSrcs.length > 0}}" current="{{current}}" autoplay="{{autoplay}}" duration="{{duration}}" interval="{{interval}}" navigation="{{navigation}}" imageProps="{{swiperImageProps}}" list="{{imgSrcs}}" />
+    </view>
   </view>
-</view>
-<view class="home-page-container">
-  <goods-list wr-class="goods-list-container" goodsList="{{goodsList}}" bind:click="goodListClickHandle" bind:addcart="goodListAddCartHandle" />
-  <load-more list-is-empty="{{!goodsList.length}}" status="{{goodsListLoadStatus}}" bind:retry="onReTry" />
-  <t-toast id="t-toast" />
-  <cloud-template-dialog url="https://tcb.cloud.tencent.com/cloud-admin#/cloud-template/detail?tplId=tpl-1sm7qkwQcbBUpZ&appName=electronic-business" />
-</view>
+  <view class="home-page-container">
+    <goods-list wr-class="goods-list-container" goodsList="{{goodsList}}" bind:click="goodListClickHandle" bind:addcart="goodListAddCartHandle" />
+    <load-more list-is-empty="{{!goodsList.length}}" status="{{goodsListLoadStatus}}" bind:retry="onReTry" />
+    <t-toast id="t-toast" />
+  </view>
+</cloud-template-checker>

@@ -1,0 +1,21 @@
+<view wx:if="{{show}}" class="cloud-checker-container">
+  <view class="card">
+    <view class="icon-text">
+      <t-icon name="error-circle" size="40rpx" />
+      <view>加载数据失败</view>
+    </view>
+    <view class="text">
+      {{text}}
+    </view>
+
+    <text class="url">{{url}}</text>
+    <view class="btns">
+      <t-button theme="light" bind:tap="copy">复制链接</t-button>
+      <t-button theme="primary" bind:tap="check">再试一次</t-button>
+    </view>
+
+  </view>
+</view>
+<view wx:else>
+  <slot />
+</view>

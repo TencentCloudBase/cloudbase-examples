@@ -1,0 +1,37 @@
+.cloud-checker-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cloud-checker-container .card {
+  padding: 60rpx;
+}
+
+.cloud-checker-container .text {
+  text-align: center;
+  margin: 20rpx;
+}
+.cloud-checker-container .url {
+  word-break: break-all;
+  font-size: small;
+  color: #3f3f3f;
+}
+
+.cloud-checker-container .icon-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cloud-checker-container .t-icon {
+  color: red;
+  margin-right: 5rpx;
+}
+
+.cloud-checker-container .btns {
+  margin-top: 40rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
