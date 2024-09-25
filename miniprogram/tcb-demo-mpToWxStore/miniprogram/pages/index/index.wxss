@@ -1,0 +1,34 @@
+.page-title{
+  font-size: 19px;
+  font-weight: 500;
+  padding-left: 32rpx;
+}
+.banner-container{
+  display: flex;
+   justify-content: center; 
+   padding-top: 16px;
+    padding-bottom: 16px;
+}
+.banner{
+  width: 686rpx;
+  height: 240rpx;
+}
+.tabs{
+  padding-left: 32rpx;
+  padding-right: 32rpx;
+}
+.tabs-header{
+  display: flex;
+  justify-content: space-around;
+}
+.tabs-header-item-normal{
+  line-height: 43px; 
+}
+.tabs-header-item-selected{
+  line-height: 43px; 
+  border-bottom: 2px #0052D9 solid; 
+  color: #0052D9;
+}
+.tabs-body{
+  padding-top: 16px;
+}

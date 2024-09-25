@@ -1,0 +1,14 @@
+<!--components/tipsModal.wxml-->
+<view class="modal-contianer" wx:if="{{isShow}}">
+  <view class="modal">
+    <view class="modal-content">
+      <view class="modal-title">{{title}}</view>
+      <view class="modal-desc">{{desc}}</view>
+      <view class="modal-link">{{url}}</view>
+    </view>
+    <view class="modal-btn-group">
+      <button class="copy-btn" bind:tap="copyToClipboard">复制地址</button>
+      <button class="close-btn" bind:tap="onClose">暂不打开</button>
+    </view>
+  </view>
+</view>

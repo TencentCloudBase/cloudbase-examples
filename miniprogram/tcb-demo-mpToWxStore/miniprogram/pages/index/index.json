@@ -1,0 +1,6 @@
+{
+  "navigationBarBackgroundColor": "#fff",
+  "usingComponents": {
+    "tips-modal": "/components/tipsModal/tipsModal"
+  }
+}

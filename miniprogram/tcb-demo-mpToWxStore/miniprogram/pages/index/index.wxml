@@ -1,0 +1,37 @@
+<!--index.wxml-->
+<view>
+  <view style="margin-top: {{menuPosition.top}}px; height: {{menuPosition.height}}px;line-height: {{menuPosition.height}}px;" class="page-title">小程序打开微信小店</view>
+  <view class="banner-container">
+    <image src="../../images/banner.png" mode="aspectFill" class="banner" />
+  </view>
+  <view class="tabs">
+    <view class="tabs-header">
+      <view wx:for="{{menuItems}}" wx:key="key" class="{{selectedItemIndex===item.key?'tabs-header-item-selected':'tabs-header-item-normal'}}" data-key="{{item.key}}" bind:tap="onChangeTab">
+        {{item.title}}
+      </view>
+    </view>
+    <view class="tabs-body">
+      <block wx:if="{{selectedItemIndex===1}}">
+        <block wx:if="{{isPreview}}">
+          <image bind:tap="onOpenTipsModal" src="../../images/shop_home.png" mode="widthFix" style="width: 100%;"></image>
+        </block>
+        <block wx:else>
+          <block wx:for="{{storeList}}" wx:key="appid">
+            <store-home appid="{{item.appid}}"></store-home>
+          </block>
+        </block>
+      </block>
+      <block wx:if="{{selectedItemIndex===2}}">
+        <block wx:if="{{isPreview}}">
+          <image bind:tap="onOpenTipsModal" src="../../images/shop_product.png" mode="widthFix" style="width: 100%;">商品展示（预览数据）</image>
+        </block>
+        <block wx:else>
+        <block wx:for="{{productList}}" wx:key="product_id">
+          <store-product appid="{{item.appid}}" product-id="{{item.product_id}}" product-promotion-link="{{item.product_promotion_link}}"></store-product>
+        </block>
+        </block>
+      </block>
+    </view>
+  </view>
+  <tips-modal tipShow="{{tipShow}}" title="{{title}}" desc="{{desc}}" url="{{url}}"></tips-modal>
+</view>

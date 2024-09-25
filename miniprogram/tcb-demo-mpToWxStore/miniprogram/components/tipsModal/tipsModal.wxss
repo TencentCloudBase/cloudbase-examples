@@ -1,0 +1,70 @@
+/* components/tipsModal.wxss */
+.modal-contianer {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.40);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  box-sizing: border-box;
+  width: 640rpx;
+  background-color: #fff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+}
+.modal-content{
+  padding: 32rpx;
+}
+.modal-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.modal-desc {
+  color: rgba(0, 0, 0, 0.50);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  margin: 12px 0px 16px 0px;
+}
+
+.modal-link {
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration-line: underline;
+  word-break: break-all;
+}
+
+.modal-btn-group {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 32rpx;
+}
+
+.copy-btn {
+  background-color: #0052D9;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.close-btn {
+  background-color: #fff;
+  color: #0052D9;
+  border: #0052D9 1px solid;
+  font-size: 16px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
