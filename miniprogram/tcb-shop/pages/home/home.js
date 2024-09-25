@@ -20,6 +20,16 @@ Page({
     cloudCheckerShow: false
   },
 
+  async onCloudCheck() {
+    try {
+      await getHomeSwiper();
+      this.setData({ cloudCheckerShow: false })
+    } catch (e) {
+      console.log(e);
+      this.setData({ cloudCheckerShow: true })
+    }
+  },
+
   goodListPagination: {
     index: 1,
     num: 20,
@@ -128,15 +138,5 @@ Page({
     wx.navigateTo({
       url: `/pages/promotion-detail/index?promotion_id=${promotionID}`,
     });
-  },
-
-  async onCloudCheck() {
-    try {
-      await getHomeSwiper();
-      this.setData({ cloudCheckerShow: false })
-    } catch (e) {
-      console.log(e);
-      this.setData({ cloudCheckerShow: true })
-    }
-  },
+  }
 });
