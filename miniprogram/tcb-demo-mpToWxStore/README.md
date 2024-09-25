@@ -1,12 +1,21 @@
-# 小程序跳转微信小店模板
+<div align="center">
+    <img src="https://qcloudimg.tencent-cloud.cn/raw/dfdfb0e99b2d6029fbc55b0b541a6c1d.png" alt="Logo" width="400">
+  <h1 align="center">小程序跳转微信小店</h1>
+</div>
 
 ## 说明
 
-本项目为小程序跳转微信小店模板，可用于快速在小程序展示微信小店商品并支持跳转到微信小店。
+小程序跳转微信小店模板，可用于快速在小程序展示微信小店商品并支持跳转到微信小店。
 
-## 配套数据管理功能
+模板需配合云开发数据模型使用，具体配置可前往<https://tcb.cloud.tencent.com/cloud-admin#/cloud-template/detail?tplId=tpl-1srBTDTiTOOprG&appName=wx_shop>安装。
 
-在[云模板](https://tcb.cloud.tencent.com/cloud-admin#/cloud-template/detail?tplId=tpl-1srBTDTiTOOprG&appName=wx_shop)中我们提供了相应的数据模型，用于配置需要在小程序中展示的微信小店和商品，可一键安装使用。
+## 社区
+
+欢迎添加企微群沟通交流：
+
+<div>
+    <img src="https://qcloudimg.tencent-cloud.cn/raw/bbb904f6fd6da01aa677e8a31e37651d.jpg" style="width:30%;">
+</div>
 
 ## 安装依赖
 
@@ -25,11 +34,6 @@ npm install
 2. 构建 npm
 点击微信开发者工具菜单栏中的「工具」->「构建 npm」
 
-## 社区
+## 运行小程序
 
-欢迎添加企微群沟通交流：
-
-<div>
-    <img src="https://qcloudimg.tencent-cloud.cn/raw/bbb904f6fd6da01aa677e8a31e37651d.jpg" style="width:30%;">
-</div>
-
+在微信开发者工具中导入本项目即可运行。
