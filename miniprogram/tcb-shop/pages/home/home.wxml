@@ -1,4 +1,4 @@
-<cloud-template-checker bindcheck="onCloudCheck" show="{{cloudCheckerShow}}" text="原因可能是模板未完成初始化，请参考 README.md 或打开下方使用文档。" url="https://tcb.cloud.tencent.com/cloud-admin#/cloud-template/detail?tplId=tpl-1sm7qkwQcbBUpZ&appName=electronic-business">
+<cloud-template-checker bindcheck="onCloudCheck" show="{{cloudCheckerShow}}" text="原因可能是模板未完成初始化，请参考 README.md 或打开下方使用文档。" url="https://tcb.cloud.tencent.com/cloud-admin?_jump_source=wxide_tcb_shop#/cloud-template/detail?tplId=tpl-1sm7qkwQcbBUpZ&appName=electronic-business">
   <view style="text-align: center; color: #b9b9b9" wx:if="{{pageLoading}}">
     <t-loading theme="circular" size="40rpx" text="加载中..." inherit-color />
   </view>
