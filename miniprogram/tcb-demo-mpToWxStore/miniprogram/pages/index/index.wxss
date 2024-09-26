@@ -32,3 +32,8 @@
 .tabs-body{
   padding-top: 16px;
 }
+.empty-tip{
+  text-align: center;
+  font-size: 14px;
+  font-weight: 300;
+}

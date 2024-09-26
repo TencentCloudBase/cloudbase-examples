@@ -16,6 +16,9 @@
           <image bind:tap="onOpenTipsModal" src="../../images/shop_home.png" mode="widthFix" style="width: 100%;"></image>
         </block>
         <block wx:else>
+          <view wx:if="{{storeList.length===0}}" class="empty-tip">
+            暂无小店信息，可前往<text bind:tap="onOpenTipsModal" style="text-decoration: underline;color: #0052D9;">云后台内容管理</text>进行配置
+          </view>
           <block wx:for="{{storeList}}" wx:key="appid">
             <store-home appid="{{item.appid}}"></store-home>
           </block>
@@ -26,9 +29,12 @@
           <image bind:tap="onOpenTipsModal" src="../../images/shop_product.png" mode="widthFix" style="width: 100%;">商品展示（预览数据）</image>
         </block>
         <block wx:else>
-        <block wx:for="{{productList}}" wx:key="product_id">
-          <store-product appid="{{item.appid}}" product-id="{{item.product_id}}" product-promotion-link="{{item.product_promotion_link}}"></store-product>
-        </block>
+          <view wx:if="{{productList.length===0}}" class="empty-tip">
+              暂无商品信息，可前往<text bind:tap="onOpenTipsModal" style="text-decoration: underline; color: #0052D9;">云后台内容管理</text>进行配置
+          </view>
+          <block wx:for="{{productList}}" wx:key="product_id">
+            <store-product appid="{{item.appid}}" product-id="{{item.product_id}}" product-promotion-link="{{item.product_promotion_link}}"></store-product>
+          </block>
         </block>
       </block>
     </view>
