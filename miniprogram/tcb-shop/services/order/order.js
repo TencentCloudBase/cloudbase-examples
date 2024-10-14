@@ -1,5 +1,6 @@
 import { model, getAll } from '../../services/_utils/model';
 import { DATA_MODEL_KEY } from '../../config/model';
+import { cloudbaseTemplateConfig } from "../../config/index"
 
 const ORDER_MODEL_KEY = DATA_MODEL_KEY.ORDER;
 
@@ -87,6 +88,10 @@ export async function listOrder({ pageSize, pageNumber, status }) {
 }
 
 async function getOrderCountOfStatus(status) {
+  if (cloudbaseTemplateConfig.useMock) {
+    return 0;
+  }
+
   return (
     await model()[ORDER_MODEL_KEY].list({
       filter: { where: { status: { $eq: status } } },

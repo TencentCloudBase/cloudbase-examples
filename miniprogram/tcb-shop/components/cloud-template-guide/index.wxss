@@ -1,0 +1,57 @@
+.cloud-template-guide {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f2f3ff;
+  margin: 20rpx;
+  padding: 20rpx;
+  border-radius: 10rpx;
+  font-size: small;
+}
+
+.cloud-template-guide .left {
+  gap: 10rpx;
+  display: flex;
+  align-items: center;
+}
+
+.cloud-template-guide .right {
+  align-items: center;
+  color: #0052d9;
+}
+
+.cloud-template-guide-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 30rpx;
+}
+
+.cloud-template-guide-dialog .title {
+  font-size: large;
+  text-align: center;
+}
+
+.cloud-template-guide-dialog .btns {
+  display: flex;
+  justify-content: space-between;
+  gap: 30rpx;
+}
+
+.cloud-template-guide-dialog .close {
+  color: #0052d9;
+  border-color: #0052d9;
+  border: solid 1rpx #0052d9;
+}
+
+.cloud-template-guide-dialog .text {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: small;
+}
+
+.cloud-template-guide-dialog .btns button {
+  flex: 1;
+}
+
+.cloud-template-guide-dialog .url {
+  word-break: break-all;
+}

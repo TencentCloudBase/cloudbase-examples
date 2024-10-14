@@ -3,6 +3,8 @@ import { model, getAll } from '../_utils/model';
 import { getCloudImageTempUrl } from '../../utils/cloudImageHandler';
 import { SPU_SELLING_STATUS } from '../../utils/spuStatus';
 import { DATA_MODEL_KEY } from '../../config/model';
+import { cloudbaseTemplateConfig } from '../../config/index';
+import { CATEGORY } from '../cloudbaseMock/index';
 
 const CATE_MODEL_KEY = DATA_MODEL_KEY.CATE;
 
@@ -36,6 +38,9 @@ export async function getAllSpuOfCate(cateId) {
 }
 
 export async function getCates() {
+  if (cloudbaseTemplateConfig.useMock) {
+    return CATEGORY;
+  }
   const cateSelect = {
     _id: true,
     name: true,
@@ -55,6 +60,5 @@ export async function getCates() {
   const childCates = allCates.flatMap((c) => c.child_cate);
   const res = await getCloudImageTempUrl(childCates.map((x) => x.image));
   res.forEach((image, index) => (childCates[index].image = image));
-
   return allCates;
 }

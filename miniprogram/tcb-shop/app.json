@@ -56,11 +56,11 @@
       }
     ]
   },
-  "requiredPrivateInfos": [
-    "chooseAddress"
-  ],
+  "requiredPrivateInfos": ["chooseAddress"],
   "lazyCodeLoading": "requiredComponents",
-  "usingComponents": {},
+  "usingComponents": {
+    "cloud-template-guide": "/components/cloud-template-guide/index"
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

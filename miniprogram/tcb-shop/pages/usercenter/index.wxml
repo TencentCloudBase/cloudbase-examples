@@ -1,6 +1,7 @@
 <t-user-center-card userInfo="{{userInfo}}" isPhoneHide="{{true}}" name-class="custom-name-class" phone-class="custom-phone-class" avatar-class="customer-avatar-class" currAuthStep="{{currAuthStep}}" bind:gotoUserEditPage="gotoUserEditPage" />
 <view class="content-wrapper">
   <view class="order-group-wrapper">
+    <cloud-template-guide />
     <t-order-group orderTagInfos="{{orderTagInfos}}" bind:onClickTop="jumpAllOrder" bind:onClickItem="jumpNav" />
   </view>
   <view wx:for="{{menuData}}" wx:key="item" class="cell-box">

@@ -14,7 +14,6 @@
     "t-tabs": "tdesign-miniprogram/tabs/tabs",
     "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
     "goods-list": "/components/goods-list/index",
-    "load-more": "/components/load-more/index",
-    "cloud-template-checker": "/components/cloud-template-checker/index"
+    "load-more": "/components/load-more/index"
   }
 }

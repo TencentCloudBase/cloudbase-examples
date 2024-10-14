@@ -1,6 +1,7 @@
 import { model, getAll } from '../../services/_utils/model';
 import { config } from '../../config/index';
 import { DATA_MODEL_KEY } from '../../config/model';
+import { cloudbaseTemplateConfig } from '../../config/index';
 
 const CATE_ITEM_MODEL_KEY = DATA_MODEL_KEY.CART_ITEM;
 
@@ -39,6 +40,10 @@ export async function getCartItem({ id }) {
 }
 
 export async function fetchCartItems() {
+  if (cloudbaseTemplateConfig.useMock) {
+    return [];
+  }
+
   return getAll({
     name: CATE_ITEM_MODEL_KEY,
     select: {

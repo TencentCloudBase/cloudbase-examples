@@ -2,6 +2,8 @@ import { model } from '../_utils/model';
 import { getCloudImageTempUrl } from '../../utils/cloudImageHandler';
 import { SPU_SELLING_STATUS } from '../../utils/spuStatus';
 import { DATA_MODEL_KEY } from '../../config/model';
+import { cloudbaseTemplateConfig } from '../../config/index';
+import { SPU, SKU } from '../cloudbaseMock/index';
 
 const SPU_MODEL_KEY = DATA_MODEL_KEY.SPU;
 const SKU_MODEL_KEY = DATA_MODEL_KEY.SKU;
@@ -17,6 +19,12 @@ const SKU_MODEL_KEY = DATA_MODEL_KEY.SKU;
  * @returns
  */
 export async function listGood({ pageSize, pageNumber, search }) {
+  if (cloudbaseTemplateConfig.useMock) {
+    return {
+      records: SPU,
+      total: SPU.length,
+    };
+  }
   const filter = {
     where: {
       status: { $eq: SPU_SELLING_STATUS },
@@ -38,6 +46,9 @@ export async function listGood({ pageSize, pageNumber, search }) {
 }
 
 export async function getPrice(spuId) {
+  if (cloudbaseTemplateConfig.useMock) {
+    return SKU.find((x) => x.spu._id === spuId).price;
+  }
   const {
     data: { records },
   } = await model()[SKU_MODEL_KEY].list({
@@ -46,6 +57,12 @@ export async function getPrice(spuId) {
         spu: {
           $eq: spuId,
         },
+      },
+    },
+    select: {
+      $master: true,
+      spu: {
+        _id: true,
       },
     },
   });

@@ -16,18 +16,7 @@ Page({
     duration: '500',
     interval: 5000,
     navigation: { type: 'dots' },
-    swiperImageProps: { mode: 'scaleToFill' },
-    cloudCheckerShow: false
-  },
-
-  async onCloudCheck() {
-    try {
-      await getHomeSwiper();
-      this.setData({ cloudCheckerShow: false })
-    } catch (e) {
-      console.log(e);
-      this.setData({ cloudCheckerShow: true })
-    }
+    swiperImageProps: { mode: 'scaleToFill' }
   },
 
   goodListPagination: {
