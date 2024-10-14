@@ -84,6 +84,9 @@ export async function handleSpuCloudImage(spu) {
 }
 
 export async function getSpu(spuId) {
+  if (cloudbaseTemplateConfig.useMock) {
+    return SPU.find((x) => x._id === spuId);
+  }
   return (
     await model()[SPU_MODEL_KEY].get({
       filter: {

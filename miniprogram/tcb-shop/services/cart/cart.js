@@ -2,6 +2,7 @@ import { model, getAll } from '../../services/_utils/model';
 import { config } from '../../config/index';
 import { DATA_MODEL_KEY } from '../../config/model';
 import { cloudbaseTemplateConfig } from '../../config/index';
+import { CART_ITEM } from '../cloudbaseMock/index';
 
 const CATE_ITEM_MODEL_KEY = DATA_MODEL_KEY.CART_ITEM;
 
@@ -41,7 +42,7 @@ export async function getCartItem({ id }) {
 
 export async function fetchCartItems() {
   if (cloudbaseTemplateConfig.useMock) {
-    return [];
+    return CART_ITEM;
   }
 
   return getAll({
@@ -66,6 +67,10 @@ export async function fetchCartItems() {
  * }} param0
  */
 export async function createCartItem({ skuId, count }) {
+  if (cloudbaseTemplateConfig.useMock) {
+    CART_ITEM.push({ sku: { _id: skuId, count, description: 'NO_DESC' } });
+    return;
+  }
   return await model()[CATE_ITEM_MODEL_KEY].create({
     data: {
       count,
@@ -99,6 +104,10 @@ export async function deleteCartItem({ cartItemId }) {
  * @returns
  */
 export async function updateCartItemCount({ cartItemId, count }) {
+  if (cloudbaseTemplateConfig.useMock) {
+    CART_ITEM.find((x) => x._id === cartItemId).count = count;
+    return;
+  }
   return await model()[CATE_ITEM_MODEL_KEY].update({
     data: {
       count,

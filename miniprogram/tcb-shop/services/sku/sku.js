@@ -1,5 +1,7 @@
 import { model, getAll } from '../_utils/model';
 import { DATA_MODEL_KEY } from '../../config/model';
+import { cloudbaseTemplateConfig } from '../../config/index';
+import { SKU } from '../cloudbaseMock/index';
 
 const SKU_MODEL_KEY = DATA_MODEL_KEY.SKU;
 
@@ -44,6 +46,9 @@ export async function updateSku({ skuId, data }) {
 }
 
 export async function getAllSku(spuId) {
+  if (cloudbaseTemplateConfig.useMock) {
+    return SKU.filter((x) => x.spu._id === spuId);
+  }
   return getAll({
     name: SKU_MODEL_KEY,
     filter: {

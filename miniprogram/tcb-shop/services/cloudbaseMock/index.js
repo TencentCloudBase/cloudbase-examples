@@ -1,3 +1,5 @@
+export const USER_ID = 'USER_MOCK';
+
 export const SPU = [
   {
     swiper_images: ['https://qcloudimg.tencent-cloud.cn/raw/c63c16644e5e961c5d3a4669ae9c2031.png'],
@@ -187,3 +189,94 @@ export const CATEGORY = [
     ],
   },
 ];
+
+export const ATTR_VALUE = [
+  {
+    _id: 'A3QFLQ4UQ0',
+    sku: [
+      {
+        _id: 'A3QFLRCZFW',
+      },
+    ],
+    value: '1 个',
+    attr_name: {
+      name: '数量',
+      _id: 'A3QFLQU44Q',
+    },
+  },
+  {
+    _id: 'A6HR2CRLL0',
+    sku: [
+      {
+        _id: 'A3QFLR1PHA',
+      },
+    ],
+    value: '10 个',
+    attr_name: {
+      name: '数量',
+      _id: 'A3QFLQU44Q',
+    },
+  },
+  {
+    _id: 'A3QFLPL2XA',
+    sku: [
+      {
+        _id: 'A3QFLRPP4L',
+      },
+    ],
+    value: '薄',
+    attr_name: {
+      name: '薄厚',
+      _id: 'A3QFLQL93N',
+    },
+  },
+  {
+    _id: 'A3QFLPU8KS',
+    sku: [
+      {
+        _id: 'A3QFLS1D92',
+      },
+    ],
+    value: '厚',
+    attr_name: {
+      name: '薄厚',
+      _id: 'A3QFLQL93N',
+    },
+  },
+];
+
+export const COMMENTS = [
+  {
+    owner: '1788891669799862274',
+    createdAt: 1728899184779,
+    createBy: '1788891669799862274',
+    updateBy: '1788891669799862274',
+    order_item: {
+      _id: 'A6JRQ0YB2G',
+    },
+    spu: {
+      _id: 'A3QFLUSAK2',
+    },
+    _openid: '1788891669799862274',
+    rating: 5,
+    _id: 'A6JRGRT6U8',
+    reply: '',
+    content: '好好好',
+    updatedAt: 1728899339993,
+  },
+];
+COMMENTS.pop(); // 默认没数据，先塞后清是为了有编辑器提示
+
+export const CART_ITEM = [
+  {
+    count: 8,
+    _id: 'A6JQYSJJSL',
+    sku: {
+      count: 100,
+      description: '1 个橘子',
+      _id: 'A3QFLRCZFW',
+    },
+  },
+];
+
+CART_ITEM.pop();
