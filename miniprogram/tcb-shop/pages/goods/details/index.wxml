@@ -68,4 +68,6 @@
   <promotion-popup list="{{list}}" bind:closePromotionPopup="closePromotionPopup" show="{{isShowPromotionPop}}" bind:promotionChange="promotionChange" />
 </view>
 <t-toast id="t-toast" />
-<loading-dialog show="{{loading}}" />
+<view wx:if="{{loading}}">
+  <loading-dialog show="{{loading}}" />
+</view>
