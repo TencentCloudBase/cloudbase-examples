@@ -2,7 +2,7 @@ import { model, getAll } from '../../services/_utils/model';
 import { config } from '../../config/index';
 import { DATA_MODEL_KEY } from '../../config/model';
 import { cloudbaseTemplateConfig } from '../../config/index';
-import { CART_ITEM } from '../cloudbaseMock/index';
+import { CART_ITEM, SKU, createId } from '../cloudbaseMock/index';
 
 const CATE_ITEM_MODEL_KEY = DATA_MODEL_KEY.CART_ITEM;
 
@@ -20,6 +20,12 @@ function mockFetchCartGroupData(params) {
  * @returns
  */
 export async function getCartItem({ id }) {
+  if (cloudbaseTemplateConfig.useMock) {
+    const cartItem = CART_ITEM.find((x) => x._id === id);
+    cartItem.sku = SKU.find((sku) => sku._id === cartItem.sku._id);
+    return { data: cartItem };
+  }
+
   return model()[CATE_ITEM_MODEL_KEY].get({
     filter: {
       where: {
@@ -42,7 +48,13 @@ export async function getCartItem({ id }) {
 
 export async function fetchCartItems() {
   if (cloudbaseTemplateConfig.useMock) {
-    return CART_ITEM;
+    return CART_ITEM.map((cartItem) => {
+      const sku = SKU.find((x) => x._id === cartItem.sku._id);
+      return {
+        ...cartItem,
+        sku,
+      };
+    });
   }
 
   return getAll({
@@ -68,7 +80,7 @@ export async function fetchCartItems() {
  */
 export async function createCartItem({ skuId, count }) {
   if (cloudbaseTemplateConfig.useMock) {
-    CART_ITEM.push({ sku: { _id: skuId, count, description: 'NO_DESC' } });
+    CART_ITEM.push({ sku: { _id: skuId }, count, _id: createId() });
     return;
   }
   return await model()[CATE_ITEM_MODEL_KEY].create({
@@ -84,6 +96,13 @@ export async function createCartItem({ skuId, count }) {
  * @param {{cartItemId: string}} param0
  */
 export async function deleteCartItem({ cartItemId }) {
+  if (cloudbaseTemplateConfig.useMock) {
+    CART_ITEM.splice(
+      CART_ITEM.findIndex((cartItem) => cartItem._id === cartItemId),
+      1,
+    );
+    return;
+  }
   return await model()[CATE_ITEM_MODEL_KEY].delete({
     filter: {
       where: {

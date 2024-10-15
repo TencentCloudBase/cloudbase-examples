@@ -1,6 +1,7 @@
 import { model, getAll } from '../../services/_utils/model';
 import { DATA_MODEL_KEY } from '../../config/model';
-import { cloudbaseTemplateConfig } from "../../config/index"
+import { cloudbaseTemplateConfig } from '../../config/index';
+import { ORDER, createId } from '../cloudbaseMock/index';
 
 const ORDER_MODEL_KEY = DATA_MODEL_KEY.ORDER;
 
@@ -33,6 +34,17 @@ export const orderStatusToName = (status) => Object.values(ORDER_STATUS_INFO).fi
  * @returns
  */
 export async function createOrder({ status, addressId }) {
+  if (cloudbaseTemplateConfig.useMock) {
+    const _id = createId();
+    ORDER.push({
+      status,
+      delivery_info: {
+        _id: addressId,
+      },
+      _id,
+    });
+    return { id: _id };
+  }
   return (
     await model()[ORDER_MODEL_KEY].create({
       data: {
@@ -61,6 +73,18 @@ export function getAllOrder() {
  * @returns
  */
 export async function listOrder({ pageSize, pageNumber, status }) {
+  if (cloudbaseTemplateConfig.useMock) {
+    const filteredOrder = status == null ? ORDER : ORDER.filter((x) => x.status === status);
+    const startIndex = (pageNumber - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const records = filteredOrder.slice(startIndex, endIndex);
+    const total = filteredOrder.length;
+    return {
+      records,
+      total,
+    };
+  }
+
   if (status != null) {
     return (
       await model()[ORDER_MODEL_KEY].list({
@@ -89,7 +113,7 @@ export async function listOrder({ pageSize, pageNumber, status }) {
 
 async function getOrderCountOfStatus(status) {
   if (cloudbaseTemplateConfig.useMock) {
-    return 0;
+    return ORDER.filter((x) => x.status === status).length;
   }
 
   return (

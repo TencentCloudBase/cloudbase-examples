@@ -4,12 +4,16 @@ import { getCloudImageTempUrl } from '../../utils/cloudImageHandler';
 import { SPU_SELLING_STATUS } from '../../utils/spuStatus';
 import { DATA_MODEL_KEY } from '../../config/model';
 import { cloudbaseTemplateConfig } from '../../config/index';
-import { CATEGORY } from '../cloudbaseMock/index';
+import { CATEGORY, SPU } from '../cloudbaseMock/index';
 
 const CATE_MODEL_KEY = DATA_MODEL_KEY.CATE;
 
 // TODO: we should do pagination
 export async function getAllSpuOfCate(cateId) {
+  if (cloudbaseTemplateConfig.useMock) {
+    return { spu: CATEGORY.find((x) => x._id === cateId).spu.map(({ _id }) => SPU.find((x) => x._id === _id)) };
+  }
+
   return (
     await model()[CATE_MODEL_KEY].get({
       filter: {
@@ -39,7 +43,7 @@ export async function getAllSpuOfCate(cateId) {
 
 export async function getCates() {
   if (cloudbaseTemplateConfig.useMock) {
-    return CATEGORY;
+    return CATEGORY.filter((x) => x.child_cate?.length > 0);
   }
   const cateSelect = {
     _id: true,

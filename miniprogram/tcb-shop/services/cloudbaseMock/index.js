@@ -1,5 +1,11 @@
 export const USER_ID = 'USER_MOCK';
 
+export function createId() {
+  return Array.from({ length: 16 })
+    .map(() => Math.floor(Math.random() * 16).toString(16))
+    .join('');
+}
+
 export const SPU = [
   {
     swiper_images: ['https://qcloudimg.tencent-cloud.cn/raw/c63c16644e5e961c5d3a4669ae9c2031.png'],
@@ -170,6 +176,7 @@ export const CATEGORY = [
         _id: 'A3QFLUAFZJ',
       },
     ],
+    spu: [],
   },
   {
     name: '美食',
@@ -185,6 +192,40 @@ export const CATEGORY = [
         image: 'https://qcloudimg.tencent-cloud.cn/raw/c8b249e12a41f3df127a007ebca23615.png',
         name: '面点',
         _id: 'A3QFLUHL7A',
+      },
+    ],
+    spu: [],
+  },
+  {
+    image: 'https://qcloudimg.tencent-cloud.cn/raw/9f718f547304d4fabe267d3b42076a54.png',
+    name: '上衣',
+    _id: 'A3QFLUAFZJ',
+    spu: [
+      {
+        _id: 'A3QFLVHSDN',
+      },
+    ],
+  },
+  {
+    image: 'https://qcloudimg.tencent-cloud.cn/raw/c63c16644e5e961c5d3a4669ae9c2031.png',
+    name: '水果',
+    _id: 'A3QFLTVZG4',
+    spu: [
+      {
+        _id: 'A3QFLVAF2Y',
+      },
+      {
+        _id: 'A3QFLV1E3S',
+      },
+    ],
+  },
+  {
+    image: 'https://qcloudimg.tencent-cloud.cn/raw/c8b249e12a41f3df127a007ebca23615.png',
+    name: '面点',
+    _id: 'A3QFLUHL7A',
+    spu: [
+      {
+        _id: 'A3QFLUSAK2',
       },
     ],
   },
@@ -272,11 +313,45 @@ export const CART_ITEM = [
     count: 8,
     _id: 'A6JQYSJJSL',
     sku: {
-      count: 100,
-      description: '1 个橘子',
       _id: 'A3QFLRCZFW',
     },
   },
 ];
 
 CART_ITEM.pop();
+
+export const DELIVERY_INFO = [
+  {
+    name: '客人a',
+    address: '深圳湾一号',
+    _id: 'A6JRPE3NYG',
+    phone: '13858585858',
+  },
+];
+
+DELIVERY_INFO.pop();
+
+export const ORDER = [
+  {
+    status: '',
+    delivery_info: { _id: '' },
+    _id: '',
+  },
+];
+
+ORDER.pop();
+
+export const ORDER_ITEM = [
+  {
+    count: 0,
+    sku: {
+      _id: '',
+    },
+    order: {
+      _id: '',
+    },
+    _id: '',
+  },
+];
+
+ORDER_ITEM.pop();
