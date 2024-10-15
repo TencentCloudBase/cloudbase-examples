@@ -18,4 +18,6 @@
   </view>
 </view>
 <t-toast id="t-toast" />
-<loading-dialog show="{{loading}}" />
+<view wx:if="{{loading}}">
+  <loading-dialog show="{{loading}}" />
+</view>

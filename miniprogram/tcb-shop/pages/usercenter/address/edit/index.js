@@ -116,11 +116,9 @@ Page({
 
       let action, failedMessage;
       if (typeof addressId === 'string') {
-        console.log('to update');
         action = () => updateAddress({ name, address: detailAddress, phone, _id: addressId });
         failedMessage = '修改地址失败，请稍候重试';
       } else {
-        console.log('to create');
         action = () => createAddress({ name, phone, address: detailAddress });
         failedMessage = '添加地址失败，请稍候重试';
       }
