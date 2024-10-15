@@ -10,4 +10,6 @@
 <cart-empty wx:else bind:handleClick="onGotoHome" />
 <t-toast id="t-toast" />
 <t-dialog id="t-dialog" />
-<loading-dialog show="{{loading}}" />
+<view wx:if="{{loading}}">
+  <loading-dialog show="{{loading}}" />
+</view>
