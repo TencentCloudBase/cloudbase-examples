@@ -20,9 +20,12 @@ const SKU_MODEL_KEY = DATA_MODEL_KEY.SKU;
  */
 export async function listGood({ pageSize, pageNumber, search }) {
   if (cloudbaseTemplateConfig.useMock) {
+    const records = search ? SPU.filter((x) => x.name.includes(search)) : SPU;
+    const startIndex = (pageNumber - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
     return {
-      records: SPU,
-      total: SPU.length,
+      records: records.slice(startIndex, endIndex),
+      total: records.length,
     };
   }
   const filter = {
