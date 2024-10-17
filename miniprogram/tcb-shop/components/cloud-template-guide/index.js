@@ -8,11 +8,11 @@ Component({
     },
     title: {
       type: String,
-      value: '替换为真实数据',
+      value: '安装模板后端',
     },
     text: {
       type: String,
-      value: '当前为体验数据，切换为真实数据请复制下方链接并在浏览器中打开，通过指引帮您快速替换',
+      value: '当前为前端模拟数据，如需使用模板后端，请打开下方链接，跟随指引进行安装',
     },
     url: {
       type: String,
