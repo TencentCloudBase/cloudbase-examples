@@ -14,7 +14,11 @@
 
 本项目为云开发电商模板的小程序，提供首页、购物车、订单、个人中心、商品详情等页面。
 
-本项目的后端可前往<https://tcb.cloud.tencent.com/cloud-admin#/cloud-template/detail?tplId=tpl-1sm7qkwQcbBUpZ&appName=electronic-business>安装。
+本项目默认使用体验数据运行，同时也能够使用真实数据。配置好云开发后端后，即可一键切换至真实数据。
+
+注：体验数据通过本地 Mock 数据实现。
+
+本项目的后端可前往<https://tcb.cloud.tencent.com/cloud-template/detail?appName=electronic-business&from=wxide_tcb_shop>安装。
 
 ## 社区
 
@@ -43,4 +47,4 @@ npm install
 
 ## 运行小程序
 
-在微信开发者工具中导入本项目即可运行，若想配合后端运行完整应用，请前往<https://tcb.cloud.tencent.com/cloud-admin#/cloud-template/detail?tplId=tpl-1sm7qkwQcbBUpZ&appName=electronic-business>安装。
+在微信开发者工具中导入本项目即可运行，若想配合后端运行完整应用，请前往<https://tcb.cloud.tencent.com/cloud-template/detail?appName=electronic-business&from=wxide_tcb_shop>安装。

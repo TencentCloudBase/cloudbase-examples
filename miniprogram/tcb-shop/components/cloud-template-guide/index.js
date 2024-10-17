@@ -17,7 +17,7 @@ Component({
     url: {
       type: String,
       value:
-        'https://tcb.cloud.tencent.com/cloud-admin?_jump_source=wxide_tcb_shop#/cloud-template/detail?tplId=tpl-1sm7qkwQcbBUpZ&appName=electronic-business',
+        'https://tcb.cloud.tencent.com/cloud-template/detail?appName=electronic-business&from=wxide_tcb_shop',
     },
   },
 
