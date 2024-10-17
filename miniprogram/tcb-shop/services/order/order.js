@@ -1,7 +1,7 @@
 import { model, getAll } from '../../services/_utils/model';
 import { DATA_MODEL_KEY } from '../../config/model';
 import { cloudbaseTemplateConfig } from '../../config/index';
-import { ORDER, createId } from '../cloudbaseMock/index';
+import { ORDER, createId, DELIVERY_INFO } from '../cloudbaseMock/index';
 
 const ORDER_MODEL_KEY = DATA_MODEL_KEY.ORDER;
 
@@ -42,6 +42,7 @@ export async function createOrder({ status, addressId }) {
         _id: addressId,
       },
       _id,
+      createdAt: new Date().getTime()
     });
     return { id: _id };
   }
@@ -142,6 +143,11 @@ export async function getToReceiveOrderCount() {
  * @param {String} orderId
  */
 export async function getOrder(orderId) {
+  if (cloudbaseTemplateConfig.useMock) {
+    const order = ORDER.find(o => o._id === orderId);
+    order.delivery_info = DELIVERY_INFO.find(i => i._id === order.delivery_info._id)
+    return order
+  }
   return (
     await model()[ORDER_MODEL_KEY].get({
       filter: {
@@ -185,6 +191,10 @@ export async function updateOrderDeliveryInfo({ orderId, deliveryInfoId }) {
  * @returns
  */
 export async function updateOrderStatus({ orderId, status }) {
+  if (cloudbaseTemplateConfig.useMock) {
+    ORDER.find(x => x._id === orderId).status = status
+    return;
+  }
   return await model()[ORDER_MODEL_KEY].update({
     data: {
       status,
