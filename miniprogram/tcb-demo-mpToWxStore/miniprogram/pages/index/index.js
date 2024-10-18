@@ -57,7 +57,7 @@ Page({
         isPreview:false,
         title:"使用云模板管理微信小店",
         desc:"您已成功配置后台数据，可以打开下方地址对微信小店及商品进行增删改查等数据管理，配置后的数据将同步到该模板",
-        url:"https://tcb.cloud.tencent.com/cloud-admin#/management/content-mgr/index"
+        url:"https://tcb.cloud.tencent.com/cloud-admin?_jump_source=wxide_mp2store#/management/content-mgr/index"
       })
     }catch(e){
       wx.hideLoading()
@@ -65,7 +65,7 @@ Page({
         isPreview:true,
         title:"使用云模板快速接入微信小店",
         desc:"当前为体验数据，切换为真实数据请复制下方链接并在浏览器中打开，帮您快速接入微信小店，管理小店及商品数据",
-        url:"https://tcb.cloud.tencent.com/cloud-admin#/cloud-template/detail?tplId=tpl-1srBTDTiTOOprG&appName=wx_shop"
+        url:"https://tcb.cloud.tencent.com/cloud-template/detail?appName=wx_shop&from=wxide_mp2store"
       })
     }
   },
