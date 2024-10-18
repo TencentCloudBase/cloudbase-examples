@@ -7,7 +7,7 @@
 
 小程序跳转微信小店模板，可用于快速在小程序展示微信小店商品并支持跳转到微信小店。
 
-模板需配合云开发数据模型使用，具体配置可前往<https://tcb.cloud.tencent.com/cloud-admin#/cloud-template/detail?tplId=tpl-1srBTDTiTOOprG&appName=wx_shop>安装。
+模板需配合云开发数据模型使用，具体配置可前往<https://tcb.cloud.tencent.com/cloud-template/detail?appName=wx_shop&from=wxide_mp2store>安装。
 
 ## 社区
 
