@@ -149,6 +149,18 @@ Component({
 
       try {
         await pay({ id: order._id, totalPrice: order.totalPrice });
+        try {
+          await updateOrderStatus({ orderId: order._id, status: ORDER_STATUS.TO_SEND });
+        } catch (e) {
+          console.error(e);
+          this.triggerEvent(OPERATION_DONE_EVENT, {
+            type: OPERATION_TYPE.PAY,
+            message: 'pay failed',
+            success: false,
+            detail: e,
+          });
+          return;
+        }
       } catch (e) {
         this.triggerEvent(OPERATION_DONE_EVENT, {
           type: OPERATION_TYPE.PAY,
