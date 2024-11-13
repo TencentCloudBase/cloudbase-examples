@@ -231,9 +231,9 @@ Page({
     const { id: orderId } = await createOrder({ status: ORDER_STATUS.TO_PAY, addressId: userAddress._id });
 
     try {
-      await cartItems.map(async (cartItem) => {
+      await Promise.all(cartItems.map(async (cartItem) => {
         await createOrderItemFromCartItem(cartItem, orderId);
-      });
+      }));
 
       try {
         await cartItems.map(async (cartItem) => {
