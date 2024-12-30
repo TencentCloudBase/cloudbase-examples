@@ -11,3 +11,4 @@
 
 函数式托管主要基于 [`@cloudbase/functions-framework`](https://www.npmjs.com/package/@cloudbase/functions-framework) 进行开发。本目录中的示例提供如何基于该 SDK 开发实用功能。
 
+了解更多信息：<https://docs.cloudbase.net/cbrf/intro>

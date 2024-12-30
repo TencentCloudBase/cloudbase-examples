@@ -4,7 +4,7 @@
 
 ## 架构示意图
 
-![architecture](./architecture.png)
+![architecture](architecture.png)
 
 ## 时序图
 
