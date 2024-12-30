@@ -1,0 +1,24 @@
+{
+  "name": "message-center",
+  "private": "true",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "pnpm run --parallel -r build",
+    "start": "export $(xargs <.env) && npx tcb-ff",
+    "watch": "pnpm run --parallel -r watch & export $(xargs <.env) && npx tcb-ff -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@cloudbase/functions-framework": "1.0.0-beta.11",
+    "dotenv": "^16.4.7"
+  }
+}

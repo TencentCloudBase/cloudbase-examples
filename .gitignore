@@ -2,3 +2,15 @@ node_modules
 .DS_Store
 package-lock.json
 yarn.lock
+.env
+node_modules
+build
+built
+dist
+coverage
+.log
+.idea
+.history
+.DS_Store
+logs
+.vscode

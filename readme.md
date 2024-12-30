@@ -13,6 +13,7 @@
 - server: 存放服务端 Demo / Workshop
 - web: 存放 Web 端 Demo / Workshop
 - cloudbaserun: 存放 云应用 端 Demo / Workshop
+- functions-framework: 存放云函数 2.0 (函数式托管) Demo
 - lowcode: 存放微搭低代码应用
 ```
 
