@@ -1,0 +1,25 @@
+{
+    "functionsRoot": ".",
+    "functions": [
+        {
+            "name": "trigger",
+            "directory": "./packages/trigger",
+            "source": "built/index.js"
+        },
+        {
+            "name": "message",
+            "directory": "./packages/message",
+            "source": "built/index.js"
+        }
+    ],
+    "routes": [
+        {
+            "functionName": "trigger",
+            "path": "/trigger"
+        },
+        {
+            "functionName": "message",
+            "path": "/message"
+        }
+    ]
+}

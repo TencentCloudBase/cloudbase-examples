@@ -1,0 +1,19 @@
+{
+  "name": "@local/common",
+  "version": "1.0.0",
+  "description": "",
+  "main": "built/index.js",
+  "private": "true",
+  "scripts": {
+    "build": "npx tsc",
+    "watch": "npx tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "kafkajs": "^2.2.4",
+    "redis": "^4.7.0"
+  }
+}

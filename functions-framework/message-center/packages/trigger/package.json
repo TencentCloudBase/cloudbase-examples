@@ -1,0 +1,18 @@
+{
+  "name": "trigger",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "built/index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "watch": "npx tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cloudbase/functions-typings": "1.0.0-beta.3",
+    "@local/common": "workspace:^"
+  }
+}
