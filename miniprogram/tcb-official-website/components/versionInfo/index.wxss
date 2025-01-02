@@ -1,0 +1,8 @@
+.foot-version {
+  font-size: 24rpx;
+  color: #A2A9B0;
+  margin: 80rpx 80rpx 20rpx;
+  text-align: center;
+  line-break: 32rpx;
+
+}

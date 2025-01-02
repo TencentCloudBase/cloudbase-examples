@@ -1,0 +1,51 @@
+.solution {
+  padding-bottom: 20rpx;
+}
+
+.solution_list {
+  position: relative;
+  margin: 20rpx 20rpx 0;
+  border-radius: 10rpx;
+  height: 260rpx;
+  padding: 30rpx;
+  background-size: cover;
+  background-position: 0 0;
+}
+
+
+.solution_tag {
+  width: 108rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  padding: 8rpx 24rpx;
+  background-color: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255,255,255, 0.3);
+  border-radius: 10rpx;
+}
+
+.solution_tag image {
+  margin-right: 16rpx;
+  width: 40rpx;
+  height: 40rpx;
+  vertical-align: top;
+}
+
+.solution_tag  text {
+  color: #fff;
+  line-height: 40rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  vertical-align: top;
+}
+
+.solution_title {
+  margin: 100rpx 0 16rpx;
+  font-size: 32rpx;
+  color: #fff;
+  font-weight: 400;
+}
+
+.solution_desc {
+  font-size: 24rpx;
+  color: #d4d4d4;
+}

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "version-info":"../../components/versionInfo/index",
+    "news-list":"../../components/newsList/index"
+  },
+  "navigationBarTitleText": "最新动态"
+}

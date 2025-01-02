@@ -1,0 +1,7 @@
+<cloud-template-guide />
+<view class="news_page">
+  <view class="news_list">
+    <news-list wx:for="{{newsList}}" wx:key="index" title="{{item.title}}" time="{{item.time}}" image="{{item.picture}}" id="{{item._id}}" number="{{index}}" ></news-list>
+  </view>
+</view>
+<version-info wx:if="{{newsList.length >0}}"></version-info>

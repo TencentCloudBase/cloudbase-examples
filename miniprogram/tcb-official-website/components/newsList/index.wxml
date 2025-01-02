@@ -1,0 +1,8 @@
+<view  wx:if="{{number >0}}" class="news_item_border"></view>
+<view class="news_item" catch:tap="goDetail" data-title="{{title}}">
+  <view class="news_cont">
+    <text class="news_list_title">{{title}}</text>
+    <text class="news_time">{{time}}</text>
+  </view>
+  <view class="news_image"><image src="{{image}}"></image></view>
+</view>
