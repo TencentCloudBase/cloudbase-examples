@@ -18,7 +18,7 @@
 
 注：体验数据通过本地 Mock 数据实现。
 
-本项目的后端可前往[https://tcb.cloud.tencent.com/cloud-template/detail?appName=electronic-business&from=wxide_tcb_shop](https://tcb.cloud.tencent.com/cloud-template/detail?appName=electronic-business&from=wxide_tcb_shop)安装。
+本项目的后端可前往[https://tcb.cloud.tencent.com/cloud-template/detail?appName=appName=cloudbase_official_website&from=wxide_tcb_official_website](https://tcb.cloud.tencent.com/cloud-template/detail?appName=cloudbase_official_website&from=wxide_tcb_official_website)安装。
 
 ## 社区
 
@@ -47,4 +47,5 @@ sudo npm install
 
 ## 运行小程序
 
-在微信开发者工具中导入本项目即可运行，若想配合后端运行完整应用，请前往[https://tcb.cloud.tencent.com/cloud-template/detail?appName=electronic-business&from=wxide_tcb_shop](https://tcb.cloud.tencent.com/cloud-template/detail?appName=electronic-business&from=wxide_tcb_shop)安装。
+在微信开发者工具中导入本项目即可运行，若想配合后端运行完整应用，请前往[https://tcb.cloud.tencent.com/cloud-template/detail?appName=cloudbase_official_website&from=wxide_tcb_official_website](https://tcb.cloud.tencent.com/cloud-template/detail?appName=cloudbase_official_website&from=wxide_tcb_official_website)安装。
+
