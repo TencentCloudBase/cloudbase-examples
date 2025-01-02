@@ -5,9 +5,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "pnpm run --parallel -r build",
+    "build": "pnpm run -r build",
     "start": "export $(xargs <.env) && npx tcb-ff",
-    "watch": "pnpm run --parallel -r watch & export $(xargs <.env) && npx tcb-ff -w",
+    "watch": "pnpm run -r watch & export $(xargs <.env) && npx tcb-ff -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

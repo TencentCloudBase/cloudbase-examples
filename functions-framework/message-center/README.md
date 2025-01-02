@@ -43,10 +43,12 @@ sequenceDiagram
 - 安装 `pnpm`
 - 安装 `@cloudbase/functions-framework`
 
-2. 进入项目根目录，安装依赖
+2. 进入项目根目录，安装依赖，构建代码
 
 ```sh
 pnpm i
+
+pnpm run build
 ```
 
 3. 在项目根目录创建 `.env` 文件，填入中间件参数
