@@ -1,6 +1,6 @@
 # README
 
-函数式托管集成消息队列和 Redis 实现与客户端收发消息的示例。
+云函数2.0 基于 消息队列Kafka 和 Redis 实现与客户端收发消息的示例。
 
 ## 架构示意图
 
@@ -12,7 +12,7 @@
 sequenceDiagram
     autonumber
     actor c as 客户端
-    box rgb(199,239,251) 函数式托管集群
+    box rgb(199,239,251) 云函数2.0 服务集群
     participant t as 函数 trigger
     participant m as 函数 message
     end
