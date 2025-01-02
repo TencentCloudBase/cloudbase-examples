@@ -8,7 +8,8 @@
     "build": "pnpm run -r build",
     "start": "export $(xargs <.env) && npx tcb-ff",
     "watch": "pnpm run -r watch & export $(xargs <.env) && npx tcb-ff -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf packages/{common,message,trigger}/built"
   },
   "keywords": [],
   "author": "",
