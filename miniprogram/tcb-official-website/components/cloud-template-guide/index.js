@@ -17,7 +17,7 @@ Component({
     url: {
       type: String,
       value:
-        'https://tcb.cloud.tencent.com/cloud-template/detail?appName=electronic-business&from=wxide_tcb_official_website',
+        'https://tcb.cloud.tencent.com/cloud-template/detail?appName=cloudbase_official_website&from=wxide_tcb_official_website',
     },
   },
 
@@ -26,13 +26,13 @@ Component({
   },
 
   methods: {
-    open() {
+    open () {
       this.setData({ dialogShow: true });
     },
-    close() {
+    close () {
       this.setData({ dialogShow: false });
     },
-    copy() {
+    copy () {
       wx.setClipboardData({
         data: this.data.url,
       });
