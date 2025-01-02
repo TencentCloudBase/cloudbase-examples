@@ -1,0 +1,19 @@
+<cloud-template-guide />
+<view class="solution">
+  <view 
+    class="solution_list" 
+    wx:for="{{solutionList}}" 
+    wx:key="index"  
+    style="background-image: url({{item.pic}});" 
+    catch:tap="goDetail" 
+    data-id="{{item._id}}" 
+    data-title="{{item.title}}"
+  >
+    <view class="solution_tag">
+      <image src="{{item.icon}}"></image>
+      <text>{{item.text}}</text>
+    </view>
+    <view class="solution_title">{{item.title}}</view>
+    <view class="solution_desc">{{item.content}}</view>
+  </view>
+</view>

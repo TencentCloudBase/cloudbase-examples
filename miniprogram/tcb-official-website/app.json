@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/solution/index",
+    "pages/aboutUs/index",
+    "pages/news/index",
+    "pages/detail/index"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "企业官网",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "tabBar": {
+    "color": "#A2A9B0",
+    "selectedColor": "#0F62FE",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/icons/index.png",
+        "selectedIconPath": "images/icons/index-active.png"
+      },
+      {
+        "pagePath": "pages/solution/index",
+        "text": "解决方案",
+        "iconPath": "images/icons/solution.png",
+        "selectedIconPath": "images/icons/solution-active.png"
+      },
+      {
+        "pagePath": "pages/aboutUs/index",
+        "text": "联系我们",
+        "iconPath": "images/icons/about.png",
+        "selectedIconPath": "images/icons/about-active.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "cloud-template-guide": "/components/cloud-template-guide/index"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置定位"
+    }
+  }
+}

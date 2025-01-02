@@ -1,0 +1,18 @@
+<view wx:if="{{show}}" class="cloud-template-guide">
+  <view class="left">
+    <t-icon color="#0052D9" name="info-circle-filled" size="40rpx" />
+    当前为体验数据，可替换为真实数据
+  </view>
+  <view class="right" bind:tap="open">去替换＞</view>
+</view>
+<t-dialog visible="{{dialogShow}}">
+  <view slot="content" class="cloud-template-guide-dialog">
+    <view class="title">{{title}}</view>
+    <view class="text">{{text}}</view>
+    <view class="url">{{url}}</view>
+    <view class="btns">
+      <t-button class="copy" bind:tap="copy" theme="primary">复制地址</t-button>
+      <t-button class="close" bind:tap="close" theme="outline">暂不打开</t-button>
+    </view>
+  </view>
+</t-dialog>

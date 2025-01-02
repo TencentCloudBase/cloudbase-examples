@@ -1,0 +1,31 @@
+/**app.wxss**/
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+} 
+
+button {
+  background: initial;
+}
+
+button:focus{
+  outline: 0;
+}
+
+button::after{
+  border: none;
+}
+
+
+page {
+  background: #F2F4F8;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.news_list {
+  padding: 0 20rpx;
+}

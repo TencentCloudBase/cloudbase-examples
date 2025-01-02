@@ -1,0 +1,9 @@
+<cloud-template-guide />
+<view class="detail_page">
+  <view class="detail_title">{{article.sub_title||article.title}}</view>
+  <view class="detail_time">{{article.time}}</view>
+  <view class="detail_image">
+    <image src="{{article.detail_pic||article.picture || article.subPic}}"></image>
+  </view>
+  <rich-text class="detail_cont" nodes="{{article.header || article.content}}"></rich-text>
+</view>

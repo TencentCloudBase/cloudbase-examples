@@ -1,0 +1,6 @@
+/* pages/news/index.wxss */
+.news_page {
+  margin: 20rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+}

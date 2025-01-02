@@ -1,0 +1,48 @@
+<view class="about_us">
+  <view class="about_us_title">关于我们</view>
+  <image class="about_us_background" src="https://qcloudimg.tencent-cloud.cn/raw/584bdd2bde3925b4820684d753b2aa7d.jpg"></image>
+</view>
+<view class="about_desc">
+  <text class="about_desc_title">品牌简介</text>
+  <view class="about_desc_border"></view>
+  <rich-text  class="about_desc_content" nodes="{{aboutUs.intro}}"></rich-text>
+</view>
+<view class="about_title">
+  <text>联系我们</text>
+</view>  
+<view  class="about_list">
+  <view class="about_icon">
+    <image src="../../images/icons/address.png"></image>
+  </view>
+  <view class="about_cont">
+    <view class="about_cont_title">公司地址</view>
+    <view class="about_cont_content">深圳市南山区深南大道10000号</view>
+  </view>
+  <view class="about_button" bind:tap="onGoMap">
+    <view class="about_button_img"><image src="../../images/address.png"></image></view>
+    <text class="about_button_title">到这里</text>
+  </view>
+</view>
+<view  class="about_list">
+  <view class="about_icon">
+    <image src="../../images/icons/phone.png"></image>
+  </view>
+  <view class="about_cont">
+    <view class="about_cont_title">联系电话</view>
+    <view class="about_cont_content">{{aboutUs.phone}}</view>
+  </view>
+  <view class="about_button" bind:tap="onPhone">
+    <view class="about_button_img"><image src="../../images/phone.png"></image></view>
+    <text class="about_button_title">打电话</text>
+  </view>
+</view>
+<view  class="about_list">
+  <view class="about_icon">
+    <image src="../../images/icons/email.png"></image>
+  </view>
+  <view class="about_cont">
+    <view class="about_cont_title">电子邮箱</view>
+    <view class="about_cont_content">{{aboutUs.email}}</view>
+  </view>
+</view>
+<version-info></version-info>

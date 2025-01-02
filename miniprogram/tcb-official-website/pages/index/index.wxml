@@ -1,0 +1,55 @@
+<cloud-template-guide />
+<!-- banner -->
+<swiper wx:if="{{bannerList.length >0}}" class="poster" indicator-dots autoplay>
+  <swiper-item wx:for="{{bannerList}}" wx:key="index">
+    <image src="{{item}}"></image>
+  </swiper-item>
+</swiper>
+
+<!-- 产品能力 -->
+<view wx:if="{{productAbilityList.length >0}}"  class="template">
+  <view class="template_list">
+    <view class="template_item" wx:for="{{productAbilityList}}" wx:key="index">
+      <image src="{{item.icon}}"></image>
+      <text>{{item.text}}</text>
+    </view>
+  </view>
+</view>
+
+<!-- 应用场景 -->
+<view wx:if="{{applicationScene.length >0}}" class="common" style="padding-right: 40rpx;">
+  <view class="common_title">应用场景</view>
+  <scroll-view class="scene_list" scroll-x="true" enable-flex>
+    <view wx:for="{{applicationScene}}" wx:key="index" class="scene_item" style="background-image: url({{item.backgroud_pic}});" catch:tap="goDetail" data-id="{{item._id}}" data-title="{{item.title}}">
+      <view class="scene_title">{{item.title}}</view> 
+      <view class="scene_cont">{{item.sub_title}}</view> 
+    </view>
+  </scroll-view>
+</view>
+
+<!-- 最新动态 -->
+<view wx:if="{{newsList.length >0}}" class="common">
+  <view class="common_title">
+    <text>最新动态</text>
+    <view class="news_more" bind:tap="onGoNews">
+      <text>更多</text>
+      <image src="../../images/more.png"></image>
+    </view>
+  </view>
+  <view class="news_list">
+    <news-list wx:for="{{newsList}}" wx:key="index" title="{{item.title}}" time="{{item.time}}" image="{{item.picture}}" id="{{item._id}}" number="{{index}}"></news-list>
+  </view>
+</view>
+
+<!-- 合作伙伴 -->
+<view wx:if="{{partnersList.length >0}}" class="common">
+  <view class="common_title">合作伙伴</view>
+  <view class="partners_list">
+    <view wx:for="{{partnersList}}" wx:key="index" class="partners_item">
+      <image src="{{item.pic}}"></image>
+    </view>
+  </view>
+</view>
+
+<!-- 版本信息 -->
+<version-info wx:if="{{partnersList.length >0}}"></version-info>
