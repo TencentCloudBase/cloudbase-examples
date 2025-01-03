@@ -1,6 +1,6 @@
 import { getAll, getOne } from '../_utils/model';
 import { cloudbaseTemplateConfig } from '../../config/index';
-import {SceneData} from '../cloudbaseMock/index'
+import {SceneData, SolutionData, NewsData} from '../cloudbaseMock/index'
 import { DATA_MODEL_KEY } from '../../config/model'
 
 /** 获取应用场景数据 */
@@ -10,14 +10,7 @@ export async function fetchSceneData(params) {
     return SceneData;
   }
   return await getAll({
-    name: DATA_MODEL_KEY.SCENE_LIST,
-    select: {
-      _id: true,
-      title: true,
-      sub_title: true,
-      backgroud_pic: true,
-      updatedAt: true,
-    },
+    name: DATA_MODEL_KEY.SCENE_LIST
   });
 }
 
@@ -30,7 +23,13 @@ export async function fetchSceneDetail(id,type) {
   }
   if (cloudbaseTemplateConfig.useMock) {
     /** 返回应用场景 mock数据 */
-    return SceneData;
+    if(type === 'news'){
+      return NewsData.find((item)=> item?._id === id);
+    }else if(type === 'scene'){
+      return SceneData.find((item)=> item?._id === id);
+    }else if(type === 'solution'){
+      return SolutionData.find((item)=> item?._id === id);
+    }
   }
   return await getOne({
     name: NAMES[type],

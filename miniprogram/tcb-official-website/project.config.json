@@ -39,7 +39,7 @@
     "packNpmRelationList": [],
     "minifyWXSS": true
   },
-  "appid": "wxc35ad965824811ef",
+  "appid": "wxca108d58cc8402c2",
   "projectname": "tcb-official-website",
   "libVersion": "3.7.3",
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
