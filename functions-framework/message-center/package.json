@@ -19,7 +19,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "@cloudbase/functions-framework": "1.0.0-beta.11",
+    "@cloudbase/functions-framework": "1.0.0-beta.12",
     "dotenv": "^16.4.7"
   }
 }

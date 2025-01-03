@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@cloudbase/functions-framework':
-        specifier: 1.0.0-beta.11
-        version: 1.0.0-beta.11
+        specifier: 1.0.0-beta.12
+        version: 1.0.0-beta.12
       dotenv:
         specifier: ^16.4.7
         version: 16.4.7
@@ -34,8 +34,8 @@ importers:
   packages/message:
     dependencies:
       '@cloudbase/functions-typings':
-        specifier: 1.0.0-beta.3
-        version: 1.0.0-beta.3
+        specifier: 1.0.0-beta.4
+        version: 1.0.0-beta.4
       '@local/common':
         specifier: workspace:^
         version: link:../common
@@ -46,8 +46,8 @@ importers:
   packages/trigger:
     dependencies:
       '@cloudbase/functions-typings':
-        specifier: 1.0.0-beta.3
-        version: 1.0.0-beta.3
+        specifier: 1.0.0-beta.4
+        version: 1.0.0-beta.4
       '@local/common':
         specifier: workspace:^
         version: link:../common
@@ -62,13 +62,13 @@ packages:
     resolution: {integrity: sha512-Ed61U6XJc3CVRfkERJWDz4dJwKe7iLmmJsbOGu9wSloNSFttHV0I8g6UAgb7qnK5ly5bGLPd4oXZlxCdANBOWQ==}
     engines: {node: '>=6.9.0'}
 
-  '@cloudbase/functions-framework@1.0.0-beta.11':
-    resolution: {integrity: sha512-qEkyG6SIWx9wk0CIuXuDY5JQaRokSTuGcRYic40LmdG2vWPQLxMcGJPJfylNWJllsbSx/uKRKuKc09EfF2Hmlw==}
+  '@cloudbase/functions-framework@1.0.0-beta.12':
+    resolution: {integrity: sha512-gDavvlk3yr7ADBUWa9VUExSkeOj7Pts+UDKwTAomeQ/Mn3ly5o3yXAKqVuq6gbsgEzVKXEgTv4wriKTfj42Cog==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
-  '@cloudbase/functions-typings@1.0.0-beta.3':
-    resolution: {integrity: sha512-H0B1tc27vFqz5TLUB6iuK4ZZtvcLHmJXgVsmsd7H1UTKW9gBrsBQguqXCajlHZ5h0dnO65cbcjTPDH5vFmJtnA==}
+  '@cloudbase/functions-typings@1.0.0-beta.4':
+    resolution: {integrity: sha512-3v4MEJRoPyb0Uc1Zae35IgAk1L7wH4kuWGr9Z3DYHndSm+i7clxybpKQdFTMStCVF0qBIP/wR/gt43OTkrC7jQ==}
     engines: {node: '>=18.0.0'}
 
   '@colors/colors@1.6.0':
@@ -868,9 +868,9 @@ snapshots:
 
   '@babel/helper-validator-identifier@7.25.9': {}
 
-  '@cloudbase/functions-framework@1.0.0-beta.11':
+  '@cloudbase/functions-framework@1.0.0-beta.12':
     dependencies:
-      '@cloudbase/functions-typings': 1.0.0-beta.3
+      '@cloudbase/functions-typings': 1.0.0-beta.4
       '@types/ws': 8.5.13
       ajv: 8.17.1
       koa: 2.15.3
@@ -892,7 +892,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@cloudbase/functions-typings@1.0.0-beta.3': {}
+  '@cloudbase/functions-typings@1.0.0-beta.4': {}
 
   '@colors/colors@1.6.0': {}
 
