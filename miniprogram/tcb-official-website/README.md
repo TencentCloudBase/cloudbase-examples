@@ -18,7 +18,7 @@
 
 注：体验数据通过本地 Mock 数据实现。
 
-本项目的后端可前往[https://tcb.cloud.tencent.com/cloud-template/detail?appName=appName=cloudbase_official_website&from=wxide_tcb_official_website](https://tcb.cloud.tencent.com/cloud-template/detail?appName=cloudbase_official_website&from=wxide_tcb_official_website)安装。
+本项目的后端可前往[https://tcb.cloud.tencent.com/cloud-template/detail?appName=cloudbase_official_website&from=wxide_tcb_official_website](https://tcb.cloud.tencent.com/cloud-template/detail?appName=cloudbase_official_website&from=wxide_tcb_official_website)安装。
 
 ## 社区
 
