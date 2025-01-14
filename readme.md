@@ -4,6 +4,7 @@
 
 ## 目录结构
 
+
 - android: 存放 Android 端 Demo / Workshop
 - ios: 存放 iOS 端 Demo / Workshop
 - minigame: 存放小游戏端 Demo / Workshop
@@ -11,7 +12,7 @@
 - server: 存放服务端 Demo / Workshop
 - web: 存放 Web 端 Demo / Workshop
 - cloudbaserun: 存放 云应用 端 Demo / Workshop
-- functions-framework: 存放 `云函数2.0` Demo
+- cloudrunfunctions: 存放 `云函数2.0` Demo
 - lowcode: 存放微搭低代码应用
 
 ## 联系我们
