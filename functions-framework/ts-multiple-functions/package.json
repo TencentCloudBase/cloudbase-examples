@@ -1,0 +1,11 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "main": "build/index.js",
+  "devDependencies": {
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "@cloudbase/functions-typings": "1.0.0-beta.4"
+  }
+}

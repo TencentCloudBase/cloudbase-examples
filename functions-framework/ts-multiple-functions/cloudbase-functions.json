@@ -1,0 +1,15 @@
+{
+  "functionsRoot": "./cloudrunfunctions/built",
+  "functions": [
+    {
+      "name": "func-a",
+      "directory": "func-a",
+      "triggerPath": "/a"
+    },
+    {
+      "name": "func-b",
+      "directory": "func-b",
+      "triggerPath": "/b"
+    }
+  ]
+}
