@@ -33,7 +33,7 @@ JavaScript 示例代码见：<https://github.com/TencentCloudBase/func-v2-templa
 
 以上，是一个基于 `TypeScript` 的项目结构示例，项目中 需要 `src`、`built` 目录 包含 源代码和编译后的代码，因此需要在云函数代码中配置 `tsconfig.json` 文件。
 
-因每个函数是独立部署的，所以每个函数也是相互独立的，但是代码结构比较相识。
+因每个函数是独立部署的，所以每个函数也是相互独立的，但是代码结构比较相似。
 
 非运行时依赖的部分，可以在多个函数之间共享，如 `tsconfig.json` `公共依赖` 等。
 
