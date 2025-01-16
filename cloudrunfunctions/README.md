@@ -17,3 +17,5 @@
 
 - `ts-multiple-functions` 云函数2.0示例项目-TS函数项目
 - `message-center` 云函数2.0示例项目-消息中心
+- `llm-based-weather-agent` 云函数2.0示例项目-基于混元大模型构建天气查询 Agent
+- `yuanqi-agent` 云函数2.0示例项目-元器 Agent
