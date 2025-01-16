@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": [
+    "src/**/*.ts"
+  ],
+  "compilerOptions": {
+    "outDir": "built",                                   /* Specify an output folder for all emitted files. */
+    "module": "ES2022",                                  /* Specify what module code is generated. */
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "functionsRoot": "built",
+  "functions": [
+    {
+      "name": "func-a-1",
+      "directory": "func-a-1",
+      "triggerPath": "/a-1"
+    },
+    {
+      "name": "func-a-2",
+      "directory": "func-a-2",
+      "triggerPath": "/a-2"
+    }
+  ]
+}
