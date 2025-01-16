@@ -1,0 +1,10 @@
+{
+  "functionsRoot": "./cloudrunfunctions/dist",
+  "functions": [
+    {
+      "name": "default",
+      "directory": "./",
+      "triggerPath": "/"
+    }
+  ]
+}

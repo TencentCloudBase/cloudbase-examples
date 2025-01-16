@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "rootDir": "cloudrunfunctions/src",
+    "outDir": "cloudrunfunctions/dist",
+    "target": "ES2015",
+    "skipLibCheck": true,
+    "esModuleInterop": false
+  },
+  "include": ["**/*.ts"]
+}
