@@ -1,0 +1,31 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "launch-tcb-ff-global",
+      // 注意：请确保全局安装了 @cloudbase/functions-framework 模块
+      // npm install -g @cloudbase/functions-framework
+      // 因不同环境下全局安装路径可能不同，需要手动替换
+      //  Windows 系统可通过 `where tcb-ff` 命令查看全局安装路径
+      //  MacOS/Linux 系统下可通过 `which tcb-ff` 命令查看全局安装路径
+      "program": "/Users/joe/.nvm/versions/node/v18.20.4/bin/tcb-ff",
+      // 直接启动 src 目录下的 ts 函数代码，如需调试编译后的 js 代码，可将 --source 参数替换为编译后的目录
+      "args": [
+        "--extendedContextKey=X-Functions-Extended-Context",
+        "--source cloudrunfunctions/src"
+      ],
+      "env": {
+        // 默认支持调试 TS 代码，如不需要可以移除
+        "NODE_OPTIONS": "--require ts-node/register/transpile-only",
+        "YUAN_QI_API_KEY": "your-yuan-qi-api-key"
+      },
+      "skipFiles": ["<node_internals>/**"],
+      "outFiles": ["!**/node_modules/**"]
+    }
+  ]
+}
