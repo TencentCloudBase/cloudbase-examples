@@ -7,9 +7,8 @@
   "scripts": {
     "build": "pnpm run -r build",
     "start": "export $(xargs <.env) && npx tcb-ff",
-    "watch": "pnpm run -r watch & export $(xargs <.env) && npx tcb-ff -w",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rm -rf packages/{common,message,trigger}/built"
+    "watch": "pnpm run --parallel -r watch & export $(xargs <.env) && npx tcb-ff -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +18,8 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "@cloudbase/functions-framework": "1.0.0-beta.12",
+    "@cloudbase/functions-framework": "latest",
+    "@local/common": "^1.0.0",
     "dotenv": "^16.4.7"
   }
 }

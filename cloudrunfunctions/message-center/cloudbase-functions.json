@@ -1,17 +1,25 @@
 {
-  "functionsRoot": ".",
-  "functions": [
-    {
-      "name": "trigger",
-      "directory": "./cloudrunfunctions/trigger",
-      "source": "built/index.js",
-      "triggerPath": "/trigger"
-    },
-    {
-      "name": "message",
-      "directory": "./cloudrunfunctions/message",
-      "source": "built/index.js",
-      "triggerPath": "/message"
-    }
-  ]
+    "functionsRoot": ".",
+    "functions": [
+        {
+            "name": "trigger",
+            "directory": "./cloudrunfunctions/trigger",
+            "source": "built/index.js"
+        },
+        {
+            "name": "message",
+            "directory": "./cloudrunfunctions/message",
+            "source": "built/index.js"
+        }
+    ],
+    "routes": [
+        {
+            "functionName": "trigger",
+            "path": "/trigger"
+        },
+        {
+            "functionName": "message",
+            "path": "/message"
+        }
+    ]
 }

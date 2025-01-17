@@ -9,11 +9,12 @@
     "watch": "npx tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@local/common": "^1.0.0",
     "kafkajs": "^2.2.4",
+    "pulsar-client": "^1.12.0",
     "redis": "^4.7.0"
   }
 }
