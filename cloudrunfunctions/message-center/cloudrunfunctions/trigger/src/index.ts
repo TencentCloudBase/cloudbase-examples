@@ -3,7 +3,6 @@ import {
   createKafkaClient,
   KafkaClient,
   calculateClientID,
-  TMessage,
   createPulsarClientProducer,
   PulsarClient
 } from '@local/common'
