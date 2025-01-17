@@ -71,10 +71,6 @@ export class KafkaClient {
       await this.consumer.disconnect()
       console.log('Kafka consumer disconnected')
     }
-
-    if (this.kafka) {
-      console.log('Kafka client disconnected')
-    }
   }
 }
 

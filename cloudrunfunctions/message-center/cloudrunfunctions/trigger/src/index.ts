@@ -62,3 +62,14 @@ export const main: TcbEventFunction = async function (event, context) {
 
   return 'success'
 }
+;['beforeExit', 'SIGINT', 'SIGTERM'].forEach((signal) => {
+  process.on(signal, async () => {
+    try {
+      await kafkaClient.close()
+      await pulsarProducer.close()
+      console.log('Shutting down... Cleaned up resources.')
+    } catch (error) {
+      console.error('Failed to close resources:', error)
+    }
+  })
+})

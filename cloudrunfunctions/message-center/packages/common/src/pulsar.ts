@@ -94,7 +94,6 @@ export class PulsarClient {
     await this.producer?.close()
     await this.consumer?.close()
     await this.client.close()
-    console.log('Pulsar client closed')
   }
 }
 

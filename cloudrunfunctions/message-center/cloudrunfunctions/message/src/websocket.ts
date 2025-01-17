@@ -5,8 +5,8 @@ export class WebSocketManager {
 
   /**
    * 保存客户端连接，如果客户端 ID 已经存在，则进行覆盖
-   * @param clientID 
-   * @param ws 
+   * @param clientID
+   * @param ws
    */
   addClient(clientID: string, ws: ws.IWebSocket) {
     this.clientMap.set(clientID, ws)
@@ -14,8 +14,8 @@ export class WebSocketManager {
 
   /**
    * 取出客户端 ID 对应的 Websocket 连接
-   * @param clientID 
-   * @returns 
+   * @param clientID
+   * @returns
    */
   getClient(clientID: string): ws.IWebSocket | undefined {
     return this.clientMap.get(clientID)
@@ -23,8 +23,8 @@ export class WebSocketManager {
 
   /**
    * 是否存在指定客户端
-   * @param clientID 
-   * @returns 
+   * @param clientID
+   * @returns
    */
   hasClient(clientID: string): boolean {
     const ws = this.getClient(clientID)
@@ -33,7 +33,7 @@ export class WebSocketManager {
 
   /**
    * 移除客户端 ID 对应的连接
-   * @param clientID 
+   * @param clientID
    */
   removeClient(clientID: string) {
     this.clientMap.delete(clientID)
@@ -49,5 +49,15 @@ export class WebSocketManager {
     if (ws && ws.send) {
       ws.send(message)
     }
+  }
+
+  /**
+   * 关闭所有客户端连接
+   *
+   */
+  close() {
+    this.clientMap.forEach((ws) => {
+      ws.close(1000, 'Server shutdown. Bye.')
+    })
   }
 }

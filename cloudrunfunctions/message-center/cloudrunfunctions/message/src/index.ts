@@ -63,7 +63,6 @@ const init = async () => {
   await init()
 })()
 
-
 async function publishToClient(message: TMessage): Promise<void> {
   const { clientID, ...rest } = message
   rest.sentTime = new Date().toISOString()
@@ -99,3 +98,16 @@ main.handleUpgrade = async function (upgradeContext) {
 
   return { allowWebSocket: true }
 }
+;['beforeExit', 'SIGINT', 'SIGTERM'].forEach((signal) => {
+  process.on(signal, async () => {
+    try {
+      wsManager.close()
+      await kafkaClient.close()
+      await pulsarConsumer.close()
+      await redisClient.close()
+      console.log('Shutting down... Cleaned up resources.')
+    } catch (error) {
+      console.error('Failed to close resources:', error)
+    }
+  })
+})
