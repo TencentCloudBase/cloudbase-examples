@@ -1,9 +1,6 @@
 import { Kafka, Producer, Consumer, EachMessagePayload } from 'kafkajs'
+import { TMessage } from './utils';
 
-export type TMessage = {
-  clientID: string
-  event: unknown
-}
 
 export class KafkaClient {
   private kafka: Kafka

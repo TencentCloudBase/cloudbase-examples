@@ -5,10 +5,12 @@ import {
   RedisClient,
   createKafkaClient,
   createRedisClient,
-  TMessage
+  TMessage,
+  PulsarClient,
+  registerPulsarClientConsumer
 } from '@local/common'
-import { EachMessagePayload } from 'kafkajs'
 import { WebSocketManager } from './websocket.js'
+import { KafkaProcessor, PulsarProcessor } from './processor.js'
 
 const kafkaConfig = {
   brokers: [process.env.KAFKA_BROKER] as string[],
@@ -19,8 +21,16 @@ const redisConfig = {
   url: process.env.REDIS_URL as string
 }
 
+const pulsarConfig = {
+  serviceUrl: process.env.PULSAR_SERVICE_URL as string,
+  token: process.env.PULSAR_TOKEN as string,
+  topic: process.env.PULSAR_TOPIC as string,
+  subscription: process.env.PULSAR_SUBSCRIPTION as string
+}
+
 let redisClient: RedisClient
 let kafkaClient: KafkaClient
+let pulsarConsumer: PulsarClient
 let wsManager: WebSocketManager
 const init = async () => {
   // 初始化 kafka 客户端
@@ -28,8 +38,19 @@ const init = async () => {
     clientId: 'client-trigger',
     brokers: kafkaConfig.brokers
   })
-  // 启动 Kafka 消费者
-  kafkaClient.startConsuming(kafkaConfig.topic, messageHandler)
+
+  // 初始化并启动 Kafka 消费者
+  const kafkaProcessor = new KafkaProcessor(publishToClient)
+  kafkaClient.startConsuming(kafkaConfig.topic, (payload) =>
+    kafkaProcessor.process(payload)
+  )
+
+  // 初始化并启动 pulsar 消费者
+  const pulsarProcessor = new PulsarProcessor(publishToClient)
+  pulsarConsumer = await registerPulsarClientConsumer({
+    ...pulsarConfig,
+    onMessage: (msg) => pulsarProcessor.process(msg)
+  })
 
   // 初始化 Redis 客户端用于管理连接
   redisClient = await createRedisClient(redisConfig.url)
@@ -42,43 +63,13 @@ const init = async () => {
   await init()
 })()
 
-/**
- * 解析 Kafka 消息
- * @param payload
- * @returns
- */
-const parseKafkaMessage = (
-  payload: EachMessagePayload
-): TMessage | undefined => {
-  try {
-    const value = payload.message.value?.toString()
-    return value ? (JSON.parse(value) as TMessage) : undefined
-  } catch (error) {
-    console.error('Failed to parse Kafka message:', error)
-    return
-  }
-}
 
-/**
- * 向 Redis 投递收到的 Kafka 消息
- * @param message
- * @returns
- */
-const processMessage = async (message: TMessage) => {
-  const { clientID, event } = message
-
+async function publishToClient(message: TMessage): Promise<void> {
+  const { clientID, ...rest } = message
+  rest.sentTime = new Date().toISOString()
   // 向该客户端对应的 Redis channel 发送从 Kafka 中消费得到的消息数据
-  await redisClient.publish(clientID, JSON.stringify(event))
+  await redisClient.publish(clientID, JSON.stringify(rest))
   console.log('Published to Redis channel:', clientID)
-}
-
-const messageHandler = async function (
-  payload: EachMessagePayload
-): Promise<void> {
-  const message = parseKafkaMessage(payload)
-  if (message) {
-    await processMessage(message)
-  }
 }
 
 export const main: TcbEventFunction = async function (event, context) {
