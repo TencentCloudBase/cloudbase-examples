@@ -111,7 +111,6 @@ curl -v http://127.0.0.1:3000/trigger \
     -H "User-Agent:unique-client" \
     -d '{"id":"Hello"}'
 ```
-
 该命令执行后，会触发两条消息推送，其中一个是实时消息，另一个是延时（3s）消息。
 
 7. 连接到 `message` 函数的客户端收到服务端推送的消息，消息内容为客户端向 `trigger` 函数发送的消息
