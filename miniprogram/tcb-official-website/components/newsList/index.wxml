@@ -4,5 +4,5 @@
     <text class="news_list_title">{{title}}</text>
     <text class="news_time">{{time}}</text>
   </view>
-  <view class="news_image"><image src="{{image}}"></image></view>
+  <view class="news_image"><image mode="aspectFill" src="{{image}}"></image></view>
 </view>
