@@ -2,7 +2,7 @@
 <!-- banner -->
 <swiper wx:if="{{bannerList.length >0}}" class="poster" indicator-dots autoplay>
   <swiper-item wx:for="{{bannerList}}" wx:key="index">
-    <image src="{{item}}"></image>
+    <image mode="aspectFill" src="{{item}}"></image>
   </swiper-item>
 </swiper>
 
@@ -10,7 +10,7 @@
 <view wx:if="{{productAbilityList.length >0}}"  class="template">
   <view class="template_list">
     <view class="template_item" wx:for="{{productAbilityList}}" wx:key="index">
-      <image src="{{item.icon}}"></image>
+      <image mode="aspectFill"  src="{{item.icon}}"></image>
       <text>{{item.text}}</text>
     </view>
   </view>
@@ -33,7 +33,7 @@
     <text>最新动态</text>
     <view class="news_more" bind:tap="onGoNews">
       <text>更多</text>
-      <image src="../../images/more.png"></image>
+      <image mode="aspectFill" src="../../images/more.png"></image>
     </view>
   </view>
   <view class="news_list">
@@ -46,7 +46,7 @@
   <view class="common_title">合作伙伴</view>
   <view class="partners_list">
     <view wx:for="{{partnersList}}" wx:key="index" class="partners_item">
-      <image src="{{item.pic}}"></image>
+      <image mode="aspectFill" src="{{item.pic}}"></image>
     </view>
   </view>
 </view>
