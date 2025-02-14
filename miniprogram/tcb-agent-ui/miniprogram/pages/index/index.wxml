@@ -1,0 +1,116 @@
+<view>
+  <view class="title">
+    Agent-UI
+  </view>
+  <view class="sub-title">
+    极简，原生态
+  </view>
+  <view class="sub-title">
+    组件化ChatBot对话组件
+  </view>
+  <view class="btn-box">
+    <view class="btn-fill" data-anchor="anchor1" bind:tap="scrollToAnchor">开始使用</view>
+    <view class="btn-light" data-anchor="anchor2" bind:tap="scrollToAnchor">组件文档</view>
+  </view>
+  <block wx:for="{{introduction}}" wx:key="title">
+    <view class="introduction-box">
+      <view class="introduction-title">{{item.title}}</view>
+      <view class="introduction-desc">{{item.desc}}</view>
+    </view>
+  </block>
+  <view class="title-h1" id="anchor1">快速开始</view>
+  <view class="step-text" style="padding: 16px;">
+    Agent-UI 组件用于对接腾讯云开发AI能力，支持Agnet(智能体)、大模型流式对话。使用腾讯云开发AI能力，需要先开通云开发环境（<text style="color: #1aad19;" bind:tap="copyUrl">去开通</text>），如何迁移到已有项目参见“集成到已有小程序中”
+  </view>
+  <view class="function-box">
+    <view class="function-box-title" bind:tap="expandModel">
+      <text>对接腾讯云开发大模型</text>
+      <image src="../../imgs/arrow.png" mode="widthFix" style="width: 16px;height: 16px;transform-origin: center center;transform: rotate({{modelExpand?90:0}}deg);" />
+    </view>
+    <view wx:if="{{modelExpand}}">
+      <view class="model"> <text style="color: #1aad19;">一、使用deepseek大模型</text> </view>
+      <view class="step-title"><text class="step-left">step</text> <text class="step-right">1 </text>配置环境ID</view>
+      <view class="step-text">
+        前往 miniprogram/app.js 文件配置环境ID
+      </view>
+      <view class="code_zone">
+        <rich-text nodes="<pre style='overflow: scroll;'>{{agentUiConfig.initEnvID}}</pre>" />
+      </view>
+      <view class="step-title"><text class="step-left">step</text> <text class="step-right">2</text>修改组件配置</view>
+      <view class="step-text">
+        前往 chatBot/chatBot.js 文件配置 agent-ui 组件参数。type , model , modelName 必填, type 固定为 "model" , model 为大模型服务商 , modelName 为具体使用的模型版本。 deepseek 目前支持 v3 和 r1 , modelName 可填 "deepseek-r1" 或者 "deepseek-v3"
+      </view>
+      <view class="code_zone">
+        <rich-text nodes="<pre style='overflow: scroll;'>{{agentUiConfig.modelConfig2}}</pre>" />
+      </view>
+      <view class="btn-full" bind:tap="goChatBot">我已配置，去体验</view>
+      <view class="model"> <text style="color: #1aad19;">二、使用混元大模型</text> </view>
+      <view class="step-title"><text class="step-left">step</text> <text class="step-right">1</text> 配置环境ID</view>
+      <view class="step-text">
+        前往 miniprogram/app.js 文件配置环境ID
+      </view>
+      <view class="code_zone">
+        <rich-text nodes="<pre style='overflow: scroll;'>{{agentUiConfig.initEnvID}}</pre>" />
+      </view>
+      <view class="step-title"><text class="step-left">step</text> <text class="step-right">2</text> 修改组件配置</view>
+      <view class="step-text">
+        前往 chatBot/chatBot.js 文件配置 agent-ui 组件参数。type , model , modelName 必填, type固定为 "model" , model 为大模型服务商 , modelName 为具体使用的模型版本
+      </view>
+      <view class="code_zone">
+        <rich-text nodes="<pre style='overflow: scroll;'>{{agentUiConfig.modelConfig1}}</pre>" />
+      </view>
+      <view class="btn-full" bind:tap="goChatBot">我已配置，去体验</view>
+    </view>
+  </view>
+  <view class="function-box">
+    <view class="function-box-title" bind:tap="expandAgent">
+      <text>对接腾讯云开发Agent</text>
+      <image src="../../imgs/arrow.png" mode="widthFix" style="width: 16px;height: 16px;transform-origin: center center;transform: rotate({{agentExpand?90:0}}deg);" />
+    </view>
+    <block wx:if="{{agentExpand}}">
+      <view class="step-title"><text class="step-left">step</text> <text class="step-right">1</text> 配置环境ID</view>
+      <view class="step-text">
+        前往 miniprogram/app.js 文件配置环境ID
+      </view>
+      <view class="code_zone">
+        <rich-text nodes="<pre style='overflow: scroll;'>{{agentUiConfig.initEnvID}}</pre>" />
+      </view>
+      <view class="step-title"><text class="step-left">step</text> <text class="step-right">2</text> 修改组件配置</view>
+      <view class="step-text">
+        前往 chatBot/chatBot.js 文件配置 agent-ui 组件参数。type 和 botId 必填, type 固定为 "bot" , botId 为 agent id
+      </view>
+      <view class="code_zone">
+        <rich-text nodes="<pre style='overflow: scroll;'>{{agentUiConfig.agentConfig}}</pre>" />
+      </view>
+      <view class="btn-full" bind:tap="goChatBot">我已配置，去体验</view>
+    </block>
+  </view>
+
+  <view class="title-h1" id="anchor2">组件文档</view>
+  <view style="padding: 16px;">
+    <view style="color: #1aad19; font-size: 14px;margin-bottom: 16px;">参数说明</view>
+    <block wx:for="{{params}}" wx:key="name">
+      <view style="margin-bottom:16px;font-size: 14px;line-height: 24px;text-align: justify;">
+        <view> <text style="font-weight: 500;">字段：</text>{{item.name}}</view>
+        <view><text style="font-weight: 500;">类型：</text>{{item.type}}</view>
+        <view><text style="font-weight: 500;">说明：</text>说明：{{item.desc}}</view>
+      </view>
+    </block>
+  </view>
+  <view style="padding: 16px;">
+    <view style="color: #1aad19; font-size: 14px;margin-bottom: 16px;">集成到已有小程序中</view>
+    <view class="step-text">1. 拷贝 miniprogram/components/agent-ui 组件到小程序中</view>
+    <view class="step-text">2. 在页面 .json 配置文件中注册组件 </view>
+    <view class="code_zone">
+      <rich-text nodes="<pre style='overflow: scroll;'>{{guide[0]}}</pre>" />
+    </view>
+    <view class="step-text">3. 在页面 .wxml 文件中使用组件 </view>
+    <view class="code_zone">
+      <rich-text nodes="<pre style='overflow: scroll;'>{{guide[1]}}</pre>" />
+    </view>
+    <view class="step-text">4. 在页面 .js 文件中编写配置 </view>
+    <view class="code_zone">
+      <rich-text nodes="<pre style='overflow: scroll;'>{{guide[2]}}</pre>" />
+    </view>
+  </view>
+</view>

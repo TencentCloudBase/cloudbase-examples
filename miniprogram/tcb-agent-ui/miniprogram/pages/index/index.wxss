@@ -1,0 +1,143 @@
+.title {
+  color: #1aad19;
+  font-size: 40px;
+  font-weight: 900;
+  text-align: center;
+  padding: 50px 0px 30px 0px;
+}
+
+.sub-title {
+  color: #1aad19;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 30px;
+}
+
+.btn-box {
+  display: flex;
+  justify-content: center;
+  gap: 30rpx;
+  padding: 30px 0px;
+}
+
+.btn-fill {
+  width: 180rpx;
+  height: 40px;
+  border-radius: 4px;
+  line-height: 40px;
+  color: #fff;
+  background-color: #1aad19;
+  text-align: center;
+}
+
+.btn-light {
+  width: 180rpx;
+  height: 40px;
+  border-radius: 4px;
+  line-height: 40px;
+  color: #1aad19;
+  background-color: #FFF;
+  border: #1aad19 solid 1px;
+  text-align: center;
+}
+
+.introduction-box {
+  margin: 0px auto;
+  border: rgb(238, 238, 238) solid 1px;
+  width: 500rpx;
+  padding: 30px;
+  margin-bottom: 25px;
+}
+
+.introduction-title {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  padding-bottom: 20px;
+}
+
+.introduction-desc {
+  font-size: 14px;
+  color: rgb(153, 153, 153);
+  line-height: 24px;
+  text-align: justify;
+}
+
+.title-h1 {
+  font-size: 16px;
+  font-weight: 500;
+  padding-left: 16px;
+  margin: 40px 0px 0px 0px
+}
+
+.title-h4 {
+  font-size: 12px;
+  font-weight: 300;
+  padding-left: 16px;
+  margin-top: 4px;
+  opacity: 0.7;
+}
+
+.function-box {
+  margin: 16px;
+  border: #eee solid 1px;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.function-box-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.step-title {
+  line-height: 37px;
+  font-size: 16px;
+}
+.step-text{
+  font-size: 14px;
+  line-height: 24px;
+  padding: 10px 0px;
+  text-align: justify;
+}
+.model{
+  font-size: 16px;
+  line-height: 40px;
+}
+.step-left {
+  color: #FFF;
+  background-color: #1aad19;
+  border: #1aad19 solid 1px;
+  padding: 0px 6px;
+}
+
+.step-right {
+  color: #1aad19;
+  background-color: #FFF;
+  border: #1aad19 solid 1px;
+  padding: 0px 6px;
+  margin-right: 10px;
+}
+
+.code_zone {
+  background-color: #0E190E;
+  color: rgba(255, 255, 255, 0.7);
+  border-radius: 12rpx;
+  padding: 16rpx 32rpx;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
+  margin-bottom: 24rpx;
+}
+
+.btn-full {
+  height: 40px;
+  border-radius: 4px;
+  line-height: 40px;
+  color: #fff;
+  background-color: #1aad19;
+  text-align: center;
+}

@@ -1,0 +1,67 @@
+<!-- agent ui 组件根容器 -->
+<view class="agent-ui">
+  <!-- 聊天对话区 -->
+  <scroll-view class="main" style="height: {{windowInfo.windowHeight-80}}px;" scroll-y="{{true}}" bind:tap="toBottom" scroll-top="{{scrollTop}}">
+    <view class="nav">
+      <image src="{{bot.avatar||agentConfig.logo}}" mode="aspectFill" class="avatar" />
+      <view style="line-height: 47px;">{{agentConfig.type==='bot'?bot.name:agentConfig.modelName}}</view>
+      <view style="line-height: 26px;padding: 0px 16px;">{{agentConfig.type==='bot'?"":agentConfig.welcomeMessage}}</view>
+    </view>
+    <view class="system" wx:if="{{showGuide}}">
+      <markdownPreview markdown="{{guide}}"></markdownPreview>
+    </view>
+    <view class="system" wx:if="{{agentConfig.type==='bot'}}">
+      <markdownPreview markdown="{{bot.introduction||''}}"></markdownPreview>
+    </view>
+    <block wx:for="{{chatRecords}}" wx:key="record_id">
+      <view class="system" wx:if="{{item.role==='assistant'}}">
+        <view wx:if="{{!!item.reasoning_content}}" style="opacity: 0.7;">
+          <view>{{item.reasoning_content&&!item.content?"思考中...":"已深度思考"}}</view>
+          <view style="padding-left: 30rpx;border-left: rgb(165, 164, 164) solid 2px;">
+            <markdownPreview markdown="{{item.reasoning_content||''}}"></markdownPreview>
+          </view>
+        </view>
+        <markdownPreview markdown="{{item.content||''}}"></markdownPreview>
+        <view style="display: flex; gap: 10px;justify-content: flex-end;" wx:if="{{!streamStatus}}">
+          <image mode="widthFix" bind:tap="copyChatRecord" src='./imgs/copy.png' style="width: 36rpx; height: 36rpx;" data-content="{{item.content}}" />
+          <button class="share_btn" open-type="share">
+            <image mode="widthFix" src='./imgs/share1.png' style="width: 36rpx; height: 36rpx;vertical-align: top;" bind:tap="share" />
+          </button>
+        </view>
+      </view>
+      <view class="user" wx:if="{{item.role==='user'}}">
+        <view>
+          {{item.content}}
+        </view>
+      </view>
+    </block>
+    <!-- 推荐问题 -->
+    <block wx:for="{{questions}}" wx:key="item">
+      <view class="questions">
+        <view class="question_content" bind:tap="sendMessage" data-message="{{item}}">{{item}}</view>
+      </view>
+    </block>
+    <view style="width: 100%;height: 20px;"></view>
+  </scroll-view>
+  <!-- 底部输入区 -->
+  <view class="footer">
+    <view class="input_box">
+      <input class="input" value="{{inputValue}}" type="text" maxlength="1024" bindinput="bindKeyInput" placeholder="说点什么吧" bindconfirm="sendMessage" confirm-type="send" adjust-position cursor-spacing="20" />
+      <image src="./imgs/set.png" class="set" mode="widthFix" bind:tap="openSetPanel" />
+      <image src="./imgs/send.png" class="set" mode="widthFix" wx:if="{{!!inputValue&&!streamStatus}}" bind:tap="sendMessage" />
+      <image src="./imgs/stop.png" class="set" mode="widthFix" wx:if="{{!!streamStatus}}" bind:tap="stop" />
+    </view>
+    <!-- 设置面板 -->
+    <view class="set_panel_modal" wx:if="{{setPanelVisibility}}" bind:tap="closeSetPanel">
+      <view class="set_panel">
+        <view class="set_panel_funtion">
+          <view class="function" bind:tap="clearChatRecords">
+            <image src="./imgs/clear.png" alt="widthFix" class="icon" />
+            <text class="text_desc">清除对话</text>
+          </view>
+        </view>
+        <view class="set_panel_cancel" bind:tap="closeSetPanel">取消</view>
+      </view>
+    </view>
+  </view>
+</view>

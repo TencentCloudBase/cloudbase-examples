@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "markdownPreview":"/components/agent-ui/markdownPreview/index"
+  }
+}
