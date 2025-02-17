@@ -30,6 +30,7 @@ Component({
     scrollTop: 0,
     guide,
     showGuide: false,
+    imageList: []
   },
 
   attached: async function () {
@@ -81,16 +82,24 @@ Component({
     },
     sendMessage: async function (event) {
       const { message } = event.currentTarget.dataset;
-      let { inputValue, bot, agentConfig, chatRecords, streamStatus } =
-        this.data;
+      let { inputValue, bot, agentConfig, chatRecords, streamStatus, imageList } = this.data;
+      // 如果正在流式输出，不让发送消息
       if (streamStatus) {
         return;
       }
+      // 将传进来的消息给到inputValue
       if (message) {
         inputValue = message;
       }
+      // 空消息返回
       if (!inputValue) {
         return;
+      }
+      // 图片上传没有完成，返回
+      if (imageList.length) {
+        if (imageList.filter(item => !item.base64Url).length) {
+          return
+        }
       }
       const { type, modelName, model } = agentConfig;
       // console.log(inputValue,bot.botId)
@@ -98,6 +107,7 @@ Component({
         content: inputValue,
         record_id: "record_id" + String(+new Date() - 10),
         role: "user",
+        imageList: [...imageList]
       };
       const record = {
         content: "...",
@@ -109,6 +119,7 @@ Component({
         questions: [],
         chatRecords: [...chatRecords, userRecord, record],
         streamStatus: false,
+        imageList: []
       });
       // 先这样写，后面抽离出来
       if (type === "bot") {
@@ -179,8 +190,45 @@ Component({
       }
       if (type === "model") {
         const aiModel = wx.cloud.extend.AI.createModel(modelName);
-        const res = await aiModel.streamText({
-          data: {
+        let params = {}
+        if (model === 'hunyuan-vision') {
+          params = {
+            model: model,
+            messages: [
+              ...chatRecords.map(item => ({
+                role: item.role,
+                content: [
+                  {
+                    "type": "text",
+                    "text": item.content
+                  },
+                  ...(item.imageList||[]).map(item=>({
+                    "type": "image_url",
+                    "image_url": {
+                      "url": item.base64Url
+                    }
+                  }))
+                ]
+              })),
+              {
+                role: "user",
+                content: [
+                  {
+                    "type": "text",
+                    "text": inputValue
+                  },
+                  ...imageList.map(item => ({
+                    "type": "image_url",
+                    "image_url": {
+                      "url": item.base64Url
+                    }
+                  }))
+                ]
+              },
+            ],
+          }
+        } else {
+          params = {
             model: model,
             messages: [
               ...chatRecords.map((item) => ({
@@ -192,7 +240,10 @@ Component({
                 content: inputValue,
               },
             ],
-          },
+          }
+        }
+        const res = await aiModel.streamText({
+          data: params,
         });
         let contentText = "";
         let reasoningText = "";
@@ -246,5 +297,45 @@ Component({
         },
       });
     },
+    uploadImgs: function () {
+      const that = this
+      wx.chooseMedia({
+        count: 9,
+        mediaType: ['image'],
+        sourceType: ['album', 'camera'],
+        maxDuration: 30,
+        camera: 'back',
+        success(media) {
+          // console.log(media.tempFiles)
+          const { tempFiles } = media
+          that.setData({ imageList: [...tempFiles] })
+          tempFiles.forEach((img, index) => {
+            const lastDotIndex = img.tempFilePath.lastIndexOf('.');
+            const fileExtension = img.tempFilePath.substring(lastDotIndex + 1);
+            wx.getFileSystemManager().readFile({
+              filePath: img.tempFilePath,
+              encoding: 'base64',
+              success(file) {
+                const base64String = file.data;
+                const base64Url = `data:image/${fileExtension};base64,${base64String}`
+                const { imageList } = that.data
+                const image = imageList[index]
+                image.base64Url = base64Url
+                that.setData({ imageList: [...imageList] })
+              },
+            })
+          })
+        },
+        fail(e) {
+          console.log(e)
+        }
+      })
+    },
+    deleteImg: function (e) {
+      const { currentTarget: { dataset: { index } } } = e
+      const { imageList } = this.data
+      const newImageList = imageList.filter((_, idx) => idx != index);
+      this.setData({ imageList: [...newImageList] })
+    }
   },
 });

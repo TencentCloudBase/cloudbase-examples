@@ -29,11 +29,19 @@
           </button>
         </view>
       </view>
-      <view class="user" wx:if="{{item.role==='user'}}">
-        <view>
-          {{item.content}}
+      <view wx:if="{{item.role==='user'}}">
+        <view class="user">
+          <view>
+            {{item.content}}
+          </view>
+        </view>
+        <view style="display: flex;flex-direction: row-reverse; overflow-x: auto;white-space: nowrap;margin:0px 16px 0px 100rpx ">
+          <block wx:for="{{item.imageList}}" wx:key="tempFilePath" wx:for-item="item1">
+            <image src="{{item1.tempFilePath}}" alt="" model='aspectFill' style="width: 80px; height: 80px;margin-left: 8px;flex-shrink: 0; border-radius: 10px;" />
+          </block>
         </view>
       </view>
+
     </block>
     <!-- 推荐问题 -->
     <block wx:for="{{questions}}" wx:key="item">
@@ -45,12 +53,29 @@
   </scroll-view>
   <!-- 底部输入区 -->
   <view class="footer">
-    <view class="input_box">
-      <input class="input" value="{{inputValue}}" type="text" maxlength="1024" bindinput="bindKeyInput" placeholder="说点什么吧" bindconfirm="sendMessage" confirm-type="send" adjust-position cursor-spacing="20" />
-      <image src="./imgs/set.png" class="set" mode="widthFix" bind:tap="openSetPanel" />
-      <image src="./imgs/send.png" class="set" mode="widthFix" wx:if="{{!!inputValue&&!streamStatus}}" bind:tap="sendMessage" />
-      <image src="./imgs/stop.png" class="set" mode="widthFix" wx:if="{{!!streamStatus}}" bind:tap="stop" />
+    <view class="foot-function">
+      <scroll-view class="img-box" scroll-x="true" wx:if="{{!!imageList.length}}">
+        <block wx:for="{{imageList}}" wx:key="tempFilePath">
+          <view class="img-preview">
+            <image src="{{item.tempFilePath}}" alt="" model='aspectFill' class="img-preview-image" />
+            <!-- 蒙层 -->
+            <view class="img-preview-loading" wx:if="{{!!!item.base64Url}}"></view>
+            <!-- 删除按钮 -->
+            <image src="./imgs/close.svg" mode="aspectFill" class="img-preview-close" bind:tap="deleteImg" data-index="{{index}}" />
+          </view>
+        </block>
+      </scroll-view>
+      <view class="input_box">
+        <input class="input" value="{{inputValue}}" type="text" maxlength="1024" bindinput="bindKeyInput" placeholder="说点什么吧" bindconfirm="sendMessage" confirm-type="send" adjust-position cursor-spacing="20" />
+        <!-- 加号 -->
+        <image src="./imgs/set.png" class="set" mode="widthFix" bind:tap="openSetPanel" />
+        <!-- 发送按钮 -->
+        <image src="./imgs/send.png" class="set" mode="widthFix" wx:if="{{!!inputValue&&!streamStatus}}" bind:tap="sendMessage" />
+        <!-- 暂停按钮 -->
+        <image src="./imgs/stop.png" class="set" mode="widthFix" wx:if="{{!!streamStatus}}" bind:tap="stop" />
+      </view>
     </view>
+
     <!-- 设置面板 -->
     <view class="set_panel_modal" wx:if="{{setPanelVisibility}}" bind:tap="closeSetPanel">
       <view class="set_panel">
@@ -58,6 +83,10 @@
           <view class="function" bind:tap="clearChatRecords">
             <image src="./imgs/clear.png" alt="widthFix" class="icon" />
             <text class="text_desc">清除对话</text>
+          </view>
+          <view class="function" bind:tap="uploadImgs" wx:if="{{agentConfig.model==='hunyuan-vision'&&agentConfig.type==='model'}}">
+            <image src="./imgs/uploadImg.svg" alt="widthFix" class="icon" />
+            <text class="text_desc">添加图片</text>
           </view>
         </view>
         <view class="set_panel_cancel" bind:tap="closeSetPanel">取消</view>
