@@ -12,8 +12,8 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       '@cloudbase/functions-typings':
-        specifier: ^1.0.0-beta.4
-        version: 1.0.0-beta.4
+        specifier: 1.0.0
+        version: 1.0.0
       '@cloudbase/js-sdk':
         specifier: ^2.8.34
         version: 2.8.34
@@ -60,8 +60,8 @@ packages:
   '@cloudbase/database@0.9.21':
     resolution: {integrity: sha512-tpOFC8BUtM0a6kKwpHrjJ9zqII8HZDHj3ZlmhZpKRTyzgS8GjFlM49f20pTgkcfwWzbPyvJROW6UYuLU1Vq+CQ==}
 
-  '@cloudbase/functions-typings@1.0.0-beta.4':
-    resolution: {integrity: sha512-3v4MEJRoPyb0Uc1Zae35IgAk1L7wH4kuWGr9Z3DYHndSm+i7clxybpKQdFTMStCVF0qBIP/wR/gt43OTkrC7jQ==}
+  '@cloudbase/functions-typings@1.0.0':
+    resolution: {integrity: sha512-Zwdj//5F3TJPM+UR0X/olYiRG0Cu1xU1M4wP7jgnXwTzZjtEYytVArCm0QN/4C+5wRjX2B0BWZkpt2Pm6HsWQA==}
     engines: {node: '>=18.0.0'}
 
   '@cloudbase/functions@2.8.34':
@@ -434,7 +434,7 @@ snapshots:
       lodash.set: 4.3.2
       lodash.unset: 4.5.2
 
-  '@cloudbase/functions-typings@1.0.0-beta.4': {}
+  '@cloudbase/functions-typings@1.0.0': {}
 
   '@cloudbase/functions@2.8.34':
     dependencies:

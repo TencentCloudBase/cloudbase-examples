@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "rootDir": "cloudrunfunctions/src",
-    "outDir": "cloudrunfunctions/dist",
+    "rootDir": "src",
+    "outDir": "dist",
     "target": "ES2015",
     "skipLibCheck": true,
     "esModuleInterop": false
