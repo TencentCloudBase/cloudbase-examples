@@ -44,7 +44,7 @@ export class SSESender {
   constructor(readonly context: ContextInjected<TcbExtendedContext>) { }
 
   send(data: any) {
-    this.context.sse?.().send(data)
+    this.context.sse?.().send({data})
   }
   end() { 
     this.context.sse?.().end({ data: '[DONE]' })
