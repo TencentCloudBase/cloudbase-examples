@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "rimraf ./cloudrunfunctions/dist && tsc",
+    "build": "rimraf ./dist && tsc",
     "preDeploy": "npm i && npm run build && rimraf ./node_modules"
   },
   "dependencies": {
