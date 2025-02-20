@@ -11,6 +11,9 @@ importers:
       '@cloudbase/adapter-node':
         specifier: ^1.0.2
         version: 1.0.2
+      '@cloudbase/aiagent-framework':
+        specifier: 1.0.0-beta.0
+        version: 1.0.0-beta.0
       '@cloudbase/functions-typings':
         specifier: 1.0.0
         version: 1.0.0
@@ -47,6 +50,10 @@ packages:
 
   '@cloudbase/ai@2.8.34':
     resolution: {integrity: sha512-IeJLd5OYsa2h9NnL6yg/BIfVXpbDpm/V/Zmk4i7sTzK/z+eSiVGjl0LxvUX54dK57XdttetvYI9Ttm65bTnMlA==}
+
+  '@cloudbase/aiagent-framework@1.0.0-beta.0':
+    resolution: {integrity: sha512-5XtBd+cyFgDejNnYSBiADWYNVzIPxxNena+Rv2oLV1KZ7ER0hvkIYC8vQqxUBvCtvgarMhOlTI5g0EITXOwWGA==}
+    engines: {node: '>=18.0.0'}
 
   '@cloudbase/analytics@2.8.34':
     resolution: {integrity: sha512-juqarpscx+uETp+YW4RVuuyNplvNE6pb17dgh3DSKQZmzx5pWu8Rr1hIh5t+wrfDacJIK5V5aYZOceQijv3xzA==}
@@ -381,6 +388,9 @@ packages:
     resolution: {integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==}
     engines: {node: '>=6'}
 
+  zod@3.24.2:
+    resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
+
 snapshots:
 
   '@cloudbase/adapter-interface@0.5.0': {}
@@ -408,6 +418,11 @@ snapshots:
       '@mattiasbuelens/web-streams-adapter': 0.1.0
       text-encoding-shim: 1.0.5
       web-streams-polyfill: 4.1.0
+
+  '@cloudbase/aiagent-framework@1.0.0-beta.0':
+    dependencies:
+      '@cloudbase/functions-typings': 1.0.0
+      zod: 3.24.2
 
   '@cloudbase/analytics@2.8.34':
     dependencies:
@@ -737,3 +752,5 @@ snapshots:
   ws@8.18.0: {}
 
   yn@3.1.1: {}
+
+  zod@3.24.2: {}

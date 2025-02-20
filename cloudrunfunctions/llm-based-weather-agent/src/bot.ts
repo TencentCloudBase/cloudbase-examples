@@ -1,10 +1,6 @@
 import {
-  TcbExtendedContext,
-  ContextInjected,
-} from "@cloudbase/functions-typings";
-
-import {
   IBot,
+  IAbstractBot,
   SendMessageInput,
   GetChatRecordInput,
   GetChatRecordOutput,
@@ -13,7 +9,12 @@ import {
   SendFeedbackOutput,
   GetFeedbackInput,
   GetFeedbackOutput,
-} from "./aiagent-framework/type";
+} from "cloudbase-aiagent-framework";
+
+import {
+  TcbExtendedContext,
+  ContextInjected,
+} from "@cloudbase/functions-typings";
 
 import { getCloudbaseAi } from "./cloudbase-ai";
 
@@ -35,12 +36,11 @@ const getRandomWeather = () => {
   return WEATHERS[index];
 };
 
-export class MyBot extends IBot {
+export class MyBot extends IBot implements IAbstractBot {
   constructor(
     readonly context: ContextInjected<TcbExtendedContext>,
-    readonly envId: string
   ) {
-    super(context, envId);
+    super(context);
   }
 
   async sendMessage({ msg, history = [] }: SendMessageInput): Promise<void> {
@@ -50,7 +50,7 @@ export class MyBot extends IBot {
       name: "get_weather",
       description:
         "返回某个城市的天气信息。调用示例：get_weather({city: '北京'})",
-      fn: ({ city }) => `${city}的天气是：${getRandomWeather()}！！！`, // 在这定义工具执行的内容
+      fn: ({ city }: { city: string }) => `${city}的天气是：${getRandomWeather()}！！！`, // 在这定义工具执行的内容
       parameters: {
         type: "object",
         properties: {
@@ -87,9 +87,11 @@ export class MyBot extends IBot {
 
     for await (const chunk of res.dataStream) {
       this.sseSender.send({
-        content: chunk?.choices?.[0]?.delta?.content ?? "",
-        model: "hunyuan-turbo",
-        finish_reason: chunk?.choices?.[0]?.finish_reason ?? "",
+        data: {
+          content: chunk?.choices?.[0]?.delta?.content ?? "",
+          model: "hunyuan-turbo",
+          finish_reason: chunk?.choices?.[0]?.finish_reason ?? "",
+        },
       });
     }
 
@@ -124,9 +126,11 @@ export class MyBot extends IBot {
     });
     for await (const chunk of res.dataStream) {
       this.sseSender.send({
-        content: chunk?.choices?.[0]?.delta?.content ?? "",
-        model: "hunyuan-turbo",
-        finish_reason: chunk?.choices?.[0]?.finish_reason ?? "",
+        data: {
+          content: chunk?.choices?.[0]?.delta?.content ?? "",
+          model: "hunyuan-turbo",
+          finish_reason: chunk?.choices?.[0]?.finish_reason ?? "",
+        }
       });
     }
     this.sseSender.end();

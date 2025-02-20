@@ -5,7 +5,8 @@
     "outDir": "dist",
     "target": "ES2015",
     "skipLibCheck": true,
-    "esModuleInterop": false
+    "esModuleInterop": false,
+    "strict": true
   },
   "include": ["**/*.ts"]
 }

@@ -1,13 +1,15 @@
 import _cloudbase = require('@cloudbase/js-sdk')
 import _adapter = require('@cloudbase/adapter-node')
 
-export async function getCloudbaseAi(envId: string) {
+type AI = import("@cloudbase/js-sdk/ai").AI
+
+export async function getCloudbaseAi(envId: string): Promise<AI> {
   const cloudbase =
     _cloudbase as unknown as typeof import('@cloudbase/js-sdk').default
   const adapter =
     _adapter as unknown as typeof import('@cloudbase/adapter-node').default
 
-  let ai: import('@cloudbase/js-sdk/ai').AI
+  let ai: AI | null = null
   if (!ai) {
     const { sessionStorage } = adapter.genAdapter()
     cloudbase.useAdapters(adapter)
@@ -33,5 +35,5 @@ export async function getCloudbaseAi(envId: string) {
     ai = await (app as any).ai()
   }
 
-  return ai
+  return ai as AI
 }
