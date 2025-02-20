@@ -1,5 +1,5 @@
 {
-  "functionsRoot": "./cloudrunfunctions/dist",
+  "functionsRoot": "./dist",
   "functions": [
     {
       "name": "default",

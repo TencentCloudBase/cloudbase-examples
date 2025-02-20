@@ -11,9 +11,12 @@ importers:
       '@cloudbase/adapter-node':
         specifier: ^1.0.2
         version: 1.0.2
+      '@cloudbase/aiagent-framework':
+        specifier: 1.0.0-beta.2
+        version: 1.0.0-beta.2
       '@cloudbase/functions-typings':
-        specifier: ^1.0.0-beta.4
-        version: 1.0.0-beta.4
+        specifier: 1.0.0
+        version: 1.0.0
       '@cloudbase/js-sdk':
         specifier: ^2.8.34
         version: 2.8.34
@@ -48,6 +51,10 @@ packages:
   '@cloudbase/ai@2.8.34':
     resolution: {integrity: sha512-IeJLd5OYsa2h9NnL6yg/BIfVXpbDpm/V/Zmk4i7sTzK/z+eSiVGjl0LxvUX54dK57XdttetvYI9Ttm65bTnMlA==}
 
+  '@cloudbase/aiagent-framework@1.0.0-beta.2':
+    resolution: {integrity: sha512-uZWo4AABzT6/F5T16RE/A4fmLprTPI4etpJPXOFneJU8e53Z1s+USFs0nyfa4quXFGLFWkeuo824Xq6d8A3XVw==}
+    engines: {node: '>=18.0.0'}
+
   '@cloudbase/analytics@2.8.34':
     resolution: {integrity: sha512-juqarpscx+uETp+YW4RVuuyNplvNE6pb17dgh3DSKQZmzx5pWu8Rr1hIh5t+wrfDacJIK5V5aYZOceQijv3xzA==}
 
@@ -60,8 +67,8 @@ packages:
   '@cloudbase/database@0.9.21':
     resolution: {integrity: sha512-tpOFC8BUtM0a6kKwpHrjJ9zqII8HZDHj3ZlmhZpKRTyzgS8GjFlM49f20pTgkcfwWzbPyvJROW6UYuLU1Vq+CQ==}
 
-  '@cloudbase/functions-typings@1.0.0-beta.4':
-    resolution: {integrity: sha512-3v4MEJRoPyb0Uc1Zae35IgAk1L7wH4kuWGr9Z3DYHndSm+i7clxybpKQdFTMStCVF0qBIP/wR/gt43OTkrC7jQ==}
+  '@cloudbase/functions-typings@1.0.0':
+    resolution: {integrity: sha512-Zwdj//5F3TJPM+UR0X/olYiRG0Cu1xU1M4wP7jgnXwTzZjtEYytVArCm0QN/4C+5wRjX2B0BWZkpt2Pm6HsWQA==}
     engines: {node: '>=18.0.0'}
 
   '@cloudbase/functions@2.8.34':
@@ -381,6 +388,9 @@ packages:
     resolution: {integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==}
     engines: {node: '>=6'}
 
+  zod@3.24.2:
+    resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
+
 snapshots:
 
   '@cloudbase/adapter-interface@0.5.0': {}
@@ -409,6 +419,11 @@ snapshots:
       text-encoding-shim: 1.0.5
       web-streams-polyfill: 4.1.0
 
+  '@cloudbase/aiagent-framework@1.0.0-beta.2':
+    dependencies:
+      '@cloudbase/functions-typings': 1.0.0
+      zod: 3.24.2
+
   '@cloudbase/analytics@2.8.34':
     dependencies:
       '@cloudbase/types': 2.8.34
@@ -434,7 +449,7 @@ snapshots:
       lodash.set: 4.3.2
       lodash.unset: 4.5.2
 
-  '@cloudbase/functions-typings@1.0.0-beta.4': {}
+  '@cloudbase/functions-typings@1.0.0': {}
 
   '@cloudbase/functions@2.8.34':
     dependencies:
@@ -737,3 +752,5 @@ snapshots:
   ws@8.18.0: {}
 
   yn@3.1.1: {}
+
+  zod@3.24.2: {}

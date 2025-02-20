@@ -17,7 +17,7 @@
       // 直接启动 src 目录下的 ts 函数代码，如需调试编译后的 js 代码，可将 --source 参数替换为编译后的目录
       "args": [
         "--extendedContextKey=X-Functions-Extended-Context",
-        "--source cloudrunfunctions/src"
+        "--source src"
       ],
       "env": {
         // 默认支持调试 TS 代码，如不需要可以移除
