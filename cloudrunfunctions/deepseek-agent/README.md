@@ -1,6 +1,6 @@
-# 空白 Agent
+# deepseek Agent
 
-本模板提供了自定义 Agent 的云函数实现，封装了一个最简的 Agent 接口，部署后提供以下 Agent 相关接口：
+本模板提供了自定义 Agent 的云函数实现，通过调用 deepseek-r1 大模型封装 Agent 接口，部署后提供以下 Agent 相关接口：
 
 ```shell
 POST    /:botId/send-message       发送消息
