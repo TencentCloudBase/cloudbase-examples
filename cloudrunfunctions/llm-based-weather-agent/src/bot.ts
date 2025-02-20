@@ -9,7 +9,7 @@ import {
   SendFeedbackOutput,
   GetFeedbackInput,
   GetFeedbackOutput,
-} from "cloudbase-aiagent-framework";
+} from "@cloudbase/aiagent-framework";
 
 import {
   TcbExtendedContext,
@@ -98,7 +98,7 @@ export class MyBot extends IBot implements IAbstractBot {
     this.sseSender.end();
   }
 
-  async getChatRecord(input: GetChatRecordInput): Promise<GetChatRecordOutput> {
+  async getChatRecords(input: GetChatRecordInput): Promise<GetChatRecordOutput> {
     const ret: GetChatRecordOutput = {
       recordList: [],
       total: 0,
@@ -106,7 +106,7 @@ export class MyBot extends IBot implements IAbstractBot {
     return ret;
   }
 
-  async recommendQuestions(input: GetRecommendQuestionsInput): Promise<void> {
+  async getRecommendQuestions(input: GetRecommendQuestionsInput): Promise<void> {
     const ai = await getCloudbaseAi(this.envId);
 
     const model = ai.createModel("hunyuan-exp");

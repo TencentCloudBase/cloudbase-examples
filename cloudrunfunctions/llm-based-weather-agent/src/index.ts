@@ -1,4 +1,4 @@
-import { BotRunner } from "cloudbase-aiagent-framework";
+import { BotRunner } from "@cloudbase/aiagent-framework";
 import { TcbEventFunction } from "@cloudbase/functions-typings";
 import { MyBot } from "./bot";
 
