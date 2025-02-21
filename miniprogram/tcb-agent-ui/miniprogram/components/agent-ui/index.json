@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-    "markdownPreview":"/components/agent-ui/markdownPreview/index"
+    "markdownPreview":"/components/agent-ui/markdownPreview/index",
+    "FoldedCard":"/components/agent-ui/collapsibleCard/index"
   }
 }

@@ -56,7 +56,7 @@ Page({
       { name: 'type', type: "string", desc: "组件对接的AI类型，值为 'bot' 或者 'model'，为 'bot' 时，对接 agent 能力；为 'model' 时，对接大模型能力" },
       { name: 'botId', type: 'string', desc: "agent id，当 type = 'bot' 时，必填" },
       { name: 'modelName', type: 'string', desc: "大模型服务商，当 type = 'model' 时，必填，值为 'hunyuan-open' | 'hunyuan-exp' | 'deepseek'" },
-      { name: 'model', type: 'string', desc: "具体使用的模型，当 type = 'model' 时，必填。与 modelName 组合使用，可选的组合 [{modelName:'hunyuan-open',model:'hunyuan-lite'},{modelName:'hunyuan-exp',model:'hunyuan-lite'},{modelName:'deepseek',model:'deepseek-r1'},{modelName:'deepseek',model:'deepseek-v3'}]" },
+      { name: 'model', type: 'string', desc: "具体使用的模型，当 type = 'model' 时，必填。与 modelName 组合使用，可选的组合 [{modelName:'hunyuan-open',model:'hunyuan-lite'},{modelName:'hunyuan-exp',model:'hunyuan-lite'},{modelName:'deepseek',model:'deepseek-r1'},{modelName:'deepseek',model:'deepseek-v3'},{modelName:'hunyuan-open',model:'hunyuan-vision'}]" },
       { name: 'logo', type: 'string', desc: "页面 logo，当 type = 'model' 时，选填" },
       { name: 'welcomeMessage', type: 'string', desc: "欢迎语，当 type = 'model' 时，选填" },
     ],

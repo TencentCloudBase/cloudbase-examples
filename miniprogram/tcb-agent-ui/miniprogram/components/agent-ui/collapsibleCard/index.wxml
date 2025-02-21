@@ -1,0 +1,10 @@
+<!--components/agent-ui/collapsibleCard/index.wxml-->
+<view>
+  <view bind:tap="changeCollapsedStatus" style="display: flex;align-items: center;gap: 8px;margin-bottom: 8px;">
+    <slot name="title"></slot>
+    <image src="../imgs/arrow.svg" mode="aspectFill" style="width: 16px;height: 16px;transform: rotate({{collapsedStatus?0:180}}deg);" />
+  </view>
+  <block wx:if="{{collapsedStatus}}">
+    <slot name="content"></slot>
+  </block>
+</view>

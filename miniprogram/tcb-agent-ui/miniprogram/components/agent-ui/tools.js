@@ -79,6 +79,10 @@ agentConfig: {
 `;
 export const checkConfig = (config) => {
   const { type, botId, modelName, model } = config
+  // 检测AI能力，不存在提示用户
+  if(!wx.cloud.extend||!wx.cloud.extend.AI){
+    return [false,'使用AI能力需基础库为3.7.7及以上，请升级基础库版本']
+  }
   if (!['bot', 'model'].includes(type)) {
     return [false, 'type 不正确，值应为“bot”或“model”']
   }

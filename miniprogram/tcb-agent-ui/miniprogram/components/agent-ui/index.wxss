@@ -155,8 +155,8 @@
 }
 
 .icon {
-  width: 36rpx;
-  height: 36rpx;
+  width: 48rpx;
+  height: 48rpx;
 }
 
 .text_desc {

@@ -48,8 +48,16 @@ Component({
     if (type === "bot") {
       const ai = wx.cloud.extend.AI;
       const bot = await ai.bot.get({ botId });
+      // console.log(bot)
+      // 新增错误提示
+      if(bot.code){
+        wx.showModal({
+          title: "提示",
+          content: bot.message,
+        });
+        return
+      }
       this.setData({ bot, questions: bot.initQuestions });
-      return;
     }
   },
   methods: {
@@ -121,7 +129,6 @@ Component({
         streamStatus: false,
         imageList: []
       });
-      // 先这样写，后面抽离出来
       if (type === "bot") {
         const ai = wx.cloud.extend.AI;
         const res = await ai.bot.sendMessage({
@@ -137,8 +144,8 @@ Component({
           },
         });
         this.setData({ streamStatus: true });
-        let contentText = "";
-        let reasoningText = "";
+        let contentText = ''
+        let reasoningContentText = ''
         for await (let event of res.eventStream) {
           if (!this.data.streamStatus) {
             break;
@@ -148,17 +155,44 @@ Component({
           try {
             const dataJson = JSON.parse(data);
             // console.log(dataJson)
-            const { content, reasoning_content, record_id } = dataJson;
-            contentText += content;
-            reasoningText += reasoning_content;
+            const { type, content, reasoning_content, record_id, search_info, role, knowledge_meta,finish_reason } = dataJson;
             const newValue = [...this.data.chatRecords];
-            newValue[newValue.length - 1] = {
-              record_id,
-              role: dataJson.role || "assistant",
-              content: contentText,
-              reasoning_content: reasoningText,
-            };
-            this.setData({ chatRecords: newValue });
+            // 取最后一条消息更新
+            const lastValue = newValue[newValue.length - 1]
+            lastValue.role = role || 'assistant'
+            lastValue.record_id = record_id || lastValue.record_id
+            // 优先处理错误,直接中断
+            if(finish_reason==='error'){
+              lastValue.search_info=null
+              lastValue.reasoning_content=''
+              lastValue.knowledge_meta=[];
+              lastValue.content='网络繁忙，请稍后重试!'
+              this.setData({ chatRecords: newValue })
+              break;
+            }
+            // 下面根据type来确定输出的内容
+            // 只更新一次参考文献，后续再收到这样的消息丢弃
+            if (type === "search" && !lastValue.search_info) {
+              lastValue.search_info = search_info
+              this.setData({ chatRecords: newValue })
+            }
+            // 思考过程
+            if (type === 'thinking') {
+              reasoningContentText += reasoning_content
+              lastValue.reasoning_content = reasoningContentText
+              this.setData({ chatRecords: newValue });
+            }
+            // 内容
+            if (type === 'text') {
+              contentText += content
+              lastValue.content = contentText
+              this.setData({ chatRecords: newValue });
+            }
+            // 知识库，这个版本没有文件元信息，展示不更新
+            if (type === 'knowledge') {
+              // lastValue.knowledge_meta = knowledge_meta
+              // this.setData({ chatRecords: newValue });
+            }
           } catch (e) {
             // console.log('err', event, e)
             break;
@@ -202,7 +236,7 @@ Component({
                     "type": "text",
                     "text": item.content
                   },
-                  ...(item.imageList||[]).map(item=>({
+                  ...(item.imageList || []).map(item => ({
                     "type": "image_url",
                     "image_url": {
                       "url": item.base64Url
@@ -336,6 +370,19 @@ Component({
       const { imageList } = this.data
       const newImageList = imageList.filter((_, idx) => idx != index);
       this.setData({ imageList: [...newImageList] })
+    },
+    copyUrl: function (e) {
+      const { url } = e.currentTarget.dataset
+      console.log(url)
+      wx.setClipboardData({
+        data: url,
+        success: function (res) {
+          wx.showToast({
+            title: "复制成功",
+            icon: "success",
+          });
+        },
+      });
     }
   },
 });
