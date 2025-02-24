@@ -3,11 +3,11 @@
 本模板提供了自定义 Agent 的云函数实现，通过调用大模型封装 Agent 接口，部署后提供以下 Agent 相关接口：
 
 ```shell
-GET    /:botId/records             获取聊天记录
-POST   /:botId/feedback            提交用户反馈
-GET    /:botId/feedback            获取用户反馈
-GET    /:botId/recommend-questions 获取推荐问题
-POST    /:botId/send-message       发送消息
+POST   /:botTag/send-message        发送消息
+GET    /:botTag/records             获取聊天记录
+POST   /:botTag/feedback            提交用户反馈
+GET    /:botTag/feedback            获取用户反馈
+GET    /:botTag/recommend-questions 获取推荐问题
 ```
 
 本模板使用了 `@cloudbase/aiagent-framework`，只需要实现该库定义的 Agent 接口即可完成接入，详见 `src/bot.ts`。
@@ -19,6 +19,55 @@ POST    /:botId/send-message       发送消息
 ```shell
 npm run preDeploy
 ```
+
+## 本地调试指引
+
+本模板使用 typescript 开发，运行 `npm run build` 编译 javascript 产物到 `dist/` 文件夹中。
+
+启动本地调试前，需要修改 `package.json` 中的 `dev` 命令，将 `your-env-id` 替换为您的云开发环境 id，并将 `your-service-name` 替换为部署的云托管服务名。
+
+运行 `npm run dev` 启动本地调试。
+
+现在即可通过 `127.0.0.1:3000` 访问本地 Agent 服务了。
+
+### cURL 访问本地服务
+
+直接访问 `127.0.0.1:3000` 即可，例如 `POST /:botTag/send-message 发送消息` 接口：
+
+```shell
+curl 'http://127.0.0.1:3000/Oela0VRdv0/send-message' \
+  -H 'Accept: text/event-stream' \
+  -H 'Content-Type: application/json' \
+  --data-raw '{"botId":"ibot-myBot-botTag","msg":"hi"}'
+```
+
+### Web 访问本地服务
+
+使用 Web 页面访问本地服务，可以直接编写网络请求代码，也可以使用 [@cloudbase/js-sdk 提供的 Agent SDK](https://docs.cloudbase.net/ai/agent/sdk)。
+
+若使用 @cloudbase/js-sdk，则需要配置一定的代理服务。以 [whistle](https://wproxy.org/whistle/) 举例，按照如下配置：
+
+```shell
+/.*.api.tcloudbasegateway.com/v1/aibot/bots/ibot-myBot-([^/]+)/([^/]*)/ http://localhost:3000/$1/$2
+```
+
+即可使用 @cloudbase/js-sdk 用以下代码访问到本地服务：
+
+```js
+const res = await ai.bot.sendMessage({
+  botId: 'ibot-myBot-botTag',
+  msg: 'hi',
+  history: []
+})
+
+for await (let x of res.textStream) {
+  console.log(x);
+}
+```
+
+### 直接调试 typescript 代码
+
+若不想将 typescript 编译到 javascript 代码再进行调试，则可以将 `cloudbase-functions.json` 中的 `functionsRoot` 字段值改为 `./src`，再运行 `npm run dev`，即可直接调试 typescript 代码。
 
 ## 参考文档
 
