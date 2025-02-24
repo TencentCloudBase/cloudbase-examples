@@ -1,0 +1,154 @@
+<!-- agent ui 组件根容器 -->
+<view class="agent-ui">
+  <!-- 全局遮罩和弹窗 -->
+  <view class="global-modal {{showAgentList ? 'show' : ''}}">
+    <view class="modal-mask" bindtap="toggleAgentList"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text>切换Agent</text>
+        <image class="close-icon" src="./imgs/close.png" bindtap="toggleAgentList"/>
+      </view>
+      <view class="agent-list">
+        <view 
+          class="agent-item {{bot.botId === item.botId ? 'active' : ''}}"
+          wx:for="{{botList}}" 
+          wx:key="botId"
+          data-bot="{{item}}"
+          bindtap="switchAgent"
+        >
+          <image class="agent-avatar" src="{{item.avatar}}" mode="aspectFill"/>
+          <view class="agent-info">
+            <text class="agent-name">{{item.name}}</text>
+            <!-- <text class="agent-desc">{{item.introduction}}</text> -->
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 左侧抽屉 -->
+  <view class="drawer-mask {{isDrawerShow ? 'show' : ''}}" bindtap="closeDrawer"></view>
+  <view class="drawer {{isDrawerShow ? 'show' : ''}}">
+    <view class="drawer-header">
+      <text>会话记录</text>
+      <image class="close-icon" src="./imgs/close.png" bindtap="closeDrawer"/>
+    </view>
+    <view class="drawer-content">
+      <!-- 会话列表 -->
+      <view class="chat-history-list">
+        <view data-conversation="{{item.conversationId}}" data-botid="{{item.botId}}"  bind:tap="clickConversation" class="chat-item" wx:for="{{conversations}}" wx:key="index">
+          <text class="chat-title">{{item.firstRecordContent}}</text>
+          <view style="display: flex;justify-content: space-between;">
+            <text class="chat-time">{{item.botName}}</text>
+            <text class="chat-time">{{item.createdAt}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 顶部导航 -->
+  <view class="top_nav">
+    <!-- <text style="position: absolute; left: 0px;cursor: pointer;" bind:tap="openDrawer">会话历史</text> -->
+    <image wx:if="{{curTab.type === 'bot'}}" style="position: absolute;left: 10px;cursor: pointer;width: 30px; height:30px" src="./imgs/history.png" mode="" bind:tap="openDrawer"/>
+    <view>
+      <text wx:for="{{agentConfigList}}" wx:key="index" class="tab" data-name="{{item.tabName}}" data-type="{{item.type}}" data-id="{{item.tabId}}" style="border-bottom: {{curTab.id === item.tabId ? '1px solid #000' : 'none'}}" bind:tap="clickTab">{{item.tabName}}</text>
+      <!-- <text class="tab" data-curTabName="hunyuan" data-curTabType="model" style="border-bottom: {{curTab === 'hunyuan' ? '1px solid #000' : 'none'}}" bind:tap="clickTab">混元</text>
+      <text class="tab" data-curTabName="agent" data-curTabType="bot" style="border-bottom: {{curTab === 'agent' ? '1px solid #000' : 'none'}}" bind:tap="clickTab">Agent</text> -->
+    </view>
+  </view>
+  <!-- 聊天对话区 -->
+  <scroll-view bind:tap="toBottom" class="main" enhanced="{{true}}" bindscroll="onScroll" binddragstart="handleScrollStart" binddragend="handleScrollEnd"	scroll-with-animation="{{true}}" style="height: {{windowInfo.windowHeight-160}}px;" scroll-y="{{true}}" scroll-top="{{viewTop}}" scroll-into-view="{{ scrollTo }}" lower-threshold="1" bindscrolltolower="handleScrollToLower">
+    <view class="nav">
+      <image src="{{curTab.type === 'bot' ? bot.avatar : (curTab.type === 'model' ? agentConfig.logo : '')}}" mode="aspectFill" class="avatar" />
+
+      <view style="line-height: 47px;display: flex;align-items: center;"> 
+        {{agentConfig.type==='bot'?bot.name:agentConfig.modelName}}
+      </view>
+      <view style="line-height: 26px;padding: 0px 16px;">{{agentConfig.type==='bot'?"":agentConfig.welcomeMessage}}</view>
+    </view>
+    <!--TODO-->
+    <view class="guide_system" wx:if="{{showGuide}}">
+      <markdownPreview markdown="{{guide}}"></markdownPreview>
+    </view>
+    <view class="bot_intro_system" wx:if="{{agentConfig.type==='bot'}}">
+      <markdownPreview markdown="{{bot.introduction||''}}"></markdownPreview>
+    </view>
+    <block wx:for="{{chatRecordsMap[curTab.id]}}" wx:key="record_id">
+      <view  class="system" wx:if="{{item.role==='assistant'}}">
+        <view wx:if="{{!!item.reasoning_content}}" style="opacity: 0.7;">
+          <view>{{item.reasoning_content&&!item.content?"思考中...":"已深度思考"}}</view>
+          <view style="padding-left: 30rpx;border-left: rgb(165, 164, 164) solid 2px;">
+            <markdownPreview markdown="{{item.reasoning_content||''}}"></markdownPreview>
+          </view>
+        </view>
+        <markdownPreview markdown="{{item.content||''}}"></markdownPreview>
+        <view style="display: flex; gap: 10px;justify-content: flex-end;" wx:if="{{!streamStatus}}">
+          <image mode="widthFix" bind:tap="copyChatRecord" src='./imgs/copy.png' style="width: 36rpx; height: 36rpx;" data-content="{{item.content}}" />
+          <button class="share_btn" open-type="share">
+            <image mode="widthFix" src='./imgs/share1.png' style="width: 36rpx; height: 36rpx;vertical-align: top;" bind:tap="share" />
+          </button>
+        </view>
+      </view>
+      <view class="user" wx:if="{{item.role==='user'}}">
+          <text class="userContent">{{item.content}}</text>
+          <view class="fileBar">
+            <chatFile style="margin-right:32rpx" enableDel="false" wx:for="{{item.fileList}}" wx:for-item="innerItem" wx:key="tempPath" fileData="{{innerItem}}" bind:removeChild="handleRemoveChild" bind:changeChild="handleChangeChild"></chatFile>
+          </view>
+      </view>
+    </block>
+    <!-- 推荐问题 -->
+    <view wx:if="{{curTab.type === 'bot'}}">
+      <block wx:for="{{questions}}" wx:key="item">
+        <view class="questions">
+          <view class="question_content" bind:tap="sendMessage" data-message="{{item}}">{{item}}</view>
+        </view>
+      </block>
+    </view>
+    <view id="scroll-bottom" style="width: 100%;height: 1px;"></view>
+  </scroll-view>
+  <!-- 底部输入区 -->
+  <view class="footer">
+    <view class="input_box">
+      <view class="file_list" wx:if="{{sendFileList.length > 0}}">
+        <chatFile wx:for="{{sendFileList}}" wx:key="tempPath" fileData="{{item}}" bind:removeChild="handleRemoveChild" bind:changeChild="handleChangeChild"></chatFile>
+        <!-- <chatFile fileName="你好.pdf" fileSize="1000"></chatFile>
+        <chatFile fileName="你好.pdf" fileSize="1000"></chatFile> -->
+      </view>
+      <view class="input_area">      
+        <!-- <image src="./imgs/reset.png" class="set" mode="widthFix" bind:tap="clearChatRecords" /> -->
+        <image wx:if="{{curTab.type === 'bot' && botList.length > 0}}" bind:tap="toggleAgentList" style="width:20px;height:20px;" src="./imgs/switch.png" mode=""/> 
+        <!-- <image wx:if="{{!useMicro}}" src="./imgs/voice.png" class="set" mode="widthFix" bind:tap="changeChatType" />
+        <image wx:else src="./imgs/keyboard.png" class="set" mode="widthFix" bind:tap="changeChatType" /> -->
+        <input wx:if="{{true}}" class="input" value="{{inputValue}}" type="text" maxlength="1024" bindinput="bindKeyInput" placeholder="说点什么吧" bindfocus="bindInputFocus" bindconfirm="sendMessage" confirm-type="send" adjust-position cursor-spacing="20" />
+        <text wx:else class="voice_btn" bind:tap="clickVoiceBtn">按住 说话</text>
+        <image src="./imgs/set.png" class="set" mode="widthFix" bind:tap="openSetPanel" />
+        <image src="./imgs/send.png" class="set" mode="widthFix" wx:if="{{!!inputValue&&!streamStatus}}" bind:tap="sendMessage" />
+        <image src="./imgs/stop.png" class="set" mode="widthFix" wx:if="{{!!streamStatus}}" bind:tap="stop" />
+      </view>
+    </view>
+    <!-- 设置面板 -->
+    <view class="set_panel_modal" wx:if="{{setPanelVisibility}}" bind:tap="closeSetPanel">
+      <view class="set_panel">
+        <view class="set_panel_funtion">
+          <view wx:if="{{curTab.type === 'bot'}}" class="function" bind:tap="handleUploadImg">
+            <image src="./imgs/image-btn.png" alt="widthFix" class="icon" />
+            <text class="text_desc">图片</text>
+          </view>
+          <view wx:if="{{curTab.type === 'bot'}}" class="function" bind:tap="handleUploadFile">
+            <image src="./imgs/file-btn.png" alt="widthFix" class="icon" />
+            <text class="text_desc">文件</text>
+          </view>
+          <view wx:if="{{curTab.type === 'bot'}}" class="function" bind:tap="handleCamera">
+            <image src="./imgs/camera-btn.png" alt="widthFix" class="icon" />
+            <text class="text_desc">相机</text>
+          </view>
+          <view class="function" bind:tap="clearChatRecords">
+            <image src="./imgs/clear.png" alt="widthFix" class="icon" />
+            <text class="text_desc">清除</text>
+          </view>
+        </view>
+        <view class="set_panel_cancel" bind:tap="closeSetPanel">取消</view>
+      </view>
+    </view>
+  </view>
+  <image bind:tap="autoToBottom" wx:if="{{manualScroll}}" style="width:30px;height:30px;position: absolute;bottom:150px;right: 20px" src="./imgs/down.svg" mode="aspectFit"  binderror="" bindload="" />
+</view>

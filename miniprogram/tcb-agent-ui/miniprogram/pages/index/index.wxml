@@ -44,6 +44,7 @@
         <rich-text nodes="<pre style='overflow: scroll;'>{{agentUiConfig.modelConfig2}}</pre>" />
       </view>
       <view class="btn-full" bind:tap="goChatBot">我已配置，去体验</view>
+      <view style="margin-top: 20px" class="btn-full" bind:tap="goChatBotV1">我已配置，去体验(v2)</view>
       <view class="model"> <text style="color: #1aad19;">二、使用混元大模型</text> </view>
       <view class="step-title"><text class="step-left">step</text> <text class="step-right">1</text> 配置环境ID</view>
       <view class="step-text">

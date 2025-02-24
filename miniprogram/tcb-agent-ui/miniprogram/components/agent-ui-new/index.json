@@ -1,0 +1,7 @@
+{
+	"component": true,
+	"usingComponents": {
+		"markdownPreview": "/components/agent-ui-new/markdownPreview/index",
+		"chatFile": "/components/agent-ui-new/chatFile/index"
+	}
+}

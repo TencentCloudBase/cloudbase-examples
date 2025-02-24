@@ -1,0 +1,14 @@
+<!--components/agent-ui-new/chatFIle/chatFile.wxml-->
+<!-- <text>components/agent-ui-new/chatFIle/chatFile.wxml</text> -->
+<view class="chat_file">
+  <view class="chat_file__content">
+    <image class="chat_file__icon" src="{{iconPath}}" />
+    <view class="chat_file__info">
+      <view class="chat_file__name">{{fileData.fileName}}</view>
+      <view class="chat_file__size">{{formatSize}}
+      <image wx:if="{{!fileData.fileId}}" style="width: 20px;height:20px;" src="../imgs/loading.svg" mode=""/>
+      </view>
+    </view>
+  </view>
+  <image wx:if="enableDel" bind:tap="removeFileFromParents" style="width: 15px;height: 15px;position: absolute;top: 0px;right: 0px" src="../imgs/close-filled.png" mode="aspectFill"/>
+</view>

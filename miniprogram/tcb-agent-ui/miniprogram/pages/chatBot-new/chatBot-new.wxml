@@ -1,0 +1,4 @@
+<!--pages/chatBot/chatBot.wxml-->
+<view>
+  <agent-ui-new agentConfigList="{{agentConfigList}}"></agent-ui-new>
+</view>
