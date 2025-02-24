@@ -2,22 +2,22 @@
 import { guide, checkConfig } from './tools';
 Component({
 	properties: {
+		// agentConfigList: {
+		// 	type: Array,
+		// 	value: [
+		// 		{
+		// 			type: '', // 值为'bot'或'model'。当type='bot'时，botId必填；当type='model'时，model必填
+		// 			botIds: [], // agent id
+		// 			modelName: '', // 大模型服务商
+		// 			model: '', // 具体的模型版本
+		// 			logo: '', // 图标(只在model模式下生效)
+		// 			welcomeMessage: '', // 欢迎语(只在model模式下生效)
+		// 			tabName: '',
+		// 			tabId: '',
+		// 		},
+		// 	],
+		// },
 		agentConfigList: {
-			type: Array,
-			value: [
-				{
-					type: '', // 值为'bot'或'model'。当type='bot'时，botId必填；当type='model'时，model必填
-					botIds: [], // agent id
-					modelName: '', // 大模型服务商
-					model: '', // 具体的模型版本
-					logo: '', // 图标(只在model模式下生效)
-					welcomeMessage: '', // 欢迎语(只在model模式下生效)
-					tabName: '',
-					tabId: '',
-				},
-			],
-		},
-		newAgentConfigList: {
 			type: Array,
 			value: [
 				{
@@ -71,8 +71,24 @@ Component({
 	},
 
 	attached: async function () {
-		// const { botId, type } = this.data.agentConfig;
-		const checkResList = checkConfig(this.data.agentConfigList);
+		let transformAgentConfigList = [];
+		if (this.data.agentConfigList) {
+			// 优先取agentConfigList参数
+			transformAgentConfigList = this.data.agentConfigList;
+		} else if (this.data.agentConfig) {
+			transformAgentConfigList = [this.data.agentConfig];
+		}
+
+		if (!transformAgentConfigList.length) {
+			wx.showModal({
+				title: '提示',
+				content: '请配置 agentConfigList 参数 (旧参数 agentConfig 可兼容)',
+			});
+			this.setData({ showGuide: true });
+			return;
+		}
+
+		const checkResList = checkConfig(transformAgentConfigList);
 		const invalidList = checkResList.filter((item) => !item[0]);
 		if (invalidList.length) {
 			wx.showModal({
@@ -80,50 +96,67 @@ Component({
 				content: invalidList.map((item) => item[1]).join(' | '),
 			});
 			this.setData({ showGuide: true });
+			return;
 		} else {
 			this.setData({ showGuide: false });
 		}
-		if (this.data.agentConfigList.length) {
-			const firstAgentConfig = this.data.agentConfigList[0];
+
+		this.setData({
+			transformAgentConfigList: transformAgentConfigList.map((item) => ({
+				...item,
+				id: item.type === 'bot' ? item.botId : item.model,
+				name: item.type === 'model' ? item.model : '',
+			})),
+		});
+
+		if (transformAgentConfigList.length) {
+			const firstAgentConfig = transformAgentConfigList[0];
 			const chatRecordsMap = {};
-			for (let item of this.data.agentConfigList) {
+			for (let item of transformAgentConfigList) {
 				chatRecordsMap[item.tabId] = [];
 			}
 			this.setData({
 				agentConfig: firstAgentConfig,
 				curTab: {
-					id: firstAgentConfig.tabId,
-					name: firstAgentConfig.tabName,
+					id: firstAgentConfig.id,
+					// name: firstAgentConfig.tabName,
 					type: firstAgentConfig.type,
 				},
 				chatRecordsMap,
 			});
 
 			// 判断是否有bot类配置，有则拉取所有bot数据
-			const botConfig = this.data.agentConfigList.find(
+			const botConfigList = this.data.transformAgentConfigList.filter(
 				(item) => item.type === 'bot'
 			);
-			if (botConfig && botConfig.botIds.length) {
-				const ai = wx.cloud.extend.AI;
+			const ai = wx.cloud.extend.AI;
+
+			if (botConfigList.length) {
 				const bots = await Promise.all(
-					botConfig.botIds.map((id) => ai.bot.get({ botId: id }))
+					botConfigList.map((item) => ai.bot.get({ botId: item.id }))
 				);
 				// console.log('bots', bots)
+
 				this.setData({
 					botList: bots,
+					transformAgentConfigList: this.data.transformAgentConfigList.map(
+						(item) => {
+							if (item.type === 'bot') {
+								return {
+									...item,
+									name: bots.find((bot) => bot.botId === item.id).name,
+								};
+							}
+							return item;
+						}
+					),
 				});
 			}
 
-			const { type } = firstAgentConfig;
-			if (type === 'bot') {
-				// const ai = wx.cloud.extend.AI;
-				// const bot = await ai.bot.get({ botId: firstAgentConfig.botIds[0] });
-				const curBot = this.data.botList.find(
-					(item) => item.botId === firstAgentConfig.botIds[0]
-				);
-				this.setData({ bot: curBot, questions: curBot.initQuestions });
-				return;
-			}
+			console.log(
+				'transformAgentConfigList',
+				this.data.transformAgentConfigList
+			);
 		}
 	},
 	methods: {

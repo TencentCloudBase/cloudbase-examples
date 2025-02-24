@@ -79,15 +79,12 @@ agentConfig: {
 export const checkConfig = (configList) => {
 	// 检查每一组配置是否均符合
 	return configList.map((item, index) => {
-		const { type, botIds, modelName, model } = item;
+		const { type, botId, modelName, model } = item;
 		if (!['bot', 'model'].includes(type)) {
 			return [false, `第${index + 1}组配置：type 不正确，值应为“bot”或“model”`];
 		}
-		if (type === 'bot' && botIds.length === 0) {
-			return [
-				false,
-				`第${index + 1}组配置：type值为bot，不允许配置botIds为空数组`,
-			];
+		if (type === 'bot' && !botId) {
+			return [false, `第${index + 1}组配置：type值为bot，不允许配置botId为空`];
 		}
 		if (type === 'model' && (!modelName || !model)) {
 			return [
