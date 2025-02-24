@@ -1,14 +1,14 @@
-const { IBot } = require("@cloudbase/aiagent-framework");
+const { BotCore } = require("@cloudbase/aiagent-framework");
 
 const ANSWER = "你好，我是一个智能体，但我只会说这一句话。";
 
 /**
- * @typedef {import('@cloudbase/aiagent-framework').IAbstractBot} IAbstractBot
+ * @typedef {import('@cloudbase/aiagent-framework').IBot} IBot
  *
  * @class
- * @implements {IAbstractBot}
+ * @implements {IBot}
  */
-class MyBot extends IBot {
+class MyBot extends BotCore {
   async sendMessage() {
     return new Promise((res) => {
       // 创建个字符数组
