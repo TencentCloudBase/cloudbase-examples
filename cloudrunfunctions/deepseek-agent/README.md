@@ -25,10 +25,10 @@ POST    /:botId/send-message       发送消息
 直接访问 `127.0.0.1:3000` 即可，例如 `POST /:botTag/send-message 发送消息` 接口：
 
 ```shell
-curl 'http://127.0.0.1:3000/Oela0VRdv0/send-message' \
+curl 'http://127.0.0.1:3000/botTag/send-message' \
   -H 'Accept: text/event-stream' \
   -H 'Content-Type: application/json' \
-  --data-raw '{"botId":"ibot-myBot-botTag","msg":"hi"}'
+  --data-raw '{"msg":"hi"}'
 ```
 
 ### Web 访问本地服务
