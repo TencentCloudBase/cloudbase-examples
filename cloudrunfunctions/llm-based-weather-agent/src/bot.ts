@@ -1,6 +1,6 @@
 import {
+  BotCore,
   IBot,
-  IAbstractBot,
   SendMessageInput,
   GetChatRecordInput,
   GetChatRecordOutput,
@@ -10,11 +10,6 @@ import {
   GetFeedbackInput,
   GetFeedbackOutput,
 } from "@cloudbase/aiagent-framework";
-
-import {
-  TcbExtendedContext,
-  ContextInjected,
-} from "@cloudbase/functions-typings";
 
 import { getCloudbaseAi } from "./cloudbase-ai";
 
@@ -36,14 +31,8 @@ const getRandomWeather = () => {
   return WEATHERS[index];
 };
 
-export class MyBot extends IBot implements IAbstractBot {
-  constructor(
-    readonly context: ContextInjected<TcbExtendedContext>,
-  ) {
-    super(context);
-  }
-
-  async sendMessage({ msg, history = [] }: SendMessageInput): Promise<void> {
+export class MyBot extends BotCore implements IBot {
+  async sendMessage({ msg, history }: SendMessageInput): Promise<void> {
     const ai = await getCloudbaseAi(this.envId);
     // 1. 定义获取天气的工具，详见 FunctionTool 类型
     const getWeatherTool = {
@@ -76,7 +65,6 @@ export class MyBot extends IBot implements IAbstractBot {
           content:
             "你是一个可以处理询问天气的机器人。用户可能会问你有关天气的问题，你可以调用工具函数进行查询。",
         },
-        ...((history as any) ?? []),
         {
           role: "user",
           content: msg,

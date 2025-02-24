@@ -12,8 +12,8 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       '@cloudbase/aiagent-framework':
-        specifier: 1.0.0-beta.2
-        version: 1.0.0-beta.2
+        specifier: 1.0.0-beta.3
+        version: 1.0.0-beta.3
       '@cloudbase/functions-typings':
         specifier: 1.0.0
         version: 1.0.0
@@ -51,8 +51,8 @@ packages:
   '@cloudbase/ai@2.8.34':
     resolution: {integrity: sha512-IeJLd5OYsa2h9NnL6yg/BIfVXpbDpm/V/Zmk4i7sTzK/z+eSiVGjl0LxvUX54dK57XdttetvYI9Ttm65bTnMlA==}
 
-  '@cloudbase/aiagent-framework@1.0.0-beta.2':
-    resolution: {integrity: sha512-uZWo4AABzT6/F5T16RE/A4fmLprTPI4etpJPXOFneJU8e53Z1s+USFs0nyfa4quXFGLFWkeuo824Xq6d8A3XVw==}
+  '@cloudbase/aiagent-framework@1.0.0-beta.3':
+    resolution: {integrity: sha512-lxDWpaoI5dO7K16y7ZEuigZOiSABsYsISGWLO7Q8p91DIsJixC/CyYdKsn1U8W6yk6SY+/o3++EtIrTz9igD0g==}
     engines: {node: '>=18.0.0'}
 
   '@cloudbase/analytics@2.8.34':
@@ -419,7 +419,7 @@ snapshots:
       text-encoding-shim: 1.0.5
       web-streams-polyfill: 4.1.0
 
-  '@cloudbase/aiagent-framework@1.0.0-beta.2':
+  '@cloudbase/aiagent-framework@1.0.0-beta.3':
     dependencies:
       '@cloudbase/functions-typings': 1.0.0
       zod: 3.24.2
