@@ -1,14 +1,14 @@
-const { IBot, IAbstractBot } = require("@cloudbase/aiagent-framework");
+const { BotCore } = require("@cloudbase/aiagent-framework");
 
 const { getCloudbaseAi } = require("./cloudbase-ai");
 
 /**
- * @typedef {import('@cloudbase/aiagent-framework').IAbstractBot} IAbstractBot
+ * @typedef {import('@cloudbase/aiagent-framework').IBot} IBot
  *
  * @class
- * @implements {IAbstractBot}
+ * @implements {IBot}
  */
-class MyBot extends IBot {
+class MyBot extends BotCore {
   async sendMessage({ msg }) {
     const ai = await getCloudbaseAi(this.envId);
 

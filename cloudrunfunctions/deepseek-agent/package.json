@@ -1,10 +1,10 @@
 {
   "scripts": {
-    "dev": "tcb-ff --enableCors=true --extendedContextKey=X-Functions-Extended-Context -w"
+    "dev": "tcb-ff --enableCors=true --extendedContext='{\"envId\": \"your-env-id\", \"serviceName\": \"your-service-name\"}' -w"
   },
   "dependencies": {
     "@cloudbase/adapter-node": "^1.0.2",
-    "@cloudbase/aiagent-framework": "1.0.0-beta.2",
+    "@cloudbase/aiagent-framework": "1.0.0-beta.3",
     "@cloudbase/functions-typings": "1.0.0",
     "@cloudbase/js-sdk": "^2.9.2"
   },
