@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "rootDir": "src",
+    "outDir": "dist",
+    "target": "ES2015",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "moduleResolution": "nodenext"
+  },
+  "include": ["src/**/*.ts"]
+}

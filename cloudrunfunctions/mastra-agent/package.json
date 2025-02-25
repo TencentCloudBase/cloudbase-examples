@@ -1,0 +1,32 @@
+{
+  "name": "mastra-agent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "type": "module",
+  "exports": {
+    "./src": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "NODE_OPTIONS=\"--loader ts-node/esm/transpile-only\" tcb-ff --enableCors=true --extendedContext='{\"envId\": \"your-env-id\", \"serviceName\": \"your-service-name\"}' -w",
+    "build": "tsc",
+    "preDeploy": "npm i && npm run build && rimraf ./node_modules"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ai-sdk/openai": "^1.1.14",
+    "@cloudbase/aiagent-framework": "1.0.0-beta.3",
+    "@cloudbase/functions-typings": "^1.0.0",
+    "@mastra/core": "^0.4.0",
+    "dotenv": "^16.4.7",
+    "zod": "^3.24.2"
+  },
+  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
