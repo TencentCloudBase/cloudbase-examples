@@ -71,7 +71,7 @@ Component({
       return new Promise((resolve) => {
         const query = wx.createSelectorQuery().in(this);
         query
-          .selectAll('.main >>> .system, .main >>> .user')
+          .selectAll('.main >>> .system, .main >>> .userContent')
           .boundingClientRect((rects) => {
             let totalHeight = 0;
             rects.forEach((rect) => {
@@ -99,6 +99,13 @@ Component({
           })
           .exec();
       });
+    },
+    onWheel: function (e) { // 解决小程序开发工具中滑动
+      if (!this.data.manualScroll && e.detail.deltaY < 0) {
+        this.setData({
+          manualScroll: true,
+        });
+      }
     },
     onScroll: function (e) {
       // 针对连续滚动的最后一次进行处理，scroll-view的 scroll end事件不好判定
@@ -138,14 +145,14 @@ Component({
         });
       }
     },
-    handleScrollEnd: function (e) {
-      console.log('drag end', e, this.data.scrollTop, e.detail.scrollTop);
-      // if (this.data.scrollTop - e.detail.scrollTop < 50) {
-      // 	this.setData({
-      // 		manualScroll: false,
-      // 	});
-      // }
-    },
+    // handleScrollEnd: function (e) {
+    //   console.log('drag end', e, this.data.scrollTop, e.detail.scrollTop);
+    //   // if (this.data.scrollTop - e.detail.scrollTop < 50) {
+    //   // 	this.setData({
+    //   // 		manualScroll: false,
+    //   // 	});
+    //   // }
+    // },
     handleScrollToLower: function (e) {
       console.log('scroll to lower', e);
       // 监听到底转自动
@@ -237,6 +244,19 @@ Component({
         imageList: [...imageList],
       };
       // TODO: 判断是否携带图片，携带则scrollTop 增加
+      if (imageList.length) {
+        const newScrollTop = this.data.scrollTop + 20;
+        if (this.data.manualScroll) {
+          this.setData({
+            scrollTop: newScrollTop,
+          });
+        } else {
+          this.setData({
+            scrollTop: newScrollTop,
+            viewTop: newScrollTop,
+          });
+        }
+      }
 
       const record = {
         content: '...',
