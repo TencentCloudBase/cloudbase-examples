@@ -33,7 +33,7 @@ const getRandomWeather = () => {
 
 export class MyBot extends BotCore implements IBot {
   async sendMessage({ msg, history }: SendMessageInput): Promise<void> {
-    const ai = await getCloudbaseAi(this.envId);
+    const ai = await getCloudbaseAi(this.context.extendedContext?.envId!);
     // 1. 定义获取天气的工具，详见 FunctionTool 类型
     const getWeatherTool = {
       name: "get_weather",
@@ -95,7 +95,7 @@ export class MyBot extends BotCore implements IBot {
   }
 
   async getRecommendQuestions(input: GetRecommendQuestionsInput): Promise<void> {
-    const ai = await getCloudbaseAi(this.envId);
+    const ai = await getCloudbaseAi(this.context.extendedContext?.envId!);
 
     const model = ai.createModel("hunyuan-exp");
     const res = await model.streamText({
