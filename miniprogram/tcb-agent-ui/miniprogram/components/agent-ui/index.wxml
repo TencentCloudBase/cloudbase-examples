@@ -1,7 +1,7 @@
 <!-- agent ui 组件根容器 -->
 <view class="agent-ui">
   <!-- 聊天对话区 -->
-  <scroll-view bindwheel="onWheel" bind:tap="toBottom" enhanced="{{true}}" bindscroll="onScroll" scroll-with-animation="{{true}}" binddragstart="handleScrollStart"  class="main" style="height: {{windowInfo.windowHeight-80}}px;" scroll-y="{{true}}" scroll-top="{{viewTop}}" scroll-into-view="{{ scrollTo }}" lower-threshold="1" bindscrolltolower="handleScrollToLower">
+  <scroll-view bindwheel="onWheel" bind:tap="toBottom" enhanced="{{true}}" bindscroll="onScroll" scroll-with-animation="{{true}}" binddragstart="handleScrollStart"  class="main" style="height: {{windowInfo.windowHeight-footerHeight}}px;" scroll-y="{{true}}" scroll-top="{{viewTop}}" scroll-into-view="{{ scrollTo }}" lower-threshold="1" bindscrolltolower="handleScrollToLower">
     <view class="nav">
       <image src="{{bot.avatar||agentConfig.logo}}" mode="aspectFill" class="avatar" />
       <view style="line-height: 47px;">{{agentConfig.type==='bot'?bot.name:agentConfig.modelName}}</view>
@@ -46,6 +46,9 @@
             {{item.content}}
           </view>
         </view>
+        <view class="fileBar">
+          <chatFile style="margin-right:32rpx" enableDel="false" wx:for="{{item.fileList}}" wx:for-item="innerItem" wx:key="tempPath" fileData="{{innerItem}}" bind:removeChild="handleRemoveChild" bind:changeChild="handleChangeChild"></chatFile>
+        </view>
         <view style="display: flex;flex-direction: row-reverse; overflow-x: auto;white-space: nowrap;margin:0px 16px 0px 100rpx ">
           <block wx:for="{{item.imageList}}" wx:key="tempFilePath" wx:for-item="item1">
             <image src="{{item1.tempFilePath}}" alt="" model='aspectFill' style="width: 80px; height: 80px;margin-left: 8px;flex-shrink: 0; border-radius: 10px;" />
@@ -63,6 +66,9 @@
   </scroll-view>
   <!-- 底部输入区 -->
   <view class="footer">
+    <view class="file_list" wx:if="{{showFileList}}">
+      <chatFile wx:for="{{sendFileList}}" wx:key="tempId" fileData="{{item}}" bind:removeChild="handleRemoveChild" bind:changeChild="handleChangeChild"></chatFile>
+    </view>
     <view class="foot-function">
       <scroll-view class="img-box" scroll-x="true" wx:if="{{!!imageList.length}}">
         <block wx:for="{{imageList}}" wx:key="tempFilePath">
@@ -75,17 +81,41 @@
           </view>
         </block>
       </scroll-view>
+
       <view class="input_box">
         <input class="input" value="{{inputValue}}" type="text" maxlength="1024" bindfocus="bindInputFocus" bindinput="bindKeyInput" placeholder="说点什么吧" bindconfirm="sendMessage" confirm-type="send" adjust-position cursor-spacing="20" />
         <!-- 加号 -->
-        <image src="./imgs/set.svg" class="set" mode="widthFix" bind:tap="openSetPanel" />
+        <image src="./imgs/set.svg" class="set" mode="widthFix" bind:tap="handleClickTools" />
         <!-- 发送按钮 -->
         <image src="./imgs/send.svg" class="set" mode="widthFix" wx:if="{{!!inputValue&&!streamStatus}}" bind:tap="sendMessage"  style="transform: rotate(-40deg);transform-origin: 8px 8px"/>
         <!-- 暂停按钮 -->
         <image src="./imgs/stop.svg" class="set" mode="widthFix" wx:if="{{!!streamStatus}}" bind:tap="stop" />
       </view>
     </view>
-
+    <!-- 底部工具栏 -->
+    <view class="tool_box" wx:if="{{showTools}}">
+      <view class="function" bind:tap="clearChatRecords">
+        <image src="./imgs/clear.svg" alt="widthFix" class="icon" />
+        <text class="text_desc">清除</text>
+      </view>
+      <view class="function" bind:tap="uploadImgs" wx:if="{{agentConfig.model==='hunyuan-vision'&&agentConfig.type==='model'}}">
+        <image src="./imgs/uploadImg.svg" alt="widthFix" class="icon" />
+        <text class="text_desc">添加图片</text>
+      </view>
+      <view wx:if="{{enableUpload && agentConfig.type === 'bot'}}" class="function" bind:tap="handleUploadImg">
+        <image src="./imgs/uploadImg.svg" alt="widthFix" class="icon" />
+        <text class="text_desc">图片</text>
+      </view>
+      <view wx:if="{{enableUpload && agentConfig.type === 'bot'}}" class="function" bind:tap="handleUploadFile">
+        <image src="./imgs/file.svg" alt="widthFix" class="icon" />
+        <text class="text_desc">文件</text>
+      </view>
+      <view wx:if="{{enableUpload && agentConfig.type === 'bot'}}" class="function" bind:tap="handleCamera">
+        <image src="./imgs/camera.svg" alt="widthFix" class="icon" />
+        <text class="text_desc">相机</text>
+      </view>
+    </view>
+    
     <!-- 设置面板 -->
     <view class="set_panel_modal" wx:if="{{setPanelVisibility}}" bind:tap="closeSetPanel">
       <view class="set_panel">
@@ -103,5 +133,5 @@
       </view>
     </view>
   </view>
-  <image bind:tap="autoToBottom" wx:if="{{manualScroll}}" style="width:30px;height:30px;position: absolute;bottom:150px;right: 20px" src="./imgs/toBottom.svg" mode="aspectFit"  binderror="" bindload="" />
+  <image bind:tap="autoToBottom" wx:if="{{manualScroll}}" style="width:30px;height:30px;border-radius: 50px;position: absolute;bottom:150px;right: 20px;background-color: white;" src="./imgs/toBottom.svg" mode="aspectFit"  binderror="" bindload="" />
 </view>

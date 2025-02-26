@@ -6,7 +6,7 @@ Page({
   data: {
     agentConfig: {
       type: 'bot', // 值为'bot'或'model'。当type='bot'时，botId必填；当type='model'时，modelName和model必填
-      botId: '', // agent id  
+      botId: 'bot-db3cab4a', // agent id  
       modelName: 'hunyuan-open', // 大模型服务商 // 
       model: 'hunyuan-lite', // 具体的模型版本 // 
       logo: 'https://docs.cloudbase.net/img/logo.svg', // 图标(只在model模式下生效)

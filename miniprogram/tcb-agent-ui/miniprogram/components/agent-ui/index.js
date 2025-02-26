@@ -15,6 +15,31 @@ Component({
     },
   },
 
+  observers: {
+    showTools: function (isShow) {
+      if (isShow) {
+        this.setData({
+          footerHeight: this.data.footerHeight + 80
+        })
+      } else {
+        this.setData({
+          footerHeight: this.data.footerHeight - 80
+        })
+      }
+    },
+    showFileList: function (isShow) {
+      if (isShow) {
+        this.setData({
+          footerHeight: this.data.footerHeight + 80
+        })
+      } else {
+        this.setData({
+          footerHeight: this.data.footerHeight - 80
+        })
+      }
+    }
+  },
+
   data: {
     isLoading: true, // 判断是否尚在加载中
     article: {},
@@ -36,6 +61,11 @@ Component({
     scrollTo: '', // 快速定位到指定元素，置底用
     scrollTimer: null, //
     manualScroll: false, // 当前为手动滚动/自动滚动
+    showTools: false, // 展示底部工具栏
+    showFileList: false, // 展示顶部文件行
+    sendFileList: [],
+    footerHeight: 80,
+    enableUpload: true
   },
 
   attached: async function () {
@@ -145,14 +175,6 @@ Component({
         });
       }
     },
-    // handleScrollEnd: function (e) {
-    //   console.log('drag end', e, this.data.scrollTop, e.detail.scrollTop);
-    //   // if (this.data.scrollTop - e.detail.scrollTop < 50) {
-    //   // 	this.setData({
-    //   // 		manualScroll: false,
-    //   // 	});
-    //   // }
-    // },
     handleScrollToLower: function (e) {
       console.log('scroll to lower', e);
       // 监听到底转自动
@@ -184,7 +206,126 @@ Component({
       this.setData({
         chatRecords: [],
         streamStatus: false,
-        setPanelVisibility: !this.data.setPanelVisibility,
+        // setPanelVisibility: !this.data.setPanelVisibility,
+      });
+    },
+    handleUploadImg: function () {
+      const self = this;
+      wx.chooseMessageFile({
+        count: 10,
+        type: 'image',
+        success(res) {
+          // tempFilePath可以作为img标签的src属性显示图片
+          // const tempFilePaths = res.tempFiles;
+          console.log('res', res);
+          const tempFiles = res.tempFiles.map((item) => ({
+            tempId: `${new Date().getTime()}-${item.name}`,
+            rawType: item.type, // 微信选择默认的文件类型 image/video/file
+            fileName: item.name, // 文件名
+            tempPath: item.path,
+            fileSize: item.size,
+            fileUrl: '',
+            fileId: '',
+          }));
+          // 过滤掉已选择中的 file 文件（保留image）
+          const filterFileList = self.data.sendFileList.filter(
+            (item) => item.rawType !== 'file'
+          );
+          const finalFileList = [...filterFileList, ...tempFiles]
+          console.log('final', finalFileList);
+          self.setData({
+            sendFileList: finalFileList, //
+          });
+
+          if (finalFileList.length) {
+            self.setData({
+              showFileList: true,
+              showTools: false
+            })
+          }
+        },
+      });
+    },
+    handleUploadFile: function () {
+      const self = this;
+      wx.chooseMessageFile({
+        count: 10,
+        type: 'file',
+        success(res) {
+          // tempFilePath可以作为img标签的src属性显示图片
+          // const tempFilePaths = res.tempFiles;
+          console.log('res', res);
+          const tempFiles = res.tempFiles.map((item) => ({
+            tempId: `${new Date().getTime()}-${item.name}`,
+            rawType: item.type, // 微信选择默认的文件类型 image/video/file
+            fileName: item.name, // 文件名
+            tempPath: item.path,
+            fileSize: item.size,
+            fileUrl: '',
+            fileId: '',
+          }));
+          // 过滤掉已选择中的 image 文件（保留file)
+          const filterFileList = self.data.sendFileList.filter(
+            (item) => item.rawType !== 'image'
+          );
+          const finalFileList = [...filterFileList, ...tempFiles]
+          console.log('final', finalFileList);
+
+          self.setData({
+            sendFileList: finalFileList, //
+          });
+
+          if (finalFileList.length) {
+            self.setData({
+              showFileList: true,
+              showTools: false
+            })
+          }
+        },
+      });
+    },
+    handleCamera: function () {
+      const self = this;
+      wx.chooseMedia({
+        count: 9,
+        mediaType: ['image'],
+        sourceType: ['camera'],
+        maxDuration: 30,
+        camera: 'back',
+        success(res) {
+          console.log('res', res);
+          // console.log(res.tempFiles[0].tempFilePath)
+          // console.log(res.tempFiles[0].size)
+          const tempFiles = res.tempFiles.map((item) => {
+            let index = item.tempFilePath.lastIndexOf('.');
+            const fileExt = item.tempFilePath.substring(index + 1);
+            const randomFileName = new Date().getTime() + '.' + fileExt;
+            return {
+              tempId: randomFileName,
+              rawType: item.fileType, // 微信选择默认的文件类型 image/video/file
+              fileName: randomFileName, // 文件名
+              tempPath: item.tempFilePath,
+              fileSize: item.size,
+              fileUrl: '',
+              fileId: '',
+            };
+          });
+          // 过滤掉已选择中的 file 文件（保留image）
+          const filterFileList = self.data.sendFileList.filter(
+            (item) => item.rawType !== 'file'
+          );
+          const finalFileList = [...filterFileList, ...tempFiles]
+          console.log('final', finalFileList);
+          self.setData({
+            sendFileList: finalFileList, //
+          });
+          if (finalFileList.length) {
+            self.setData({
+              showTools: false,
+              showFileList: true
+            })
+          }
+        },
       });
     },
     stop: function () {
@@ -208,6 +349,16 @@ Component({
       this.setData({ setPanelVisibility: false });
     },
     sendMessage: async function (event) {
+      if (this.data.showFileList) {
+        this.setData({
+          showFileList: !this.data.showFileList
+        })
+      }
+      if (this.data.showTools) {
+        this.setData({
+          showTools: !this.data.showTools
+        })
+      }
       const { message } = event.currentTarget.dataset;
       let {
         inputValue,
@@ -243,20 +394,28 @@ Component({
         role: 'user',
         imageList: [...imageList],
       };
-      // TODO: 判断是否携带图片，携带则scrollTop 增加
-      if (imageList.length) {
-        const newScrollTop = this.data.scrollTop + 20;
-        if (this.data.manualScroll) {
-          this.setData({
-            scrollTop: newScrollTop,
-          });
-        } else {
-          this.setData({
-            scrollTop: newScrollTop,
-            viewTop: newScrollTop,
-          });
-        }
+
+      userRecord.fileList = this.data.sendFileList;
+      if (this.data.sendFileList.length) {
+        this.setData({
+          sendFileList: []
+        })
       }
+
+      // // TODO: 判断是否携带图片(hunyuan-vision 用到)，携带则scrollTop 增加
+      // if (imageList.length) {
+      //   const newScrollTop = this.data.scrollTop;
+      //   if (this.data.manualScroll) {
+      //     this.setData({
+      //       scrollTop: newScrollTop,
+      //     });
+      //   } else {
+      //     this.setData({
+      //       scrollTop: newScrollTop,
+      //       viewTop: newScrollTop,
+      //     });
+      //   }
+      // }
 
       const record = {
         content: '...',
@@ -271,12 +430,8 @@ Component({
         imageList: [],
       });
 
-      // 新增一轮对话记录时，scrollTop + 20
-      const newScrollTop = this.data.scrollTop + 20;
-      this.setData({
-        scrollTop: newScrollTop,
-        viewTop: newScrollTop,
-      });
+      // 新增一轮对话记录时 自动往下滚底
+      this.autoToBottom()
 
       if (type === 'bot') {
         const ai = wx.cloud.extend.AI;
@@ -290,6 +445,10 @@ Component({
               })),
             ],
             msg: inputValue,
+            fileList: userRecord.fileList.map((item) => ({
+              type: item.rawType,
+              fileId: item.fileId,
+            })),
           },
         });
         this.setData({ streamStatus: true });
@@ -474,7 +633,7 @@ Component({
       }
     },
     toBottom: async function () {
-      const clientHeight = this.data.windowInfo.windowHeight - 80; // 视口高度
+      const clientHeight = this.data.windowInfo.windowHeight - this.data.footerHeight; // 视口高度
       const contentHeight =
         (await this.calculateContentHeight()) +
         (await this.calculateContentInTop()); // 内容总高度
@@ -512,6 +671,15 @@ Component({
           });
         },
       });
+    },
+    addFileList: function () {
+      // 顶部文件行展现时，隐藏底部工具栏
+      this.setData({
+
+      })
+    },
+    subFileList: function () {
+
     },
     uploadImgs: function () {
       const that = this;
@@ -570,5 +738,51 @@ Component({
         },
       });
     },
+    handleRemoveChild: function (e) {
+      console.log('remove', e.detail.tempId);
+      if (e.detail.tempId) {
+        const newSendFileList = this.data.sendFileList.filter(
+          (item) => item.tempId !== e.detail.tempId
+        );
+        console.log('newSendFileList', newSendFileList);
+        this.setData({
+          sendFileList: newSendFileList,
+        });
+        if (newSendFileList.length === 0) {
+          this.setData({
+            showFileList: false
+          })
+        }
+      }
+    },
+    handleChangeChild: function (e) {
+      console.log('change', e.detail);
+      const { fileId, tempId } = e.detail;
+      // const curFile = this.data.sendFileList.find(item => item.tempId === tempId)
+      // curFile.fileId = fileId
+      const newSendFileList = this.data.sendFileList.map((item) => {
+        if (item.tempId === tempId) {
+          return {
+            ...item,
+            fileId,
+          };
+        }
+        return item;
+      });
+      this.setData({
+        sendFileList: newSendFileList,
+      });
+    },
+    handleClickTools: function () {
+      if (this.data.showTools) {
+        this.setData({
+          showTools: !this.data.showTools,
+        });
+      } else {
+        this.setData({
+          showTools: !this.data.showTools,
+        });
+      }
+    }
   },
 });
