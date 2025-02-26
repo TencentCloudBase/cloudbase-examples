@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "tcb-ff --enableCors=true --extendedContext='{\"envId\": \"your-env-id\", \"serviceName\": \"your-service-name\"}' -w"
+    "dev": "tcb-ff --enableCors=true --extendedContext='{\"envId\": \"your-env-id\"}' -w"
   },
   "dependencies": {
     "@cloudbase/adapter-node": "^1.0.2",

@@ -14,7 +14,7 @@ POST    /:botId/send-message       发送消息
 
 ## 本地调试指引
 
-启动本地调试前，需要修改 `package.json` 中的 `dev` 命令，将 `your-env-id` 替换为您的云开发环境 id，并将 `your-service-name` 替换为部署的云托管服务名。
+启动本地调试前，需要修改 `package.json` 中的 `dev` 命令，将 `your-env-id` 替换为您的云开发环境 id。
 
 运行 `npm run dev` 启动本地调试。
 
@@ -22,10 +22,10 @@ POST    /:botId/send-message       发送消息
 
 ### cURL 访问本地服务
 
-直接访问 `127.0.0.1:3000` 即可，例如 `POST /:botTag/send-message 发送消息` 接口：
+直接访问 `127.0.0.1:3000` 即可，例如 `POST /:botId/send-message 发送消息` 接口：
 
 ```shell
-curl 'http://127.0.0.1:3000/botTag/send-message' \
+curl 'http://127.0.0.1:3000/ibot-myBot-botTag/send-message' \
   -H 'Accept: text/event-stream' \
   -H 'Content-Type: application/json' \
   --data-raw '{"msg":"hi"}'
@@ -38,7 +38,7 @@ curl 'http://127.0.0.1:3000/botTag/send-message' \
 若使用 @cloudbase/js-sdk，则需要配置一定的代理服务。以 [whistle](https://wproxy.org/whistle/) 举例，按照如下配置：
 
 ```shell
-/.*.api.tcloudbasegateway.com/v1/aibot/bots/ibot-myBot-([^/]+)/([^/]*)/ http://localhost:3000/$1/$2
+/.*.api.tcloudbasegateway.com/v1/aibot/bots/([^S]*)/ http://localhost:3000/$1
 ```
 
 即可使用 @cloudbase/js-sdk 用以下代码访问到本地服务：

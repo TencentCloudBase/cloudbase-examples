@@ -2,7 +2,7 @@
   "scripts": {
     "build": "rimraf ./dist && tsc",
     "preDeploy": "npm i && npm run build && rimraf ./node_modules",
-    "dev": "NODE_OPTIONS=\"--require ts-node/register/transpile-only\" tcb-ff --enableCors=true --extendedContext='{\"envId\": \"your-env-id\", \"serviceName\": \"your-service-name\"}' -w"
+    "dev": "NODE_OPTIONS=\"--require ts-node/register/transpile-only\" tcb-ff --enableCors=true --extendedContext='{\"envId\": \"your-env-id\"}' -w"
   },
   "dependencies": {
     "@cloudbase/adapter-node": "^1.0.2",
