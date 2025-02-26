@@ -12,17 +12,14 @@ importers:
         specifier: ^1.1.14
         version: 1.1.14(zod@3.24.2)
       '@cloudbase/aiagent-framework':
-        specifier: 1.0.0-beta.3
-        version: 1.0.0-beta.3
+        specifier: 1.0.0-beta.4
+        version: 1.0.0-beta.4
       '@cloudbase/functions-typings':
         specifier: ^1.0.0
         version: 1.0.0
       '@mastra/core':
         specifier: ^0.4.0
         version: 0.4.0(react@19.0.0)
-      dotenv:
-        specifier: ^16.4.7
-        version: 16.4.7
       zod:
         specifier: ^3.24.2
         version: 3.24.2
@@ -249,8 +246,8 @@ packages:
   '@aws-sdk/util-utf8-browser@3.259.0':
     resolution: {integrity: sha512-UvFa/vR+e19XookZF8RzFZBrw2EUkQWxiBW0yYQAhvk3C+QVGl0H3ouca8LDBlBfQKXwmW3huo/59H8rwb1wJw==}
 
-  '@cloudbase/aiagent-framework@1.0.0-beta.3':
-    resolution: {integrity: sha512-lxDWpaoI5dO7K16y7ZEuigZOiSABsYsISGWLO7Q8p91DIsJixC/CyYdKsn1U8W6yk6SY+/o3++EtIrTz9igD0g==}
+  '@cloudbase/aiagent-framework@1.0.0-beta.4':
+    resolution: {integrity: sha512-XO01+P0ZbLFulBoMQzHmOVA8XfDslMjKk4g8fvKv63D2/EaOILcnOXqjEsN2KzJYHDhtwMEy1tO605E0tEHvrA==}
     engines: {node: '>=18.0.0'}
 
   '@cloudbase/functions-typings@1.0.0':
@@ -2474,7 +2471,7 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@cloudbase/aiagent-framework@1.0.0-beta.3':
+  '@cloudbase/aiagent-framework@1.0.0-beta.4':
     dependencies:
       '@cloudbase/functions-typings': 1.0.0
       zod: 3.24.2

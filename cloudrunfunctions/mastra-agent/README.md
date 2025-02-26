@@ -3,7 +3,7 @@
 本模板提供了自定义 Agent 的云函数实现，使用 [Mastra.ai](https://mastra.ai/) 封装 Agent 接口，部署后提供以下 Agent 相关接口：
 
 ```shell
-POST   /:botTag/send-message        发送消息
+POST    /v1/aibot/bots/:botId/send-message       发送消息
 ```
 
 本模板使用了 `@cloudbase/aiagent-framework`，只需要实现该库定义的 Agent 接口即可完成接入，详见 `src/bot.ts`。
@@ -32,10 +32,10 @@ npm run preDeploy
 
 ### cURL 访问本地服务
 
-直接访问 `127.0.0.1:3000` 即可，例如 `POST /:botId/send-message 发送消息` 接口：
+直接访问 `127.0.0.1:3000` 即可，例如 `POST v1/aibot/bots/:botId/send-message 发送消息` 接口：
 
 ```shell
-curl 'http://127.0.0.1:3000/ibot-myBot-botTag/send-message' \
+curl 'http://127.0.0.1:3000/v1/aibot/bots/ibot-myBot-botTag/send-message' \
   -H 'Accept: text/event-stream' \
   -H 'Content-Type: application/json' \
   --data-raw '{"msg":"hi"}'

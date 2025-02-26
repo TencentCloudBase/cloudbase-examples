@@ -8,20 +8,9 @@ import "dotenv/config"
 import { createOpenAI } from "@ai-sdk/openai";
 
 export class MyBot extends BotCore implements IBot {
-  get apiKey() {
-    const accessToken = this.context?.extendedContext?.accessToken
-    if (typeof accessToken !== "string") {
-      throw new Error("Invalid accessToken")
-    }
-
-    const apiKey = accessToken.replace("Bearer", "").trim()
-
-    return apiKey
-  }
-
   async sendMessage({ msg, history }: SendMessageInput): Promise<void> {
     const openai = createOpenAI({
-      baseURL: `https://${this.envId}.api.tcloudbasegateway.com/v1/ai/hunyuan-exp/v1`,
+      baseURL: `https://${this.context.extendedContext.envId}.api.tcloudbasegateway.com/v1/ai/hunyuan-exp/v1`,
       apiKey: this.apiKey,
 
     })
@@ -35,5 +24,16 @@ export class MyBot extends BotCore implements IBot {
 
     this.sseSender.end()
 
+  }
+
+  get apiKey() {
+    const accessToken = this.context?.extendedContext?.accessToken
+    if (typeof accessToken !== "string") {
+      throw new Error("Invalid accessToken")
+    }
+
+    const apiKey = accessToken.replace("Bearer", "").trim()
+
+    return apiKey
   }
 }
