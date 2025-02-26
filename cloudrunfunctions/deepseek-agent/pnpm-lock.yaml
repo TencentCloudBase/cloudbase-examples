@@ -8,148 +8,175 @@ importers:
 
   .:
     dependencies:
-      '@cloudbase/adapter-node':
-        specifier: ^1.0.2
-        version: 1.0.2
       '@cloudbase/aiagent-framework':
-        specifier: 1.0.0-beta.3
-        version: 1.0.0-beta.3
+        specifier: 1.0.0-beta.4
+        version: 1.0.0-beta.4
       '@cloudbase/functions-typings':
         specifier: 1.0.0
         version: 1.0.0
-      '@cloudbase/js-sdk':
-        specifier: ^2.9.2
-        version: 2.9.2
+      openai:
+        specifier: ^4.85.4
+        version: 4.85.4(ws@8.18.0)(zod@3.24.2)
 
 packages:
 
-  '@cloudbase/adapter-interface@0.5.0':
-    resolution: {integrity: sha512-6rPKyvD+uiq8I7wGSEG2TKqvp629EMs5EVeVayXE65QNul+2l89V08L5ha6xaTF7Sfg4q7lAyPQyGSEUnTu1IQ==}
-
-  '@cloudbase/adapter-interface@0.6.0':
-    resolution: {integrity: sha512-o+/hht5Zi4bxkPGGNVoGofXpux9pQYe5Oio+qbyL4bpR/+507rVRc/EH4t9YPUn6e0PDR+DZ794x221UiFU9JQ==}
-
-  '@cloudbase/adapter-node@1.0.2':
-    resolution: {integrity: sha512-YWHT0QfpHh6nv5Yo7lU2+gzTHFaXboaNxvb8Z2UY24w9z32vXvXVO1tdDUXaGOGiLItRclveKutyCdKJLA2sLg==}
-
-  '@cloudbase/adapter-wx_mp@1.1.0':
-    resolution: {integrity: sha512-eVolqrCtMwQQ1sJZxoaXoAtw8yIuKmkLDz1vvJX61rn/SuFkOSVmeKVg/4YQMa/NfC88NqbjNSzVTdiHLVfYsQ==}
-
-  '@cloudbase/ai@2.9.2':
-    resolution: {integrity: sha512-oof8R8eK6P1ii82gf4kdRv7/IZqGyMmR55g3Di5INlIULBfnE8GCvSZqxGEWYA2eMPvM21ZDNI74BHqgbnyc5g==}
-
-  '@cloudbase/aiagent-framework@1.0.0-beta.3':
-    resolution: {integrity: sha512-lxDWpaoI5dO7K16y7ZEuigZOiSABsYsISGWLO7Q8p91DIsJixC/CyYdKsn1U8W6yk6SY+/o3++EtIrTz9igD0g==}
+  '@cloudbase/aiagent-framework@1.0.0-beta.4':
+    resolution: {integrity: sha512-XO01+P0ZbLFulBoMQzHmOVA8XfDslMjKk4g8fvKv63D2/EaOILcnOXqjEsN2KzJYHDhtwMEy1tO605E0tEHvrA==}
     engines: {node: '>=18.0.0'}
-
-  '@cloudbase/analytics@2.9.2':
-    resolution: {integrity: sha512-3uHqD6jiD6nYswv+jxAdJQnZ7nkVtWzaBbkm60MusCOwYGjcxB32ekOgm1+Gw9wvqpr6SkEOxDoANk8YcmbbAA==}
-
-  '@cloudbase/app@2.9.2':
-    resolution: {integrity: sha512-nlyxyJrZz11OIk5KCn2b0+S1Bx3uhdVN5KWhbUL5rfv4bntOJd9gFzC1ROAa6Dzb/W4pEcvi6fvz4SXfTvWDHQ==}
-
-  '@cloudbase/auth@2.9.2':
-    resolution: {integrity: sha512-YuQxv6qLGJ2vpIVS6YF80eHxLH2qeBBsvhJnS8uhTrzt77J8xFV57sqsc6EUvJD80u3bD2loaaGF9mfKssCqgw==}
-
-  '@cloudbase/database@0.9.21':
-    resolution: {integrity: sha512-tpOFC8BUtM0a6kKwpHrjJ9zqII8HZDHj3ZlmhZpKRTyzgS8GjFlM49f20pTgkcfwWzbPyvJROW6UYuLU1Vq+CQ==}
 
   '@cloudbase/functions-typings@1.0.0':
     resolution: {integrity: sha512-Zwdj//5F3TJPM+UR0X/olYiRG0Cu1xU1M4wP7jgnXwTzZjtEYytVArCm0QN/4C+5wRjX2B0BWZkpt2Pm6HsWQA==}
     engines: {node: '>=18.0.0'}
 
-  '@cloudbase/functions@2.9.2':
-    resolution: {integrity: sha512-Czhkyl2fTqcrUpP6ic9qVbieNAG5HJ3PJsQ8lDfFANAmFcX2VLSOdzAQaR57PAzp60l+avae/IZDLybA8bmQZQ==}
+  '@types/node-fetch@2.6.12':
+    resolution: {integrity: sha512-8nneRWKCg3rMtF69nLQJnOYUcbafYeFSjqkw3jCRLsqkWFlHaoQrr5mXmofFGOx3DKn7UfmBMyov8ySvLRVldA==}
 
-  '@cloudbase/js-sdk@2.9.2':
-    resolution: {integrity: sha512-sKtKJQSIlUDLCbiXLXNvc5IBHqI0Xyd8a6u4JE6avbZShzwgOgA9ykkD1+hNBeei8uT3hGOr8PhXXJQWw7yL7w==}
+  '@types/node@18.19.76':
+    resolution: {integrity: sha512-yvR7Q9LdPz2vGpmpJX5LolrgRdWvB67MJKDPSgIIzpFbaf9a1j/f5DnLp5VDyHGMR0QZHlTr1afsD87QCXFHKw==}
 
-  '@cloudbase/model@2.9.2':
-    resolution: {integrity: sha512-PXHe2z8rB2wxTSBaS5s3kWgFaHo6nfXi8FdMVZl80amYGzUUxX+rh2DoGuOnoniWCsc1GJSPkXV3UimqH6PkMQ==}
+  abort-controller@3.0.0:
+    resolution: {integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==}
+    engines: {node: '>=6.5'}
 
-  '@cloudbase/oauth@2.9.2':
-    resolution: {integrity: sha512-+J33pXNtFIA8MDE671okOSuSLwVLxetqiXbonizh55URuosZa5Mfoj++TOuhUZBWwfWZNpyOpGZdcrpIJRJYGA==}
+  agentkeepalive@4.6.0:
+    resolution: {integrity: sha512-kja8j7PjmncONqaTsB8fQ+wE2mSU2DJ9D4XKoJ5PFWIdRMa6SLSN1ff4mOr4jCbfRSsxR4keIiySJU0N9T5hIQ==}
+    engines: {node: '>= 8.0.0'}
 
-  '@cloudbase/realtime@2.9.2':
-    resolution: {integrity: sha512-kMfSNezwfGMUDgd8fOxw14wytD78n6pdKl9Hu6yuZjRif24KxUgQFTdaBgGNXh4C4RFAE27bzEWHsDSmwYUi0Q==}
+  asynckit@0.4.0:
+    resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
 
-  '@cloudbase/storage@2.9.2':
-    resolution: {integrity: sha512-gM4bDYuyIJriGvdOzom0AcgtxtpTmyI6RX1LhZLEdeuq1uFjkJHYk7FgVj/zhS7o3HHJTFmwluC72kSCr5WOBQ==}
+  call-bind-apply-helpers@1.0.2:
+    resolution: {integrity: sha512-Sp1ablJ0ivDkSzjcaJdxEunN5/XvksFJ2sMBFfq6x0ryhQV/2b/KwFe21cMpmHtPOSij8K99/wSfoEuTObmuMQ==}
+    engines: {node: '>= 0.4'}
 
-  '@cloudbase/types@2.8.34':
-    resolution: {integrity: sha512-Lh+SwPb3UwgLB2HqISV0q+0bW5X0blEwrGUN0S8FbhfxFabHFFEOq97oZnyAM6BjDKVmJv9iU1BXehXZ9lNyMQ==}
+  combined-stream@1.0.8:
+    resolution: {integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==}
+    engines: {node: '>= 0.8'}
 
-  '@cloudbase/types@2.9.2':
-    resolution: {integrity: sha512-9coBXWTQ8S1/5WyAjRtyJmoo3IzDjT8/XYWTvcCWcxUQgLkaXBIwqrFvLYlJ1xma2aYL15ZzZAFT9MPxDjlCwQ==}
+  delayed-stream@1.0.0:
+    resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==}
+    engines: {node: '>=0.4.0'}
 
-  '@cloudbase/utilities@2.8.11-beta.0':
-    resolution: {integrity: sha512-k7sn8lQMrm52n9xJ7mBRp4XNIVQrpehJL4lR0Yj8QmGjkpq50mv0FGdzUZKrwEhu5DjapMjHTjvYupCIy16Jvg==}
+  dunder-proto@1.0.1:
+    resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
+    engines: {node: '>= 0.4'}
 
-  '@cloudbase/utilities@2.9.2':
-    resolution: {integrity: sha512-2Vw+48ggCatJBUjd82U0KT61Q0eyws/6FOe0yoxZ+QS/haF8KW0P3xT/CyL6sZF1jeAM98E8EF6BeRdSR+b8Qw==}
+  es-define-property@1.0.1:
+    resolution: {integrity: sha512-e3nRfgfUZ4rNGL232gUgX06QNyyez04KdjFrF+LTRoOXmrOgFKDg4BCdsjW8EnT69eqdYGmRpJwiPVYNrCaW3g==}
+    engines: {node: '>= 0.4'}
 
-  '@cloudbase/wx-cloud-client-sdk@1.3.1':
-    resolution: {integrity: sha512-HTETUGX3lbCtLgksCOcrYNdWw/lFKsf4Civu4ZFb/H0dRVcZv8DOEqBhF7pImFJT9Hh8fvpuo9iPfT2RM/zs0g==}
+  es-errors@1.3.0:
+    resolution: {integrity: sha512-Zf5H2Kxt2xjTvbJvP2ZWLEICxA6j+hAmMzIlypy4xcBg1vKVnx89Wy0GbS+kf5cwCVFFzdCFh2XSCFNULS6csw==}
+    engines: {node: '>= 0.4'}
 
-  '@mattiasbuelens/web-streams-adapter@0.1.0':
-    resolution: {integrity: sha512-oV4PyZfwJNtmFWhvlJLqYIX1Nn22ML8FZpS16ZUKv0hg7414xV1fjsGqxQzLT2dyK92TKxsJSwMOd7VNHAtPmA==}
-    engines: {node: '>= 12'}
+  es-object-atoms@1.1.1:
+    resolution: {integrity: sha512-FGgH2h8zKNim9ljj7dankFPcICIK9Cp5bm+c2gQSYePhpaG5+esrLODihIorn+Pe6FGJzWhXQotPv73jTaldXA==}
+    engines: {node: '>= 0.4'}
 
-  base64-js@1.5.1:
-    resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
+  es-set-tostringtag@2.1.0:
+    resolution: {integrity: sha512-j6vWzfrGVfyXxge+O0x5sh6cvxAog0a/4Rdd2K36zCMV5eJ+/+tOAngRO8cODMNWbVRdVlmGZQL2YS3yR8bIUA==}
+    engines: {node: '>= 0.4'}
 
-  bson@4.7.2:
-    resolution: {integrity: sha512-Ry9wCtIZ5kGqkJoi6aD8KjxFZEx78guTQDnpXWiNthsxzrxAK/i8E6pCHAIZTbaEFWcOCvbecMukfK7XUvyLpQ==}
-    engines: {node: '>=6.9.0'}
+  event-target-shim@5.0.1:
+    resolution: {integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==}
+    engines: {node: '>=6'}
 
-  buffer@5.7.1:
-    resolution: {integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==}
+  form-data-encoder@1.7.2:
+    resolution: {integrity: sha512-qfqtYan3rxrnCk1VYaA4H+Ms9xdpPqvLZa6xmMgFvhO32x7/3J/ExcTd6qpxM0vH2GdMI+poehyBZvqfMTto8A==}
 
-  data-uri-to-buffer@4.0.1:
-    resolution: {integrity: sha512-0R9ikRb668HB7QDxT1vkpuUBtqc53YyAwMwGeUFKRojY/NWKvdZ+9UYtRfGmhqNbRkTSVpMbmyhXipFFv2cb/A==}
-    engines: {node: '>= 12'}
+  form-data@4.0.2:
+    resolution: {integrity: sha512-hGfm/slu0ZabnNt4oaRZ6uREyfCj6P4fT/n6A1rGV+Z0VdGXjfOhVUpkn6qVQONHGIFwmveGXyDs75+nr6FM8w==}
+    engines: {node: '>= 6'}
 
-  fetch-blob@3.2.0:
-    resolution: {integrity: sha512-7yAQpD2UMJzLi1Dqv7qFYnPbaPx7ZfFK6PiIxQ4PfkGPyNyl2Ugx+a/umUonmKqjhM4DnfbMvdX6otXq83soQQ==}
-    engines: {node: ^12.20 || >= 14.13}
+  formdata-node@4.4.1:
+    resolution: {integrity: sha512-0iirZp3uVDjVGt9p49aTaqjk84TrglENEDuqfdlZQ1roC9CWlPk6Avf8EEnZNcAqPonwkG35x4n3ww/1THYAeQ==}
+    engines: {node: '>= 12.20'}
 
-  formdata-polyfill@4.0.10:
-    resolution: {integrity: sha512-buewHzMvYL29jdeQTVILecSaZKnt/RJWjoZCF5OW60Z67/GmSLBkOFM7qh1PI3zFNtJbaZL5eQu1vLfazOwj4g==}
-    engines: {node: '>=12.20.0'}
+  function-bind@1.1.2:
+    resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
 
-  ieee754@1.2.1:
-    resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
+  get-intrinsic@1.3.0:
+    resolution: {integrity: sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==}
+    engines: {node: '>= 0.4'}
 
-  jwt-decode@3.1.2:
-    resolution: {integrity: sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==}
+  get-proto@1.0.1:
+    resolution: {integrity: sha512-sTSfBjoXBp89JvIKIefqw7U2CCebsc74kiY6awiGogKtoSGbgjYE/G/+l9sF3MWFPNc9IcoOC4ODfKHfxFmp0g==}
+    engines: {node: '>= 0.4'}
 
-  lodash.clonedeep@4.5.0:
-    resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
+  gopd@1.2.0:
+    resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
+    engines: {node: '>= 0.4'}
 
-  lodash.set@4.3.2:
-    resolution: {integrity: sha512-4hNPN5jlm/N/HLMCO43v8BXKq9Z7QdAGc/VGrRD61w8gN9g/6jF9A4L1pbUgBLCffi0w9VsXfTOij5x8iTyFvg==}
+  has-symbols@1.1.0:
+    resolution: {integrity: sha512-1cDNdwJ2Jaohmb3sg4OmKaMBwuC48sYni5HUw2DvsC8LjGTLK9h+eb1X6RyuOHe4hT0ULCW68iomhjUoKUqlPQ==}
+    engines: {node: '>= 0.4'}
 
-  lodash.unset@4.5.2:
-    resolution: {integrity: sha512-bwKX88k2JhCV9D1vtE8+naDKlLiGrSmf8zi/Y9ivFHwbmRfA8RxS/aVJ+sIht2XOwqoNr4xUPUkGZpc1sHFEKg==}
+  has-tostringtag@1.0.2:
+    resolution: {integrity: sha512-NqADB8VjPFLM2V0VvHUewwwsw0ZWBaIdgo+ieHtK3hasLz4qeCRjYcqfB6AQrBggRKppKF8L52/VqdVsO47Dlw==}
+    engines: {node: '>= 0.4'}
+
+  hasown@2.0.2:
+    resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
+    engines: {node: '>= 0.4'}
+
+  humanize-ms@1.2.1:
+    resolution: {integrity: sha512-Fl70vYtsAFb/C06PTS9dZBo7ihau+Tu/DNCk/OyHhea07S+aeMWpFFkUaXRa8fI+ScZbEI8dfSxwY7gxZ9SAVQ==}
+
+  math-intrinsics@1.1.0:
+    resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
+    engines: {node: '>= 0.4'}
+
+  mime-db@1.52.0:
+    resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
+    engines: {node: '>= 0.6'}
+
+  mime-types@2.1.35:
+    resolution: {integrity: sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==}
+    engines: {node: '>= 0.6'}
+
+  ms@2.1.3:
+    resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
   node-domexception@1.0.0:
     resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
     engines: {node: '>=10.5.0'}
 
-  node-fetch@3.3.2:
-    resolution: {integrity: sha512-dRB78srN/l6gqWulah9SrxeYnxeddIG30+GOqK/9OlLVyLg3HPnr6SqOWTWOXKRwC2eGYCkZ59NNuSgvSrpgOA==}
-    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+  node-fetch@2.7.0:
+    resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
+    engines: {node: 4.x || >=6.0.0}
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
 
-  text-encoding-shim@1.0.5:
-    resolution: {integrity: sha512-H7yYW+jRn4yhu60ygZ2f/eMhXPITRt4QSUTKzLm+eCaDsdX8avmgWpmtmHAzesjBVUTAypz9odu5RKUjX5HNYA==}
+  openai@4.85.4:
+    resolution: {integrity: sha512-Nki51PBSu+Aryo7WKbdXvfm0X/iKkQS2fq3O0Uqb/O3b4exOZFid2te1BZ52bbO5UwxQZ5eeHJDCTqtrJLPw0w==}
+    hasBin: true
+    peerDependencies:
+      ws: ^8.18.0
+      zod: ^3.23.8
+    peerDependenciesMeta:
+      ws:
+        optional: true
+      zod:
+        optional: true
 
-  web-streams-polyfill@3.3.3:
-    resolution: {integrity: sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==}
-    engines: {node: '>= 8'}
+  tr46@0.0.3:
+    resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
 
-  web-streams-polyfill@4.1.0:
-    resolution: {integrity: sha512-A7Jxrg7+eV+eZR/CIdESDnRGFb6/bcKukGvJBB5snI6cw3is1c2qamkYstC1bY1p08TyMRlN9eTMkxmnKJBPBw==}
-    engines: {node: '>= 8'}
+  undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+
+  web-streams-polyfill@4.0.0-beta.3:
+    resolution: {integrity: sha512-QW95TCTaHmsYfHDybGMwO5IJIM93I/6vTRk+daHTWFPhwh+C8Cg7j7XyKrwrj8Ib6vYXe0ocYNrmzY4xAAN6ug==}
+    engines: {node: '>= 14'}
+
+  webidl-conversions@3.0.1:
+    resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
+
+  whatwg-url@5.0.0:
+    resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
 
   ws@8.18.0:
     resolution: {integrity: sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==}
@@ -168,172 +195,161 @@ packages:
 
 snapshots:
 
-  '@cloudbase/adapter-interface@0.5.0': {}
-
-  '@cloudbase/adapter-interface@0.6.0': {}
-
-  '@cloudbase/adapter-node@1.0.2':
-    dependencies:
-      '@cloudbase/adapter-interface': 0.5.0
-      '@cloudbase/utilities': 2.8.11-beta.0
-      node-fetch: 3.3.2
-      ws: 8.18.0
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-
-  '@cloudbase/adapter-wx_mp@1.1.0':
-    dependencies:
-      '@cloudbase/adapter-interface': 0.6.0
-      web-streams-polyfill: 4.1.0
-
-  '@cloudbase/ai@2.9.2':
-    dependencies:
-      '@cloudbase/types': 2.9.2
-      '@mattiasbuelens/web-streams-adapter': 0.1.0
-      text-encoding-shim: 1.0.5
-      web-streams-polyfill: 4.1.0
-
-  '@cloudbase/aiagent-framework@1.0.0-beta.3':
+  '@cloudbase/aiagent-framework@1.0.0-beta.4':
     dependencies:
       '@cloudbase/functions-typings': 1.0.0
       zod: 3.24.2
 
-  '@cloudbase/analytics@2.9.2':
-    dependencies:
-      '@cloudbase/types': 2.9.2
-      '@cloudbase/utilities': 2.9.2
-
-  '@cloudbase/app@2.9.2':
-    dependencies:
-      '@cloudbase/adapter-interface': 0.6.0
-      '@cloudbase/adapter-wx_mp': 1.1.0
-      '@cloudbase/types': 2.9.2
-      '@cloudbase/utilities': 2.9.2
-
-  '@cloudbase/auth@2.9.2':
-    dependencies:
-      '@cloudbase/adapter-wx_mp': 1.1.0
-      '@cloudbase/oauth': 2.9.2
-      '@cloudbase/utilities': 2.9.2
-
-  '@cloudbase/database@0.9.21':
-    dependencies:
-      bson: 4.7.2
-      lodash.clonedeep: 4.5.0
-      lodash.set: 4.3.2
-      lodash.unset: 4.5.2
-
   '@cloudbase/functions-typings@1.0.0': {}
 
-  '@cloudbase/functions@2.9.2':
+  '@types/node-fetch@2.6.12':
     dependencies:
-      '@cloudbase/adapter-interface': 0.6.0
-      '@cloudbase/types': 2.9.2
-      '@cloudbase/utilities': 2.9.2
+      '@types/node': 18.19.76
+      form-data: 4.0.2
 
-  '@cloudbase/js-sdk@2.9.2':
+  '@types/node@18.19.76':
     dependencies:
-      '@cloudbase/adapter-interface': 0.6.0
-      '@cloudbase/ai': 2.9.2
-      '@cloudbase/analytics': 2.9.2
-      '@cloudbase/app': 2.9.2
-      '@cloudbase/auth': 2.9.2
-      '@cloudbase/database': 0.9.21
-      '@cloudbase/functions': 2.9.2
-      '@cloudbase/model': 2.9.2
-      '@cloudbase/realtime': 2.9.2
-      '@cloudbase/storage': 2.9.2
-      '@cloudbase/types': 2.9.2
-      '@cloudbase/utilities': 2.9.2
+      undici-types: 5.26.5
 
-  '@cloudbase/model@2.9.2':
+  abort-controller@3.0.0:
     dependencies:
-      '@cloudbase/types': 2.9.2
-      '@cloudbase/utilities': 2.9.2
-      '@cloudbase/wx-cloud-client-sdk': 1.3.1
+      event-target-shim: 5.0.1
 
-  '@cloudbase/oauth@2.9.2': {}
-
-  '@cloudbase/realtime@2.9.2':
+  agentkeepalive@4.6.0:
     dependencies:
-      '@cloudbase/types': 2.9.2
+      humanize-ms: 1.2.1
 
-  '@cloudbase/storage@2.9.2':
+  asynckit@0.4.0: {}
+
+  call-bind-apply-helpers@1.0.2:
     dependencies:
-      '@cloudbase/types': 2.9.2
-      '@cloudbase/utilities': 2.9.2
+      es-errors: 1.3.0
+      function-bind: 1.1.2
 
-  '@cloudbase/types@2.8.34':
+  combined-stream@1.0.8:
     dependencies:
-      '@cloudbase/adapter-interface': 0.6.0
+      delayed-stream: 1.0.0
 
-  '@cloudbase/types@2.9.2':
+  delayed-stream@1.0.0: {}
+
+  dunder-proto@1.0.1:
     dependencies:
-      '@cloudbase/adapter-interface': 0.6.0
+      call-bind-apply-helpers: 1.0.2
+      es-errors: 1.3.0
+      gopd: 1.2.0
 
-  '@cloudbase/utilities@2.8.11-beta.0':
+  es-define-property@1.0.1: {}
+
+  es-errors@1.3.0: {}
+
+  es-object-atoms@1.1.1:
     dependencies:
-      '@cloudbase/adapter-interface': 0.5.0
-      '@cloudbase/types': 2.8.34
-      jwt-decode: 3.1.2
+      es-errors: 1.3.0
 
-  '@cloudbase/utilities@2.9.2':
+  es-set-tostringtag@2.1.0:
     dependencies:
-      '@cloudbase/adapter-interface': 0.6.0
-      '@cloudbase/types': 2.9.2
-      jwt-decode: 3.1.2
+      es-errors: 1.3.0
+      get-intrinsic: 1.3.0
+      has-tostringtag: 1.0.2
+      hasown: 2.0.2
 
-  '@cloudbase/wx-cloud-client-sdk@1.3.1': {}
+  event-target-shim@5.0.1: {}
 
-  '@mattiasbuelens/web-streams-adapter@0.1.0': {}
+  form-data-encoder@1.7.2: {}
 
-  base64-js@1.5.1: {}
-
-  bson@4.7.2:
+  form-data@4.0.2:
     dependencies:
-      buffer: 5.7.1
+      asynckit: 0.4.0
+      combined-stream: 1.0.8
+      es-set-tostringtag: 2.1.0
+      mime-types: 2.1.35
 
-  buffer@5.7.1:
-    dependencies:
-      base64-js: 1.5.1
-      ieee754: 1.2.1
-
-  data-uri-to-buffer@4.0.1: {}
-
-  fetch-blob@3.2.0:
+  formdata-node@4.4.1:
     dependencies:
       node-domexception: 1.0.0
-      web-streams-polyfill: 3.3.3
+      web-streams-polyfill: 4.0.0-beta.3
 
-  formdata-polyfill@4.0.10:
+  function-bind@1.1.2: {}
+
+  get-intrinsic@1.3.0:
     dependencies:
-      fetch-blob: 3.2.0
+      call-bind-apply-helpers: 1.0.2
+      es-define-property: 1.0.1
+      es-errors: 1.3.0
+      es-object-atoms: 1.1.1
+      function-bind: 1.1.2
+      get-proto: 1.0.1
+      gopd: 1.2.0
+      has-symbols: 1.1.0
+      hasown: 2.0.2
+      math-intrinsics: 1.1.0
 
-  ieee754@1.2.1: {}
+  get-proto@1.0.1:
+    dependencies:
+      dunder-proto: 1.0.1
+      es-object-atoms: 1.1.1
 
-  jwt-decode@3.1.2: {}
+  gopd@1.2.0: {}
 
-  lodash.clonedeep@4.5.0: {}
+  has-symbols@1.1.0: {}
 
-  lodash.set@4.3.2: {}
+  has-tostringtag@1.0.2:
+    dependencies:
+      has-symbols: 1.1.0
 
-  lodash.unset@4.5.2: {}
+  hasown@2.0.2:
+    dependencies:
+      function-bind: 1.1.2
+
+  humanize-ms@1.2.1:
+    dependencies:
+      ms: 2.1.3
+
+  math-intrinsics@1.1.0: {}
+
+  mime-db@1.52.0: {}
+
+  mime-types@2.1.35:
+    dependencies:
+      mime-db: 1.52.0
+
+  ms@2.1.3: {}
 
   node-domexception@1.0.0: {}
 
-  node-fetch@3.3.2:
+  node-fetch@2.7.0:
     dependencies:
-      data-uri-to-buffer: 4.0.1
-      fetch-blob: 3.2.0
-      formdata-polyfill: 4.0.10
+      whatwg-url: 5.0.0
 
-  text-encoding-shim@1.0.5: {}
+  openai@4.85.4(ws@8.18.0)(zod@3.24.2):
+    dependencies:
+      '@types/node': 18.19.76
+      '@types/node-fetch': 2.6.12
+      abort-controller: 3.0.0
+      agentkeepalive: 4.6.0
+      form-data-encoder: 1.7.2
+      formdata-node: 4.4.1
+      node-fetch: 2.7.0
+    optionalDependencies:
+      ws: 8.18.0
+      zod: 3.24.2
+    transitivePeerDependencies:
+      - encoding
 
-  web-streams-polyfill@3.3.3: {}
+  tr46@0.0.3: {}
 
-  web-streams-polyfill@4.1.0: {}
+  undici-types@5.26.5: {}
 
-  ws@8.18.0: {}
+  web-streams-polyfill@4.0.0-beta.3: {}
+
+  webidl-conversions@3.0.1: {}
+
+  whatwg-url@5.0.0:
+    dependencies:
+      tr46: 0.0.3
+      webidl-conversions: 3.0.1
+
+  ws@8.18.0:
+    optional: true
 
   zod@3.24.2: {}
