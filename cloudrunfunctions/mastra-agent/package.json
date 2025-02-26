@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_OPTIONS=\"--loader ts-node/esm/transpile-only\" tcb-ff --enableCors=true --extendedContext='{\"envId\": \"your-env-id\", \"serviceName\": \"your-service-name\"}' -w",
+    "dev": "NODE_OPTIONS=\"--loader ts-node/esm/transpile-only\" tcb-ff --enableCors=true --extendedContext='{\"envId\": \"your-env-id\", \"serviceName\": \"your-service-name\", \"accessToken\": \"your-access-token\"}' -w",
     "build": "tsc",
     "preDeploy": "npm i && npm run build && rimraf ./node_modules"
   },

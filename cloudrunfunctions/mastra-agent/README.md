@@ -24,7 +24,10 @@ npm run preDeploy
 
 启动本地调试前，需要：
 
-- 修改 `package.json` 中的 `dev` 命令，将 `your-env-id` 替换为您的云开发环境 id，并将 `your-service-name` 替换为部署的云托管服务名。
+- 修改 `package.json` 中的 `dev` 命令，将：
+  - `your-env-id` 替换为您的云开发环境 id
+  - `your-service-name` 替换为部署的云托管服务名
+  - `your-access-token` 替换为 apiKey
 - 修改 `.env` 文件，配置 `OPENAI_API_KEY` 环境变量
 
 运行 `npm run dev` 启动本地调试。

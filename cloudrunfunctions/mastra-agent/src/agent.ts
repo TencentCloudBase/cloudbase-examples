@@ -1,4 +1,4 @@
-import { createOpenAI } from '@ai-sdk/openai';
+import { LanguageModel } from '@mastra/core';
 import { Agent } from '@mastra/core/agent';
 import { createTool } from '@mastra/core/tools'
 import { z } from 'zod'
@@ -6,11 +6,7 @@ import { z } from 'zod'
 /**
  * 散文 -> 诗歌 Agent
  */
-function createProseToPoemAgent(envId: string) {
-  const openai = createOpenAI({
-    baseURL: `https://${envId}.api.tcloudbasegateway.com/v1/ai/hunyuan-exp/v1`,
-  })
-
+function createProseToPoemAgent(model: LanguageModel) {
   const proseToPoemAgent = new Agent({
     name: 'Prose To Poem Agent',
     instructions: `
@@ -32,7 +28,7 @@ function createProseToPoemAgent(envId: string) {
         适当运用对仗、押韵等古典诗歌技巧。
         确保译文具有古典诗歌的韵味。
   `,
-    model: openai('hunyuan-turbo') as any,
+    model
   });
 
   return proseToPoemAgent
@@ -41,11 +37,7 @@ function createProseToPoemAgent(envId: string) {
 /**
  * 中文诗 -> 英文诗 Agent
  */
-function createPoemTranslationAgent(envId: string) {
-  const openai = createOpenAI({
-    baseURL: `https://${envId}.api.tcloudbasegateway.com/v1/ai/hunyuan-exp/v1`,
-  })
-
+function createPoemTranslationAgent(model: LanguageModel) {
   const poemTranslationAgent = new Agent({
     name: 'Poem Translation Agent',
     instructions: `
@@ -66,7 +58,7 @@ function createPoemTranslationAgent(envId: string) {
       尽量保留原诗的韵律或节奏感。
       确保译文忠实于原诗的核心思想。 
     `,
-    model: openai('hunyuan-turbo') as any,
+    model,
   });
 
   return poemTranslationAgent
@@ -75,8 +67,8 @@ function createPoemTranslationAgent(envId: string) {
 /**
  * 内部调用 ProseToPoemAgent 的工具
  */
-function createProseToPoemTool(envId: string) {
-  const proseToPoemAgent = createProseToPoemAgent(envId)
+function createProseToPoemTool(model: LanguageModel) {
+  const proseToPoemAgent = createProseToPoemAgent(model)
 
   const tool = createTool({
     id: "Prose To Poem Tool",
@@ -99,8 +91,8 @@ function createProseToPoemTool(envId: string) {
 /**
  * 内部调用 PoemTranslationAgent 的工具
  */
-function createPoemTranslationTool(envId: string) {
-  const poemTranslationAgent = createPoemTranslationAgent(envId)
+function createPoemTranslationTool(model: LanguageModel) {
+  const poemTranslationAgent = createPoemTranslationAgent(model)
 
   const tool = createTool({
     id: "Poem Translation Tool",
@@ -123,11 +115,7 @@ function createPoemTranslationTool(envId: string) {
 /**
  * 双语诗歌创作 Agent
  */
-export function createDualLangPoetAgent(envId: string) {
-  const openai = createOpenAI({
-    baseURL: `https://${envId}.api.tcloudbasegateway.com/v1/ai/hunyuan-exp/v1`,
-  })
-
+export function createDualLangPoetAgent(model: LanguageModel) {
   const dualLangPoetAgent = new Agent({
     name: 'Dual Lang Poet Agent Weather',
     instructions: `
@@ -140,11 +128,13 @@ export function createDualLangPoetAgent(envId: string) {
         你可以使用以下工具来完成你的工作：
         - proseToPoemTool: 使用这个工具来将散文重写为诗歌形式
         - poemTranslationTool: 使用这个工具来将中文诗歌翻译为英文诗歌
+
+        重要：你绝对不能自己写诗！
   `,
-    model: openai('hunyuan-turbo') as any,
+    model,
     tools: {
-      proseToPoemTool: createProseToPoemTool(envId),
-      poemTranslationTool: createPoemTranslationTool(envId)
+      proseToPoemTool: createProseToPoemTool(model),
+      poemTranslationTool: createPoemTranslationTool(model)
     },
   });
 
