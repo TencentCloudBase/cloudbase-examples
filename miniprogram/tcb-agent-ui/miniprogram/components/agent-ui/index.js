@@ -1,60 +1,60 @@
 // components/agent-ui/index.js
-import { guide, checkConfig } from './tools';
+import { guide, checkConfig, randomSelectInitquestion } from "./tools";
 Component({
   properties: {
     agentConfig: {
       type: Object,
       value: {
-        type: '', // 值为'bot'或'model'。当type='bot'时，botId必填；当type='model'时，model必填
-        botId: '', // agent id
-        modelName: '', // 大模型服务商
-        model: '', // 具体的模型版本
-        logo: '', // 图标(只在model模式下生效)
-        welcomeMessage: '', // 欢迎语(只在model模式下生效)
-        allowWebSearch: true
+        type: "", // 值为'bot'或'model'。当type='bot'时，botId必填；当type='model'时，model必填
+        botId: "", // agent id
+        modelName: "", // 大模型服务商
+        model: "", // 具体的模型版本
+        logo: "", // 图标(只在model模式下生效)
+        welcomeMessage: "", // 欢迎语(只在model模式下生效)
+        allowWebSearch: true,
       },
     },
   },
 
   observers: {
-    'showWebSearchSwitch': function (showWebSearchSwitch) {
+    showWebSearchSwitch: function (showWebSearchSwitch) {
       this.setData({
-        showFeatureList: showWebSearchSwitch
-      })
+        showFeatureList: showWebSearchSwitch,
+      });
     },
     showTools: function (isShow) {
       if (isShow) {
         this.setData({
-          footerHeight: this.data.footerHeight + 80
-        })
+          footerHeight: this.data.footerHeight + 80,
+        });
       } else {
         this.setData({
-          footerHeight: this.data.footerHeight - 80
-        })
+          footerHeight: this.data.footerHeight - 80,
+        });
       }
     },
     showFileList: function (isShow) {
       if (isShow) {
         this.setData({
-          footerHeight: this.data.footerHeight + 80
-        })
+          footerHeight: this.data.footerHeight + 80,
+        });
       } else {
         this.setData({
-          footerHeight: this.data.footerHeight - 80
-        })
+          footerHeight: this.data.footerHeight - 80,
+        });
       }
     },
     showFeatureList: function (isShow) {
       if (isShow) {
         this.setData({
-          footerHeight: this.data.footerHeight + 30
-        })
+          footerHeight: this.data.footerHeight + 30,
+        });
       } else {
         this.setData({
-          footerHeight: this.data.footerHeight - 30
-        })
+          footerHeight: this.data.footerHeight - 30,
+        });
       }
-    }
+    },
   },
 
   data: {
@@ -62,8 +62,8 @@ Component({
     article: {},
     windowInfo: wx.getWindowInfo(),
     bot: {},
-    inputValue: '',
-    output: '',
+    inputValue: "",
+    output: "",
     chatRecords: [],
     scrollTop: 0,
     streamStatus: false,
@@ -75,7 +75,7 @@ Component({
     imageList: [],
     scrollTop: 0, // 文字撑起来后能滚动的最大高度
     viewTop: 0, // 根据实际情况，可能用户手动滚动，需要记录当前滚动的位置
-    scrollTo: '', // 快速定位到指定元素，置底用
+    scrollTo: "", // 快速定位到指定元素，置底用
     scrollTimer: null, //
     manualScroll: false, // 当前为手动滚动/自动滚动
     showTools: false, // 展示底部工具栏
@@ -86,33 +86,52 @@ Component({
     enableUpload: false, // 待支持
     showWebSearchSwitch: false,
     useWebSearch: false,
-    showFeatureList: false
+    showFeatureList: false,
   },
 
   attached: async function () {
     const { botId, type } = this.data.agentConfig;
+    // 检查配置
     const [check, message] = checkConfig(this.data.agentConfig);
     if (!check) {
       wx.showModal({
-        title: '提示',
+        title: "提示",
         content: message,
       });
       this.setData({ showGuide: true });
+      return;
     } else {
       this.setData({ showGuide: false });
     }
-    if (type === 'bot') {
+    if (type === "bot") {
       const ai = wx.cloud.extend.AI;
       const bot = await ai.bot.get({ botId });
       // 新增错误提示
       if (bot.code) {
         wx.showModal({
-          title: '提示',
+          title: "提示",
           content: bot.message,
         });
         return;
       }
-      this.setData({ bot, questions: bot.initQuestions, showWebSearchSwitch: bot.searchEnable && this.data.agentConfig.allowWebSearch });
+
+      // 初始化第一条记录为welcomeMessage
+      const record = {
+        content: bot.welcomeMessage,
+        record_id: "record_id" + String(+new Date() + 10),
+        role: "assistant",
+        hiddenBtnGround: true,
+      };
+      const { chatRecords } = this.data;
+      // 随机选取三个初始化问题
+      const questions = randomSelectInitquestion(bot.initQuestions, 3);
+      this.setData({
+        bot,
+        questions,
+        chatRecords: [...chatRecords, record],
+        showWebSearchSwitch:
+          bot.searchEnable && this.data.agentConfig.allowWebSearch,
+      });
     }
   },
   methods: {
@@ -121,7 +140,7 @@ Component({
       return new Promise((resolve) => {
         const query = wx.createSelectorQuery().in(this);
         query
-          .selectAll('.main >>> .system, .main >>> .userContent')
+          .selectAll(".main >>> .system, .main >>> .userContent")
           .boundingClientRect((rects) => {
             let totalHeight = 0;
             rects.forEach((rect) => {
@@ -137,7 +156,7 @@ Component({
         const query = wx.createSelectorQuery().in(this);
         query
           .selectAll(
-            '.main >>> .nav, .main >>> .guide_system, .main >>> .bot_intro_system'
+            ".main >>> .nav, .main >>> .guide_system, .main >>> .bot_intro_system"
           )
           .boundingClientRect((rects) => {
             let totalHeight = 0;
@@ -150,7 +169,8 @@ Component({
           .exec();
       });
     },
-    onWheel: function (e) { // 解决小程序开发工具中滑动
+    onWheel: function (e) {
+      // 解决小程序开发工具中滑动
       if (!this.data.manualScroll && e.detail.deltaY < 0) {
         this.setData({
           manualScroll: true,
@@ -161,13 +181,13 @@ Component({
       if (e.detail.scrollTop < this.data.lastScrollTop) {
         // 鸿蒙系统上可能滚动事件，拖动事件失效，兜底处理
         this.setData({
-          manualScroll: true
-        })
+          manualScroll: true,
+        });
       }
 
       this.setData({
-        lastScrollTop: e.detail.scrollTop
-      })
+        lastScrollTop: e.detail.scrollTop,
+      });
 
       // 针对连续滚动的最后一次进行处理，scroll-view的 scroll end事件不好判定
       if (this.data.scrollTimer) {
@@ -198,7 +218,7 @@ Component({
       });
     },
     handleScrollStart: function (e) {
-      console.log('drag start', e);
+      console.log("drag start", e);
       if (e.detail.scrollTop > 0) {
         // 手动开始滚
         this.setData({
@@ -207,17 +227,17 @@ Component({
       }
     },
     handleScrollToLower: function (e) {
-      console.log('scroll to lower', e);
+      console.log("scroll to lower", e);
       // 监听到底转自动
       this.setData({
         manualScroll: false,
       });
     },
     autoToBottom: function () {
-      console.log('autoToBottom');
+      console.log("autoToBottom");
       this.setData({
         manualScroll: false,
-        scrollTo: 'scroll-bottom',
+        scrollTo: "scroll-bottom",
       });
       // console.log('scrollTop', this.data.scrollTop);
     },
@@ -234,8 +254,25 @@ Component({
       });
     },
     clearChatRecords: function () {
+      const { type } = this.data.agentConfig;
+      const { bot } = this.data;
+      if (type === "model") {
+        this.setData({
+          chatRecords: [],
+          streamStatus: false,
+          setPanelVisibility: !this.data.setPanelVisibility,
+        });
+        return;
+      }
+      const record = {
+        content: bot.welcomeMessage,
+        record_id: "record_id" + String(+new Date() + 10),
+        role: "assistant",
+        hiddenBtnGround: true,
+      };
+      const questions = randomSelectInitquestion(bot.initQuestions, 3);
       this.setData({
-        chatRecords: [],
+        chatRecords: [record],
         streamStatus: false,
         // setPanelVisibility: !this.data.setPanelVisibility,
       });
@@ -244,26 +281,26 @@ Component({
       const self = this;
       wx.chooseMessageFile({
         count: 10,
-        type: 'image',
+        type: "image",
         success(res) {
           // tempFilePath可以作为img标签的src属性显示图片
           // const tempFilePaths = res.tempFiles;
-          console.log('res', res);
+          console.log("res", res);
           const tempFiles = res.tempFiles.map((item) => ({
             tempId: `${new Date().getTime()}-${item.name}`,
             rawType: item.type, // 微信选择默认的文件类型 image/video/file
             fileName: item.name, // 文件名
             tempPath: item.path,
             fileSize: item.size,
-            fileUrl: '',
-            fileId: '',
+            fileUrl: "",
+            fileId: "",
           }));
           // 过滤掉已选择中的 file 文件（保留image）
           const filterFileList = self.data.sendFileList.filter(
-            (item) => item.rawType !== 'file'
+            (item) => item.rawType !== "file"
           );
-          const finalFileList = [...filterFileList, ...tempFiles]
-          console.log('final', finalFileList);
+          const finalFileList = [...filterFileList, ...tempFiles];
+          console.log("final", finalFileList);
           self.setData({
             sendFileList: finalFileList, //
           });
@@ -271,8 +308,8 @@ Component({
           if (finalFileList.length) {
             self.setData({
               showFileList: true,
-              showTools: false
-            })
+              showTools: false,
+            });
           }
         },
       });
@@ -281,26 +318,26 @@ Component({
       const self = this;
       wx.chooseMessageFile({
         count: 10,
-        type: 'file',
+        type: "file",
         success(res) {
           // tempFilePath可以作为img标签的src属性显示图片
           // const tempFilePaths = res.tempFiles;
-          console.log('res', res);
+          console.log("res", res);
           const tempFiles = res.tempFiles.map((item) => ({
             tempId: `${new Date().getTime()}-${item.name}`,
             rawType: item.type, // 微信选择默认的文件类型 image/video/file
             fileName: item.name, // 文件名
             tempPath: item.path,
             fileSize: item.size,
-            fileUrl: '',
-            fileId: '',
+            fileUrl: "",
+            fileId: "",
           }));
           // 过滤掉已选择中的 image 文件（保留file)
           const filterFileList = self.data.sendFileList.filter(
-            (item) => item.rawType !== 'image'
+            (item) => item.rawType !== "image"
           );
-          const finalFileList = [...filterFileList, ...tempFiles]
-          console.log('final', finalFileList);
+          const finalFileList = [...filterFileList, ...tempFiles];
+          console.log("final", finalFileList);
 
           self.setData({
             sendFileList: finalFileList, //
@@ -309,8 +346,8 @@ Component({
           if (finalFileList.length) {
             self.setData({
               showFileList: true,
-              showTools: false
-            })
+              showTools: false,
+            });
           }
         },
       });
@@ -319,42 +356,42 @@ Component({
       const self = this;
       wx.chooseMedia({
         count: 9,
-        mediaType: ['image'],
-        sourceType: ['camera'],
+        mediaType: ["image"],
+        sourceType: ["camera"],
         maxDuration: 30,
-        camera: 'back',
+        camera: "back",
         success(res) {
-          console.log('res', res);
+          console.log("res", res);
           // console.log(res.tempFiles[0].tempFilePath)
           // console.log(res.tempFiles[0].size)
           const tempFiles = res.tempFiles.map((item) => {
-            let index = item.tempFilePath.lastIndexOf('.');
+            let index = item.tempFilePath.lastIndexOf(".");
             const fileExt = item.tempFilePath.substring(index + 1);
-            const randomFileName = new Date().getTime() + '.' + fileExt;
+            const randomFileName = new Date().getTime() + "." + fileExt;
             return {
               tempId: randomFileName,
               rawType: item.fileType, // 微信选择默认的文件类型 image/video/file
               fileName: randomFileName, // 文件名
               tempPath: item.tempFilePath,
               fileSize: item.size,
-              fileUrl: '',
-              fileId: '',
+              fileUrl: "",
+              fileId: "",
             };
           });
           // 过滤掉已选择中的 file 文件（保留image）
           const filterFileList = self.data.sendFileList.filter(
-            (item) => item.rawType !== 'file'
+            (item) => item.rawType !== "file"
           );
-          const finalFileList = [...filterFileList, ...tempFiles]
-          console.log('final', finalFileList);
+          const finalFileList = [...filterFileList, ...tempFiles];
+          console.log("final", finalFileList);
           self.setData({
             sendFileList: finalFileList, //
           });
           if (finalFileList.length) {
             self.setData({
               showTools: false,
-              showFileList: true
-            })
+              showFileList: true,
+            });
           }
         },
       });
@@ -364,8 +401,8 @@ Component({
       const { chatRecords } = this.data;
       const newChatRecords = [...chatRecords];
       const record = newChatRecords[newChatRecords.length - 1];
-      if (record.content === '...') {
-        record.content = '已暂停回复';
+      if (record.content === "...") {
+        record.content = "已暂停回复";
       }
       this.setData({
         streamStatus: false,
@@ -382,13 +419,13 @@ Component({
     sendMessage: async function (event) {
       if (this.data.showFileList) {
         this.setData({
-          showFileList: !this.data.showFileList
-        })
+          showFileList: !this.data.showFileList,
+        });
       }
       if (this.data.showTools) {
         this.setData({
-          showTools: !this.data.showTools
-        })
+          showTools: !this.data.showTools,
+        });
       }
       const { message } = event.currentTarget.dataset;
       let {
@@ -421,16 +458,16 @@ Component({
       // console.log(inputValue,bot.botId)
       const userRecord = {
         content: inputValue,
-        record_id: 'record_id' + String(+new Date() - 10),
-        role: 'user',
+        record_id: "record_id" + String(+new Date() - 10),
+        role: "user",
         imageList: [...imageList],
       };
 
       userRecord.fileList = this.data.sendFileList;
       if (this.data.sendFileList.length) {
         this.setData({
-          sendFileList: []
-        })
+          sendFileList: [],
+        });
       }
 
       // // TODO: 判断是否携带图片(hunyuan-vision 用到)，携带则scrollTop 增加
@@ -449,12 +486,12 @@ Component({
       // }
 
       const record = {
-        content: '...',
-        record_id: 'record_id' + String(+new Date() + 10),
-        role: 'assistant',
+        content: "...",
+        record_id: "record_id" + String(+new Date() + 10),
+        role: "assistant",
       };
       this.setData({
-        inputValue: '',
+        inputValue: "",
         questions: [],
         chatRecords: [...chatRecords, userRecord, record],
         streamStatus: false,
@@ -462,9 +499,9 @@ Component({
       });
 
       // 新增一轮对话记录时 自动往下滚底
-      this.autoToBottom()
+      this.autoToBottom();
 
-      if (type === 'bot') {
+      if (type === "bot") {
         const ai = wx.cloud.extend.AI;
         const res = await ai.bot.sendMessage({
           data: {
@@ -480,17 +517,17 @@ Component({
               type: item.rawType,
               fileId: item.fileId,
             })),
-            searchEnable: this.data.useWebSearch
+            searchEnable: this.data.useWebSearch,
           },
         });
         this.setData({ streamStatus: true });
-        let contentText = '';
-        let reasoningContentText = '';
+        let contentText = "";
+        let reasoningContentText = "";
         for await (let event of res.eventStream) {
           if (!this.data.streamStatus) {
             break;
           }
-          this.toBottom();
+          // this.toBottom();
           const { data } = event;
           try {
             const dataJson = JSON.parse(data);
@@ -508,37 +545,37 @@ Component({
             const newValue = [...this.data.chatRecords];
             // 取最后一条消息更新
             const lastValue = newValue[newValue.length - 1];
-            lastValue.role = role || 'assistant';
+            lastValue.role = role || "assistant";
             lastValue.record_id = record_id || lastValue.record_id;
             // 优先处理错误,直接中断
-            if (finish_reason === 'error') {
+            if (finish_reason === "error") {
               lastValue.search_info = null;
-              lastValue.reasoning_content = '';
+              lastValue.reasoning_content = "";
               lastValue.knowledge_meta = [];
-              lastValue.content = '网络繁忙，请稍后重试!';
+              lastValue.content = "网络繁忙，请稍后重试!";
               this.setData({ chatRecords: newValue });
               break;
             }
             // 下面根据type来确定输出的内容
             // 只更新一次参考文献，后续再收到这样的消息丢弃
-            if (type === 'search' && !lastValue.search_info) {
+            if (type === "search" && !lastValue.search_info) {
               lastValue.search_info = search_info;
               this.setData({ chatRecords: newValue });
             }
             // 思考过程
-            if (type === 'thinking') {
+            if (type === "thinking") {
               reasoningContentText += reasoning_content;
               lastValue.reasoning_content = reasoningContentText;
               this.setData({ chatRecords: newValue });
             }
             // 内容
-            if (type === 'text') {
+            if (type === "text") {
               contentText += content;
               lastValue.content = contentText;
               this.setData({ chatRecords: newValue });
             }
             // 知识库，这个版本没有文件元信息，展示不更新
-            if (type === 'knowledge') {
+            if (type === "knowledge") {
               // lastValue.knowledge_meta = knowledge_meta
               // this.setData({ chatRecords: newValue });
             }
@@ -555,26 +592,26 @@ Component({
               botId: bot.botId,
               history: [],
               msg: inputValue,
-              agentSetting: '',
-              introduction: '',
-              name: '',
+              agentSetting: "",
+              introduction: "",
+              name: "",
             },
           });
-          let result = '';
+          let result = "";
           for await (let str of recommendRes.textStream) {
             // console.log(str);
-            this.toBottom();
+            // this.toBottom();
             result += str;
             this.setData({
-              questions: result.split('\n').filter((item) => !!item),
+              questions: result.split("\n").filter((item) => !!item),
             });
           }
         }
       }
-      if (type === 'model') {
+      if (type === "model") {
         const aiModel = wx.cloud.extend.AI.createModel(modelName);
         let params = {};
-        if (model === 'hunyuan-vision') {
+        if (model === "hunyuan-vision") {
           params = {
             model: model,
             messages: [
@@ -582,11 +619,11 @@ Component({
                 role: item.role,
                 content: [
                   {
-                    type: 'text',
+                    type: "text",
                     text: item.content,
                   },
                   ...(item.imageList || []).map((item) => ({
-                    type: 'image_url',
+                    type: "image_url",
                     image_url: {
                       url: item.base64Url,
                     },
@@ -594,14 +631,14 @@ Component({
                 ],
               })),
               {
-                role: 'user',
+                role: "user",
                 content: [
                   {
-                    type: 'text',
+                    type: "text",
                     text: inputValue,
                   },
                   ...imageList.map((item) => ({
-                    type: 'image_url',
+                    type: "image_url",
                     image_url: {
                       url: item.base64Url,
                     },
@@ -619,7 +656,7 @@ Component({
                 content: item.content,
               })),
               {
-                role: 'user',
+                role: "user",
                 content: inputValue,
               },
             ],
@@ -628,31 +665,31 @@ Component({
         const res = await aiModel.streamText({
           data: params,
         });
-        let contentText = '';
-        let reasoningText = '';
+        let contentText = "";
+        let reasoningText = "";
         this.setData({ streamStatus: true });
         for await (let event of res.eventStream) {
           if (!this.data.streamStatus) {
             break;
           }
-          this.toBottom();
+          // this.toBottom();
 
           const { data } = event;
           try {
             const dataJson = JSON.parse(data);
             const { id, choices = [] } = dataJson || {};
             const { delta, finish_reason } = choices[0] || {};
-            if (finish_reason === 'stop') {
+            if (finish_reason === "stop") {
               break;
             }
             const { content, reasoning_content, role } = delta;
-            reasoningText += reasoning_content || '';
-            contentText += content || '';
+            reasoningText += reasoning_content || "";
+            contentText += content || "";
             const newValue = [...this.data.chatRecords];
             newValue[newValue.length - 1] = {
               content: contentText,
               reasoning_content: reasoningText,
-              record_id: 'record_id' + String(id),
+              record_id: "record_id" + String(id),
               role: role,
             };
             this.setData({ chatRecords: newValue });
@@ -665,7 +702,8 @@ Component({
       }
     },
     toBottom: async function () {
-      const clientHeight = this.data.windowInfo.windowHeight - this.data.footerHeight; // 视口高度
+      const clientHeight =
+        this.data.windowInfo.windowHeight - this.data.footerHeight; // 视口高度
       const contentHeight =
         (await this.calculateContentHeight()) +
         (await this.calculateContentInTop()); // 内容总高度
@@ -695,42 +733,38 @@ Component({
       // console.log(e)
       const { content } = e.currentTarget.dataset;
       wx.setClipboardData({
-        data: content + '\n\n来自微信云开发AI+',
+        data: content + "\n\n来自微信云开发AI+",
         success: function (res) {
           wx.showToast({
-            title: '复制成功',
-            icon: 'success',
+            title: "复制成功",
+            icon: "success",
           });
         },
       });
     },
     addFileList: function () {
       // 顶部文件行展现时，隐藏底部工具栏
-      this.setData({
-
-      })
+      this.setData({});
     },
-    subFileList: function () {
-
-    },
+    subFileList: function () {},
     uploadImgs: function () {
       const that = this;
       wx.chooseMedia({
         count: 9,
-        mediaType: ['image'],
-        sourceType: ['album', 'camera'],
+        mediaType: ["image"],
+        sourceType: ["album", "camera"],
         maxDuration: 30,
-        camera: 'back',
+        camera: "back",
         success(media) {
           // console.log(media.tempFiles)
           const { tempFiles } = media;
           that.setData({ imageList: [...tempFiles] });
           tempFiles.forEach((img, index) => {
-            const lastDotIndex = img.tempFilePath.lastIndexOf('.');
+            const lastDotIndex = img.tempFilePath.lastIndexOf(".");
             const fileExtension = img.tempFilePath.substring(lastDotIndex + 1);
             wx.getFileSystemManager().readFile({
               filePath: img.tempFilePath,
-              encoding: 'base64',
+              encoding: "base64",
               success(file) {
                 const base64String = file.data;
                 const base64Url = `data:image/${fileExtension};base64,${base64String}`;
@@ -764,31 +798,31 @@ Component({
         data: url,
         success: function (res) {
           wx.showToast({
-            title: '复制成功',
-            icon: 'success',
+            title: "复制成功",
+            icon: "success",
           });
         },
       });
     },
     handleRemoveChild: function (e) {
-      console.log('remove', e.detail.tempId);
+      console.log("remove", e.detail.tempId);
       if (e.detail.tempId) {
         const newSendFileList = this.data.sendFileList.filter(
           (item) => item.tempId !== e.detail.tempId
         );
-        console.log('newSendFileList', newSendFileList);
+        console.log("newSendFileList", newSendFileList);
         this.setData({
           sendFileList: newSendFileList,
         });
         if (newSendFileList.length === 0) {
           this.setData({
-            showFileList: false
-          })
+            showFileList: false,
+          });
         }
       }
     },
     handleChangeChild: function (e) {
-      console.log('change', e.detail);
+      console.log("change", e.detail);
       const { fileId, tempId } = e.detail;
       // const curFile = this.data.sendFileList.find(item => item.tempId === tempId)
       // curFile.fileId = fileId
@@ -818,8 +852,8 @@ Component({
     },
     handleClickWebSearch: function () {
       this.setData({
-        useWebSearch: !this.data.useWebSearch
-      })
-    }
+        useWebSearch: !this.data.useWebSearch,
+      });
+    },
   },
 });

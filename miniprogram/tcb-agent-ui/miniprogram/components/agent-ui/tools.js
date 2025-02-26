@@ -81,7 +81,7 @@ export const checkConfig = (config) => {
   const { type, botId, modelName, model } = config
   // 检测AI能力，不存在提示用户
   if(!wx.cloud.extend||!wx.cloud.extend.AI){
-    return [false,'使用AI能力需基础库为3.7.7及以上，请升级基础库版本']
+    return [false,'使用AI能力需基础库为3.7.7及以上，请升级基础库版本或微信客户端']
   }
   if (!['bot', 'model'].includes(type)) {
     return [false, 'type 不正确，值应为“bot”或“model”']
@@ -93,4 +93,16 @@ export const checkConfig = (config) => {
     return [false, '当前type值为model，请配置modelNam和model']
   }
   return [true, '']
+}
+// 随机选取三个问题
+export function randomSelectInitquestion(question=[],num=3){
+  if(question.length<=num){
+    return [...question]
+  }
+  const set=new Set();
+  while(set.size<num){
+    const randomIndex=Math.floor(Math.random()*question.length)
+    set.add(question[randomIndex])
+  }
+  return Array.from(set)
 }
