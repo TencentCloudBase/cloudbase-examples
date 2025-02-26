@@ -42,18 +42,31 @@
 }
 
 .footer {
-  height: 80px;
+  width: 100%;
+  min-height: 80px;
+  max-height: 240px;
   /* background-color: aquamarine; */
-
+  position: absolute;
+  bottom: 0;
 }
 
 .foot-function {
   border: #f3f3f3 solid 1px;
   border-radius: 16px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  margin: 0px 16px;
+  margin: 15px 16px;
   padding: 4px 8px;
   position: relative;
+}
+
+.footer .file_list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 0px 16px;
+  overflow-x: scroll;
+  height: 80px;
 }
 
 .img-box {
@@ -144,6 +157,7 @@
 }
 
 .function {
+  width: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -151,7 +165,7 @@
   gap: 8px;
   background-color: #fff;
   color: black;
-  padding: 16px 6px;
+  padding: 0px 6px;
   border-radius: 6px;
 }
 
@@ -207,6 +221,13 @@
   margin-bottom: 16px;
 }
 
+.userContent .fileBar {
+  display: flex;
+  overflow-x: scroll;
+  justify-content: flex-end;
+  width: 100%;
+}
+
 .user view {
   background-color: #f3f3f3;
   border-radius: 12rpx;
@@ -250,4 +271,19 @@
 
 .modal_footer {
   display: flex;
+}
+
+.tool_box {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  padding: 10px 16px;
+  box-sizing: border-box;
+  gap: 10px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.tool_box .function {
+  flex: 0 0 calc(25% - 20px);
 }
