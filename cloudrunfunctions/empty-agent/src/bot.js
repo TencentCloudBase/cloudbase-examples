@@ -18,6 +18,8 @@ class MyBot extends BotCore {
       await sleep(50);
       this.sseSender.send({ data: { content: ANSWER[i] } });
     }
+
+    this.sseSender.end();
   }
 }
 
