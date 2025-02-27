@@ -11,11 +11,17 @@ Component({
         model: '', // 具体的模型版本
         logo: '', // 图标(只在model模式下生效)
         welcomeMessage: '', // 欢迎语(只在model模式下生效)
+        allowWebSearch: true
       },
     },
   },
 
   observers: {
+    'showWebSearchSwitch': function (showWebSearchSwitch) {
+      this.setData({
+        showFeatureList: showWebSearchSwitch
+      })
+    },
     showTools: function (isShow) {
       if (isShow) {
         this.setData({
@@ -35,6 +41,17 @@ Component({
       } else {
         this.setData({
           footerHeight: this.data.footerHeight - 80
+        })
+      }
+    },
+    showFeatureList: function (isShow) {
+      if (isShow) {
+        this.setData({
+          footerHeight: this.data.footerHeight + 30
+        })
+      } else {
+        this.setData({
+          footerHeight: this.data.footerHeight - 30
         })
       }
     }
@@ -65,8 +82,11 @@ Component({
     showFileList: false, // 展示顶部文件行
     sendFileList: [],
     footerHeight: 80,
-    enableUpload: true,
-    lastScrollTop: 0
+    lastScrollTop: 0,
+    enableUpload: false, // 待支持
+    showWebSearchSwitch: false,
+    useWebSearch: false,
+    showFeatureList: false
   },
 
   attached: async function () {
@@ -92,7 +112,7 @@ Component({
         });
         return;
       }
-      this.setData({ bot, questions: bot.initQuestions });
+      this.setData({ bot, questions: bot.initQuestions, showWebSearchSwitch: bot.searchEnable && this.data.agentConfig.allowWebSearch });
     }
   },
   methods: {
@@ -460,6 +480,7 @@ Component({
               type: item.rawType,
               fileId: item.fileId,
             })),
+            searchEnable: this.data.useWebSearch
           },
         });
         this.setData({ streamStatus: true });
@@ -794,6 +815,11 @@ Component({
           showTools: !this.data.showTools,
         });
       }
+    },
+    handleClickWebSearch: function () {
+      this.setData({
+        useWebSearch: !this.data.useWebSearch
+      })
     }
   },
 });

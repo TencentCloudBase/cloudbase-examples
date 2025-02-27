@@ -44,7 +44,7 @@
 .footer {
   width: 100%;
   min-height: 80px;
-  max-height: 240px;
+  max-height: 270px;
   /* background-color: aquamarine; */
   position: absolute;
   bottom: 0;
@@ -57,6 +57,7 @@
   margin: 15px 16px;
   padding: 4px 8px;
   position: relative;
+  background-color: white;
 }
 
 .footer .file_list {
@@ -281,9 +282,32 @@
   box-sizing: border-box;
   gap: 10px;
   justify-content: flex-start;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
 }
 
 .tool_box .function {
   flex: 0 0 calc(25% - 20px);
+}
+
+.webSearchSwitch {
+  width: 200rpx;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f3f3;
+  border-radius: 50px;
+  border: 1px solid rgb(76, 76, 76);
+  font-size: 14px;
+}
+
+.feature_enable {
+  background-color: rgb(219, 234, 254);
+  color: rgb(77, 107, 254);
+  border-color: rgba(0, 122, 255, 0.15);
+}
+
+.feature_list {
+  margin: 0 16px;
 }

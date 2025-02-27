@@ -11,6 +11,7 @@ Page({
       model: 'hunyuan-lite', // 具体的模型版本 // 
       logo: 'https://docs.cloudbase.net/img/logo.svg', // 图标(只在model模式下生效)
       welcomeMessage: '欢迎语!', // 欢迎语(只在model模式下生效)
+      allowWebSearch: true // 允许界面呈现联网配置开关
     },
   },
 
