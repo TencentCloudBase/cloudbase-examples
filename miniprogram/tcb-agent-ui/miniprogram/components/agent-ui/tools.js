@@ -106,3 +106,16 @@ export function randomSelectInitquestion(question=[],num=3){
   }
   return Array.from(set)
 }
+function Throttle(){
+  let timer=null
+  return function(fn){
+    if(!timer){
+      timer=setTimeout(()=>{
+        fn()
+        timer=null
+      },50)
+    }
+  }
+}
+// 频繁渲染会阻塞UI线程，这里节流一下
+ export const ThrottleFn= Throttle()

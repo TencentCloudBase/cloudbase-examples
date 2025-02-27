@@ -6,8 +6,3 @@
 
 /**主题配色（深色样式）**/
 @import './style/theme/dark.wxss';
-
-.h2w__main{
-  margin: 0px;
-  padding: 0px;
-}

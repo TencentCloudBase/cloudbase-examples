@@ -1,7 +1,11 @@
 // components/agent-ui/index.js
-import { guide, checkConfig, randomSelectInitquestion } from "./tools";
+import { guide, checkConfig, randomSelectInitquestion,ThrottleFn } from "./tools";
 Component({
   properties: {
+    showBotAvatar:{
+      type:Boolean,
+      value:false
+    },
     agentConfig: {
       type: Object,
       value: {
@@ -470,21 +474,6 @@ Component({
           sendFileList: [],
         });
       }
-
-      // // TODO: 判断是否携带图片(hunyuan-vision 用到)，携带则scrollTop 增加
-      // if (imageList.length) {
-      //   const newScrollTop = this.data.scrollTop;
-      //   if (this.data.manualScroll) {
-      //     this.setData({
-      //       scrollTop: newScrollTop,
-      //     });
-      //   } else {
-      //     this.setData({
-      //       scrollTop: newScrollTop,
-      //       viewTop: newScrollTop,
-      //     });
-      //   }
-      // }
       const record = {
         content: "",
         record_id: "record_id" + String(+new Date() + 10),
@@ -532,7 +521,7 @@ Component({
             isManuallyPaused = true;
             break;
           }
-          this.toBottom();
+         this.toBottom();
           const { data } = event;
           try {
             const dataJson = JSON.parse(data);
@@ -550,7 +539,7 @@ Component({
             // 取最后一条消息更新
             const lastValue = newValue[newValue.length - 1];
             lastValue.role = role || "assistant";
-            lastValue.record_id = record_id || lastValue.record_id;
+            lastValue.record_id = record_id||lastValue.record_id;// 这里是为了解决markdown渲染库有序列表的问题，每次计算新key
             // 优先处理错误,直接中断
             if (finish_reason === "error") {
               lastValue.search_info = null;
@@ -577,7 +566,10 @@ Component({
               reasoningContentText += reasoning_content;
               lastValue.reasoning_content = reasoningContentText;
               lastValue.thinkingTime = Math.floor((endTime - startTime) / 1000);
-              this.setData({ chatRecords: newValue, chatStatus: 2 }); // 聊天状态切换为思考中
+              ThrottleFn(()=>{
+                this.setData({ chatRecords: newValue, chatStatus: 2 }); // 聊天状态切换为思考中
+              })
+             
             }
             // 内容
             if (type === "text") {
@@ -616,6 +608,7 @@ Component({
           for await (let str of recommendRes.textStream) {
             // console.log(str);
             // this.toBottom();
+            this.toBottom();
             result += str;
             this.setData({
               questions: result.split("\n").filter((item) => !!item),
@@ -750,7 +743,7 @@ Component({
       // );
       if (clientHeight - contentHeight < 10) {
         // 只有当内容高度接近视口高度时才开始增加 scrollTop
-        const newTop = this.data.scrollTop + 4;
+        const newTop = this.data.scrollTop + 10;
 
         if (this.data.manualScroll) {
           this.setData({
