@@ -27,6 +27,7 @@ Component({
       });
     },
     showTools: function (isShow) {
+      console.log('showTools', isShow)
       if (isShow) {
         this.setData({
           footerHeight: this.data.footerHeight + 80,
@@ -38,6 +39,7 @@ Component({
       }
     },
     showFileList: function (isShow) {
+      console.log('showFileList', isShow)
       if (isShow) {
         this.setData({
           footerHeight: this.data.footerHeight + 80,
@@ -49,13 +51,15 @@ Component({
       }
     },
     showFeatureList: function (isShow) {
+      console.log('showFeatureList', isShow)
       if (isShow) {
         this.setData({
           footerHeight: this.data.footerHeight + 30,
         });
       } else {
+        const subHeight = this.data.footerHeight - 30
         this.setData({
-          footerHeight: this.data.footerHeight - 30,
+          footerHeight: subHeight >= 80 ? subHeight : 80,
         });
       }
     },
@@ -134,7 +138,7 @@ Component({
         questions,
         chatRecords: [...chatRecords, record],
         showWebSearchSwitch:
-          bot.searchEnable && this.data.agentConfig.allowWebSearch,
+          !!(bot.searchEnable && this.data.agentConfig.allowWebSearch),
       });
     }
   },
@@ -771,7 +775,7 @@ Component({
       // 顶部文件行展现时，隐藏底部工具栏
       this.setData({});
     },
-    subFileList: function () {},
+    subFileList: function () { },
     uploadImgs: function () {
       const that = this;
       wx.chooseMedia({
