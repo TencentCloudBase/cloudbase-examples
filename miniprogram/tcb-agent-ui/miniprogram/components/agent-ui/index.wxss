@@ -291,7 +291,7 @@
 }
 
 .webSearchSwitch {
-  width: 100px;
+  width: 200rpx;
   height: 30px;
   display: flex;
   justify-content: center;
