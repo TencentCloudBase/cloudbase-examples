@@ -1,7 +1,7 @@
 <!-- agent ui 组件根容器 -->
 <view class="agent-ui">
   <!-- 聊天对话区 -->
-  <scroll-view bindwheel="onWheel" bind:tap="toBottom" enhanced="{{true}}" bindscroll="onScroll" scroll-with-animation="{{true}}" binddragstart="handleScrollStart" class="main" style="height: {{windowInfo.windowHeight-footerHeight}}px;" scroll-y="{{true}}" scroll-top="{{viewTop}}" scroll-into-view="{{ scrollTo }}" lower-threshold="80" bindscrolltolower="handleScrollToLower">
+  <scroll-view bindwheel="onWheel" bind:tap="toBottom" enhanced="{{true}}" bindscroll="onScroll" scroll-with-animation="{{true}}" binddragstart="handleScrollStart" class="main" style="height: {{windowInfo.windowHeight-footerHeight}}px;" scroll-y="{{true}}" scroll-top="{{viewTop}}" scroll-into-view="{{ scrollTo }}" lower-threshold="1" bindscrolltolower="handleScrollToLower">
     <view class="nav">
       <image src="{{bot.avatar||agentConfig.logo}}" mode="aspectFill" class="avatar" />
       <view style="line-height: 47px; font-size: 20px; font-weight: 500;">{{agentConfig.type==='bot'?bot.name:agentConfig.modelName}}</view>

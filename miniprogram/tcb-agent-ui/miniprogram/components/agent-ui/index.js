@@ -681,7 +681,7 @@ Component({
             isManuallyPaused = true;
             break;
           }
-          // this.toBottom();
+          this.toBottom();
 
           const { data } = event;
           try {
@@ -740,7 +740,7 @@ Component({
       // );
       if (clientHeight - contentHeight < 10) {
         // 只有当内容高度接近视口高度时才开始增加 scrollTop
-        const newTop = this.data.scrollTop + 10;
+        const newTop = this.data.scrollTop + 6;
 
         if (this.data.manualScroll) {
           this.setData({
