@@ -65,7 +65,8 @@ Component({
     showFileList: false, // 展示顶部文件行
     sendFileList: [],
     footerHeight: 80,
-    enableUpload: true
+    enableUpload: true,
+    lastScrollTop: 0
   },
 
   attached: async function () {
@@ -83,7 +84,6 @@ Component({
     if (type === 'bot') {
       const ai = wx.cloud.extend.AI;
       const bot = await ai.bot.get({ botId });
-      // console.log(bot)
       // 新增错误提示
       if (bot.code) {
         wx.showModal({
@@ -124,7 +124,7 @@ Component({
             rects.forEach((rect) => {
               totalHeight += rect.height;
             });
-            console.log('top height', totalHeight);
+            // console.log('top height', totalHeight);
             resolve(totalHeight);
           })
           .exec();
@@ -138,6 +138,17 @@ Component({
       }
     },
     onScroll: function (e) {
+      if (e.detail.scrollTop < this.data.lastScrollTop) {
+        // 鸿蒙系统上可能滚动事件，拖动事件失效，兜底处理
+        this.setData({
+          manualScroll: true
+        })
+      }
+
+      this.setData({
+        lastScrollTop: e.detail.scrollTop
+      })
+
       // 针对连续滚动的最后一次进行处理，scroll-view的 scroll end事件不好判定
       if (this.data.scrollTimer) {
         clearTimeout(this.data.scrollTimer);
@@ -146,12 +157,12 @@ Component({
 
       this.setData({
         scrollTimer: setTimeout(() => {
-          console.log(
-            'e.detail.scrollTop data.scrollTop',
-            scrollTop,
-            this.data.scrollTop,
-            this.data.manualScroll
-          );
+          // console.log(
+          //   'e.detail.scrollTop data.scrollTop',
+          //   scrollTop,
+          //   this.data.scrollTop,
+          //   this.data.manualScroll
+          // );
           const newTop = Math.max(this.data.scrollTop, e.detail.scrollTop);
           if (this.data.manualScroll) {
             this.setData({
@@ -637,12 +648,12 @@ Component({
       const contentHeight =
         (await this.calculateContentHeight()) +
         (await this.calculateContentInTop()); // 内容总高度
-      console.log(
-        'contentHeight clientHeight newTop',
-        contentHeight,
-        clientHeight,
-        this.data.scrollTop + 4
-      );
+      // console.log(
+      //   'contentHeight clientHeight newTop',
+      //   contentHeight,
+      //   clientHeight,
+      //   this.data.scrollTop + 4
+      // );
       if (clientHeight - contentHeight < 10) {
         // 只有当内容高度接近视口高度时才开始增加 scrollTop
         const newTop = this.data.scrollTop + 4;
