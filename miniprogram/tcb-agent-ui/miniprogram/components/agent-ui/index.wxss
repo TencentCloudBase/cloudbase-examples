@@ -285,7 +285,6 @@
 
 .link-box {
   padding: 0px 16px 6px 16px;
-  box-sizing: border-box;
 }
 
 .tool_box {

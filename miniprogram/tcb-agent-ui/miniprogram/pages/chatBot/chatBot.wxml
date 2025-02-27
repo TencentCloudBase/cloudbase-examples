@@ -1,4 +1,4 @@
 <!--pages/chatBot/chatBot.wxml-->
 <view>
-  <agent-ui agentConfig="{{agentConfig}}" showBotAvatar="{{false}}"></agent-ui>
+  <agent-ui agentConfig="{{agentConfig}}" showBotAvatar="{{true}}"></agent-ui>
 </view>

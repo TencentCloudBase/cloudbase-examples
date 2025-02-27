@@ -30,7 +30,7 @@
                 <image src="./imgs/search.svg" mode="aspectFill" style="width: 36rpx;height: 36rpx;" />
                 <text>已参考 {{item.search_info.search_results.length}} 个网页</text>
               </view>
-              <view slot="content" class="link-box" style="width: {{showBotAvatar?580:670}}rpx;">
+              <view slot="content" class="link-box">
                 <block wx:for="{{item.search_info.search_results}}" wx:key="index">
                     <view bind:tap="copyUrl" data-url="{{item.url}}" style="margin-bottom: 3px; font-size: 14px;color: rgb(0, 82, 217); line-height: 24px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"> {{index+1}}.{{item.title}}</view>
                 </block>

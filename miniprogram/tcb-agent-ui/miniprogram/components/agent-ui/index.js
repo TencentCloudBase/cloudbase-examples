@@ -1,10 +1,10 @@
 // components/agent-ui/index.js
-import { guide, checkConfig, randomSelectInitquestion,ThrottleFn } from "./tools";
+import { guide, checkConfig, randomSelectInitquestion } from "./tools";
 Component({
   properties: {
-    showBotAvatar:{
-      type:Boolean,
-      value:false
+    showBotAvatar: {
+      type: Boolean,
+      value: false,
     },
     agentConfig: {
       type: Object,
@@ -521,7 +521,7 @@ Component({
             isManuallyPaused = true;
             break;
           }
-         this.toBottom();
+          this.toBottom();
           const { data } = event;
           try {
             const dataJson = JSON.parse(data);
@@ -539,7 +539,7 @@ Component({
             // 取最后一条消息更新
             const lastValue = newValue[newValue.length - 1];
             lastValue.role = role || "assistant";
-            lastValue.record_id = record_id||lastValue.record_id;// 这里是为了解决markdown渲染库有序列表的问题，每次计算新key
+            lastValue.record_id = record_id || lastValue.record_id; // 这里是为了解决markdown渲染库有序列表的问题，每次计算新key
             // 优先处理错误,直接中断
             if (finish_reason === "error") {
               lastValue.search_info = null;
@@ -566,10 +566,7 @@ Component({
               reasoningContentText += reasoning_content;
               lastValue.reasoning_content = reasoningContentText;
               lastValue.thinkingTime = Math.floor((endTime - startTime) / 1000);
-              ThrottleFn(()=>{
-                this.setData({ chatRecords: newValue, chatStatus: 2 }); // 聊天状态切换为思考中
-              })
-             
+              this.setData({ chatRecords: newValue, chatStatus: 2 }); // 聊天状态切换为思考中
             }
             // 内容
             if (type === "text") {
@@ -701,7 +698,7 @@ Component({
             const lastValue = newValue[newValue.length - 1];
             lastValue.content = contentText;
             lastValue.reasoning_content = reasoningText;
-            lastValue.record_id = "record_id" + String(id) + +new Date();
+            lastValue.record_id = "record_id" + String(id);
             if (!!reasoningText && !contentText) {
               // 推理中
               chatStatus = 2;
