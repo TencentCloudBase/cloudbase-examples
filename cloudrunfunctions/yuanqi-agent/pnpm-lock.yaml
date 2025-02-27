@@ -8,12 +8,18 @@ importers:
 
   .:
     dependencies:
-      '@cloudbase/functions-typings':
-        specifier: ^1.0.0-beta.4
+      '@cloudbase/aiagent-framework':
+        specifier: 1.0.0-beta.4
         version: 1.0.0-beta.4
+      '@cloudbase/functions-typings':
+        specifier: ^1.0.0
+        version: 1.0.0
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.4.7
       openai:
         specifier: ^4.77.3
-        version: 4.77.3
+        version: 4.77.3(zod@3.24.2)
     devDependencies:
       '@types/node':
         specifier: ^22.10.5
@@ -30,8 +36,12 @@ importers:
 
 packages:
 
-  '@cloudbase/functions-typings@1.0.0-beta.4':
-    resolution: {integrity: sha512-3v4MEJRoPyb0Uc1Zae35IgAk1L7wH4kuWGr9Z3DYHndSm+i7clxybpKQdFTMStCVF0qBIP/wR/gt43OTkrC7jQ==}
+  '@cloudbase/aiagent-framework@1.0.0-beta.4':
+    resolution: {integrity: sha512-XO01+P0ZbLFulBoMQzHmOVA8XfDslMjKk4g8fvKv63D2/EaOILcnOXqjEsN2KzJYHDhtwMEy1tO605E0tEHvrA==}
+    engines: {node: '>=18.0.0'}
+
+  '@cloudbase/functions-typings@1.0.0':
+    resolution: {integrity: sha512-Zwdj//5F3TJPM+UR0X/olYiRG0Cu1xU1M4wP7jgnXwTzZjtEYytVArCm0QN/4C+5wRjX2B0BWZkpt2Pm6HsWQA==}
     engines: {node: '>=18.0.0'}
 
   '@cspotcode/source-map-support@0.8.1':
@@ -143,6 +153,10 @@ packages:
   diff@4.0.2:
     resolution: {integrity: sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==}
     engines: {node: '>=0.3.1'}
+
+  dotenv@16.4.7:
+    resolution: {integrity: sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==}
+    engines: {node: '>=12'}
 
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
@@ -341,9 +355,17 @@ packages:
     resolution: {integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==}
     engines: {node: '>=6'}
 
+  zod@3.24.2:
+    resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
+
 snapshots:
 
-  '@cloudbase/functions-typings@1.0.0-beta.4': {}
+  '@cloudbase/aiagent-framework@1.0.0-beta.4':
+    dependencies:
+      '@cloudbase/functions-typings': 1.0.0
+      zod: 3.24.2
+
+  '@cloudbase/functions-typings@1.0.0': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -444,6 +466,8 @@ snapshots:
 
   diff@4.0.2: {}
 
+  dotenv@16.4.7: {}
+
   eastasianwidth@0.2.0: {}
 
   emoji-regex@8.0.0: {}
@@ -515,7 +539,7 @@ snapshots:
     dependencies:
       whatwg-url: 5.0.0
 
-  openai@4.77.3:
+  openai@4.77.3(zod@3.24.2):
     dependencies:
       '@types/node': 18.19.70
       '@types/node-fetch': 2.6.12
@@ -524,6 +548,8 @@ snapshots:
       form-data-encoder: 1.7.2
       formdata-node: 4.4.1
       node-fetch: 2.7.0
+    optionalDependencies:
+      zod: 3.24.2
     transitivePeerDependencies:
       - encoding
 
@@ -623,3 +649,5 @@ snapshots:
       strip-ansi: 7.1.0
 
   yn@3.1.1: {}
+
+  zod@3.24.2: {}

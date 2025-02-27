@@ -1,10 +1,13 @@
 {
   "scripts": {
-    "build": "rimraf ./cloudrunfunctions/dist && tsc",
-    "preDeploy": "npm i && npm run build && rimraf ./node_modules"
+    "build": "tsc",
+    "preDeploy": "npm i && npm run build && rimraf ./node_modules",
+    "dev": "NODE_OPTIONS=\"--require ts-node/register/transpile-only\" tcb-ff --enableCors=true -w"
   },
   "dependencies": {
-    "@cloudbase/functions-typings": "^1.0.0-beta.4",
+    "@cloudbase/aiagent-framework": "1.0.0-beta.4",
+    "@cloudbase/functions-typings": "^1.0.0",
+    "dotenv": "^16.4.7",
     "openai": "^4.77.3"
   },
   "devDependencies": {

@@ -48,7 +48,7 @@ curl 'http://127.0.0.1:3000/v1/aibot/bots/ibot-myBot-botTag/send-message' \
 若使用 @cloudbase/js-sdk，则需要配置一定的代理服务。以 [whistle](https://wproxy.org/whistle/) 举例，按照如下配置：
 
 ```shell
-/.*.api.tcloudbasegateway.com/v1/aibot/bots/([^S]*)/ http://localhost:3000/$1
+/.*.api.tcloudbasegateway.com/([^S]*)/ http://localhost:3000/$1
 ```
 
 即可使用 @cloudbase/js-sdk 用以下代码访问到本地服务：
