@@ -2,7 +2,7 @@
 .h2w {
     font-family: PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
     /* font-weight:300; */
-    font-size: 32rpx;
+    font-size: 28rpx;
     line-height: 1.8;
     word-wrap: break-word;
     word-break: normal;

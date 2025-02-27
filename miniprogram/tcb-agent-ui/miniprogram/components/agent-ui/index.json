@@ -2,7 +2,7 @@
   "component": true,
   "usingComponents": {
     "markdownPreview":"/components/agent-ui/markdownPreview/index",
-    "FoldedCard":"/components/agent-ui/collapsibleCard/index",
+    "FoldedCard":"/components/agent-ui/collapse/index",
 		"chatFile": "/components/agent-ui/chatFile/index"
   }
 }

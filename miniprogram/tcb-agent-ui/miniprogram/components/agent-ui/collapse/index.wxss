@@ -1,0 +1,14 @@
+/* components/agent-ui/collapsibleCard/index.wxss */
+.collapse{
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+.collapse-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #f5f5f5;
+  justify-content: space-between;
+  padding: 18rpx 26rpx;
+  border-radius: 8px;
+}

@@ -8,6 +8,10 @@ Component({
     initStatus: {
       type: Boolean,
       value: false
+    },
+    showBgColor:{
+      type: Boolean,
+      value: false
     }
   },
 

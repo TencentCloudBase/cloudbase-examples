@@ -24,8 +24,8 @@
 }
 
 .avatar {
-  width: 150rpx;
-  height: 150rpx;
+  width: 160rpx;
+  height: 160rpx;
   border-radius: 75rpx;
 }
 
@@ -38,7 +38,7 @@
   padding: 16rpx 24rpx;
   border-radius: 12px;
   display: inline-block;
-  font-size: 28rpx;
+  font-size: 14px;
   font-weight: 300;
 }
 

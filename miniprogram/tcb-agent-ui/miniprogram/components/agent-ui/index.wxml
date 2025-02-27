@@ -1,45 +1,65 @@
 <!-- agent ui 组件根容器 -->
 <view class="agent-ui">
   <!-- 聊天对话区 -->
-  <scroll-view bindwheel="onWheel" bind:tap="toBottom" enhanced="{{true}}" bindscroll="onScroll" scroll-with-animation="{{true}}" binddragstart="handleScrollStart"  class="main" style="height: {{windowInfo.windowHeight-footerHeight}}px;" scroll-y="{{true}}" scroll-top="{{viewTop}}" scroll-into-view="{{ scrollTo }}" lower-threshold="1" bindscrolltolower="handleScrollToLower">
+  <scroll-view bindwheel="onWheel" bind:tap="toBottom" enhanced="{{true}}" bindscroll="onScroll" scroll-with-animation="{{true}}" binddragstart="handleScrollStart" class="main" style="height: {{windowInfo.windowHeight-footerHeight}}px;" scroll-y="{{true}}" scroll-top="{{viewTop}}" scroll-into-view="{{ scrollTo }}" lower-threshold="1" bindscrolltolower="handleScrollToLower">
     <view class="nav">
       <image src="{{bot.avatar||agentConfig.logo}}" mode="aspectFill" class="avatar" />
-      <view style="line-height: 47px;">{{agentConfig.type==='bot'?bot.name:agentConfig.modelName}}</view>
+      <view style="line-height: 47px; font-size: 20px; font-weight: 500;">{{agentConfig.type==='bot'?bot.name:agentConfig.modelName}}</view>
       <view style="line-height: 26px;padding: 0px 16px;">{{agentConfig.type==='bot'?"":agentConfig.welcomeMessage}}</view>
     </view>
     <view class="guide_system" wx:if="{{showGuide}}">
       <markdownPreview markdown="{{guide}}"></markdownPreview>
     </view>
-    <view class="bot_intro_system" wx:if="{{agentConfig.type==='bot'}}">
-      <markdownPreview markdown="{{bot.introduction||''}}"></markdownPreview>
-    </view>
     <block wx:for="{{chatRecords}}" wx:key="record_id">
+      <!-- 系统聊天框 -->
       <view class="system" wx:if="{{item.role==='assistant'}}">
-        <!-- 联网搜索 -->
-        <FoldedCard wx:if="{{item.search_info}}" initStatus="{{false}}">
-          <view slot="title" style="opacity: 0.7;font-size: 16px;">已搜索到 {{item.search_info.search_results.length}} 个网页</view>
-          <view slot="content">
-            <block wx:for="{{item.search_info.search_results}}" wx:key="index">
-              <view bind:tap="copyUrl" data-url="{{item.url}}" style="font-size: 14px;color: #2c56f0; line-height: 24px;margin-bottom: 4px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{index+1}}. {{item.title}}</view>
-            </block>
+        <!-- 最后一条消息，并且是发送状态显示发送中 -->
+        <block wx:if="{{(chatRecords.length-1)===index&&chatStatus===1}}">
+          <view style="display: flex;align-items: center; gap: 4px; font-size: 14px;">
+            <image src="./imgs/loading.svg" mode="aspectFill" style="width: 14px;height: 14px;" /> 请稍等，正在卖力思考中 🤔
           </view>
-        </FoldedCard>
-        <!-- 知识库 -->
-        <!-- 推理过程 -->
-        <FoldedCard wx:if="{{!!item.reasoning_content}}" initStatus="{{true}}">
-          <view slot="title" style="opacity: 0.7;font-size: 16px;">{{item.reasoning_content&&!item.content?"思考中...":"已深度思考"}}</view>
-          <view style="padding-left: 30rpx;border-left: rgb(165, 164, 164) solid 2px; opacity: 0.7; font-size: 12px !important;" slot="content">
-            <markdownPreview markdown="{{item.reasoning_content||''}}"></markdownPreview>
+        </block>
+        <block wx:else>
+          <!-- 联网搜索 -->
+          <FoldedCard wx:if="{{item.search_info}}" initStatus="{{false}}" showBgColor="{{true}}">
+            <view slot="title" style="opacity: 0.7;font-size: 14px;display: flex; align-items: center; gap: 8px;">
+              <image src="./imgs/search.svg" mode="aspectFill" style="width: 36rpx;height: 36rpx;" />
+              <text>已参考 {{item.search_info.search_results.length}} 个网页</text>
+            </view>
+            <view slot="content" style="padding:0px 16px 8px 16px">
+              <block wx:for="{{item.search_info.search_results}}" wx:key="index">
+                <view bind:tap="copyUrl" data-url="{{item.url}}" style="font-size: 14px;color: rgb(0, 82, 217); line-height: 24px;margin-bottom: 4px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{index+1}}. {{item.title}}</view>
+              </block>
+            </view>
+          </FoldedCard>
+          <!-- 知识库 -->
+          <!-- 推理过程 -->
+          <FoldedCard wx:if="{{!!item.reasoning_content}}" initStatus="{{true}}" showBgColor="{{false}}">
+            <view slot="title" style="opacity: 0.7;font-size: 14px; display: flex; align-items: center; gap: 8px;">
+              <image src="./imgs/system-sum.svg" mode="aspectFill" style="width: 36rpx;height: 36rpx;" />
+              <block wx:if="{{item.pauseThinking}}">
+                已停止思考
+              </block>
+              <block wx:else>
+                <text>{{item.reasoning_content&&!item.content?"思考中...":"已深度思考（用时"+item.thinkingTime+"秒）"}}</text>
+              </block>
+            </view>
+            <view style="padding-left: 30rpx;border-left: rgb(165, 164, 164) solid 2px; opacity: 0.7; font-size: 12px !important;" slot="content">
+              <markdownPreview markdown="{{item.reasoning_content||''}}"></markdownPreview>
+            </view>
+          </FoldedCard>
+          <markdownPreview markdown="{{item.content||''}}"></markdownPreview>
+          <!-- 下面的按钮 -->
+          <view style="display: flex; gap: 10px;justify-content: flex;" wx:if="{{!item.hiddenBtnGround}}">
+            <image mode="widthFix" bind:tap="copyChatRecord" src='./imgs/copy.svg' style="width: 36rpx; height: 36rpx;" data-content="{{item.content}}" />
+            <button class="share_btn" open-type="share">
+              <image mode="widthFix" src='./imgs/share.svg' style="width: 36rpx; height: 36rpx;vertical-align: top;" bind:tap="share" />
+            </button>
           </view>
-        </FoldedCard>
-        <markdownPreview markdown="{{item.content||''}}"></markdownPreview>
-        <view style="display: flex; gap: 10px;justify-content: flex-end;" wx:if="{{!streamStatus}}">
-          <image mode="widthFix" bind:tap="copyChatRecord" src='./imgs/copy.svg' style="width: 36rpx; height: 36rpx;" data-content="{{item.content}}" />
-          <button class="share_btn" open-type="share">
-            <image mode="widthFix" src='./imgs/share.svg' style="width: 36rpx; height: 36rpx;vertical-align: top;" bind:tap="share" />
-          </button>
-        </view>
+        </block>
+
       </view>
+      <!-- 用户输入框 -->
       <view class="userContent" wx:if="{{item.role==='user'}}">
         <view class="user">
           <view>
@@ -93,9 +113,9 @@
         <!-- 加号 -->
         <image src="./imgs/set.svg" class="set" mode="widthFix" bind:tap="handleClickTools" />
         <!-- 发送按钮 -->
-        <image src="./imgs/send.svg" class="set" mode="widthFix" wx:if="{{!!inputValue&&!streamStatus}}" bind:tap="sendMessage"  style="transform: rotate(-40deg);transform-origin: 8px 8px"/>
+        <image src="./imgs/send.svg" class="set" mode="widthFix" wx:if="{{!!inputValue&&chatStatus===0}}" bind:tap="sendMessage" style="transform: rotate(-40deg);transform-origin: 8px 8px" />
         <!-- 暂停按钮 -->
-        <image src="./imgs/stop.svg" class="set" mode="widthFix" wx:if="{{!!streamStatus}}" bind:tap="stop" />
+        <image src="./imgs/stop.svg" class="set" mode="widthFix" wx:if="{{!(chatStatus===0)}}" bind:tap="stop" />
       </view>
     </view>
     <!-- 底部工具栏 -->
@@ -138,5 +158,5 @@
       </view>
     </view>
   </view>
-  <image bind:tap="autoToBottom" wx:if="{{manualScroll}}" style="width:30px;height:30px;border-radius: 50px;position: absolute;bottom:150px;right: 20px;background-color: white;" src="./imgs/toBottom.svg" mode="aspectFit"  binderror="" bindload="" />
+  <image bind:tap="autoToBottom" wx:if="{{manualScroll}}" style="width:30px;height:30px;border-radius: 50px;position: absolute;bottom:150px;right: 20px;background-color: white;" src="./imgs/toBottom.svg" mode="aspectFit" binderror="" bindload="" />
 </view>

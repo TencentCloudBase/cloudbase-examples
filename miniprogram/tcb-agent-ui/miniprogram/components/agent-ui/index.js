@@ -66,7 +66,6 @@ Component({
     output: "",
     chatRecords: [],
     scrollTop: 0,
-    streamStatus: false,
     setPanelVisibility: false,
     questions: [],
     scrollTop: 0,
@@ -87,6 +86,7 @@ Component({
     showWebSearchSwitch: false,
     useWebSearch: false,
     showFeatureList: false,
+    chatStatus: 0, // 页面状态： 0-正常状态，可输入，可发送， 1-发送中 2-思考中 3-输出content中
   },
 
   attached: async function () {
@@ -247,7 +247,6 @@ Component({
       });
       this.autoToBottom();
     },
-    //
     bindKeyInput: function (e) {
       this.setData({
         inputValue: e.detail.value,
@@ -256,12 +255,16 @@ Component({
     clearChatRecords: function () {
       const { type } = this.data.agentConfig;
       const { bot } = this.data;
+      this.setData({ showTools: false });
       if (type === "model") {
         this.setData({
           chatRecords: [],
-          streamStatus: false,
-          setPanelVisibility: !this.data.setPanelVisibility,
+          chatStatus: 0,
         });
+        return;
+      }
+      // 只有一条不需要清
+      if (this.data.chatRecords.length === 1) {
         return;
       }
       const record = {
@@ -273,8 +276,8 @@ Component({
       const questions = randomSelectInitquestion(bot.initQuestions, 3);
       this.setData({
         chatRecords: [record],
-        streamStatus: false,
-        // setPanelVisibility: !this.data.setPanelVisibility,
+        chatStatus: 0,
+        questions,
       });
     },
     handleUploadImg: function () {
@@ -398,16 +401,20 @@ Component({
     },
     stop: function () {
       this.autoToBottom();
-      const { chatRecords } = this.data;
+      const { chatRecords, chatStatus } = this.data;
       const newChatRecords = [...chatRecords];
       const record = newChatRecords[newChatRecords.length - 1];
-      if (record.content === "...") {
-        record.content = "已暂停回复";
+      if (chatStatus === 1) {
+        record.content = "已暂停生成";
+      }
+      // 暂停思考
+      if (chatStatus === 2) {
+        record.pauseThinking = true;
       }
       this.setData({
-        streamStatus: false,
         chatRecords: newChatRecords,
         manualScroll: false,
+        chatStatus: 0, // 暂停之后切回正常状态
       });
     },
     openSetPanel: function () {
@@ -428,16 +435,10 @@ Component({
         });
       }
       const { message } = event.currentTarget.dataset;
-      let {
-        inputValue,
-        bot,
-        agentConfig,
-        chatRecords,
-        streamStatus,
-        imageList,
-      } = this.data;
-      // 如果正在流式输出，不让发送消息
-      if (streamStatus) {
+      let { inputValue, bot, agentConfig, chatRecords, chatStatus, imageList } =
+        this.data;
+      // 如果正在进行对话，不让发送消息
+      if (chatStatus !== 0) {
         return;
       }
       // 将传进来的消息给到inputValue
@@ -484,17 +485,17 @@ Component({
       //     });
       //   }
       // }
-
       const record = {
-        content: "...",
+        content: "",
         record_id: "record_id" + String(+new Date() + 10),
         role: "assistant",
+        hiddenBtnGround: true,
       };
       this.setData({
         inputValue: "",
         questions: [],
         chatRecords: [...chatRecords, userRecord, record],
-        streamStatus: false,
+        chatStatus: 1, // 聊天状态切换为1发送中
         imageList: [],
       });
 
@@ -520,18 +521,21 @@ Component({
             searchEnable: this.data.useWebSearch,
           },
         });
-        this.setData({ streamStatus: true });
         let contentText = "";
         let reasoningContentText = "";
+        let isManuallyPaused = false; //这个标记是为了处理手动暂停时，不要请求推荐问题，不显示下面的按钮
+        let startTime = null; //记录开始思考时间
+        let endTime = null; // 记录结束思考时间
         for await (let event of res.eventStream) {
-          if (!this.data.streamStatus) {
+          const { chatStatus } = this.data;
+          if (chatStatus === 0) {
+            isManuallyPaused = true;
             break;
           }
-          // this.toBottom();
+          this.toBottom();
           const { data } = event;
           try {
             const dataJson = JSON.parse(data);
-            // console.log(dataJson)
             const {
               type,
               content,
@@ -560,19 +564,26 @@ Component({
             // 只更新一次参考文献，后续再收到这样的消息丢弃
             if (type === "search" && !lastValue.search_info) {
               lastValue.search_info = search_info;
-              this.setData({ chatRecords: newValue });
+              this.setData({ chatRecords: newValue, chatStatus: 2 }); // 聊天状态切换为思考中,展示联网的信息
             }
             // 思考过程
             if (type === "thinking") {
+              if (!startTime) {
+                startTime = +new Date();
+                endTime = +new Date();
+              } else {
+                endTime = +new Date();
+              }
               reasoningContentText += reasoning_content;
               lastValue.reasoning_content = reasoningContentText;
-              this.setData({ chatRecords: newValue });
+              lastValue.thinkingTime = Math.floor((endTime - startTime) / 1000);
+              this.setData({ chatRecords: newValue, chatStatus: 2 }); // 聊天状态切换为思考中
             }
             // 内容
             if (type === "text") {
               contentText += content;
               lastValue.content = contentText;
-              this.setData({ chatRecords: newValue });
+              this.setData({ chatRecords: newValue, chatStatus: 3 }); // 聊天状态切换为输出content中
             }
             // 知识库，这个版本没有文件元信息，展示不更新
             if (type === "knowledge") {
@@ -584,8 +595,12 @@ Component({
             break;
           }
         }
-        this.setData({ streamStatus: false });
-        if (bot.isNeedRecommend) {
+        const newValue = [...this.data.chatRecords];
+        // 取最后一条消息更新
+        const lastValue = newValue[newValue.length - 1];
+        lastValue.hiddenBtnGround = isManuallyPaused;
+        this.setData({ chatStatus: 0, chatRecords: [...newValue] }); // 对话完成，切回0 ,并且修改最后一条消息的状态，让下面的按钮展示
+        if (bot.isNeedRecommend && !isManuallyPaused) {
           const ai = wx.cloud.extend.AI;
           const recommendRes = await ai.bot.getRecommendQuestions({
             data: {
@@ -667,9 +682,13 @@ Component({
         });
         let contentText = "";
         let reasoningText = "";
-        this.setData({ streamStatus: true });
+        let chatStatus = 2;
+        let isManuallyPaused = false;
+        let startTime = null; //记录开始思考时间
+        let endTime = null; // 记录结束思考时间
         for await (let event of res.eventStream) {
-          if (!this.data.streamStatus) {
+          if (this.data.chatStatus === 0) {
+            isManuallyPaused = true;
             break;
           }
           // this.toBottom();
@@ -686,19 +705,35 @@ Component({
             reasoningText += reasoning_content || "";
             contentText += content || "";
             const newValue = [...this.data.chatRecords];
-            newValue[newValue.length - 1] = {
-              content: contentText,
-              reasoning_content: reasoningText,
-              record_id: "record_id" + String(id),
-              role: role,
-            };
-            this.setData({ chatRecords: newValue });
+            const lastValue = newValue[newValue.length - 1];
+            lastValue.content = contentText;
+            lastValue.reasoning_content = reasoningText;
+            lastValue.record_id = "record_id" + String(id) + +new Date();
+            if (!!reasoningText && !contentText) {
+              // 推理中
+              chatStatus = 2;
+              if (!startTime) {
+                startTime = +new Date();
+                endTime = +new Date();
+              } else {
+                endTime = +new Date();
+              }
+            } else {
+              chatStatus = 3;
+            }
+            lastValue.thinkingTime = endTime
+              ? Math.floor((endTime - startTime) / 1000)
+              : 0;
+            this.setData({ chatRecords: newValue, chatStatus });
           } catch (e) {
             // console.log(e, event)
             break;
           }
         }
-        this.setData({ streamStatus: false });
+        const newValue = [...this.data.chatRecords];
+        const lastValue = newValue[newValue.length - 1];
+        lastValue.hiddenBtnGround = isManuallyPaused; // 用户手动暂停，不显示下面的按钮
+        this.setData({ chatRecords: newValue, chatStatus: 0 }); // 回正
       }
     },
     toBottom: async function () {
