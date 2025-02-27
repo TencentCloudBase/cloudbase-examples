@@ -66,6 +66,12 @@
   </scroll-view>
   <!-- 底部输入区 -->
   <view class="footer">
+    <view class="feature_list" wx:if="{{showFeatureList}}">
+      <view bind:tap="handleClickWebSearch" class="{{'webSearchSwitch ' + (useWebSearch ? 'feature_enable' : '')}}">
+        <image src="{{ useWebSearch ? './imgs/internetUse.svg' : './imgs/internet.svg'}}" mode="" style="width: 20px;height:20px;margin-right: 5px"/>
+        <text>联网搜索</text>
+      </view>
+    </view>
     <view class="file_list" wx:if="{{showFileList}}">
       <chatFile wx:for="{{sendFileList}}" wx:key="tempId" fileData="{{item}}" bind:removeChild="handleRemoveChild" bind:changeChild="handleChangeChild"></chatFile>
     </view>
@@ -115,7 +121,6 @@
         <text class="text_desc">相机</text>
       </view>
     </view>
-    
     <!-- 设置面板 -->
     <view class="set_panel_modal" wx:if="{{setPanelVisibility}}" bind:tap="closeSetPanel">
       <view class="set_panel">
