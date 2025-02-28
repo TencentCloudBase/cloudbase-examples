@@ -559,12 +559,12 @@ Component({
         const res = await ai.bot.sendMessage({
           data: {
             botId: bot.botId,
-            history: [
-              ...chatRecords.map((item) => ({
-                role: item.role,
-                content: item.content,
-              })),
-            ],
+            // history: [
+            //   ...chatRecords.map((item) => ({
+            //     role: item.role,
+            //     content: item.content,
+            //   })),
+            // ],
             msg: inputValue,
             fileList: this.data.enableUpload ? userRecord.fileList.map((item) => ({
               type: item.rawType,
@@ -654,10 +654,15 @@ Component({
         this.setData({ chatStatus: 0, chatRecords: [...newValue] }); // 对话完成，切回0 ,并且修改最后一条消息的状态，让下面的按钮展示
         if (bot.isNeedRecommend && !isManuallyPaused) {
           const ai = wx.cloud.extend.AI;
+          const chatRecords = this.data.chatRecords
+          const lastPairChatRecord = chatRecords.length >= 2 ? chatRecords.slice(chatRecords.length - 2) : []
           const recommendRes = await ai.bot.getRecommendQuestions({
             data: {
               botId: bot.botId,
-              history: [],
+              history: lastPairChatRecord.map(item => ({
+                role: item.role,
+                content: item.content
+              })),
               msg: inputValue,
               agentSetting: "",
               introduction: "",
@@ -821,7 +826,7 @@ Component({
       // console.log(e)
       const { content } = e.currentTarget.dataset;
       wx.setClipboardData({
-        data: content + "\n\n来自微信云开发AI+",
+        data: content,
         success: function (res) {
           wx.showToast({
             title: "复制成功",
