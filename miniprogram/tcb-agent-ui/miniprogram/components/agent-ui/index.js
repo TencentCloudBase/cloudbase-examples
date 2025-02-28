@@ -659,7 +659,10 @@ Component({
           const recommendRes = await ai.bot.getRecommendQuestions({
             data: {
               botId: bot.botId,
-              history: lastPairChatRecord,
+              history: lastPairChatRecord.map(item => ({
+                role: item.role,
+                content: item.content
+              })),
               msg: inputValue,
               agentSetting: "",
               introduction: "",
