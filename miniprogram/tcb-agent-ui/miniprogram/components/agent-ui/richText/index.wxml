@@ -1,0 +1,4 @@
+<view class="weda-RichTextView {{className}}" style="{{style}}">
+  <!-- <mp-html content="{{__html}}" /> -->
+  <rich-text nodes="{{__html}}"/>
+</view>
