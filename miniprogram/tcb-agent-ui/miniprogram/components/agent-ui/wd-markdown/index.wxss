@@ -1,11 +1,122 @@
 /*
  markdown 样式
 */
-.wd-markdown{
-  font-size: 32rpx;
+.wd-markdown {
   word-wrap: break-word;
   word-break: normal;
-  text-align:justify;
+  text-align: justify;
+}
+.wd-markdown ._p {
+  margin-bottom: 10rpx;
+  line-height: 1.8;
+}
+.wd-markdown ._ol {
+  margin-bottom: 30rpx;
+  padding-left: 1.2em;
+}
+.wd-markdown ._ul {
+  margin-bottom: 30rpx;
+  padding-left: 1.2em;
+}
+.wd-markdown ._hr {
+  border: none;
+  border-top: 3px solid #eee;
+  margin-bottom: 10rpx;
+}
+.wd-markdown ._pre {
+  max-width: 100%;
+  padding: 32rpx;
+  overflow-x: auto;
+  background-color: rgb(246, 248, 250);
+  border-radius: 12rpx;
+  font-family: monospace;
+  font-size: 1em;
+  line-height: 1.14285em;
+  border-radius: 12rpx;
+  margin-bottom: 10rpx;
+}
+.wd-markdown ._h1 {
+  border-bottom-style: double;
+  border-bottom-width: 6rpx;
+  font-size: 42rpx;
+  padding-bottom: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.wd-markdown ._h2 {
+  border-bottom-style: solid;
+  border-bottom-width: 1rpx;
+  font-size: 40rpx;
+  padding-bottom: 8rpx;
+  margin-bottom: 18rpx;
+}
+
+.wd-markdown ._h3 {
+  font-size: 38rpx;
+  padding-bottom: 6rpx;
+  margin-bottom: 12rpx;
+}
+
+.wd-markdown ._h4 {
+  font-size: 36rpx;
+  padding-bottom: 4rpx;
+  margin-bottom: 12rpx;
+}
+
+.wd-markdown ._h5 {
+  font-size: 34rpx;
+  padding-bottom: 2rpx;
+  margin-bottom: 12rpx;
+}
+.wd-markdown ._h6 {
+  margin-bottom: 12rpx;
+}
+.wd-markdown ._a {
+  margin: 0 8rpx;
+  border-bottom-width: 1rpx;
+  border-bottom-style: solid;
+  line-height: 1;
+  color: #0000ee;
+}
+.wd-markdown ._blockquote {
+  margin: 0 0 10px;
+  padding: 15px 20px;
+  background-color: #f1f2f3;
+  border-left: 5px solid #ccc;
+  color: #666;
+  font-style: italic;
+}
+.wd-markdown ._tableParent {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.wd-markdown ._table {
+  min-width: fit-content;
+  border-collapse: collapse;
+  margin: 0;
+  overflow: hidden;
+}
+.wd-markdown ._table ._th,
+.wd-markdown ._table ._td {
+  box-sizing: border-box;
+  position: relative;
+  min-width: 70px;
+  padding: 0px 5px;
+  border: 1px solid #e1e6f0;
+  vertical-align: top;
+  background-clip: padding-box;
+}
+.wd-markdown ._table ._th {
+  font-weight: bold;
+  background-color: #f5f7fa;
+}
+.wd-markdown ._table ._td {
+  background-color: white;
+}
+.wd-markdown ._table ._th > ._p,
+.wd-markdown ._table ._td > ._p {
+  min-height: 1em;
 }
 /*!
     Theme: GitHub

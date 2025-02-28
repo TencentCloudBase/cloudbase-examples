@@ -2,7 +2,7 @@ import MarkdownIt from './utils/markdown-it.min.js';
 import highlight from './utils/highlight.min.js';
 import hljsJs from './utils/hljs_javascript.min.js';
 import hljsCss from './utils/hljs_css.min.js';
-import {addCustomClassPlugin} from './utils/plugin'
+import { addCustomClassPlugin } from './utils/plugin'
 Component({
   options: {
     virtualHost: true,
@@ -22,7 +22,11 @@ Component({
     },
     markdown: {
       type: String,
-      value: '这是一个markdown',
+      value: '',
+    },
+    fontSize: {
+      type: Number,
+      value: 32
     },
     options: {
       type: Object,
@@ -48,18 +52,18 @@ Component({
           if (lang && hljs.getLanguage(lang)) {
             try {
               return (
-                '<pre><code class="hljs">' +
+                '<pre class="_pre"><code class="hljs">' +
                 hljs.highlight(str, { language: lang, ignoreIllegals: true }).value +
                 '</code></pre>'
               );
-            } catch (__) {}
+            } catch (__) { }
           }
-          return '<pre><code class="hljs">' + str + '</code></pre>';
+          return '<pre class="_pre"><code class="hljs">' + str + '</code></pre>';
         },
         ...options,
       });
-      console.log(md.renderer.rules)
-      // addCustomClassPlugin(md)
+      // console.log(md.renderer.rules)
+      addCustomClassPlugin(md)
       this.setData({ mdInstance: md });
       this.triggerEvent('onReady', { markdownInstance: md });
       this.setData({
@@ -79,7 +83,7 @@ Component({
     markdown: function () {
       const { mdInstance } = this.data;
       if (!mdInstance) return;
-      const html=mdInstance.render(this.data.markdown)
+      const html = mdInstance.render(this.data.markdown)
       // console.log(html)
       this.setData({
         __html: html,

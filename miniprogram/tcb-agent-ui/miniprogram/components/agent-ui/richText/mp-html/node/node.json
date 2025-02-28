@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "node": "./node",
-    "wd-unified-link": "../../../wd-unified-link/index"
-  }
-}
