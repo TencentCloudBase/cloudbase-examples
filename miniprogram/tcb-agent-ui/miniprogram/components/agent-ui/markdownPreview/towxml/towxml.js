@@ -6,6 +6,10 @@ Component({
     nodes:{
       type:Object,
       value:{}
+    },
+    fontSize:{
+      type:Number,
+      value:32
     }
   },
   data:{

@@ -8,6 +8,10 @@ Component({
     markdown: {
       type: String,
       value: ""
+    },
+    fontSize: {
+      type: Number,
+      value: 32
     }
   },
 

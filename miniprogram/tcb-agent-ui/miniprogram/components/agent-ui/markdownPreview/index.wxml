@@ -1,2 +1,2 @@
 <!--components/agent-ui/markdownPreview/index.wxml-->
-<towxml nodes="{{text}}"></towxml>
+<towxml nodes="{{text}}" fontSize="{{fontSize}}"></towxml>

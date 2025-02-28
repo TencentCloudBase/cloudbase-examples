@@ -5,7 +5,7 @@ Page({
    */
   data: {
     agentConfig: {
-      type: "bot", // 值为'bot'或'model'。当type='bot'时，botId必填；当type='model'时，modelName和model必填
+      type: "model", // 值为'bot'或'model'。当type='bot'时，botId必填；当type='model'时，modelName和model必填
       botId: "bot-db3cab4a", // agent id
       modelName: "deepseek", // 大模型服务商 //
       model: "deepseek-r1", // 具体的模型版本 //
