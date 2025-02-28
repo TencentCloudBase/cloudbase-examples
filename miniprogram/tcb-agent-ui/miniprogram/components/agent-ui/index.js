@@ -310,7 +310,7 @@ Component({
 
           // 找出新获取的一页中，不在内存中的数据
           const freshNum = this.data.size - (this.data.chatRecords.length - 1) % this.data.size
-          const freshChatRecords = res.recordList.slice(0, freshNum)
+          const freshChatRecords = res.recordList.reverse().slice(0, freshNum)
           this.setData({
             chatRecords: [...freshChatRecords, ...this.data.chatRecords]
           })
