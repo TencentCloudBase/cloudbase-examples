@@ -101,6 +101,7 @@ Component({
     size: 10,
     total: 0,
     refreshText: '下拉加载历史记录',
+    contentHeightInScrollViewTop: 0 // scroll区域顶部固定区域高度
   },
 
   attached: async function () {
@@ -150,6 +151,12 @@ Component({
           !!(bot.searchEnable && allowWebSearch),
       });
     }
+
+    const topHeight =  await this.calculateContentInTop()
+    console.log('topHeight', topHeight)
+    this.setData({
+      contentHeightInScrollViewTop: topHeight
+    })
   },
   methods: {
     // 滚动相关处理
@@ -169,6 +176,7 @@ Component({
       });
     },
     calculateContentInTop() {
+      console.log('执行top 部分计算')
       return new Promise((resolve) => {
         const query = wx.createSelectorQuery().in(this);
         query
@@ -235,8 +243,8 @@ Component({
       });
     },
     handleScrollStart: function (e) {
-      console.log("drag start", e);
-      if (e.detail.scrollTop > 0) {
+      // console.log("drag start", e);
+      if (e.detail.scrollTop > 0 && !this.data.manualScroll) {
         // 手动开始滚
         this.setData({
           manualScroll: true,
@@ -249,9 +257,6 @@ Component({
       this.setData({
         manualScroll: false,
       });
-    },
-    handleScrollToUpper: function (e) {
-      console.log('到顶了', e)
     },
     autoToBottom: function () {
       console.log("autoToBottom");
@@ -312,15 +317,6 @@ Component({
           console.log('totalChatRecords', this.data.chatRecords)
         }
       })
-    },
-    handleRefreshPulling: function (e) {
-      console.log('handleRefreshPulling', e)
-    },
-    handleRefreshAbort: async function () {
-      console.log('刷新被中止');
-    },
-    handleRefreshRestore: function (e) {
-      console.log('handleRefreshRestore', e)
     },
     clearChatRecords: function () {
       const { type } = this.data.agentConfig;
@@ -798,7 +794,7 @@ Component({
         this.data.windowInfo.windowHeight - this.data.footerHeight; // 视口高度
       const contentHeight =
         (await this.calculateContentHeight()) +
-        (await this.calculateContentInTop()); // 内容总高度
+        (this.data.contentHeightInScrollViewTop || (await this.calculateContentInTop())); // 内容总高度
       // console.log(
       //   'contentHeight clientHeight newTop',
       //   contentHeight,
