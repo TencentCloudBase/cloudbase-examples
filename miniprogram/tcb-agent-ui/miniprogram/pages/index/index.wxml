@@ -93,7 +93,7 @@
       <view style="margin-bottom:16px;font-size: 14px;line-height: 24px;text-align: justify;">
         <view> <text style="font-weight: 500;">字段：</text>{{item.name}}</view>
         <view><text style="font-weight: 500;">类型：</text>{{item.type}}</view>
-        <view><text style="font-weight: 500;">说明：</text>说明：{{item.desc}}</view>
+        <view><text style="font-weight: 500;">说明：</text>{{item.desc}}</view>
       </view>
     </block>
   </view>

@@ -15,7 +15,7 @@ Component({
         model: "", // 具体的模型版本
         logo: "", // 图标(只在model模式下生效)
         welcomeMessage: "", // 欢迎语(只在model模式下生效)
-        allowWebSearch: true,
+        allowWebSearch: Boolean,
       },
     },
   },
@@ -139,12 +139,15 @@ Component({
       const { chatRecords } = this.data;
       // 随机选取三个初始化问题
       const questions = randomSelectInitquestion(bot.initQuestions, 3);
+      let allowWebSearch = this.data.agentConfig.allowWebSearch
+      console.log('allowWebSearch', allowWebSearch)
+      allowWebSearch = allowWebSearch === undefined ? true : allowWebSearch
       this.setData({
         bot,
         questions,
         chatRecords: [...chatRecords, record],
         showWebSearchSwitch:
-          !!(bot.searchEnable && this.data.agentConfig.allowWebSearch),
+          !!(bot.searchEnable && allowWebSearch),
       });
     }
   },
