@@ -86,15 +86,21 @@ Component({
     scrollTimer: null, //
     manualScroll: false, // 当前为手动滚动/自动滚动
     showTools: false, // 展示底部工具栏
-    showFileList: false, // 展示顶部文件行
+    showFileList: false, // 展示输入框顶部文件行
+    showTopBar: false, // 展示顶部bar
     sendFileList: [],
-    footerHeight: 80,
+    footerHeight: 73,
     lastScrollTop: 0,
-    enableUpload: false, // 待支持
+    enableUpload: false, // 文件待支持
     showWebSearchSwitch: false,
     useWebSearch: false,
     showFeatureList: false,
     chatStatus: 0, // 页面状态： 0-正常状态，可输入，可发送， 1-发送中 2-思考中 3-输出content中
+    triggered: false,
+    page: 1,
+    size: 10,
+    total: 0,
+    refreshText: '下拉加载历史记录',
   },
 
   attached: async function () {
@@ -164,7 +170,7 @@ Component({
         const query = wx.createSelectorQuery().in(this);
         query
           .selectAll(
-            ".main >>> .nav, .main >>> .guide_system, .main >>> .bot_intro_system"
+            ".main >>> .nav, .main >>> .tips"
           )
           .boundingClientRect((rects) => {
             let totalHeight = 0;
@@ -235,11 +241,14 @@ Component({
       }
     },
     handleScrollToLower: function (e) {
-      console.log("scroll to lower", e);
-      // 监听到底转自动
+      // console.log("scroll to lower", e);
+      // 到底转自动
       this.setData({
         manualScroll: false,
       });
+    },
+    handleScrollToUpper: function (e) {
+      console.log('到顶了', e)
     },
     autoToBottom: function () {
       console.log("autoToBottom");
@@ -259,6 +268,56 @@ Component({
       this.setData({
         inputValue: e.detail.value,
       });
+    },
+    onRefresherStatusChange(e) {
+      console.log('status change e', e)
+    },
+    handelRefresh: function (e) {
+      this.setData({
+        triggered: true,
+        refreshText: '刷新中'
+      }, async () => {
+        // 模拟请求回数据后 停止加载
+        console.log('this.data.agentConfig.type', this.data.agentConfig.type)
+        if (this.data.agentConfig.type === 'bot') {
+          // 判断当前是否大于一条 （一条则为系统默认提示，直接从库里拉出最近的一页）
+          if (this.data.chatRecords.length > 1) {
+            const newPage = Math.floor(this.data.chatRecords.length / this.data.size) + 1
+            this.setData({
+              page: newPage
+            })
+          }
+          const res = await wx.cloud.extend.AI.bot.getChatRecords({
+            botId: this.data.agentConfig.botId,
+            pageNumber: this.data.page,
+            pageSize: this.data.size,
+            sort: "desc",
+          });
+          console.log('getChatRecords', res)
+          this.setData({
+            triggered: false,
+            total: res.total,
+            refreshText: '下拉加载历史记录'
+          })
+
+          // 找出新获取的一页中，不在内存中的数据
+          const freshNum = this.data.size - (this.data.chatRecords.length - 1) % this.data.size
+          const freshChatRecords = res.recordList.slice(0, freshNum)
+          this.setData({
+            chatRecords: [...freshChatRecords, ...this.data.chatRecords]
+          })
+          console.log('totalChatRecords', this.data.chatRecords)
+        }
+      })
+    },
+    handleRefreshPulling: function (e) {
+      console.log('handleRefreshPulling', e)
+    },
+    handleRefreshAbort: async function () {
+      console.log('刷新被中止');
+    },
+    handleRefreshRestore: function (e) {
+      console.log('handleRefreshRestore', e)
     },
     clearChatRecords: function () {
       const { type } = this.data.agentConfig;
@@ -286,6 +345,7 @@ Component({
         chatRecords: [record],
         chatStatus: 0,
         questions,
+        page: 1 // 重置分页页码
       });
     },
     handleUploadImg: function () {
@@ -507,10 +567,10 @@ Component({
               })),
             ],
             msg: inputValue,
-            fileList: userRecord.fileList.map((item) => ({
+            fileList: this.data.enableUpload ? userRecord.fileList.map((item) => ({
               type: item.rawType,
               fileId: item.fileId,
-            })),
+            })) : undefined,
             searchEnable: this.data.useWebSearch,
           },
         });
@@ -869,15 +929,9 @@ Component({
       });
     },
     handleClickTools: function () {
-      if (this.data.showTools) {
-        this.setData({
-          showTools: !this.data.showTools,
-        });
-      } else {
-        this.setData({
-          showTools: !this.data.showTools,
-        });
-      }
+      this.setData({
+        showTools: !this.data.showTools,
+      });
     },
     handleClickWebSearch: function () {
       this.setData({

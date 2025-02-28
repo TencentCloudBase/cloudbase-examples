@@ -13,8 +13,81 @@
   align-items: center;
 }
 
+.navBar {
+  height: 40px;
+  width: 100%;
+  box-shadow: 0 16px 16px #fff;
+  /* background: linear-gradient(to bottom, 
+    rgba(245, 245, 245, 0.98) 60%, 
+    rgba(235, 235, 235, 0.92)
+  ); */
+  /* backdrop-filter: blur(20rpx); */
+  /* border-bottom: 1rpx solid rgba(0, 0, 0, 0.08); */
+  /* box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.06); 
+  border-bottom: none; */
+  /* margin-bottom: 10px */
+}
+
+/* .tips {
+  width: 100%;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  color: rgb(95, 92, 92)
+} */
+
+.tips {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  color: rgb(128, 128, 128);
+  font-size: 12px;
+  height: 52px;
+}
+.tips::before,
+.tips::after {
+  content: '';
+  display: inline-block;
+  height: 1px;
+  transform: scaleY(.5);
+  flex-grow: 1;
+  border-radius: 2px;
+}
+.tips::before {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+}
+.tips::after {
+  background-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+}
+
+.nav-content {
+  height:40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.bot-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bot-name {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+
 .main {
   background-color: #fff;
+  /* padding-top:10px; */
 }
 
 .share_btn {
@@ -58,7 +131,7 @@
   border: #f3f3f3 solid 1px;
   border-radius: 16px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  margin: 15px 16px;
+  margin: 8px 16px 15px;
   padding: 4px 8px;
   position: relative;
   background-color: white;
@@ -309,9 +382,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f3f3f3;
-  border-radius: 50px;
-  border: 1px solid rgb(76, 76, 76);
+  border-radius: 25px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   font-size: 14px;
 }
 
