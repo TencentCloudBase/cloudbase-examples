@@ -579,13 +579,16 @@ Component({
         let isManuallyPaused = false; //这个标记是为了处理手动暂停时，不要请求推荐问题，不显示下面的按钮
         let startTime = null; //记录开始思考时间
         let endTime = null; // 记录结束思考时间
+        let index = 0
         for await (let event of res.eventStream) {
           const { chatStatus } = this.data;
           if (chatStatus === 0) {
             isManuallyPaused = true;
             break;
           }
-          this.toBottom();
+          if (index % 10 === 0) { // 更新频率降为1/10
+            this.toBottom(40);
+          }
           const { data } = event;
           try {
             const dataJson = JSON.parse(data);
@@ -601,7 +604,8 @@ Component({
             } = dataJson;
             const newValue = [...this.data.chatRecords];
             // 取最后一条消息更新
-            const lastValue = newValue[newValue.length - 1];
+            const lastValueIndex = newValue.length - 1
+            const lastValue = newValue[lastValueIndex];
             lastValue.role = role || "assistant";
             lastValue.record_id = record_id || lastValue.record_id; // 这里是为了解决markdown渲染库有序列表的问题，每次计算新key
             // 优先处理错误,直接中断
@@ -610,14 +614,22 @@ Component({
               lastValue.reasoning_content = "";
               lastValue.knowledge_meta = [];
               lastValue.content = "网络繁忙，请稍后重试!";
-              this.setData({ chatRecords: newValue });
+              this.setData({
+                [`chatRecords[${lastValueIndex}].search_info`]: lastValue.search_info,
+                [`chatRecords[${lastValueIndex}].reasoning_content`]: lastValue.reasoning_content,
+                [`chatRecords[${lastValueIndex}].knowledge_meta`]: lastValue.knowledge_meta,
+                [`chatRecords[${lastValueIndex}].content`]: lastValue.content,
+              });
               break;
             }
             // 下面根据type来确定输出的内容
             // 只更新一次参考文献，后续再收到这样的消息丢弃
             if (type === "search" && !lastValue.search_info) {
               lastValue.search_info = search_info;
-              this.setData({ chatRecords: newValue, chatStatus: 2 }); // 聊天状态切换为思考中,展示联网的信息
+              this.setData({
+                chatStatus: 2,
+                [`chatRecords[${lastValueIndex}].search_info`]: lastValue.search_info
+              }); // 聊天状态切换为思考中,展示联网的信息
             }
             // 思考过程
             if (type === "thinking") {
@@ -630,13 +642,19 @@ Component({
               reasoningContentText += reasoning_content;
               lastValue.reasoning_content = reasoningContentText;
               lastValue.thinkingTime = Math.floor((endTime - startTime) / 1000);
-              this.setData({ chatRecords: newValue, chatStatus: 2 }); // 聊天状态切换为思考中
+              this.setData({
+                [`chatRecords[${lastValueIndex}].reasoning_content`]: lastValue.reasoning_content,
+                [`chatRecords[${lastValueIndex}].thinkingTime`]: lastValue.thinkingTime,
+                chatStatus: 2
+              }); // 聊天状态切换为思考中
             }
             // 内容
             if (type === "text") {
               contentText += content;
               lastValue.content = contentText;
-              this.setData({ chatRecords: newValue, chatStatus: 3 }); // 聊天状态切换为输出content中
+              this.setData({
+                [`chatRecords[${lastValueIndex}].content`]: lastValue.content, chatStatus: 3
+              }); // 聊天状态切换为输出content中
             }
             // 知识库，这个版本没有文件元信息，展示不更新
             if (type === "knowledge") {
@@ -647,12 +665,18 @@ Component({
             // console.log('err', event, e)
             break;
           }
+          index++
         }
+        this.toBottom(40)
         const newValue = [...this.data.chatRecords];
+        const lastValueIndex = newValue.length - 1
         // 取最后一条消息更新
-        const lastValue = newValue[newValue.length - 1];
+        const lastValue = newValue[lastValueIndex];
         lastValue.hiddenBtnGround = isManuallyPaused;
-        this.setData({ chatStatus: 0, chatRecords: [...newValue] }); // 对话完成，切回0 ,并且修改最后一条消息的状态，让下面的按钮展示
+        this.setData({
+          chatStatus: 0,
+          [`chatRecords[${lastValueIndex}].hiddenBtnGround`]: isManuallyPaused
+        }); // 对话完成，切回0 ,并且修改最后一条消息的状态，让下面的按钮展示
         if (bot.isNeedRecommend && !isManuallyPaused) {
           const ai = wx.cloud.extend.AI;
           const chatRecords = this.data.chatRecords
@@ -672,7 +696,6 @@ Component({
           });
           let result = "";
           for await (let str of recommendRes.textStream) {
-            // console.log(str);
             // this.toBottom();
             this.toBottom();
             result += str;
@@ -795,9 +818,10 @@ Component({
         this.setData({ chatRecords: newValue, chatStatus: 0 }); // 回正
       }
     },
-    toBottom: async function () {
+    toBottom: async function (unit) {
+      const addUnit = unit === undefined ? 4 : unit
       if (this.data.shouldAddScrollTop) {
-        const newTop = this.data.scrollTop + 6;
+        const newTop = this.data.scrollTop + addUnit;
         if (this.data.manualScroll) {
           this.setData({
             scrollTop: newTop,
