@@ -101,7 +101,8 @@ Component({
     size: 10,
     total: 0,
     refreshText: '下拉加载历史记录',
-    contentHeightInScrollViewTop: 0 // scroll区域顶部固定区域高度
+    contentHeightInScrollViewTop: 0, // scroll区域顶部固定区域高度
+    shouldAddScrollTop: false
   },
 
   attached: async function () {
@@ -152,7 +153,7 @@ Component({
       });
     }
 
-    const topHeight =  await this.calculateContentInTop()
+    const topHeight = await this.calculateContentInTop()
     console.log('topHeight', topHeight)
     this.setData({
       contentHeightInScrollViewTop: topHeight
@@ -795,21 +796,8 @@ Component({
       }
     },
     toBottom: async function () {
-      const clientHeight =
-        this.data.windowInfo.windowHeight - this.data.footerHeight; // 视口高度
-      const contentHeight =
-        (await this.calculateContentHeight()) +
-        (this.data.contentHeightInScrollViewTop || (await this.calculateContentInTop())); // 内容总高度
-      // console.log(
-      //   'contentHeight clientHeight newTop',
-      //   contentHeight,
-      //   clientHeight,
-      //   this.data.scrollTop + 4
-      // );
-      if (clientHeight - contentHeight < 10) {
-        // 只有当内容高度接近视口高度时才开始增加 scrollTop
+      if (this.data.shouldAddScrollTop) {
         const newTop = this.data.scrollTop + 6;
-
         if (this.data.manualScroll) {
           this.setData({
             scrollTop: newTop,
@@ -820,6 +808,25 @@ Component({
             viewTop: newTop,
           });
         }
+        return
+      }
+
+      // 只有当内容高度接近scroll 区域视口高度时才开始增加 scrollTop
+      const clientHeight =
+        this.data.windowInfo.windowHeight - this.data.footerHeight - (this.data.agentConfig.type === 'bot' ? 40 : 0); // 视口高度
+      const contentHeight =
+        (await this.calculateContentHeight()) +
+        (this.data.contentHeightInScrollViewTop || (await this.calculateContentInTop())); // 内容总高度
+      console.log(
+        'contentHeight clientHeight newTop',
+        contentHeight,
+        clientHeight,
+        this.data.scrollTop + 4
+      );
+      if (clientHeight - contentHeight < 10) {
+        this.setData({
+          shouldAddScrollTop: true
+        })
       }
     },
     copyChatRecord: function (e) {
