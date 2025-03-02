@@ -817,12 +817,12 @@ Component({
       const contentHeight =
         (await this.calculateContentHeight()) +
         (this.data.contentHeightInScrollViewTop || (await this.calculateContentInTop())); // 内容总高度
-      console.log(
-        'contentHeight clientHeight newTop',
-        contentHeight,
-        clientHeight,
-        this.data.scrollTop + 4
-      );
+      // console.log(
+      //   'contentHeight clientHeight newTop',
+      //   contentHeight,
+      //   clientHeight,
+      //   this.data.scrollTop + 4
+      // );
       if (clientHeight - contentHeight < 10) {
         this.setData({
           shouldAddScrollTop: true
