@@ -28,7 +28,8 @@ Page({
       modelName: "", 
       model: "", 
       logo: "",
-      welcomeMessage: ""
+      welcomeMessage: "",
+      allowWebSearch: true, 
     }
 }`,
       modelConfig1: `data: {
@@ -59,7 +60,8 @@ Page({
       { name: 'model', type: 'string', desc: "具体使用的模型，当 type = 'model' 时，必填。与 modelName 组合使用，可选的组合 [{modelName:'hunyuan-open',model:'hunyuan-lite'},{modelName:'hunyuan-exp',model:'hunyuan-lite'},{modelName:'deepseek',model:'deepseek-r1'},{modelName:'deepseek',model:'deepseek-v3'},{modelName:'hunyuan-open',model:'hunyuan-vision'}]" },
       { name: 'logo', type: 'string', desc: "页面 logo，当 type = 'model' 时，选填" },
       { name: 'welcomeMessage', type: 'string', desc: "欢迎语，当 type = 'model' 时，选填" },
-      {name: 'allowWebSearch', type: 'boolean', desc: "界面是否展示联网搜索开关 选填"}
+      {name: 'allowWebSearch', type: 'boolean', desc: "界面是否展示联网搜索开关 选填"},
+      {name: 'showBotAvatar', type: 'boolean', desc: "界面是否展示左侧头像"}
     ],
     guide: [`{
   "usingComponents": {
