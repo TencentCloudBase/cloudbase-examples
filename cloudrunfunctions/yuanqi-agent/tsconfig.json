@@ -3,7 +3,8 @@
     "module": "commonjs",
     "rootDir": "src",
     "outDir": "dist",
-    "target": "ES2015"
+    "target": "ES2015",
+    "strict": true
   },
   "include": ["**/*.ts"]
 }

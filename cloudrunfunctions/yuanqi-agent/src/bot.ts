@@ -42,22 +42,24 @@ export class MyBot extends BotCore implements IBot {
       { stream: true, messages: [], model: "" },
       {
         body: yuanQiInput,
-      }
+        path: "v1/aibot/bots/:bot_id/send-message",
+      },
     );
     for await (const chunk of chatCompletion) {
       this.sseSender.send({
         data: {
           ...chunk,
-          content: chunk.choices[0]?.delta?.content || ""
-        }
-      })
+          content: chunk.choices[0]?.delta?.content || "",
+        },
+      });
     }
 
-    this.sseSender.end()
+    this.sseSender.end();
   }
 
-
-  async getChatRecords(input: GetChatRecordInput): Promise<GetChatRecordOutput> {
+  async getChatRecords(
+    input: GetChatRecordInput,
+  ): Promise<GetChatRecordOutput> {
     const ret: GetChatRecordOutput = {
       recordList: [],
       total: 0,
@@ -65,7 +67,9 @@ export class MyBot extends BotCore implements IBot {
     return ret;
   }
 
-  async getRecommendQuestions(input: GetRecommendQuestionsInput): Promise<void> {
+  async getRecommendQuestions(
+    input: GetRecommendQuestionsInput,
+  ): Promise<void> {
     const yuanQiInput = {
       assistant_id: this.botTag,
       messages: [
@@ -94,18 +98,18 @@ export class MyBot extends BotCore implements IBot {
       { stream: true, messages: [], model: "" },
       {
         body: yuanQiInput,
-      }
+      },
     );
     for await (const chunk of chatCompletion) {
       this.sseSender.send({
         data: {
           ...chunk,
-          content: chunk.choices[0]?.delta?.content || ""
-        }
-      })
+          content: chunk.choices[0]?.delta?.content || "",
+        },
+      });
     }
 
-    this.sseSender.end()
+    this.sseSender.end();
   }
 
   async sendFeedback(input: SendFeedbackInput): Promise<SendFeedbackOutput> {

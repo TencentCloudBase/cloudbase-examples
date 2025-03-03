@@ -19,7 +19,7 @@ GET    /v1/aibot/bots/:botId/recommend-questions 获取推荐问题
 ### 使用 VSCode 调试时
 
 需在 `/.vscode/launch.json` 中设置 `YUAN_QI_API_KEY` 环境变量。
-  
+
 ## 本地调试指引
 
 本模板使用 typescript 开发，运行 `npm run build` 编译 javascript 产物到 `dist/` 文件夹中。
@@ -55,10 +55,10 @@ curl 'http://127.0.0.1:3000/v1/aibot/bots/ibot-myBot-botTag/send-message' \
 
 ```js
 const res = await ai.bot.sendMessage({
-  botId: 'ibot-myBot-botTag',
-  msg: 'hi',
-  history: []
-})
+  botId: "ibot-myBot-botTag",
+  msg: "hi",
+  history: [],
+});
 
 for await (let x of res.textStream) {
   console.log(x);
