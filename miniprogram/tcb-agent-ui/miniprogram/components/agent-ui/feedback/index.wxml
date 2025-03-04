@@ -1,0 +1,35 @@
+<view class="feedback-modal" wx:if="{{isShowFeedback}}">
+  <view class="feedback">
+    <view class="feedback-header">
+      感谢您的宝贵反馈，我们会不断改进服务
+    </view>
+    <view class="feedback-body">
+      <view class="item-box">
+        <view class="item-title">评分</view>
+        <view style="display: flex; gap: 14rpx;">
+          <block wx:for="{{[1,2,3,4,5]}}" wx:key="*this">
+            <image src="{{item<=score?'./imgs/star-highlight.svg':'./imgs/star.svg'}}" mode="aspectFill" class="star" bind:touchend="onChangeScore" data-score="{{item}}" />
+          </block>
+        </view>
+      </view>
+      <view class="item-box">
+        <view class="item-title">回答内容</view>
+        <view>
+          <block wx:for="{{feedbackType==='upvote'?upVote:downVote}}" wx:key="value">
+            <view class="{{item.selected?'vote-item-highlight':'vote-item-normal'}}" bind:tap="onSelect" data-item="{{item}}">{{item.value}}</view>
+          </block>
+        </view>
+      </view>
+      <view class="item-box">
+        <view class="item-title">反馈建议</view>
+        <view>
+          <textarea value="{{message}}" class="feedback-textarea" maxlength="140" bindinput="inputChange"/>
+        </view>
+      </view>
+    </view>
+    <view class="feedback-footer">
+      <view class="btn-cancel" bind:tap="closeShowFeedback">取消</view>
+      <view class="btn-submit" bind:tap="submitFeedback">提交反馈</view>
+    </view>
+  </view>
+</view>

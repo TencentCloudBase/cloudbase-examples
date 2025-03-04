@@ -1,32 +1,13 @@
 <!-- agent ui 组件根容器 -->
 <view class="agent-ui">
   <view class="navBar" wx:if="{{agentConfig.type === 'bot'}}">
-      <view class="nav-content">
-        <!-- <image src="{{bot.avatar}}" mode="aspectFill" class="bot-avatar"/> -->
-        <text class="bot-name">{{bot.name}}</text>
-      </view>
+    <view class="nav-content">
+      <!-- <image src="{{bot.avatar}}" mode="aspectFill" class="bot-avatar"/> -->
+      <text class="bot-name">{{bot.name}}</text>
     </view>
+  </view>
   <!-- 聊天对话区 -->
-  <scroll-view 
-    bindwheel="onWheel" 
-    enhanced="{{true}}" 
-    bindscroll="onScroll" 
-    binddragstart="handleScrollStart"  
-    class="main" 
-    style="height: {{windowInfo.windowHeight-footerHeight-(agentConfig.type === 'bot' ? 40 : 0)}}px;" 
-    scroll-y="{{true}}" 
-    scroll-top="{{viewTop}}" 
-    scroll-into-view="{{ scrollTo }}" 
-    lower-threshold="1" 
-    bindscrolltolower="handleScrollToLower" 
-    show-scrollbar="{{false}}" 
-    refresher-enabled="{{true}}" 
-    refresher-threshold="{{80}}" 
-    bindrefresherrefresh="handelRefresh"  
-    refresher-triggered="{{triggered}}" 
-    bounces="{{false}}"
-    bind:refresherstatuschange="onRefresherStatusChange"
-    >
+  <scroll-view bindwheel="onWheel" enhanced="{{true}}" bindscroll="onScroll" binddragstart="handleScrollStart" class="main" style="height: {{windowInfo.windowHeight-footerHeight-(agentConfig.type === 'bot' ? 40 : 0)}}px;" scroll-y="{{true}}" scroll-top="{{viewTop}}" scroll-into-view="{{ scrollTo }}" lower-threshold="1" bindscrolltolower="handleScrollToLower" show-scrollbar="{{false}}" refresher-enabled="{{true}}" refresher-threshold="{{80}}" bindrefresherrefresh="handelRefresh" refresher-triggered="{{triggered}}" bounces="{{false}}" bind:refresherstatuschange="onRefresherStatusChange">
     <view wx:if="{{agentConfig.type === 'bot'}}" class="tips">
       {{refreshText}}
     </view>
@@ -57,7 +38,7 @@
               </view>
               <view slot="content" class="link-box">
                 <block wx:for="{{item.search_info.search_results}}" wx:key="index">
-                    <view bind:tap="copyUrl" data-url="{{item.url}}" style="margin-bottom: 3px; font-size: 14px;color: rgb(0, 82, 217); line-height: 24px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"> {{index+1}}.{{item.title}}</view>
+                  <view bind:tap="copyUrl" data-url="{{item.url}}" style="margin-bottom: 3px; font-size: 14px;color: rgb(0, 82, 217); line-height: 24px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"> {{index+1}}.{{item.title}}</view>
                 </block>
               </view>
             </FoldedCard>
@@ -84,13 +65,17 @@
               <button class="share_btn" open-type="share">
                 <image mode="widthFix" src='./imgs/share.svg' style="width: 36rpx; height: 36rpx;vertical-align: top;" bind:tap="share" />
               </button>
+              <block wx:if="{{agentConfig.type=== 'bot'}}">
+                <image mode="widthFix" bind:tap="openFeedback" data-feedbackType="upvote" data-feedbackRecordId="{{item.record_id}}" src='./imgs/thumb-up.svg' style="width: 36rpx; height: 36rpx;" />
+                <image mode="widthFix" bind:tap="openFeedback" data-feedbackType="downvote" data-feedbackRecordId="{{item.record_id}}" src='./imgs/thumb-down.svg' style="width: 36rpx; height: 36rpx;" />
+              </block>
             </view>
           </block>
         </view>
       </view>
       <!-- 用户输入框 -->
       <view class="userContent" wx:if="{{item.role==='user'}}">
-        <view class="user">
+        <view class="user" style="padding-left: {{showBotAvatar?80:0}}rpx;">
           <view>
             {{item.content}}
           </view>
@@ -117,7 +102,7 @@
   <view class="footer">
     <view class="feature_list" wx:if="{{showFeatureList}}">
       <view bind:tap="handleClickWebSearch" class="{{'webSearchSwitch ' + (useWebSearch ? 'feature_enable' : '')}}">
-        <image src="{{ useWebSearch ? './imgs/internetUse.svg' : './imgs/internet.svg'}}" mode="" style="width: 40rpx;height:30px;margin-right: 10rpx"/>
+        <image src="{{ useWebSearch ? './imgs/internetUse.svg' : './imgs/internet.svg'}}" mode="" style="width: 40rpx;height:30px;margin-right: 10rpx" />
         <text>联网搜索</text>
       </view>
     </view>
@@ -188,4 +173,5 @@
     </view>
   </view>
   <image bind:tap="autoToBottom" wx:if="{{manualScroll}}" style="width:35px;height:35px;border-radius: 50px;position: absolute;bottom:150px;right: 20px;padding: 5px;background-color: white;" src="./imgs/toBottom.svg" mode="aspectFit" binderror="" bindload="" />
+  <feedback input="{{input}}" aiAnswer="{{aiAnswer}}" isShowFeedback="{{isShowFeedback}}" bind:close="closefeedback" feedbackRecordId="{{feedbackRecordId}}" feedbackType="{{feedbackType}}" botId="{{bot.botId}}"></feedback>
 </view>

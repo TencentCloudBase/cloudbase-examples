@@ -102,7 +102,10 @@ Component({
     total: 0,
     refreshText: '下拉加载历史记录',
     contentHeightInScrollViewTop: 0, // scroll区域顶部固定区域高度
-    shouldAddScrollTop: false
+    shouldAddScrollTop: false,
+    isShowFeedback:false,
+    feedbackRecordId:'',
+    feedbackType:""
   },
 
   attached: async function () {
@@ -160,6 +163,22 @@ Component({
     })
   },
   methods: {
+    openFeedback:function(e){
+      const {feedbackrecordid,feedbacktype}=e.currentTarget.dataset
+      let index=null;
+      this.data.chatRecords.forEach((item,_index)=>{
+        if(item.record_id===feedbackrecordid){
+          index=_index
+        }
+      })
+      const inputRecord=this.data.chatRecords[index-1]
+      const answerRecord=this.data.chatRecords[index]
+      // console.log(record)
+      this.setData({isShowFeedback:true,feedbackRecordId:feedbackrecordid,feedbackType:feedbacktype,aiAnswer:answerRecord.content,input:inputRecord.content})
+    },
+    closefeedback:function(){ 
+      this.setData({isShowFeedback:false,feedbackRecordId:'',feedbackType:''})
+    },
     // 滚动相关处理
     calculateContentHeight() {
       return new Promise((resolve) => {
@@ -311,7 +330,7 @@ Component({
 
           // 找出新获取的一页中，不在内存中的数据
           const freshNum = this.data.size - (this.data.chatRecords.length - 1) % this.data.size
-          const freshChatRecords = res.recordList.reverse().slice(0, freshNum)
+          const freshChatRecords = res.recordList.reverse().slice(0, freshNum).map(item=>({...item,record_id:item.recordId}))
           this.setData({
             chatRecords: [...freshChatRecords, ...this.data.chatRecords]
           })
@@ -607,7 +626,7 @@ Component({
             const lastValueIndex = newValue.length - 1
             const lastValue = newValue[lastValueIndex];
             lastValue.role = role || "assistant";
-            lastValue.record_id = record_id || lastValue.record_id; // 这里是为了解决markdown渲染库有序列表的问题，每次计算新key
+            lastValue.record_id = record_id; 
             // 优先处理错误,直接中断
             if (finish_reason === "error") {
               lastValue.search_info = null;
@@ -619,6 +638,7 @@ Component({
                 [`chatRecords[${lastValueIndex}].reasoning_content`]: lastValue.reasoning_content,
                 [`chatRecords[${lastValueIndex}].knowledge_meta`]: lastValue.knowledge_meta,
                 [`chatRecords[${lastValueIndex}].content`]: lastValue.content,
+                [`chatRecords[${lastValueIndex}].record_id`]: lastValue.record_id,
               });
               break;
             }
@@ -628,7 +648,8 @@ Component({
               lastValue.search_info = search_info;
               this.setData({
                 chatStatus: 2,
-                [`chatRecords[${lastValueIndex}].search_info`]: lastValue.search_info
+                [`chatRecords[${lastValueIndex}].search_info`]: lastValue.search_info,
+                [`chatRecords[${lastValueIndex}].record_id`]: lastValue.record_id,
               }); // 聊天状态切换为思考中,展示联网的信息
             }
             // 思考过程
@@ -645,6 +666,7 @@ Component({
               this.setData({
                 [`chatRecords[${lastValueIndex}].reasoning_content`]: lastValue.reasoning_content,
                 [`chatRecords[${lastValueIndex}].thinkingTime`]: lastValue.thinkingTime,
+                [`chatRecords[${lastValueIndex}].record_id`]: lastValue.record_id,
                 chatStatus: 2
               }); // 聊天状态切换为思考中
             }
@@ -653,7 +675,9 @@ Component({
               contentText += content;
               lastValue.content = contentText;
               this.setData({
-                [`chatRecords[${lastValueIndex}].content`]: lastValue.content, chatStatus: 3
+                [`chatRecords[${lastValueIndex}].content`]: lastValue.content,
+                [`chatRecords[${lastValueIndex}].record_id`]: lastValue.record_id,
+                chatStatus: 3
               }); // 聊天状态切换为输出content中
             }
             // 知识库，这个版本没有文件元信息，展示不更新
