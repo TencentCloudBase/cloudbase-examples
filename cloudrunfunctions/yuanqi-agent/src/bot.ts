@@ -11,27 +11,47 @@ import {
   GetFeedbackOutput,
 } from "@cloudbase/aiagent-framework";
 import OpenAI from "openai";
+import { fixMessages } from "./util";
+import { YUAN_QI_AGENT_ID, YUAN_QI_API_KEY } from "./const";
 
 export class MyBot extends BotCore implements IBot {
-  async sendMessage({ msg, history }: SendMessageInput): Promise<void> {
+  async sendMessage(
+    x: SendMessageInput & {
+      yuanQiMessages?: SendMessageInput["history"];
+    },
+  ): Promise<void> {
+    let messages;
+    const { msg, history, yuanQiMessages } = x;
+
+    if (yuanQiMessages) {
+      messages = fixMessages(yuanQiMessages);
+    } else {
+      messages = fixMessages(history);
+      if (
+        messages.length !== 0 &&
+        messages[messages.length - 1].role === "assistant"
+      ) {
+        messages.pop();
+      }
+      messages.push({
+        role: "user",
+        content: [
+          {
+            type: "text",
+            text: msg,
+          },
+        ],
+      });
+    }
+
     const yuanQiInput = {
-      assistant_id: this.botTag,
-      messages: [
-        {
-          role: "user",
-          content: [
-            {
-              type: "text",
-              text: msg,
-            },
-          ],
-        },
-      ],
+      assistant_id: YUAN_QI_AGENT_ID,
+      messages,
       stream: true,
     };
 
     const client = new OpenAI({
-      apiKey: process.env.YUAN_QI_API_KEY,
+      apiKey: YUAN_QI_API_KEY,
       baseURL: "https://yuanqi.tencent.com/openapi/v1/agent/",
       defaultHeaders: {
         "X-Source": "openapi",
@@ -42,7 +62,6 @@ export class MyBot extends BotCore implements IBot {
       { stream: true, messages: [], model: "" },
       {
         body: yuanQiInput,
-        path: "v1/aibot/bots/:bot_id/send-message",
       },
     );
     for await (const chunk of chatCompletion) {
