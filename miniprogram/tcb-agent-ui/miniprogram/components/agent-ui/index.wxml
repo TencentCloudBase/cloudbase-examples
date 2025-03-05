@@ -17,7 +17,7 @@
       <view style="line-height: 26px;padding: 0px 16px; font-size: 32rpx;">{{agentConfig.type==='bot'?"":agentConfig.welcomeMessage}}</view>
     </view>
     <block wx:for="{{chatRecords}}" wx:key="record_id">
-      <!-- 系统聊天框 -->
+      <!-- 系统聊天 -->
       <view class="system" style="padding-left: {{showBotAvatar?80:0}}rpx;" wx:if="{{item.role==='assistant'}}">
         <view class="avatar-left" wx:if="{{showBotAvatar}}">
           <image src="{{agentConfig.type==='bot'?bot.avatar:agentConfig.logo}}" mode="aspectFill" style="width: 56rpx;height: 56rpx; border-radius: 28rpx;" />
@@ -76,15 +76,15 @@
           </block>
         </view>
       </view>
-      <!-- 用户输入框 -->
+      <!-- 用户输入 -->
       <view class="userContent" wx:if="{{item.role==='user'}}">
         <view class="user" style="padding-left: {{showBotAvatar?80:0}}rpx;">
-          <view>
+          <view class="user_content">
             {{item.content}}
           </view>
         </view>
         <view class="fileBar">
-          <chatFile style="margin-right:32rpx" enableDel="false" wx:for="{{item.fileList}}" wx:for-item="innerItem" wx:key="tempPath" fileData="{{innerItem}}" bind:removeChild="handleRemoveChild" bind:changeChild="handleChangeChild"></chatFile>
+          <chatFile enableDel="{{false}}" wx:for="{{item.fileList}}" wx:for-item="innerItem" wx:key="tempPath" fileData="{{innerItem}}" bind:removeChild="handleRemoveChild" bind:changeChild="handleChangeChild"></chatFile>
         </view>
         <view style="display: flex;flex-direction: row-reverse; overflow-x: auto;white-space: nowrap;margin:0px 16px 0px 100rpx ">
           <block wx:for="{{item.imageList}}" wx:key="tempFilePath" wx:for-item="item1">
@@ -110,7 +110,7 @@
       </view>
     </view>
     <view class="file_list" wx:if="{{showFileList}}">
-      <chatFile wx:for="{{sendFileList}}" wx:key="tempId" fileData="{{item}}" bind:removeChild="handleRemoveChild" bind:changeChild="handleChangeChild"></chatFile>
+      <chatFile enableDel="{{true}}" wx:for="{{sendFileList}}" wx:key="tempId" fileData="{{item}}" bind:removeChild="handleRemoveChild" bind:changeChild="handleChangeChild"></chatFile>
     </view>
     <view class="foot-function">
       <scroll-view class="img-box" scroll-x="true" wx:if="{{!!imageList.length}}">
@@ -145,13 +145,13 @@
         <image src="./imgs/uploadImg.svg" alt="widthFix" class="icon" />
         <text class="text_desc">添加图片</text>
       </view>
-      <view wx:if="{{enableUpload && agentConfig.type === 'bot'}}" class="function" bind:tap="handleUploadImg">
+      <view wx:if="{{enableUpload && agentConfig.type === 'bot'}}" class="function" bind:tap="handleAlbum">
         <image src="./imgs/uploadImg.svg" alt="widthFix" class="icon" />
         <text class="text_desc">图片</text>
       </view>
-      <view wx:if="{{enableUpload && agentConfig.type === 'bot'}}" class="function" bind:tap="handleUploadFile">
-        <image src="./imgs/file.svg" alt="widthFix" class="icon" />
-        <text class="text_desc">文件</text>
+      <view wx:if="{{enableUpload && agentConfig.type === 'bot'}}" class="function" bind:tap="handleUploadMessageFile">
+        <image src="./imgs/wechat.svg" alt="widthFix" class="icon" />
+        <text class="text_desc">微信文件</text>
       </view>
       <view wx:if="{{enableUpload && agentConfig.type === 'bot'}}" class="function" bind:tap="handleCamera">
         <image src="./imgs/camera.svg" alt="widthFix" class="icon" />
