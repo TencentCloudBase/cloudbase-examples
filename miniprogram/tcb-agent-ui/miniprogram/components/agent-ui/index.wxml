@@ -43,6 +43,9 @@
               </view>
             </FoldedCard>
             <!-- 知识库 -->
+            <view wx:if="{{item.knowledge_base&&item.knowledge_base.length}}" style="border-radius: 8px;margin-bottom: 12px;background-color: #f5f5f5;padding: 18rpx 26rpx;display: inline-block;opacity: 0.7;font-size: 14px;">
+              已参考 {{item.knowledge_base.length}} 个知识库
+            </view>
             <!-- 推理过程 -->
             <FoldedCard wx:if="{{!!item.reasoning_content}}" initStatus="{{true}}" showBgColor="{{false}}">
               <view slot="title" style="opacity: 0.7;font-size: 14px; display: flex; align-items: center; gap: 8px;">

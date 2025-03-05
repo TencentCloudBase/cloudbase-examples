@@ -619,6 +619,7 @@ Component({
               search_info,
               role,
               knowledge_meta,
+              knowledge_base,
               finish_reason,
             } = dataJson;
             const newValue = [...this.data.chatRecords];
@@ -628,7 +629,7 @@ Component({
             lastValue.role = role || "assistant";
             lastValue.record_id = record_id; 
             // 优先处理错误,直接中断
-            if (finish_reason === "error") {
+            if (finish_reason === "error"||finish_reason === "content_filter") {
               lastValue.search_info = null;
               lastValue.reasoning_content = "";
               lastValue.knowledge_meta = [];
@@ -680,10 +681,14 @@ Component({
                 chatStatus: 3
               }); // 聊天状态切换为输出content中
             }
-            // 知识库，这个版本没有文件元信息，展示不更新
-            if (type === "knowledge") {
-              // lastValue.knowledge_meta = knowledge_meta
-              // this.setData({ chatRecords: newValue });
+            // 知识库，只更新一次
+            if (type === "knowledge"&&!lastValue.knowledge_meta) {
+              // console.log('ryan',knowledge_base)
+              lastValue.knowledge_base = knowledge_base
+              this.setData({
+                [`chatRecords[${lastValueIndex}].knowledge_base`]: lastValue.knowledge_base,
+                chatStatus: 2
+              }); 
             }
           } catch (e) {
             // console.log('err', event, e)
