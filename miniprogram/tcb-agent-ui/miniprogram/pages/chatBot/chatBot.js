@@ -13,6 +13,7 @@ Page({
       welcomeMessage: "欢迎语!", // 欢迎语(只在model模式下生效)
       allowWebSearch: true, // 允许界面呈现联网配置开关
     },
+    showBotAvatar:true// 是否在对话框左侧显示头像
   },
 
   // modelName: "hunyuan-open", // 大模型服务商
