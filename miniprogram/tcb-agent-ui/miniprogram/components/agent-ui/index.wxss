@@ -131,7 +131,7 @@
   border: #f3f3f3 solid 1px;
   border-radius: 16px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  margin: 8px 16px 15px;
+  margin: 8px 16px 8px;
   padding: 4px 8px;
   position: relative;
   background-color: white;
@@ -244,7 +244,8 @@
   background-color: #fff;
   color: black;
   padding: 0px 6px;
-  border-radius: 6px;
+  border-radius: 16px;
+  box-shadow: 0 0px 2px rgba(0, 0, 0, 0.253);
 }
 
 .icon {
@@ -305,13 +306,21 @@
 }
 
 .userContent .fileBar {
-  display: flex;
+  /* display: flex;
   overflow-x: scroll;
-  justify-content: flex-end;
-  width: 100%;
+  justify-content: flex-end; */
+  /* width: 100%; */
+  display: flex;
+  flex-direction: row;
+  flex-direction: row-reverse;
+  flex-wrap: nowrap;
+  padding: 0px 16px;
+  overflow-x: scroll;
+  max-height: 80px;
+  gap: 10px;
 }
 
-.user view {
+.user .user_content {
   background-color: #f3f5fb;
   border-radius: 12rpx 0rpx 12rpx 12rpx;
   margin-left: 32rpx;
@@ -364,7 +373,7 @@
   height: 80px;
   display: flex;
   flex-direction: row;
-  padding: 10px 16px;
+  padding: 5px 16px;
   box-sizing: border-box;
   gap: 10px;
   justify-content: flex-start;

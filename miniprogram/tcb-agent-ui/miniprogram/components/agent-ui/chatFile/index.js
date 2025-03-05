@@ -2,9 +2,10 @@
 Component({
   lifetimes: {
     attached: function () {
+      console.log('enableDel', this.data.enableDel)
       // const formatSize = this.transformSize(this.data.fileSize)
-      const {fileName, tempPath, fileId} = this.data.fileData
-      const type = this.getFileType(fileName)
+      const {tempFileName, rawFileName, tempPath, fileId, botId} = this.data.fileData
+      const type = this.getFileType(tempFileName)
       console.log('type', type)
       if(fileId) {
         this.setData({
@@ -20,24 +21,18 @@ Component({
       })
 
       // 上传云存储获取 fileId
+      console.log('rawFileName tempFileName tempPath',rawFileName, tempFileName, tempPath)
       wx.cloud.uploadFile({
-        cloudPath: fileName, // 云上文件路径
+        cloudPath: this.generateCosUploadPath(botId, rawFileName ? (rawFileName.split('.')[0] + '-' + tempFileName) : tempFileName), // 云上文件路径
         filePath: tempPath, // 本地文件路径
         success: res => {
             console.log('上传成功，fileID为：', res.fileID);
-            // 此时你可以使用res.fileID进行后续操作
-            // this.setData({
-            //   fileData: {
-            //     ...this.data.fileData,
-            //     fileId: res.fileID
-            //   }
-            // })
             this.triggerEvent('changeChild', {tempId: this.data.fileData.tempId, fileId: res.fileID})
         },
         fail: err => {
             console.error('上传失败：', err);
         }
-    });
+      });
     }
   },
   observers: {
@@ -59,14 +54,15 @@ Component({
 	properties: {
     enableDel: {
       type: Boolean,
-      value: true
+      value: false
     },
     fileData: {
       type: Object,
       value: {
         tempId: '',
         rawType: '',
-        fileName: '',
+        tempFileName: '',
+        rawFileName: '',
         tempPath: '',
         fileSize: 0,
         fileUrl: '',
@@ -86,6 +82,9 @@ Component({
 	 * 组件的方法列表，
 	 */
 	methods: {
+    generateCosUploadPath: function (botId, fileName) {
+      return `agent_file/${botId}/${fileName}`
+    },
 		// 提取文件后缀
 		getFileType: function (fileName) {
 			let index = fileName.lastIndexOf('.');
@@ -93,11 +92,15 @@ Component({
       if(fileExt === 'docx' || fileExt === 'doc') {
         return 'word'
       }
-      if(fileExt === 'xlsx' || fileExt === 'xls') {
+      if(fileExt === 'xlsx' || fileExt === 'xls' || fileExt === 'csv') {
         return 'excel'
       }
       if(fileExt === 'png' || fileExt === 'jpg' || fileExt === 'jpeg' || fileExt === 'svg') {
         return 'image'
+      }
+
+      if(fileExt === 'ppt' || fileExt === 'pptx') {
+        return 'ppt'
       }
 
       if(fileExt === 'pdf') {
@@ -127,6 +130,45 @@ Component({
     removeFileFromParents: function () {
       console.log('remove', this.data.fileData)
       this.triggerEvent('removeChild', {tempId: this.data.fileData.tempId})
+    },
+    openFile: function () {
+      if(this.data.fileData.tempPath) {
+        if(this.data.fileData.rawType === 'file') {
+          const fileExt = this.data.fileData.tempPath.split('.')[1]
+          if(['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf'].includes(fileExt)) {
+            wx.openDocument({
+              filePath: this.data.fileData.tempPath,
+              success: function (res) {
+                console.log('打开文档成功')
+              },
+              fail: function (err) {
+                console.log('打开文档失败', err)
+              }
+            })
+          }else {
+            wx.showModal({
+              content: "当前支持文件类型为 pdf、doc、docx、ppt、pptx、xls、xlsx",
+              showCancel: false,
+              confirmText: '确定'
+            })
+          }
+        }else {
+          console.log('fileId', this.data.fileData.fileId)
+          if(this.data.fileData.fileId) {
+            wx.previewImage({
+              urls: [this.data.fileData.fileId],
+              showmenu: true,
+              success: function (res) {
+                console.log('res', res)
+              },
+              fail: function (e) {
+                console.log('e', e)
+              }
+            })
+          }
+        }
+      }
+      // TODO: 针对带cloudID的处理（历史记录中附带的文件）
     }
 	},
 });

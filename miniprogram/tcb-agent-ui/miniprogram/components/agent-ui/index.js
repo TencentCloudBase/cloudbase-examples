@@ -1,5 +1,6 @@
 // components/agent-ui/index.js
 import { guide, checkConfig, randomSelectInitquestion } from "./tools";
+import md5 from './md5'
 Component({
   properties: {
     showBotAvatar: {
@@ -89,9 +90,9 @@ Component({
     showFileList: false, // 展示输入框顶部文件行
     showTopBar: false, // 展示顶部bar
     sendFileList: [],
-    footerHeight: 73,
+    footerHeight: 66,
     lastScrollTop: 0,
-    enableUpload: false, // 文件待支持
+    enableUpload: true, // 文件待支持
     showWebSearchSwitch: false,
     useWebSearch: false,
     showFeatureList: false,
@@ -367,61 +368,135 @@ Component({
         page: 1 // 重置分页页码
       });
     },
-    handleUploadImg: function () {
-      const self = this;
-      wx.chooseMessageFile({
-        count: 10,
-        type: "image",
+    chooseMedia: function (sourceType) {
+      const self = this
+      wx.chooseMedia({
+        count: 1,
+        mediaType: ["image"],
+        sourceType: [sourceType],
+        maxDuration: 30,
+        camera: "back",
         success(res) {
-          // tempFilePath可以作为img标签的src属性显示图片
-          // const tempFilePaths = res.tempFiles;
           console.log("res", res);
-          const tempFiles = res.tempFiles.map((item) => ({
-            tempId: `${new Date().getTime()}-${item.name}`,
-            rawType: item.type, // 微信选择默认的文件类型 image/video/file
-            fileName: item.name, // 文件名
-            tempPath: item.path,
-            fileSize: item.size,
-            fileUrl: "",
-            fileId: "",
-          }));
-          // 过滤掉已选择中的 file 文件（保留image）
-          const filterFileList = self.data.sendFileList.filter(
-            (item) => item.rawType !== "file"
-          );
-          const finalFileList = [...filterFileList, ...tempFiles];
+          console.log('tempFiles', res.tempFiles)
+          const isImageSizeValid = res.tempFiles.every(item => item.size <= 30*1024*1024)
+          if(!isImageSizeValid) {
+            wx.showToast({
+              title: "图片大小30M限制",
+              icon: "error",
+            });
+            return
+          }
+          const tempFiles = res.tempFiles.map((item) => {
+            const tempFileInfos = item.tempFilePath.split('.')
+            const tempFileName = md5(tempFileInfos[0]) + '.' + tempFileInfos[1]
+            return {
+              tempId: tempFileName,
+              rawType: item.fileType, // 微信选择默认的文件类型 image/video/file
+              tempFileName: tempFileName, // 文件名
+              rawFileName: '', // 图片类不带源文件名
+              tempPath: item.tempFilePath,
+              fileSize: item.size,
+              fileUrl: "",
+              fileId: "",
+              botId: self.data.agentConfig.botId,
+            };
+          });
+
+          const finalFileList = [...tempFiles];
           console.log("final", finalFileList);
           self.setData({
             sendFileList: finalFileList, //
           });
-
           if (finalFileList.length) {
             self.setData({
-              showFileList: true,
               showTools: false,
             });
+            if(!self.data.showFileList) {
+              self.setData({
+                showFileList: true,
+              })
+            }
           }
         },
       });
     },
-    handleUploadFile: function () {
+    handleUploadImg: function (sourceType) {
       const self = this;
+      const isCurSendFile = this.data.sendFileList.find(item => item.rawType === 'file')
+      if(isCurSendFile) {
+        wx.showModal({
+          title: '确认替换吗',
+          content: '上传图片将替换当前文件内容',
+          showCancel: 'true',
+          cancelText: '取消',
+          confirmText: '确认',
+          success(res) {
+            console.log('res', res)
+            self.chooseMedia(sourceType)
+          },
+          fail(error) {
+            console.log('choose file e', error)
+          }
+        })
+      } else {
+        self.chooseMedia(sourceType)
+      }
+    },
+    chooseMessageFile: function () {
+      console.log('触发choose')
+      const self = this;
+      const oldFileLen = this.data.sendFileList.filter(item => item.rawType === 'file').length
+      console.log('oldFileLen', oldFileLen)
+      const subFileCount = oldFileLen <= 5 ? 5 - oldFileLen : 0 
+      if(subFileCount === 0) {
+        wx.showToast({
+          title: '文件数量限制5个',
+          icon: 'error'
+        })
+        return
+      }
       wx.chooseMessageFile({
-        count: 10,
+        count: subFileCount,
         type: "file",
         success(res) {
           // tempFilePath可以作为img标签的src属性显示图片
           // const tempFilePaths = res.tempFiles;
           console.log("res", res);
-          const tempFiles = res.tempFiles.map((item) => ({
-            tempId: `${new Date().getTime()}-${item.name}`,
-            rawType: item.type, // 微信选择默认的文件类型 image/video/file
-            fileName: item.name, // 文件名
-            tempPath: item.path,
-            fileSize: item.size,
-            fileUrl: "",
-            fileId: "",
-          }));
+          // 检验文件后缀
+          const isFileExtValid = res.tempFiles.every(item => self.checkFileExt(item.name.split('.')[1]))
+          if(!isFileExtValid) {
+            wx.showModal({
+              content: "当前支持文件类型为 pdf、txt、doc、docx、ppt、pptx、xls、xlsx、csv",
+              showCancel: false,
+              confirmText: '确定'
+            });
+            return
+          }
+          // 校验各文件大小是否小于10M
+          const isFileSizeValid = res.tempFiles.every(item => item.size <= 10*1024*1024)
+          if(!isFileSizeValid) {
+            wx.showToast({
+              title: "单文件10M限制",
+              icon: "error",
+            });
+            return
+          }
+          const tempFiles = res.tempFiles.map((item) => {
+            const tempFileInfos = item.path.split('.')
+            const tempFileName = md5(tempFileInfos[0]) + '.' + tempFileInfos[1]
+            return {
+              tempId: tempFileName,
+              rawType: item.type, // 微信选择默认的文件类型 image/video/file
+              tempFileName: tempFileName, // 文件名
+              rawFileName: item.name,
+              tempPath: item.path,
+              fileSize: item.size,
+              fileUrl: "",
+              fileId: "",
+              botId: self.data.agentConfig.botId
+            }
+          });
           // 过滤掉已选择中的 image 文件（保留file)
           const filterFileList = self.data.sendFileList.filter(
             (item) => item.rawType !== "image"
@@ -435,56 +510,50 @@ Component({
 
           if (finalFileList.length) {
             self.setData({
-              showFileList: true,
               showTools: false,
             });
+            if(!self.data.showFileList) {
+              self.setData({
+                showFileList: true,
+              })
+            }
           }
         },
+        fail(e) {
+          console.log('choose e', e)
+        }
       });
     },
-    handleCamera: function () {
-      const self = this;
-      wx.chooseMedia({
-        count: 9,
-        mediaType: ["image"],
-        sourceType: ["camera"],
-        maxDuration: 30,
-        camera: "back",
-        success(res) {
-          console.log("res", res);
-          // console.log(res.tempFiles[0].tempFilePath)
-          // console.log(res.tempFiles[0].size)
-          const tempFiles = res.tempFiles.map((item) => {
-            let index = item.tempFilePath.lastIndexOf(".");
-            const fileExt = item.tempFilePath.substring(index + 1);
-            const randomFileName = new Date().getTime() + "." + fileExt;
-            return {
-              tempId: randomFileName,
-              rawType: item.fileType, // 微信选择默认的文件类型 image/video/file
-              fileName: randomFileName, // 文件名
-              tempPath: item.tempFilePath,
-              fileSize: item.size,
-              fileUrl: "",
-              fileId: "",
-            };
-          });
-          // 过滤掉已选择中的 file 文件（保留image）
-          const filterFileList = self.data.sendFileList.filter(
-            (item) => item.rawType !== "file"
-          );
-          const finalFileList = [...filterFileList, ...tempFiles];
-          console.log("final", finalFileList);
-          self.setData({
-            sendFileList: finalFileList, //
-          });
-          if (finalFileList.length) {
-            self.setData({
-              showTools: false,
-              showFileList: true,
-            });
+    handleUploadMessageFile: function () {
+      const self = this
+      const isCurSendImage = this.data.sendFileList.find(item => item.rawType === 'image')
+      if(isCurSendImage) {
+        wx.showModal({
+          title: '确认替换吗',
+          content: '上传文件将替换当前图片内容',
+          showCancel: 'true',
+          cancelText: '取消',
+          confirmText: '确认',
+          success(res) {
+            console.log('res', res)
+            self.chooseMessageFile()
+          },
+          fail(error) {
+            console.log('choose file e', error)
           }
-        },
-      });
+        })
+      } else {
+        self.chooseMessageFile()
+      }
+    },
+    handleAlbum: function () {
+      this.handleUploadImg('album')
+    },
+    handleCamera: function () {
+      this.handleUploadImg('camera')
+    },
+    checkFileExt: function (ext) {
+      return ['pdf','txt','doc','docx','ppt','pptx','xls','xlsx','csv'].includes(ext)
     },
     stop: function () {
       this.autoToBottom();
@@ -967,7 +1036,7 @@ Component({
         this.setData({
           sendFileList: newSendFileList,
         });
-        if (newSendFileList.length === 0) {
+        if (newSendFileList.length === 0 && this.data.showFileList) {
           this.setData({
             showFileList: false,
           });
