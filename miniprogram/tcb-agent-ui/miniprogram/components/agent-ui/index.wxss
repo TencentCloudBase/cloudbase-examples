@@ -128,13 +128,7 @@
 }
 
 .foot-function {
-  border: #f3f3f3 solid 1px;
-  border-radius: 16px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  margin: 8px 16px 8px;
-  padding: 4px 8px;
-  position: relative;
-  background-color: white;
+  margin: 8px 8px 15px;
 }
 
 .footer .file_list {
@@ -193,11 +187,24 @@
 }
 
 .input_box {
+  /* display: flex; */
   display: flex;
+  align-items: flex-end;
+  /* padding: 0 16px; */
+  /* flex: 1; */
   flex-direction: row;
-  align-items: center;
-  gap: 10px;
+  /* align-items: center; */
+  gap: 10rpx;
   position: relative;
+  min-height: 40px;
+  /* max-height: 120px; */
+  /* overflow-y: scroll;
+  overflow-x: hidden; */
+  /* margin: 8px 0px 15px; */
+  padding: 4px 8px;
+  /* position: relative; */
+  background-color: white;
+  transition: all 0.3s;
 }
 
 .set_panel_modal {
@@ -260,14 +267,31 @@
 
 .input {
   flex: 1;
-  height: 40px;
+  /* height: 40px; */
+  max-height: 160px;
+  /* overflow-y: hidden; */
   background-color: #fff;
+  padding: 6px 12px;
   color: black;
+  border: #f3f3f3 solid 1px;
+  border-radius: 16px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  line-height: 22px;
+  font-size: 16px;
+  /* display: flex; */
+  /* align-items: center; */
+}
+
+.right_btns {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
 }
 
 .set {
-  width: 48rpx;
-  height: 48rpx;
+  width: 58rpx;
+  height: 58rpx;
 }
 
 .system {
