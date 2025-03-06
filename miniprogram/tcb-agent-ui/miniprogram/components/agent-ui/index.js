@@ -121,8 +121,10 @@ Component({
     contentHeightInScrollViewTop: 0, // scroll区域顶部固定区域高度
     shouldAddScrollTop: false,
     isShowFeedback: false,
-    feedbackRecordId: "",
+    feedbackRecordId: '',
     feedbackType: "",
+    textareaHeight: 40,
+    curLineCount: 1
   },
   attached: async function () {
     const { botId } = this.data.agentConfig;
