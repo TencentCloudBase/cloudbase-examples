@@ -42,4 +42,6 @@
 .chat_file__size {
   font-size: 24rpx;
   color: #999999;
+  display: flex;
+  align-items: center;
 }
