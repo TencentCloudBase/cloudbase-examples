@@ -1,22 +1,27 @@
 {
   "scripts": {
     "build": "tsc",
+    "build:w": "tsc -w",
+    "dev:f": "dotenvx run -- tcb-ff --enableCors=true -w",
     "preDeploy": "npm i && npm run build && rimraf ./node_modules",
-    "dev": "NODE_OPTIONS=\"--require ts-node/register/transpile-only\" tcb-ff --enableCors=true -w"
+    "dev": "concurrently \"npm run build:w\" \"npm run dev:f\""
   },
   "dependencies": {
-    "@cloudbase/aiagent-framework": "1.0.0-beta.4",
+    "@cloudbase/aiagent-framework": "1.0.0-beta.6",
     "@cloudbase/functions-typings": "^1.0.0",
+    "@cloudbase/node-sdk": "^3.7.0",
     "dotenv": "^16.4.7",
     "openai": "^4.77.3",
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@cloudbase/functions-framework": "^1.6.0",
+    "@dotenvx/dotenvx": "^1.38.4",
     "@types/node": "^22.10.5",
+    "concurrently": "^9.1.2",
     "prettier": "3.5.3",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
-  },
-  "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c"
+  }
 }
