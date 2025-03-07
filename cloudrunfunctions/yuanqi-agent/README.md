@@ -12,6 +12,8 @@ GET    /v1/aibot/bots/:botId/recommend-questions 获取推荐问题
 
 ## 环境变量
 
+本仓库提供了环境变量模板 `.env.template`，可将其重命名为 `.env` 后再进行编辑。
+
 需要将从元器的智能体 ID 配置到 `YUAN_QI_AGENT_ID` 环境变量中。
 需要将从元器平台上配置的 apiKey 配置到 `YUAN_QI_API_KEY` 环境变量中。
 
