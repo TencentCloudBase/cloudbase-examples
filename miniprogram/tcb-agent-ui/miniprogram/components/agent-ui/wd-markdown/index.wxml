@@ -1,3 +1,4 @@
 <view class="wd-markdown" style="font-size: {{fontSize}}rpx;">
-  <rich-text nodes="{{__html}}" />
+  <!-- <rich-text nodes="{{__html}}" /> -->
+  <mp-html content="{{__html}}" scroll-table="{{true}}" selectable="{{true}}"/>
 </view>
