@@ -126,7 +126,6 @@ Component({
     curLineCount: 1
   },
   attached: async function () {
-    const { botId } = this.data.agentConfig;
     const chatMode = this.data.chatMode;
     // 检查配置
     const [check, message] = checkConfig(
@@ -142,6 +141,7 @@ Component({
       return;
     }
     if (chatMode === "bot") {
+      const { botId } = this.data.agentConfig;
       const ai = wx.cloud.extend.AI;
       const bot = await ai.bot.get({ botId });
       // 新增错误提示

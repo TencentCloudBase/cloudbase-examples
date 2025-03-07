@@ -1,6 +1,6 @@
 export const checkConfig = (chatMode,agentConfig,modelConfig) => {
-  const {  botId, modelName, model } = agentConfig
-  const {  modelProvider,quickResponseModel,deepReasoningModel } = modelConfig
+  const {  botId } = agentConfig||{}
+  const {  modelProvider,quickResponseModel,deepReasoningModel } = modelConfig||{}
   // 检测AI能力，不存在提示用户
   if(!wx.cloud.extend||!wx.cloud.extend.AI){
     return [false,'使用AI能力需基础库为3.7.7及以上，请升级基础库版本或微信客户端']
