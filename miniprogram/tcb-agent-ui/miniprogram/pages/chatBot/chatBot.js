@@ -12,6 +12,7 @@ Page({
       logo: "https://docs.cloudbase.net/img/logo.svg", // 图标(只在model模式下生效)
       welcomeMessage: "欢迎语!", // 欢迎语(只在model模式下生效)
       allowWebSearch: true, // 允许界面呈现联网配置开关
+      allowUploadFile: true, // 界面程序上传文件入口
     },
     showBotAvatar: true// 是否在对话框左侧显示头像
   },
