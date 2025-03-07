@@ -102,7 +102,7 @@ Component({
     showFileList: false, // 展示输入框顶部文件行
     showTopBar: false, // 展示顶部bar
     sendFileList: [],
-    footerHeight: 66,
+    footerHeight: 73,
     lastScrollTop: 0,
     showUploadFile: true,
     showUploadImg: false,
@@ -120,7 +120,7 @@ Component({
     isShowFeedback: false,
     feedbackRecordId: '',
     feedbackType: "",
-    textareaHeight: 40,
+    textareaHeight: 50,
     curLineCount: 1
   },
   attached: async function () {
@@ -181,30 +181,46 @@ Component({
     });
   },
   methods: {
+    handleLineChange: function (e) {
+      console.log('linechange', e.detail.lineCount)
+      // 查foot-function height
+      const self = this
+      const query = wx.createSelectorQuery().in(this)
+      query.select('.foot_function').boundingClientRect(function (res) {
+        if (res) {
+          if (res.height < self.data.textareaHeight) {
+            self.setData({
+              footerHeight: self.data.footerHeight - (self.data.textareaHeight - res.height)
+            })
+          }
+          if (res.height > self.data.textareaHeight) {
+            self.setData({
+              footerHeight: self.data.footerHeight + (res.height - self.data.textareaHeight)
+            })
+          }
+          self.setData({
+            textareaHeight: res.height
+          })
+        } else {
+          console.log('未找到指定元素');
+        }
+      }).exec();
+    },
     openFeedback: function (e) {
-      const { feedbackrecordid, feedbacktype } = e.currentTarget.dataset;
+      const { feedbackrecordid, feedbacktype } = e.currentTarget.dataset
       let index = null;
       this.data.chatRecords.forEach((item, _index) => {
         if (item.record_id === feedbackrecordid) {
-          index = _index;
+          index = _index
         }
-      });
-      const inputRecord = this.data.chatRecords[index - 1];
-      const answerRecord = this.data.chatRecords[index];
-      this.setData({
-        isShowFeedback: true,
-        feedbackRecordId: feedbackrecordid,
-        feedbackType: feedbacktype,
-        aiAnswer: answerRecord.content,
-        input: inputRecord.content,
-      });
+      })
+      const inputRecord = this.data.chatRecords[index - 1]
+      const answerRecord = this.data.chatRecords[index]
+      // console.log(record)
+      this.setData({ isShowFeedback: true, feedbackRecordId: feedbackrecordid, feedbackType: feedbacktype, aiAnswer: answerRecord.content, input: inputRecord.content })
     },
     closefeedback: function () {
-      this.setData({
-        isShowFeedback: false,
-        feedbackRecordId: "",
-        feedbackType: "",
-      });
+      this.setData({ isShowFeedback: false, feedbackRecordId: '', feedbackType: '' })
     },
     // 滚动相关处理
     calculateContentHeight() {
@@ -760,10 +776,7 @@ Component({
             lastValue.role = role || "assistant";
             lastValue.record_id = record_id;
             // 优先处理错误,直接中断
-            if (
-              finish_reason === "error" ||
-              finish_reason === "content_filter"
-            ) {
+            if (finish_reason === "error" || finish_reason === "content_filter") {
               lastValue.search_info = null;
               lastValue.reasoning_content = "";
               lastValue.knowledge_meta = [];
@@ -830,9 +843,8 @@ Component({
               // console.log('ryan',knowledge_base)
               lastValue.knowledge_base = knowledge_base;
               this.setData({
-                [`chatRecords[${lastValueIndex}].knowledge_base`]:
-                  lastValue.knowledge_base,
-                chatStatus: 2,
+                [`chatRecords[${lastValueIndex}].knowledge_base`]: lastValue.knowledge_base,
+                chatStatus: 2
               });
             }
           } catch (e) {

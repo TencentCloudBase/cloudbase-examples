@@ -107,7 +107,7 @@
     <view class="file_list" wx:if="{{showFileList}}">
       <chatFile enableDel="{{true}}" wx:for="{{sendFileList}}" wx:key="tempId" fileData="{{item}}" bind:removeChild="handleRemoveChild" bind:changeChild="handleChangeChild"></chatFile>
     </view>
-    <view class="foot-function">
+    <view class="foot_function">
       <!-- <scroll-view class="img-box" scroll-x="true" wx:if="{{!!imageList.length}}">
         <block wx:for="{{imageList}}" wx:key="tempFilePath">
           <view class="img-preview">
@@ -119,7 +119,9 @@
       </scroll-view> -->
 
       <view class="input_box">
-        <textarea class="input" style="height: {{textareaHeight + 'px'}}" value="{{inputValue}}" maxlength="1024" bindfocus="bindInputFocus" bindinput="bindKeyInput" placeholder="说点什么吧" bindconfirm="sendMessage" confirm-type="send" adjust-position cursor-spacing="40" auto-height="{{false}}"	show-confirm-bar="{{false}}" bindlinechange="handleLineChange"/>
+        <view class="input_inner_box">
+        <textarea class="input" value="{{inputValue}}" maxlength="1024" bindfocus="bindInputFocus" bindinput="bindKeyInput" placeholder="说点什么吧" bindconfirm="sendMessage" confirm-type="send" adjust-position cursor-spacing="40" auto-height="{{true}}" show-confirm-bar="{{false}}" bindlinechange="handleLineChange"/>
+        </view>
         <view class="right_btns">
           <!-- 加号 -->
           <image src="./imgs/set.svg" class="set" mode="widthFix" bind:tap="handleClickTools" />
