@@ -17,7 +17,7 @@ Page({
       modelProvider: "hunyuan-open", // 大模型服务厂商
       quickResponseModel: "hunyuan-lite", // 快速响应模型 （混元 turbo, gpt4 turbo版，deepseek v3等）
       // deepReasoningModel: 'deepseek-r1', // 深度思考模型 （混元T1, deepseek R1）
-      logo: "https://qcloudimg.tencent-cloud.cn/raw/774362c0a4b9b61169e25c745cf0b7d2.png", // model 头像
+      logo: "", // model 头像
       welcomeMsg: "欢迎语", // model 欢迎语
     },
   },

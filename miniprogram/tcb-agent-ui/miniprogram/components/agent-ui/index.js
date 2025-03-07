@@ -1,6 +1,5 @@
 // components/agent-ui/index.js
-import { guide, checkConfig, randomSelectInitquestion } from "./tools";
-import md5 from "./md5";
+import { checkConfig, randomSelectInitquestion } from "./tools";
 Component({
   properties: {
     chatMode: {
@@ -94,8 +93,6 @@ Component({
     setPanelVisibility: false,
     questions: [],
     scrollTop: 0,
-    guide,
-    showGuide: false,
     scrollTop: 0, // 文字撑起来后能滚动的最大高度
     viewTop: 0, // 根据实际情况，可能用户手动滚动，需要记录当前滚动的位置
     scrollTo: "", // 快速定位到指定元素，置底用
@@ -138,10 +135,7 @@ Component({
         title: "提示",
         content: message,
       });
-      this.setData({ showGuide: true });
       return;
-    } else {
-      this.setData({ showGuide: false });
     }
     if (chatMode === "bot") {
       const ai = wx.cloud.extend.AI;
