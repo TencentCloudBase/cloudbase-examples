@@ -10,6 +10,7 @@ Page({
       botId: "bot-db3cab4a", // agent id,
       allowWebSearch: true, // 允许客户端选择启用联网搜索
       allowUploadFile: true, // 允许上传文件
+      allowPullRefresh: true // 允许下拉刷新
     },
     modelConfig: {
       modelProvider: "hunyuan-open", // 大模型服务厂商

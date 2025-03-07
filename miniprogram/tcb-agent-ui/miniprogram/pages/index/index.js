@@ -28,6 +28,7 @@ Page({
     botId: "bot-e7d1e736", // agent id,
     allowWebSearch: true, // 允许客户端选择启用联网搜索
     allowUploadFile: true, // 允许上传文件
+    allowPullRefresh: true // 允许下拉刷新
   }
 }`,
       modelConfig1: `data: {
@@ -60,7 +61,8 @@ Page({
       { name: 'modelConfig.welcomeMsg', type: 'string', desc: "欢迎语，当 chatMode = 'model' 时，选填" },
       {name: 'agentConfig.allowWebSearch', type: 'boolean', desc: "界面是否展示联网搜索开关 选填"},
       {name: 'showBotAvatar', type: 'boolean', desc: "界面是否展示左侧头像"},
-      {name: 'agentConfig.allowUploadFile', type: 'boolean', desc: "界面是否展示文件上传"}
+      {name: 'agentConfig.allowUploadFile', type: 'boolean', desc: "界面是否展示文件上传"},
+      {name: 'agentConfig.allowPullRefresh', type: 'boolean', desc: "允许下拉刷新"}
     ],
     guide: [`{
   "usingComponents": {
@@ -73,6 +75,7 @@ Page({
     botId: "bot-e7d1e736", // agent id,
     allowWebSearch: true, // 允许客户端选择启用联网搜索
     allowUploadFile: true, // 允许上传文件
+    allowPullRefresh: true // 允许下拉刷新
   },
   modelConfig: {
     modelProvider: "hunyuan-open", // 大模型服务厂商
