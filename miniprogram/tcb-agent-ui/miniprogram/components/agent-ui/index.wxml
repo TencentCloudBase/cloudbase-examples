@@ -7,7 +7,7 @@
     </view>
   </view>
   <!-- 聊天对话区 -->
-  <scroll-view bindwheel="onWheel" enhanced="{{true}}" bindscroll="onScroll" binddragstart="handleScrollStart" class="main" style="height: {{windowInfo.windowHeight-footerHeight-(agentConfig.type === 'bot' ? 40 : 0)}}px;" scroll-y="{{true}}" scroll-top="{{viewTop}}" scroll-into-view="{{ scrollTo }}" lower-threshold="1" bindscrolltolower="handleScrollToLower" show-scrollbar="{{false}}" refresher-enabled="{{true}}" refresher-threshold="{{80}}" bindrefresherrefresh="handelRefresh" refresher-triggered="{{triggered}}" bounces="{{false}}" bind:refresherstatuschange="onRefresherStatusChange">
+  <scroll-view bindwheel="onWheel" enhanced="{{true}}" bindscroll="onScroll" binddragstart="handleScrollStart" class="main" style="height: {{windowInfo.windowHeight-footerHeight-(agentConfig.type === 'bot' ? 40 : 0)}}px;" scroll-y="{{true}}" scroll-top="{{viewTop}}" scroll-into-view="{{ scrollTo }}" lower-threshold="1" bindscrolltolower="handleScrollToLower" show-scrollbar="{{false}}" refresher-enabled="{{true}}" refresher-threshold="{{80}}" bindrefresherrefresh="handelRefresh" refresher-triggered="{{triggered}}" bounces="{{false}}">
     <view wx:if="{{agentConfig.type === 'bot'}}" class="tips">
       {{refreshText}}
     </view>
@@ -96,7 +96,7 @@
     <!-- 推荐问题 -->
     <block wx:for="{{questions}}" wx:key="item">
       <view class="questions" style="padding-left: {{showBotAvatar?80:0}}rpx;">
-        <view class="question_content" bind:tap="sendMessage" data-message="{{item}}">{{item}}</view>
+        <view class="question_content" bind:tap="handleSendMessage" data-message="{{item}}">{{item}}</view>
       </view>
     </block>
     <view id="scroll-bottom" style="width: 100%;height: 20px;"></view>
@@ -126,11 +126,11 @@
       </scroll-view>
 
       <view class="input_box">
-        <input class="input" value="{{inputValue}}" type="text" maxlength="1024" bindfocus="bindInputFocus" bindinput="bindKeyInput" placeholder="说点什么吧" bindconfirm="sendMessage" confirm-type="send" adjust-position cursor-spacing="20" />
+        <input class="input" value="{{inputValue}}" type="text" maxlength="1024" bindfocus="bindInputFocus" bindinput="bindKeyInput" placeholder="说点什么吧" bindconfirm="handleSendMessage" confirm-type="send" adjust-position cursor-spacing="20" />
         <!-- 加号 -->
         <image src="./imgs/set.svg" class="set" mode="widthFix" bind:tap="handleClickTools" />
         <!-- 发送按钮 -->
-        <image src="./imgs/send.svg" class="set" mode="widthFix" wx:if="{{!!inputValue&&chatStatus===0}}" bind:tap="sendMessage" style="transform: rotate(-40deg);transform-origin: 8px 8px" />
+        <image src="./imgs/send.svg" class="set" mode="widthFix" wx:if="{{!!inputValue&&chatStatus===0}}" bind:tap="handleSendMessage" style="transform: rotate(-40deg);transform-origin: 8px 8px" />
         <!-- 暂停按钮 -->
         <image src="./imgs/stop.svg" class="set" mode="widthFix" wx:if="{{!(chatStatus===0)}}" bind:tap="stop" />
       </view>
@@ -145,15 +145,15 @@
         <image src="./imgs/uploadImg.svg" alt="widthFix" class="icon" />
         <text class="text_desc">添加图片</text>
       </view>
-      <view wx:if="{{enableUpload && agentConfig.type === 'bot'}}" class="function" bind:tap="handleAlbum">
+      <view wx:if="{{showUploadImg && agentConfig.type === 'bot'}}" class="function" bind:tap="handleAlbum">
         <image src="./imgs/uploadImg.svg" alt="widthFix" class="icon" />
         <text class="text_desc">图片</text>
       </view>
-      <view wx:if="{{enableUpload && agentConfig.type === 'bot'}}" class="function" bind:tap="handleUploadMessageFile">
+      <view wx:if="{{showUploadFile && agentConfig.type === 'bot'}}" class="function" bind:tap="handleUploadMessageFile">
         <image src="./imgs/wechat.svg" alt="widthFix" class="icon" />
         <text class="text_desc">微信文件</text>
       </view>
-      <view wx:if="{{enableUpload && agentConfig.type === 'bot'}}" class="function" bind:tap="handleCamera">
+      <view wx:if="{{showUploadImg && agentConfig.type === 'bot'}}" class="function" bind:tap="handleCamera">
         <image src="./imgs/camera.svg" alt="widthFix" class="icon" />
         <text class="text_desc">相机</text>
       </view>

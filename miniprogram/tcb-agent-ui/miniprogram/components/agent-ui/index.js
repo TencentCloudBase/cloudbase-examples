@@ -17,6 +17,7 @@ Component({
         logo: "", // 图标(只在model模式下生效)
         welcomeMessage: "", // 欢迎语(只在model模式下生效)
         allowWebSearch: Boolean,
+        allowUploadFile: Boolean
       },
     },
   },
@@ -92,7 +93,8 @@ Component({
     sendFileList: [],
     footerHeight: 66,
     lastScrollTop: 0,
-    enableUpload: true, // 文件待支持
+    showUploadFile: true,
+    showUploadImg: false,
     showWebSearchSwitch: false,
     useWebSearch: false,
     showFeatureList: false,
@@ -104,11 +106,10 @@ Component({
     refreshText: '下拉加载历史记录',
     contentHeightInScrollViewTop: 0, // scroll区域顶部固定区域高度
     shouldAddScrollTop: false,
-    isShowFeedback:false,
-    feedbackRecordId:'',
-    feedbackType:""
+    isShowFeedback: false,
+    feedbackRecordId: '',
+    feedbackType: ""
   },
-
   attached: async function () {
     const { botId, type } = this.data.agentConfig;
     // 检查配置
@@ -145,18 +146,20 @@ Component({
       const { chatRecords } = this.data;
       // 随机选取三个初始化问题
       const questions = randomSelectInitquestion(bot.initQuestions, 3);
-      let allowWebSearch = this.data.agentConfig.allowWebSearch
+      let { allowWebSearch, allowUploadFile } = this.data.agentConfig
       console.log('allowWebSearch', allowWebSearch)
       allowWebSearch = allowWebSearch === undefined ? true : allowWebSearch
+      allowUploadFile = allowUploadFile === undefined ? true : allowUploadFile
+      console.log('allowUploadFile', allowUploadFile)
       this.setData({
         bot,
         questions,
         chatRecords: [...chatRecords, record],
         showWebSearchSwitch:
           !!(bot.searchEnable && allowWebSearch),
+        showUploadFile: allowUploadFile
       });
     }
-
     const topHeight = await this.calculateContentInTop()
     console.log('topHeight', topHeight)
     this.setData({
@@ -164,21 +167,20 @@ Component({
     })
   },
   methods: {
-    openFeedback:function(e){
-      const {feedbackrecordid,feedbacktype}=e.currentTarget.dataset
-      let index=null;
-      this.data.chatRecords.forEach((item,_index)=>{
-        if(item.record_id===feedbackrecordid){
-          index=_index
+    openFeedback: function (e) {
+      const { feedbackrecordid, feedbacktype } = e.currentTarget.dataset
+      let index = null;
+      this.data.chatRecords.forEach((item, _index) => {
+        if (item.record_id === feedbackrecordid) {
+          index = _index
         }
       })
-      const inputRecord=this.data.chatRecords[index-1]
-      const answerRecord=this.data.chatRecords[index]
-      // console.log(record)
-      this.setData({isShowFeedback:true,feedbackRecordId:feedbackrecordid,feedbackType:feedbacktype,aiAnswer:answerRecord.content,input:inputRecord.content})
+      const inputRecord = this.data.chatRecords[index - 1]
+      const answerRecord = this.data.chatRecords[index]
+      this.setData({ isShowFeedback: true, feedbackRecordId: feedbackrecordid, feedbackType: feedbacktype, aiAnswer: answerRecord.content, input: inputRecord.content })
     },
-    closefeedback:function(){ 
-      this.setData({isShowFeedback:false,feedbackRecordId:'',feedbackType:''})
+    closefeedback: function () {
+      this.setData({ isShowFeedback: false, feedbackRecordId: '', feedbackType: '' })
     },
     // 滚动相关处理
     calculateContentHeight() {
@@ -298,9 +300,6 @@ Component({
         inputValue: e.detail.value,
       });
     },
-    onRefresherStatusChange(e) {
-      console.log('status change e', e)
-    },
     handelRefresh: function (e) {
       this.setData({
         triggered: true,
@@ -331,7 +330,7 @@ Component({
 
           // 找出新获取的一页中，不在内存中的数据
           const freshNum = this.data.size - (this.data.chatRecords.length - 1) % this.data.size
-          const freshChatRecords = res.recordList.reverse().slice(0, freshNum).map(item=>({...item,record_id:item.recordId}))
+          const freshChatRecords = res.recordList.reverse().slice(0, freshNum).map(item => ({ ...item, record_id: item.recordId }))
           this.setData({
             chatRecords: [...freshChatRecords, ...this.data.chatRecords]
           })
@@ -379,8 +378,8 @@ Component({
         success(res) {
           console.log("res", res);
           console.log('tempFiles', res.tempFiles)
-          const isImageSizeValid = res.tempFiles.every(item => item.size <= 30*1024*1024)
-          if(!isImageSizeValid) {
+          const isImageSizeValid = res.tempFiles.every(item => item.size <= 30 * 1024 * 1024)
+          if (!isImageSizeValid) {
             wx.showToast({
               title: "图片大小30M限制",
               icon: "error",
@@ -400,6 +399,7 @@ Component({
               fileUrl: "",
               fileId: "",
               botId: self.data.agentConfig.botId,
+              parsed: false
             };
           });
 
@@ -412,7 +412,7 @@ Component({
             self.setData({
               showTools: false,
             });
-            if(!self.data.showFileList) {
+            if (!self.data.showFileList) {
               self.setData({
                 showFileList: true,
               })
@@ -424,7 +424,7 @@ Component({
     handleUploadImg: function (sourceType) {
       const self = this;
       const isCurSendFile = this.data.sendFileList.find(item => item.rawType === 'file')
-      if(isCurSendFile) {
+      if (isCurSendFile) {
         wx.showModal({
           title: '确认替换吗',
           content: '上传图片将替换当前文件内容',
@@ -448,8 +448,8 @@ Component({
       const self = this;
       const oldFileLen = this.data.sendFileList.filter(item => item.rawType === 'file').length
       console.log('oldFileLen', oldFileLen)
-      const subFileCount = oldFileLen <= 5 ? 5 - oldFileLen : 0 
-      if(subFileCount === 0) {
+      const subFileCount = oldFileLen <= 5 ? 5 - oldFileLen : 0
+      if (subFileCount === 0) {
         wx.showToast({
           title: '文件数量限制5个',
           icon: 'error'
@@ -465,7 +465,7 @@ Component({
           console.log("res", res);
           // 检验文件后缀
           const isFileExtValid = res.tempFiles.every(item => self.checkFileExt(item.name.split('.')[1]))
-          if(!isFileExtValid) {
+          if (!isFileExtValid) {
             wx.showModal({
               content: "当前支持文件类型为 pdf、txt、doc、docx、ppt、pptx、xls、xlsx、csv",
               showCancel: false,
@@ -474,8 +474,8 @@ Component({
             return
           }
           // 校验各文件大小是否小于10M
-          const isFileSizeValid = res.tempFiles.every(item => item.size <= 10*1024*1024)
-          if(!isFileSizeValid) {
+          const isFileSizeValid = res.tempFiles.every(item => item.size <= 10 * 1024 * 1024)
+          if (!isFileSizeValid) {
             wx.showToast({
               title: "单文件10M限制",
               icon: "error",
@@ -494,7 +494,8 @@ Component({
               fileSize: item.size,
               fileUrl: "",
               fileId: "",
-              botId: self.data.agentConfig.botId
+              botId: self.data.agentConfig.botId,
+              parsed: false
             }
           });
           // 过滤掉已选择中的 image 文件（保留file)
@@ -512,7 +513,7 @@ Component({
             self.setData({
               showTools: false,
             });
-            if(!self.data.showFileList) {
+            if (!self.data.showFileList) {
               self.setData({
                 showFileList: true,
               })
@@ -525,9 +526,17 @@ Component({
       });
     },
     handleUploadMessageFile: function () {
+      if (this.data.useWebSearch) {
+        wx.showModal({
+          title: '提示',
+          content: '联网搜索不支持上传附件',
+        })
+        return
+      }
+
       const self = this
       const isCurSendImage = this.data.sendFileList.find(item => item.rawType === 'image')
-      if(isCurSendImage) {
+      if (isCurSendImage) {
         wx.showModal({
           title: '确认替换吗',
           content: '上传文件将替换当前图片内容',
@@ -553,7 +562,7 @@ Component({
       this.handleUploadImg('camera')
     },
     checkFileExt: function (ext) {
-      return ['pdf','txt','doc','docx','ppt','pptx','xls','xlsx','csv'].includes(ext)
+      return ['pdf', 'txt', 'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'csv'].includes(ext)
     },
     stop: function () {
       this.autoToBottom();
@@ -578,6 +587,17 @@ Component({
     },
     closeSetPanel: function () {
       this.setData({ setPanelVisibility: false });
+    },
+    handleSendMessage: async function (event) {
+      // 发送消息前校验所有文件上传状态
+      if (this.data.sendFileList.some(item => (!item.fileId || !item.parsed))) {
+        wx.showToast({
+          title: '文件上传及解析中',
+          icon: 'error'
+        })
+        return
+      }
+      await this.sendMessage(event)
     },
     sendMessage: async function (event) {
       if (this.data.showFileList) {
@@ -655,10 +675,9 @@ Component({
             //   })),
             // ],
             msg: inputValue,
-            fileList: this.data.enableUpload ? userRecord.fileList.map((item) => ({
-              type: item.rawType,
-              fileId: item.fileId,
-            })) : undefined,
+            files: this.data.showUploadFile ? userRecord.fileList.map((item) =>
+              item.fileId,
+            ) : undefined,
             searchEnable: this.data.useWebSearch,
           },
         });
@@ -696,7 +715,7 @@ Component({
             const lastValueIndex = newValue.length - 1
             const lastValue = newValue[lastValueIndex];
             lastValue.role = role || "assistant";
-            lastValue.record_id = record_id; 
+            lastValue.record_id = record_id;
             // 优先处理错误,直接中断
             if (finish_reason === "error"||finish_reason === "content_filter") {
               lastValue.search_info = null;
@@ -1045,7 +1064,7 @@ Component({
     },
     handleChangeChild: function (e) {
       console.log("change", e.detail);
-      const { fileId, tempId } = e.detail;
+      const { fileId, tempId, parsed } = e.detail;
       // const curFile = this.data.sendFileList.find(item => item.tempId === tempId)
       // curFile.fileId = fileId
       const newSendFileList = this.data.sendFileList.map((item) => {
@@ -1053,6 +1072,7 @@ Component({
           return {
             ...item,
             fileId,
+            parsed
           };
         }
         return item;
@@ -1067,6 +1087,13 @@ Component({
       });
     },
     handleClickWebSearch: function () {
+      if (this.data.sendFileList.length) {
+        wx.showModal({
+          title: '提示',
+          content: '上传附件后不支持联网搜索',
+        })
+        return
+      }
       this.setData({
         useWebSearch: !this.data.useWebSearch,
       });

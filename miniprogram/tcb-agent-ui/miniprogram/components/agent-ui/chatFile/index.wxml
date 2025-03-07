@@ -6,7 +6,7 @@
     <view class="chat_file__info">
       <view class="chat_file__name">{{fileData.rawFileName || fileData.tempFileName}}</view>
       <view class="chat_file__size">{{formatSize}}
-      <image wx:if="{{!fileData.fileId}}" style="width: 15px;height:15px;margin-left: 5px" src="../imgs/loading.svg" mode=""/>
+      <image wx:if="{{!fileData.fileId || !fileData.parsed}}" style="width: 15px;height:15px;margin-left: 5px" src="../imgs/loading.svg" mode=""/>
       </view>
     </view>
   </view>
