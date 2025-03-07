@@ -164,7 +164,7 @@ Component({
         })
       } else {
         wx.showModal({
-          content: "当前支持文件类型为 pdf、doc、docx、ppt、pptx、xls、xlsx",
+          content: "当前支持预览文件类型为 pdf、doc、docx、ppt、pptx、xls、xlsx",
           showCancel: false,
           confirmText: '确定'
         })
