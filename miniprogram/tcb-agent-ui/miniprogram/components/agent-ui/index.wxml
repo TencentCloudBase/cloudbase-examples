@@ -136,10 +136,6 @@
         <image src="./imgs/clear.svg" alt="widthFix" class="icon" />
         <text class="text_desc">清除</text>
       </view>
-      <view class="function" bind:tap="uploadImgs" wx:if="{{agentConfig.model==='hunyuan-vision'&&chatMode==='model'}}">
-        <image src="./imgs/uploadImg.svg" alt="widthFix" class="icon" />
-        <text class="text_desc">添加图片</text>
-      </view>
       <view wx:if="{{showUploadImg && chatMode === 'bot'}}" class="function" bind:tap="handleAlbum">
         <image src="./imgs/uploadImg.svg" alt="widthFix" class="icon" />
         <text class="text_desc">图片</text>
