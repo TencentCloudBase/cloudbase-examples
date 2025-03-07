@@ -20,10 +20,9 @@ Component({
       value: {
         botId: String,
         allowUploadFile: Boolean,
-        allowUploadImage: Boolean,
-        allowPullRefresh: Boolean,
         allowWebSearch: Boolean,
-        allowUploadFile: Boolean,
+        // allowUploadImage: Boolean,
+        // allowPullRefresh: Boolean,
       },
     },
     modelConfig: {
@@ -31,7 +30,7 @@ Component({
       value: {
         modelProvider: String,
         quickResponseModel: String,
-        deepReasoningModel: String,
+        // deepReasoningModel: String, // 待支持
         logo: String,
         welcomeMsg: String,
       },
@@ -344,25 +343,28 @@ Component({
               pageSize: this.data.size,
               sort: "desc",
             });
-            // console.log('getChatRecords', res)
+            if (res.recordList) {
+              this.setData({
+                total: res.total,
+              });
+
+              // 找出新获取的一页中，不在内存中的数据
+              const freshNum =
+                this.data.size -
+                ((this.data.chatRecords.length - 1) % this.data.size);
+              const freshChatRecords = res.recordList
+                .reverse()
+                .slice(0, freshNum)
+                .map((item) => ({ ...item, record_id: item.recordId }));
+              this.setData({
+                chatRecords: [...freshChatRecords, ...this.data.chatRecords],
+              });
+              console.log("totalChatRecords", this.data.chatRecords);
+            }
             this.setData({
               triggered: false,
-              total: res.total,
               refreshText: "下拉加载历史记录",
             });
-
-            // 找出新获取的一页中，不在内存中的数据
-            const freshNum =
-              this.data.size -
-              ((this.data.chatRecords.length - 1) % this.data.size);
-            const freshChatRecords = res.recordList
-              .reverse()
-              .slice(0, freshNum)
-              .map((item) => ({ ...item, record_id: item.recordId }));
-            this.setData({
-              chatRecords: [...freshChatRecords, ...this.data.chatRecords],
-            });
-            console.log("totalChatRecords", this.data.chatRecords);
           }
         }
       );
@@ -1012,7 +1014,7 @@ Component({
       // 顶部文件行展现时，隐藏底部工具栏
       this.setData({});
     },
-    subFileList: function () {},
+    subFileList: function () { },
     copyUrl: function (e) {
       const { url } = e.currentTarget.dataset;
       console.log(url);
