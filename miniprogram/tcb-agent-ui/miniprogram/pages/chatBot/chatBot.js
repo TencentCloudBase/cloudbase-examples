@@ -4,64 +4,60 @@ Page({
    * 页面的初始数据
    */
   data: {
+    chatMode: "bot", // bot 表示使用agent，model 表示使用大模型
+    showBotAvatar: true, // 是否在对话框左侧显示头像
     agentConfig: {
-      type: "bot", // 值为'bot'或'model'。当type='bot'时，botId必填；当type='model'时，modelName和model必填
-      botId: "bot-db3cab4a", // agent id
-      modelName: "hunyuan-open", // 大模型服务商 //
-      model: "hunyuan-vision", // 具体的模型版本 //
-      logo: "https://docs.cloudbase.net/img/logo.svg", // 图标(只在model模式下生效)
-      welcomeMessage: "欢迎语!", // 欢迎语(只在model模式下生效)
-      allowWebSearch: true, // 允许界面呈现联网配置开关
-      allowUploadFile: true, // 界面程序上传文件入口
+      botId: "bot-e7d1e736", // agent id,
+      allowWebSearch: true, // 允许客户端选择启用联网搜索
+      allowUploadFile: true, // 允许上传文件
+      allowUploadImage: true, // 允许拍照及上传图片
+      allowPullRefresh: true, // 允许客户端刷新
     },
-    showBotAvatar: true// 是否在对话框左侧显示头像
+    modelConfig: {
+      modelProvider: "hunyuan-open", // 大模型服务厂商
+      quickResponseModel: "hunyuan-lite", // 快速响应模型 （混元 turbo, gpt4 turbo版，deepseek v3等）
+      // deepReasoningModel: 'deepseek-r1', // 深度思考模型 （混元T1, deepseek R1）
+      logo: "https://qcloudimg.tencent-cloud.cn/raw/774362c0a4b9b61169e25c745cf0b7d2.png", // model 头像
+      welcomeMsg: "欢迎语", // model 欢迎语
+    },
   },
-
-  // modelName: "hunyuan-open", // 大模型服务商
-  // model: "hunyuan-lite", // 具体的模型版本
-
-  // modelName: "deepseek", // 大模型服务商
-  // model: "deepseek-r1", // 具体的模型版本
-
-  // modelName: "deepseek", // 大模型服务商
-  // model: "deepseek-v3", // 具体的模型版本
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) { },
+  onLoad(options) {},
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady() { },
+  onReady() {},
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow() { },
+  onShow() {},
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide() { },
+  onHide() {},
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload() { },
+  onUnload() {},
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh() { },
+  onPullDownRefresh() {},
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom() { },
+  onReachBottom() {},
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage() { },
+  onShareAppMessage() {},
 });
