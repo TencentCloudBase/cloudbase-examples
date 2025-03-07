@@ -7,8 +7,8 @@
     </view>
   </view>
   <!-- 聊天对话区 -->
-  <scroll-view bindwheel="onWheel" enhanced="{{true}}" bindscroll="onScroll" binddragstart="handleScrollStart" class="main" style="height: {{windowInfo.windowHeight-footerHeight-(chatMode === 'bot' ? 40 : 0)}}px;" scroll-y="{{true}}" scroll-top="{{viewTop}}" scroll-into-view="{{ scrollTo }}" lower-threshold="1" bindscrolltolower="handleScrollToLower" show-scrollbar="{{false}}" refresher-enabled="{{true}}" refresher-threshold="{{80}}" bindrefresherrefresh="handelRefresh" refresher-triggered="{{triggered}}" bounces="{{false}}">
-    <view wx:if="{{chatMode === 'bot'}}" class="tips">
+  <scroll-view bindwheel="onWheel" enhanced="{{true}}" bindscroll="onScroll" binddragstart="handleScrollStart" class="main" style="height: {{windowInfo.windowHeight-footerHeight-(chatMode === 'bot' ? 40 : 0)}}px;" scroll-y="{{true}}" scroll-top="{{viewTop}}" scroll-into-view="{{ scrollTo }}" lower-threshold="1" bindscrolltolower="handleScrollToLower" show-scrollbar="{{false}}" refresher-enabled="{{showPullRefresh}}" refresher-threshold="{{80}}" bindrefresherrefresh="handelRefresh" refresher-triggered="{{triggered}}" bounces="{{false}}">
+    <view wx:if="{{chatMode === 'bot' && showPullRefresh}}" class="tips">
       {{refreshText}}
     </view>
     <view wx:if="{{chatMode === 'model'}}" class="nav">

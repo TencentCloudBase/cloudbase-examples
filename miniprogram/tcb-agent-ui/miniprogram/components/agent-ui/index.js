@@ -21,8 +21,8 @@ Component({
         botId: String,
         allowUploadFile: Boolean,
         allowWebSearch: Boolean,
+        allowPullRefresh: Boolean,
         // allowUploadImage: Boolean,
-        // allowPullRefresh: Boolean,
       },
     },
     modelConfig: {
@@ -108,6 +108,7 @@ Component({
     showUploadFile: true,
     showUploadImg: false,
     showWebSearchSwitch: false,
+    showPullRefresh: true,
     useWebSearch: false,
     showFeatureList: false,
     chatStatus: 0, // 页面状态： 0-正常状态，可输入，可发送， 1-发送中 2-思考中 3-输出content中
@@ -162,10 +163,11 @@ Component({
       const { chatRecords } = this.data;
       // 随机选取三个初始化问题
       const questions = randomSelectInitquestion(bot.initQuestions, 3);
-      let { allowWebSearch, allowUploadFile } = this.data.agentConfig;
+      let { allowWebSearch, allowUploadFile, allowPullRefresh } = this.data.agentConfig;
       console.log("allowWebSearch", allowWebSearch);
       allowWebSearch = allowWebSearch === undefined ? true : allowWebSearch;
       allowUploadFile = allowUploadFile === undefined ? true : allowUploadFile;
+      allowPullRefresh = allowPullRefresh === undefined ? true : allowPullRefresh
       console.log("allowUploadFile", allowUploadFile);
       this.setData({
         bot,
@@ -173,6 +175,7 @@ Component({
         chatRecords: [...chatRecords, record],
         showWebSearchSwitch: !!(bot.searchEnable && allowWebSearch),
         showUploadFile: allowUploadFile,
+        showPullRefresh: allowPullRefresh
       });
     }
     const topHeight = await this.calculateContentInTop();
