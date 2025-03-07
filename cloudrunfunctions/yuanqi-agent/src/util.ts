@@ -26,42 +26,9 @@ export const yuanQiMessageSchema = z.object({
 type Message = z.infer<typeof messageSchema>;
 export type YuanQiMessage = z.infer<typeof yuanQiMessageSchema>;
 
-function messageToYuanQiMessage(message: Message): YuanQiMessage {
+export function messageToYuanQiMessage(message: Message): YuanQiMessage {
   return {
     role: message.role,
     content: [{ type: "text", text: message.content }],
   };
-}
-
-/**
- * 转换为元器的 message，并保证以 user 开头，并且 user 和 assistant 交替出现
- */
-export function fixMessages(messages?: Array<unknown>) {
-  if (!messages) {
-    return [];
-  }
-
-  return messages
-    .map(fixMessage)
-    .filter((x) => x !== null)
-    .reduce<Array<YuanQiMessage>>((acc, cur) => {
-      const isUser = acc.length % 2 === 0;
-      
-      isUser && cur.role === "user" && acc.push(cur);
-      !isUser && cur.role === "assistant" && acc.push(cur);
-
-      return acc;
-    }, []);
-}
-
-export function fixMessage(message: unknown): YuanQiMessage | null {
-  try {
-    return yuanQiMessageSchema.parse(message);
-  } catch (e) {}
-
-  try {
-    return messageToYuanQiMessage(messageSchema.parse(message));
-  } catch (e) {}
-
-  return null;
 }
