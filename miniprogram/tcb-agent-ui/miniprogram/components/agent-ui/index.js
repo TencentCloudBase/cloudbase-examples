@@ -662,7 +662,7 @@ Component({
       // 发送消息前校验所有文件上传状态
       if (this.data.sendFileList.some((item) => !item.fileId || !item.parsed)) {
         wx.showToast({
-          title: "文件上传及解析中",
+          title: "文件上传解析中",
           icon: "error",
         });
         return;

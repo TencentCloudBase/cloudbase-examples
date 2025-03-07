@@ -120,13 +120,13 @@
 
       <view class="input_box">
         <view class="input_inner_box">
-        <textarea class="input" value="{{inputValue}}" maxlength="1024" bindfocus="bindInputFocus" bindinput="bindKeyInput" placeholder="说点什么吧" bindconfirm="sendMessage" confirm-type="send" adjust-position cursor-spacing="40" auto-height="{{true}}" show-confirm-bar="{{false}}" bindlinechange="handleLineChange"/>
+        <textarea class="input" value="{{inputValue}}" maxlength="1024" bindfocus="bindInputFocus" bindinput="bindKeyInput" placeholder="说点什么吧" bindconfirm="handleSendMessage" confirm-type="send" adjust-position cursor-spacing="40" auto-height="{{true}}" show-confirm-bar="{{false}}" bindlinechange="handleLineChange"/>
         </view>
         <view class="right_btns">
           <!-- 加号 -->
           <image src="./imgs/set.svg" class="set" mode="widthFix" bind:tap="handleClickTools" />
           <!-- 发送按钮 -->
-          <image src="./imgs/send.svg" class="set" mode="widthFix" wx:if="{{!!inputValue&&chatStatus===0}}" bind:tap="sendMessage" style="transform: rotate(-40deg);transform-origin: 8px 8px" />
+          <image src="./imgs/send.svg" class="set" mode="widthFix" wx:if="{{!!inputValue&&chatStatus===0}}" bind:tap="handleSendMessage" style="transform: rotate(-40deg);transform-origin: 8px 8px" />
           <!-- 暂停按钮 -->
           <image src="./imgs/stop.svg" class="set" mode="widthFix" wx:if="{{!(chatStatus===0)}}" bind:tap="stop" />
         </view>
