@@ -1,5 +1,6 @@
 // components/agent-ui/index.js
 import { checkConfig, randomSelectInitquestion } from "./tools";
+import md5 from './md5.js'
 Component({
   properties: {
     chatMode: {
