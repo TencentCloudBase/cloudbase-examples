@@ -14,8 +14,8 @@ GET    /v1/aibot/bots/:botId/recommend-questions 获取推荐问题
 
 本仓库提供了环境变量模板 `.env.template`，可将其重命名为 `.env` 后再进行编辑。
 
-需要将从元器的智能体 ID 配置到 `YUAN_QI_AGENT_ID` 环境变量中。
-需要将从元器平台上配置的 apiKey 配置到 `YUAN_QI_API_KEY` 环境变量中。
+- 需要将**元器的智能体 ID** 配置到 `YUAN_QI_AGENT_ID` 环境变量
+- 需要将**元器的 apiKey** 配置到 `YUAN_QI_API_KEY` 环境变量
 
 ## 本地调试指引
 
@@ -29,23 +29,23 @@ GET    /v1/aibot/bots/:botId/recommend-questions 获取推荐问题
 
 [点击前往获取腾讯云访问密钥](https://console.cloud.tencent.com/cam/capi)
 
-安装依赖：
+配置完环境变量后，安装依赖：
 
 ```shell
 npm i
 ```
 
-启动本地调试：
+即可启动本地调试：
 
 ```shell
 npm run dev
 ```
 
-现在即可通过 `127.0.0.1:3000` 访问本地 Agent 服务了。
+现在可以通过 <http://127.0.0.1:3000> 访问本地 Agent 服务了。
 
 ### cURL 访问本地服务
 
-直接访问 `127.0.0.1:3000` 即可，例如 `POST v1/aibot/bots/:botId/send-message 发送消息` 接口：
+直接访问 <http://127.0.0.1:3000> 即可，例如 `POST v1/aibot/bots/:botId/send-message 发送消息` 接口：
 
 ```shell
 curl 'http://127.0.0.1:3000/v1/aibot/bots/ibot-myBot-botTag/send-message' \
