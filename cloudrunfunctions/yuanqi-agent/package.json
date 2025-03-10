@@ -1,7 +1,6 @@
 {
   "name": "yuanqi-agent",
   "description": "元器函数型智能体模板",
-  
   "scripts": {
     "build": "tsc",
     "build:w": "tsc -w",
@@ -13,7 +12,6 @@
     "@cloudbase/aiagent-framework": "1.0.0-beta.6",
     "@cloudbase/functions-typings": "^1.0.0",
     "@cloudbase/node-sdk": "^3.7.0",
-    "dotenv": "^16.4.7",
     "openai": "^4.77.3",
     "zod": "^3.24.2"
   },

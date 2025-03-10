@@ -17,9 +17,6 @@ importers:
       '@cloudbase/node-sdk':
         specifier: ^3.7.0
         version: 3.7.0
-      dotenv:
-        specifier: ^16.4.7
-        version: 16.4.7
       openai:
         specifier: ^4.77.3
         version: 4.77.3(zod@3.24.2)
