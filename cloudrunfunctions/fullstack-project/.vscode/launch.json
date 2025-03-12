@@ -1,0 +1,47 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "launch-all-functions",
+      // 注意：请确保全局安装了 @cloudbase/functions-framework 模块
+      // npm install -g @cloudbase/functions-framework
+      // 因不同环境下全局安装路径可能不同，需要手动替换
+      //    Windows 系统可通过 `where tcb-ff` 命令查看全局安装路径
+      //    MacOS/Linux 系统下可通过 `which tcb-ff` 命令查看全局安装路径
+      "program": "please-replace-this-with-the-path-to-your-global-tcb-ff",
+      // 一键拉起 cloudbaserunfunctions 目录下的所有函数，开启 CORS 支持
+      "args": ["--loadAllFunctions=true", "--functionsRoot=./cloudbaserunfunctions", "--enableCors=true"],
+      "env": {
+        // 避免证书校验失败导致报错（仅本地调试）
+        // https://nodejs.org/api/cli.html#node_tls_reject_unauthorizedvalue
+        "NODE_TLS_REJECT_UNAUTHORIZED": "0",
+        // 通过 ts-node 可支持直接调试 TS 代码，如不需要可以移除
+        // "NODE_OPTIONS": "--require ts-node/register/transpile-only"
+      },
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "outFiles": [
+        "!**/node_modules/**"
+      ]
+    },
+    {
+      // 注意：在启动调试进程前，需确保已通过 `NODE_OPTIONS='--inspect=localhost:9229' tcb-ff .` 等调试命令启动了服务
+      "address": "localhost",
+      "port": 9229, // 配置端口为 9229
+      "localRoot": "${workspaceFolder}",
+      // 采用 Attach Node.js 进程的方式调试
+      "name": "attach-to-remote-9229",
+      "request": "attach",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    }
+  ]
+}

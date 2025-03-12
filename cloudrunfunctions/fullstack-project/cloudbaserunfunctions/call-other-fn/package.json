@@ -1,0 +1,14 @@
+{
+  "name": "call-other-fn",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "description": "",
+  "dependencies": {
+    "@cloudbase/node-sdk": "^3.7.0"
+  }
+}
