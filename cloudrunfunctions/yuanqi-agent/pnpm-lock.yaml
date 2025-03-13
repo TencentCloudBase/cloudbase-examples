@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@cloudbase/aiagent-framework':
-        specifier: 1.0.0-beta.6
-        version: 1.0.0-beta.6
+        specifier: 1.0.0-beta.9
+        version: 1.0.0-beta.9
       '@cloudbase/functions-typings':
         specifier: ^1.0.0
         version: 1.0.0
@@ -59,8 +59,8 @@ packages:
     resolution: {integrity: sha512-Ed61U6XJc3CVRfkERJWDz4dJwKe7iLmmJsbOGu9wSloNSFttHV0I8g6UAgb7qnK5ly5bGLPd4oXZlxCdANBOWQ==}
     engines: {node: '>=6.9.0'}
 
-  '@cloudbase/aiagent-framework@1.0.0-beta.6':
-    resolution: {integrity: sha512-au8BuAYInxCj59QRUfZ1kqcwnd/cAl4ASFXiur7ZR4VMgVRuqRmf9phumMK/9AM+mjpUM0IoWWC53GS9AkugSQ==}
+  '@cloudbase/aiagent-framework@1.0.0-beta.9':
+    resolution: {integrity: sha512-phKVnHxT8k+wnUZ7EOQVpnChmi6aMa+tk4zsQrw32HFzcMDFsgJ4rYPyOy4Pplszh0jGQWdZP7YpZnxTQNcG4Q==}
     engines: {node: '>=18.0.0'}
 
   '@cloudbase/database@1.4.2':
@@ -1410,7 +1410,7 @@ snapshots:
 
   '@babel/helper-validator-identifier@7.25.9': {}
 
-  '@cloudbase/aiagent-framework@1.0.0-beta.6':
+  '@cloudbase/aiagent-framework@1.0.0-beta.9':
     dependencies:
       '@cloudbase/functions-typings': 1.0.0
       '@cloudbase/node-sdk': 3.7.0

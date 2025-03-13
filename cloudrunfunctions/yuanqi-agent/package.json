@@ -9,7 +9,7 @@
     "dev": "concurrently \"npm run build:w\" \"npm run dev:f\""
   },
   "dependencies": {
-    "@cloudbase/aiagent-framework": "1.0.0-beta.6",
+    "@cloudbase/aiagent-framework": "1.0.0-beta.9",
     "@cloudbase/functions-typings": "^1.0.0",
     "@cloudbase/node-sdk": "^3.7.0",
     "openai": "^4.77.3",
