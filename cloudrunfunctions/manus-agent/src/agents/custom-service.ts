@@ -70,7 +70,7 @@ export function createPrimaryAgent(model: LanguageModel, options: ICreateAgentOp
 const createOrderLookupTool = () => createTool({
   id: "order-lookup",
   description: "订单信息查询",
-  inputSchema: z.object({ orderId: z.string().length(12) }),
+  inputSchema: z.object({ orderId: z.string() }),
   outputSchema: z.object({
     items: z.array(z.object({
       product: z.string(),
@@ -98,15 +98,15 @@ const createServiceTicketTool = ({
       id: "create-service-ticket",
       description: "创建售后服务工单并跟踪处理进度",
       inputSchema: z.object({
-        orderId: z.string().length(12),
+        orderId: z.string(),
         issueType: z.enum([
           'RETURN', 
           'EXCHANGE', 
           'COMPLAINT', 
           'WARRANTY'
-        ]),
-        description: z.string().min(10),
-        customerContact: z.string().email()
+        ]).optional(),,
+        description: z.string().optional(),
+        customerContact: z.string().optional(),
       }),
       outputSchema: z.object({
         ticketId: z.string(),
@@ -270,25 +270,15 @@ const createServiceTicketTool = ({
 /********************
  * 售后工具集
  ********************/
-// 退货授权工具
-const createReturnAuthTool = () => createTool({
-  id: "generate-return-auth",
-  inputSchema: z.object({ orderId: z.string() }),
-  outputSchema: z.object({
-    RMA: z.string(),
-    shippingLabel: z.string()
-  }),
-  execute: async ({ context }) => ({
-    RMA: `RET-${context.orderId}-${Math.random().toString(36).slice(2,6)}`,
-    shippingLabel: "退货地址：上海市售后中心 #123"
-  })
-})
 
 // 退款处理工具
 const createRefundTool = () => createTool({
   id: "process-refund",
   inputSchema: z.object({
     orderId: z.string(),
+    postId: z.string({
+      description: '快递单号'
+    }).optional(),
   }),
   outputSchema: z.object({
     refundId: z.string(),
