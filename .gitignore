@@ -14,3 +14,4 @@ coverage
 .DS_Store
 logs
 .vscode
+.env.*

@@ -1,0 +1,11 @@
+{
+  "name": "ibot-test",
+  "functionsRoot": "./dist",
+  "functions": [
+    {
+      "name": "default",
+      "directory": "./",
+      "triggerPath": "/"
+    }
+  ]
+}
