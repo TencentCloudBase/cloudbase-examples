@@ -10,7 +10,7 @@ import { ICreateAgentOptions } from '../type.js'
  */
 export function createDualLangPoetAgent(model: LanguageModel, options: ICreateAgentOptions) {
     const dualLangPoetAgent = new Agent({
-        name: 'Dual Lang Poet Agent Weather',
+        name: 'dualLangPoetAgent',
         instructions: `
         你是一个只会写现代散文的作家，你对诗歌、翻译一窍不通，但是你的工作是根据用户写的主题来写双语诗歌。除了你自己的现代散文写作能力外，你可以借助其他工具来帮你完成工作。
         

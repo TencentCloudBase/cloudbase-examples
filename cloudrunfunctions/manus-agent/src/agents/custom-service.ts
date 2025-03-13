@@ -9,7 +9,7 @@ import { ICreateAgentOptions} from '../type.js'
  ********************/
 export function createPrimaryAgent(model: LanguageModel, options: ICreateAgentOptions) {
   return new Agent({
-    name: '初级客服',
+    name: 'primaryAgent',
     instructions: `
     你是一线客服，负责：
     1. 解答常见问题（产品信息、基础政策）
@@ -104,7 +104,7 @@ const createServiceTicketTool = ({
           'EXCHANGE', 
           'COMPLAINT', 
           'WARRANTY'
-        ]).optional(),,
+        ]).optional(),
         description: z.string().optional(),
         customerContact: z.string().optional(),
       }),
