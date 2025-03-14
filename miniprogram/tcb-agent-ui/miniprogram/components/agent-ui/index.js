@@ -701,7 +701,7 @@ Component({
       if (!inputValue) {
         return;
       }
-      const { modelProvider, quickResponseModel } = modelConfig;
+      
       const chatMode = this.data.chatMode;
       // console.log(inputValue,bot.botId)
       const userRecord = {
@@ -899,6 +899,7 @@ Component({
         }
       }
       if (chatMode === "model") {
+        const { modelProvider, quickResponseModel } = modelConfig;
         const aiModel = wx.cloud.extend.AI.createModel(modelProvider);
         const res = await aiModel.streamText({
           data: {
