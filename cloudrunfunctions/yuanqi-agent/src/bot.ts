@@ -8,13 +8,21 @@ import OpenAI from "openai";
 import { messageToYuanQiMessage } from "./util";
 import { YUAN_QI_AGENT_ID, YUAN_QI_API_KEY } from "./const";
 
-const openai = new OpenAI({
-  apiKey: YUAN_QI_API_KEY,
-  baseURL: "https://yuanqi.tencent.com/openapi/v1/agent/",
-  defaultHeaders: {
-    "X-Source": "openapi",
-  },
-});
+const getOpenai = (() => {
+  let openai: OpenAI;
+  return () => {
+    if (!openai) {
+      openai = new OpenAI({
+        apiKey: YUAN_QI_API_KEY,
+        baseURL: "https://yuanqi.tencent.com/openapi/v1/agent/",
+        defaultHeaders: {
+          "X-Source": "openapi",
+        },
+      });
+    }
+    return openai;
+  };
+})();
 
 export class MyBot extends BotCore implements IBot {
   async sendMessage({ msg }: SendMessageInput): Promise<void> {
@@ -33,7 +41,7 @@ export class MyBot extends BotCore implements IBot {
     });
 
     // 调用元器接口
-    const chatCompletion = await openai.chat.completions.create(
+    const chatCompletion = await getOpenai().chat.completions.create(
       { stream: true, messages: [], model: "" },
       {
         body: {
@@ -84,13 +92,7 @@ export class MyBot extends BotCore implements IBot {
       stream: true,
     };
 
-    const client = new OpenAI({
-      apiKey: process.env.YUAN_QI_API_KEY,
-      baseURL: "https://yuanqi.tencent.com/openapi/v1/agent/",
-      defaultHeaders: {
-        "X-Source": "openapi",
-      },
-    });
+    const client = getOpenai();
 
     const chatCompletion = await client.chat.completions.create(
       { stream: true, messages: [], model: "" },
