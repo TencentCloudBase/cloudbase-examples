@@ -78,6 +78,30 @@ for await (let x of res.textStream) {
 }
 ```
 
+## 部署
+
+安装依赖：
+
+```shell
+npm i
+```
+
+构建代码：
+
+```shell
+npm run build
+```
+
+部署到云函数 2.0：
+
+```shell
+npm run deploy
+```
+
+根据输出提示填入云开发环境 id、服务名即可。
+
+可前往 [云开发平台 | 云托管](https://tcb.cloud.tencent.com/dev#/platform-run/service/detail) 查看对应服务的部署情况。
+
 ## 参考文档
 
 - [函数型智能体](https://docs.cloudbase.net/ai/cbrf-agent/intro)
