@@ -6,15 +6,34 @@ import {
 } from "@cloudbase/aiagent-framework";
 import OpenAI from "openai";
 import { messageToYuanQiMessage } from "./util";
-import { YUAN_QI_AGENT_ID, YUAN_QI_API_KEY } from "./const";
+import {
+  YUAN_QI_AGENT_ID,
+  YUAN_QI_API_KEY,
+  YUAN_QI_HOST,
+  YUAN_QI_VERSION,
+} from "./const";
+
+const addVersion = (x: object) => {
+  if (typeof YUAN_QI_VERSION === "string" && YUAN_QI_VERSION) {
+    try {
+      const version = parseInt(YUAN_QI_VERSION);
+      return Object.assign(x, { version });
+    } catch (e) {
+      return x;
+    }
+  }
+
+  return x;
+};
 
 const getOpenai = (() => {
+  console.log("Using Host: ", YUAN_QI_HOST);
   let openai: OpenAI;
   return () => {
     if (!openai) {
       openai = new OpenAI({
         apiKey: YUAN_QI_API_KEY,
-        baseURL: "https://yuanqi.tencent.com/openapi/v1/agent/",
+        baseURL: YUAN_QI_HOST,
         defaultHeaders: {
           "X-Source": "openapi",
         },
@@ -44,11 +63,11 @@ export class MyBot extends BotCore implements IBot {
     const chatCompletion = await getOpenai().chat.completions.create(
       { stream: true, messages: [], model: "" },
       {
-        body: {
+        body: addVersion({
           assistant_id: YUAN_QI_AGENT_ID,
           messages,
           stream: true,
-        },
+        }),
       },
     );
 
@@ -97,7 +116,7 @@ export class MyBot extends BotCore implements IBot {
     const chatCompletion = await client.chat.completions.create(
       { stream: true, messages: [], model: "" },
       {
-        body: yuanQiInput,
+        body: addVersion(yuanQiInput),
       },
     );
     for await (const chunk of chatCompletion) {
