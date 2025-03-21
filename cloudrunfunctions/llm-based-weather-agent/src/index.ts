@@ -6,6 +6,6 @@ export const main: TcbEventFunction<unknown> = function (event, context) {
   return BotRunner.run(
     event,
     context,
-    new MyBot(context,)
+    new MyBot(context)
   );
 };

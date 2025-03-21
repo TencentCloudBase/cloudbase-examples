@@ -1,0 +1,25 @@
+{
+  "name": "mcp",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "dotenvx run -- tcb-ff --enableCors=true --extendedContext='{\"envId\": \"luke-agent-dev-7g1nc8tqc2ab76af\", \"accessToken\": \"\"}' -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@cloudbase/aiagent-framework": "^1.0.0-beta.9",
+    "@cloudbase/mcp": "^1.0.0-beta.7",
+    "@modelcontextprotocol/sdk": "^1.7.0",
+    "express": "^5.0.1",
+    "typescript": "^5.8.2",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@dotenvx/dotenvx": "^1.39.0",
+    "openai": "^4.87.4"
+  },
+  "packageManager": "pnpm@10.6.3+sha512.bb45e34d50a9a76e858a95837301bfb6bd6d35aea2c5d52094fa497a467c43f5c440103ce2511e9e0a2f89c3d6071baac3358fc68ac6fb75e2ceb3d2736065e6"
+}

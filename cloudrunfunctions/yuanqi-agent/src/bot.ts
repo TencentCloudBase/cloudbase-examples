@@ -82,6 +82,8 @@ export class MyBot extends BotCore implements IBot {
         data: {
           ...chunk,
           content,
+          role: 'assistant',
+          type: 'text',
         },
       });
     }
@@ -124,6 +126,8 @@ export class MyBot extends BotCore implements IBot {
         data: {
           ...chunk,
           content: chunk.choices[0]?.delta?.content || "",
+          role: 'assistant',
+          type: 'text',
         },
       });
     }

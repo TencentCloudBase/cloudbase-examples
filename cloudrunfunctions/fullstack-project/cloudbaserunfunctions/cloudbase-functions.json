@@ -1,0 +1,41 @@
+{
+  "functionsRoot": ".",
+  "functions": [
+    {
+      "name": "default",
+      "directory": "."
+    },
+    {
+      "name": "echo",
+      "directory": "echo",
+      "source": "index.js",
+      "triggerPath": "/echo"
+    },
+    {
+      "name": "helloworld",
+      "directory": "helloworld"
+    },
+    {
+      "name": "call-other-fn",
+      "directory": "call-other-fn"
+    }
+  ],
+  "routes": [
+    {
+      "functionName": "echo",
+      "path": "/echo"
+    },
+    {
+      "functionName": "helloworld",
+      "path": "/helloworld"
+    },
+    {
+      "functionName": "call-other-fn",
+      "path": "/call-other-fn"
+    },
+    {
+      "functionName": "default",
+      "path": "/"
+    }
+  ]
+}

@@ -8,9 +8,9 @@
     "./src": "./src/index.ts"
   },
   "scripts": {
-    "dev": "NODE_OPTIONS=\"--loader ts-node/esm/transpile-only\" tcb-ff --enableCors=true --extendedContext='{\"envId\": \"your-env-id\", \"accessToken\": \"your-access-token\"}' -w",
+    "dev": "NODE_OPTIONS=\"--loader ts-node/esm/transpile-only\" tcb-ff --enableCors=true --extendedContext='{\"envId\": \"luke-agent-dev-7g1nc8tqc2ab76af\", \"accessToken\": \"\"}' -w",
     "build": "tsc",
-    "preDeploy": "npm i && npm run build && rimraf ./node_modules"
+    "preDeploy": "pnpm i && pnpm run build && rimraf ./node_modules"
   },
   "keywords": [],
   "author": "",

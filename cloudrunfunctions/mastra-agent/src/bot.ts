@@ -4,7 +4,7 @@ import {
   SendMessageInput,
 } from "@cloudbase/aiagent-framework";
 import { createDualLangPoetAgent } from "./agent.js"
-import "dotenv/config"
+// import "dotenv/config"
 import { createOpenAI } from "@ai-sdk/openai";
 
 export class MyBot extends BotCore implements IBot {
@@ -16,10 +16,15 @@ export class MyBot extends BotCore implements IBot {
     })
 
     const res = await createDualLangPoetAgent(openai("hunyuan-turbo") as any).stream(msg)
-
-
     for await (let x of res.textStream) {
-      this.sseSender.send({ data: { content: x } })
+      console.log('item', x)
+      this.sseSender.send({
+        data: {
+          content: x,
+          role: 'assistant',
+          type: 'text',
+        }
+      })
     }
 
     this.sseSender.end()

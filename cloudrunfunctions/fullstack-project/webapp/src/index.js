@@ -1,43 +1,43 @@
-
-import cloudbase from '@cloudbase/js-sdk'
+import cloudbase from '@cloudbase/js-sdk';
 
 const tcbapp = cloudbase.init({
-  env: 'abc-9g9ta2m2dfd82dcd',
-  clientId: 'AOJ8yAABa1RmC3BKbrg'
-})
+  env: 'luke-agent-dev-7g1nc8tqc2ab76af',
+  clientId: 'AAU5PwAB4N8EXRyzm0w',
+});
 
-const auth = tcbapp.auth()
+const auth = tcbapp.auth();
 
-await auth.signInAnonymously()
+await auth.signInAnonymously();
+console.log('test');
 
 // 调用 cloudbaserunfunctions/helloworld 函数
 const result1 = await tcbapp.callFunction({
   name: 'helloworld',
-  type: 'cloudrun'
-})
+  type: 'cloudrun',
+});
 
-console.log('result1:', result1)
+console.log('result1:', result1);
 
 // 调用 cloudbaserunfunctions/echo 函数
 const result2 = await tcbapp.callFunction({
   name: 'echo',
   type: 'cloudrun',
-  method: "POST",
+  method: 'POST',
   data: {
-    name: 'world'
-  }
-})
+    name: 'world',
+  },
+});
 
-console.log('result2:', result2)
+console.log('result2:', result2);
 
 // 调用 cloudbaserunfunctions/call-other-fn 函数
 const result3 = await tcbapp.callFunction({
   name: 'call-other-fn',
   type: 'cloudrun',
-  method: "POST",
+  method: 'POST',
   data: {
-    otherFuncName: 'echo'
-  }
-})
+    otherFuncName: 'echo',
+  },
+});
 
-console.log('result3:', result3)
+console.log('result3:', result3);

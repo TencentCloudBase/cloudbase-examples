@@ -1,0 +1,22 @@
+{
+  "name": "mcp",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "dotenvx run -- tcb-ff -p=30000 --enableCors=true --extendedContext='{\"envId\": \"luke-agent-dev-7g1nc8tqc2ab76af\", \"accessToken\": \"\"}' -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@cloudbase/mcp": "^1.0.0-beta.7",
+    "@modelcontextprotocol/sdk": "^1.7.0",
+    "express": "^5.0.1",
+    "typescript": "^5.8.2",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@dotenvx/dotenvx": "^1.39.0"
+  }
+}
