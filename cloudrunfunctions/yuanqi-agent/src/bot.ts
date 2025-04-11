@@ -74,6 +74,9 @@ export class MyBot extends BotCore implements IBot {
     // 存放 Agent 回复内容的变量
     let replyContent = "";
     for await (const chunk of chatCompletion) {
+      if (chunk?.choices?.[0]?.delta?.role !== "assistant") {
+        continue;
+      }
       const content = chunk.choices[0]?.delta?.content || "";
       // 累加到 replyContent 中
       replyContent += content;
@@ -82,8 +85,8 @@ export class MyBot extends BotCore implements IBot {
         data: {
           ...chunk,
           content,
-          role: 'assistant',
-          type: 'text',
+          role: "assistant",
+          type: "text",
         },
       });
     }
@@ -126,8 +129,8 @@ export class MyBot extends BotCore implements IBot {
         data: {
           ...chunk,
           content: chunk.choices[0]?.delta?.content || "",
-          role: 'assistant',
-          type: 'text',
+          role: "assistant",
+          type: "text",
         },
       });
     }
