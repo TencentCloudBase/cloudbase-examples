@@ -11,7 +11,7 @@ interface CloudFunctionEvent {
 
 export const main: TcbEventFunction<CloudFunctionEvent> = async function (event, context) {
   // 如果是 MCP 请求，使用 MCP 服务器处理
-  if (context.httpContext.url.endsWith('messages')) {
+  if (context.httpContext.url.endsWith('messages') || context.httpContext.url.endsWith('sseMessages')) {
     const runner = new MCPServerRunner(createServer, {
       verifyAccess: process.env.SKIP_VERIFY_ACCESS === 'true' ? false : true,
     });
@@ -107,7 +107,7 @@ export const main: TcbEventFunction<CloudFunctionEvent> = async function (event,
         body: JSON.stringify({ message: 'Not Found' })
       };
     }
-    
+
     return {
       statusCode: 500,
       headers: { 'Content-Type': 'application/json' },
