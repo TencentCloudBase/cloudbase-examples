@@ -32,8 +32,6 @@ tcb-ff --loadAllFunctions=true --functionsRoot=cloudrunfunctions
 
 也可以进入函数目录运行代码，参考：[cloudrunfunctions/README.md](./cloudrunfunctions/README.md)
 
-```sh
-
 ## 项目结构说明
 
 ```tree
