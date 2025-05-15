@@ -1,6 +1,6 @@
-# 云函数2.0示例项目-TS函数项目
+# 函数型云托管示例项目-TS函数项目
 
-该示例代码演示如何通过 `TypeScript` 编写 `云函数2.0` 项目代码。包括项目结构示例，以及如何调试。
+该示例代码演示如何通过 `TypeScript` 编写 `函数型云托管` 项目代码。包括项目结构示例，以及如何调试。
 
 如何调试代码可参考：<https://docs.cloudbase.net/cbrf/how-to-debug-functions-code#%E8%B0%83%E8%AF%95-typescript-%E4%BB%A3%E7%A0%81>
 
@@ -39,7 +39,7 @@ tcb-ff --loadAllFunctions=true --functionsRoot=cloudrunfunctions
 ```tree
 .
 ├── README.md # 项目说明
-├── cloudrunfunctions # 云函数2.0项目代码目录，每个目录对应一个函数
+├── cloudrunfunctions # 函数型云托管项目代码目录，每个目录对应一个函数
 │   ├── README.md # 云函数说明
 │   ├── func-a # 云函数 `func-a` 代码目录，单函数示例多函数
 │   │   ├── README.md # 当前云函数说明

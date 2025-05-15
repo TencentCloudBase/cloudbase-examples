@@ -88,7 +88,7 @@ npm i
 npm run build
 ```
 
-部署到云函数 2.0：
+部署到函数型云托管：
 
 ```shell
 npm run deploy
@@ -101,5 +101,5 @@ npm run deploy
 ## 参考文档
 
 - [函数型智能体](https://docs.cloudbase.net/ai/cbrf-agent/intro)
-- [云函数2.0](https://docs.cloudbase.net/cbrf/intro)
+- [函数型云托管](https://docs.cloudbase.net/cbrf/intro)
 - [云开发 AI+](https://docs.cloudbase.net/ai/introduce)
