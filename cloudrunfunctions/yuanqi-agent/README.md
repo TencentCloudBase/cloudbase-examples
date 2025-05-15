@@ -19,7 +19,7 @@ GET    /v1/aibot/bots/:botId/recommend-questions 获取推荐问题
 
 ## 本地调试指引
 
-首先，请编辑 `.env` 文件配置好环境变量：
+首先，请编辑 `.env.development` 文件配置好环境变量：
 
 1. YUAN_QI_AGENT_ID: 填入元器的智能体 ID
 2. YUAN_QI_AGENT_ID: 填入元器平台上的 apiKey
