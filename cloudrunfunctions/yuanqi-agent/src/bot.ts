@@ -45,8 +45,17 @@ const getOpenai = (() => {
 
 export class MyBot extends BotCore implements IBot {
   async sendMessage({ msg }: SendMessageInput): Promise<void> {
+    console.log("[sendMessage()] starts");
+    
     // 获取历史消息
-    const messages = await this.getHistory();
+    const messages = await (async () => {
+      try {
+        return await this.getHistory();
+      } catch (e) {
+        console.error("[sendMessage()] `getHistory()` failed: ", e);
+        throw new Error(`[sendMessage()] \`getHistory()\` failed.\n${e}`);
+      }
+    })();
 
     // 添加本次请求用户消息
     messages.push({
@@ -55,21 +64,41 @@ export class MyBot extends BotCore implements IBot {
     });
 
     // 新建聊天记录，放到数据模型中
-    const { updateBotRecord } = await this.createRecordPair({
-      userContent: msg,
-    });
+    const { updateBotRecord } = await (async () => {
+      try {
+        return await this.createRecordPair({
+          userContent: msg,
+        });
+      } catch (e) {
+        console.error("[sendMessage()] `createRecordPair()` failed: ", e);
+        throw new Error(`[sendMessage()] \`createRecordPair()\` failed.\n${e}`);
+      }
+    })();
 
     // 调用元器接口
-    const chatCompletion = await getOpenai().chat.completions.create(
-      { stream: true, messages: [], model: "" },
-      {
-        body: addVersion({
-          assistant_id: YUAN_QI_AGENT_ID,
-          messages,
-          stream: true,
-        }),
-      },
-    );
+    const chatCompletion = await (async () => {
+      try {
+        return await getOpenai().chat.completions.create(
+          { stream: true, messages: [], model: "" },
+          {
+            body: addVersion({
+              assistant_id: YUAN_QI_AGENT_ID,
+              messages,
+              stream: true,
+            }),
+          },
+        );
+      } catch (e) {
+        console.error(
+          "[sendMessage()] call Yuan Qi by `getOpenai().chat.completions.create()` failed: ",
+          e,
+          `Using host: ${YUAN_QI_HOST}`,
+        );
+        throw new Error(
+          `[sendMessage()] call Yuan Qi by \`getOpenai().chat.completions.create()\` failed.\n${e}\nUsing host: ${YUAN_QI_HOST}`,
+        );
+      }
+    })();
 
     // 存放 Agent 回复内容的变量
     let replyContent = "";
@@ -94,7 +123,14 @@ export class MyBot extends BotCore implements IBot {
     // 消息传输结束
     this.sseSender.end();
     // 收集到完整的 Agent 消息后，更新数据模型中的消息记录
-    await updateBotRecord({ content: replyContent });
+    try {
+      await updateBotRecord({ content: replyContent });
+    } catch (e) {
+      console.error("[sendMessage()] `updateBotRecord()` failed: ", e);
+      throw new Error(
+        `[sendMessage()] call Yuan Qi by \`updateBotRecord()\` failed.\n${e}`,
+      );
+    }
   }
 
   async getRecommendQuestions(
