@@ -20,5 +20,10 @@ npm install -g @cloudbase/functions-framework
 进入函数代码目录，`func-a` 或 `func-b` 或 其他，执行以下命令：
 
 ```sh
-tcb-ff
+cd func-a 进入函数 a 代码目录
+cd func-b 进入函数 b 代码目录
+```
+
+```sh
+npx tsc && tcb-ff
 ```

@@ -6,6 +6,34 @@
 
 JavaScript 示例代码见：<https://github.com/TencentCloudBase/func-v2-template>
 
+## 如何运行
+
+### tsc 编译
+
+```sh
+npx tsc -p cloudrunfunctions/func-a
+npx tsc -p cloudrunfunctions/func-b
+```
+
+### 运行
+
+分别运行 `func-a` 和 `func-b`：
+
+```sh
+tcb-ff --source=cloudrunfunctions/func-a
+tcb-ff --source=cloudrunfunctions/func-b
+```
+
+一键运行所有函数：
+
+```sh
+tcb-ff --loadAllFunctions=true --functionsRoot=cloudrunfunctions
+```
+
+也可以进入函数目录运行代码，参考：[cloudrunfunctions/README.md](./cloudrunfunctions/README.md)
+
+```sh
+
 ## 项目结构说明
 
 ```tree
