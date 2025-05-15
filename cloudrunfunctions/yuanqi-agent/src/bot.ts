@@ -46,7 +46,7 @@ const getOpenai = (() => {
 export class MyBot extends BotCore implements IBot {
   async sendMessage({ msg }: SendMessageInput): Promise<void> {
     console.log("[sendMessage()] starts");
-    
+
     // 获取历史消息
     const messages = await (async () => {
       try {
@@ -77,25 +77,29 @@ export class MyBot extends BotCore implements IBot {
 
     // 调用元器接口
     const chatCompletion = await (async () => {
+      const body = addVersion({
+        assistant_id: YUAN_QI_AGENT_ID,
+        messages,
+        stream: true,
+      });
+
       try {
         return await getOpenai().chat.completions.create(
           { stream: true, messages: [], model: "" },
           {
-            body: addVersion({
-              assistant_id: YUAN_QI_AGENT_ID,
-              messages,
-              stream: true,
-            }),
+            body,
           },
         );
       } catch (e) {
+        const bodyString = JSON.stringify(body, null, 2);
         console.error(
           "[sendMessage()] call Yuan Qi by `getOpenai().chat.completions.create()` failed: ",
           e,
           `Using host: ${YUAN_QI_HOST}`,
+          `Body: ${bodyString}`,
         );
         throw new Error(
-          `[sendMessage()] call Yuan Qi by \`getOpenai().chat.completions.create()\` failed.\n${e}\nUsing host: ${YUAN_QI_HOST}`,
+          `[sendMessage()] call Yuan Qi by \`getOpenai().chat.completions.create()\` failed.\n${e}\nUsing host: ${YUAN_QI_HOST}\nBody: ${bodyString}`,
         );
       }
     })();
@@ -136,8 +140,8 @@ export class MyBot extends BotCore implements IBot {
   async getRecommendQuestions(
     input: GetRecommendQuestionsInput,
   ): Promise<void> {
-    const yuanQiInput = {
-      assistant_id: this.botTag,
+    const yuanQiInput = addVersion({
+      assistant_id: YUAN_QI_AGENT_ID,
       messages: [
         {
           role: "user",
@@ -150,16 +154,32 @@ export class MyBot extends BotCore implements IBot {
         },
       ],
       stream: true,
-    };
+    });
 
     const client = getOpenai();
 
-    const chatCompletion = await client.chat.completions.create(
-      { stream: true, messages: [], model: "" },
-      {
-        body: addVersion(yuanQiInput),
-      },
-    );
+    const chatCompletion = await (async () => {
+      try {
+        return await client.chat.completions.create(
+          { stream: true, messages: [], model: "" },
+          {
+            body: yuanQiInput,
+          },
+        );
+      } catch (e) {
+        const bodyString = JSON.stringify(yuanQiInput, null, 2);
+        console.error(
+          "[getRecommendQuestions()] call Yuan Qi by `getOpenai().chat.completions.create()` failed: ",
+          e,
+          `Using host: ${YUAN_QI_HOST}`,
+          `Body: ${bodyString}`,
+        );
+        throw new Error(
+          `[getRecommendQuestions()] call Yuan Qi by \`getOpenai().chat.completions.create()\` failed.\n${e}\nUsing host: ${YUAN_QI_HOST}\nBody: ${bodyString}`,
+        );
+      }
+    })();
+
     for await (const chunk of chatCompletion) {
       this.sseSender.send({
         data: {
