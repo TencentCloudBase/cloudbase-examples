@@ -1,7 +1,7 @@
 # n8n Agent
 
 本模板介绍如何将 n8n 的 workflow 接入云开发函数型智能体。
-![](./images/n8n-workflow.png)
+![](https://tcb.cloud.tencent.com/%20cloud-run-function-template-images/n8n-agent/images/n8n-workflow.png)
 
 模板中包含一个 workflow，该工作流通过 n8n 的 Webhook 节点接收外部请求，根据请求进行条件判断（If 节点），将不同的请求分发给不同的 AI 大模型（如 Primary AI Agent 或 Secondary LLM），并可通过 MCP 调用云开发的搜索工具。模型处理完成后，最终通过 Webhook 响应返回给调用方。
 
@@ -17,32 +17,32 @@ POST    /v1/aibot/bots/:botId/recommend-questions
 
 ### 部署 MCP 搜索工具
 部署 `云开发 AI 能力` MCP server，登陆云开发控制台，进入 `AI+ -> MCP`，点击 `创建 MCP server`，选择 `云开发 AI 能力`，鉴权方式选择 `云开发 API key 授权`，开始部署
-![](./images/deploy-mcp-1.png)
+![](https://tcb.cloud.tencent.com/%20cloud-run-function-template-images/n8n-agent/images/deploy-mcp-1.png)
 
 MCP server 创建部署完成以后，进入详情页，复制 MCP server URL，在 `配置 MCP` 标签页中根据指引获取 API key
 
-![](./images/deploy-mcp-3.png)
+![](https://tcb.cloud.tencent.com/%20cloud-run-function-template-images/n8n-agent/images/deploy-mcp-3.png)
 
 ### 创建 n8n workflow
 将仓库中的 `Agent_for_cloudbase.json` 文件导入 n8n，创建 workflow
 
-![](./images/n8n-import-workflow.png)
+![](https://tcb.cloud.tencent.com/%20cloud-run-function-template-images/n8n-agent/images/n8n-import-workflow.png)
 
 获取工作流的 Webhook 地址，在工作流编辑器中选择 `Webhook` 节点，在配置面板中复制 Webhook URL `<your-webhook-url>`
 
-![](./images/n8n-webhook-config.png)
+![](https://tcb.cloud.tencent.com/%20cloud-run-function-template-images/n8n-agent/images/n8n-webhook-config.png)
 
 配置 Webhook URL 鉴权，在 `Webhook` 节点中配置 `Authentication` 为 `Header Auth`，在 `Credential for Header Auth` 中新建 credential，并设置 `Name` 为 `Authorization`，`Value` 为 `Bearer <your-token>`
 
-![](./images/n8n-webhook-auth.png)
+![](https://tcb.cloud.tencent.com/%20cloud-run-function-template-images/n8n-agent/images/n8n-webhook-auth.png)
 
 配置模型节点，这个示例中选择 DeepSeek 模型，[获取 API key](https://api-docs.deepseek.com/)。你可以根据需要选择其他模型
 
-![](./images/n8n-model-config.png)
+![](https://tcb.cloud.tencent.com/%20cloud-run-function-template-images/n8n-agent/images/n8n-model-config.png)
 
 配置 MCP 节点，`SSE endpoint` 为 MCP server URL，鉴权方式选择 `Bearer token`，`Credential for Bearer token` 为 MCP server API key
 
-![](./images/n8n-mcp-config.png)
+![](https://tcb.cloud.tencent.com/%20cloud-run-function-template-images/n8n-agent/images/n8n-mcp-config.png)
 
 ## 部署须知
 
