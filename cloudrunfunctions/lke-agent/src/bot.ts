@@ -44,7 +44,7 @@ export class MyBot extends BotCore implements IBot {
           bot_app_key: LKE_APP_KEY,
           content: msg,
           incremental: true,
-          stream: true,
+          stream: "enable",
         },
         path: "",
       },
