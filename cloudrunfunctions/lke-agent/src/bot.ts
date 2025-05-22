@@ -50,6 +50,8 @@ export class MyBot extends BotCore implements IBot {
       const chunk = chunkWithData.data;
 
       if (chunk.type === "reply") {
+        if (chunk?.payload?.is_from_self === true) continue;
+
         const content = chunk?.payload?.content ?? "";
         // 累加到 replyContent 中
         replyContent += content;
