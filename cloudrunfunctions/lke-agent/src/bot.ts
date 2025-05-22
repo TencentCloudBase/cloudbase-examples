@@ -3,18 +3,11 @@ import OpenAI from "openai";
 import { LKE_APP_KEY, LKE_URL } from "./const";
 import { LKEChunk } from "./reply";
 import { randomUUID } from "crypto";
-const getOpenai = (() => {
-  let openai: OpenAI;
-  return () => {
-    if (!openai) {
-      openai = new OpenAI({
-        apiKey: "xx", // LKE 不用这个
-        baseURL: LKE_URL,
-      });
-    }
-    return openai;
-  };
-})();
+
+const openai = new OpenAI({
+  apiKey: "xx", // LKE 不用这个
+  baseURL: LKE_URL,
+});
 
 export class MyBot extends BotCore implements IBot {
   async sendMessage({ msg }: SendMessageInput): Promise<void> {
@@ -35,8 +28,8 @@ export class MyBot extends BotCore implements IBot {
       userId = randomUUID();
     }
 
-    // 调用元器接口
-    const chatCompletion = await getOpenai().chat.completions.create(
+    // 调用 LKE 接口
+    const chatCompletion = await openai.chat.completions.create(
       { stream: true, messages: [], model: "" },
       {
         body: {
@@ -44,7 +37,7 @@ export class MyBot extends BotCore implements IBot {
           bot_app_key: LKE_APP_KEY,
           content: msg,
           incremental: true,
-          stream: true,
+          stream: "enable",
         },
         path: "",
       },
@@ -57,6 +50,8 @@ export class MyBot extends BotCore implements IBot {
       const chunk = chunkWithData.data;
 
       if (chunk.type === "reply") {
+        if (chunk?.payload?.is_from_self === true) continue;
+
         const content = chunk?.payload?.content ?? "";
         // 累加到 replyContent 中
         replyContent += content;
@@ -64,6 +59,7 @@ export class MyBot extends BotCore implements IBot {
         this.sseSender.send({
           data: {
             ...chunk?.payload,
+            type: "text",
             content,
           },
         });
@@ -75,6 +71,7 @@ export class MyBot extends BotCore implements IBot {
         this.sseSender.send({
           data: {
             ...chunk?.payload,
+            type: "text",
             reasoning_content,
             content: "",
           },
