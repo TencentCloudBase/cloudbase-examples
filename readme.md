@@ -24,11 +24,11 @@
 
 ## 📚 官方资源
 
-- [云开发官网](https://cloud.tencent.com/product/tcb) - 腾讯云开发产品官网
-- [云开发控制台](https://console.cloud.tencent.com/tcb) - 云开发管理控制台
-- [云开发文档](https://cloud.tencent.com/document/product/876) - 官方文档
+- [云开发官网](https:/tcb.cloud.tencent.com) - 腾讯云开发产品官网
+- [云开发控制台](https:/tcb.cloud.tencent.com/dev) - 云开发管理控制台
+- [云开发产品文档](https://cloud.tencent.com/document/product/876) - 官方文档
+- [云开发技术文档](https://docs.cloudbase.net/) - 技术文档
 - [云开发 CLI](https://github.com/TencentCloudBase/cloudbase-cli) - 云开发命令行工具
-- [云开发 Framework](https://github.com/Tencent/cloudbase-framework) - 云开发多端应用前后端一体化部署工具
 
 ## 💡 示例项目
 
@@ -38,7 +38,7 @@
 - [文件上传下载](./web/tcb-demo-files) - 云开发文件存储示例
 - [自定义登录](./web/custom-login) - Web 端自定义登录认证示例
 - [下载代理示例](./web/download-agent-demo) - 云开发下载代理示例
-- [快照工具](./web/snapshots) - 网页快照与截图工具
+- [截图工具](./web/snapshots) - 网页快照与截图工具
 
 ### 📱 小程序
 
@@ -49,9 +49,7 @@
 - [美食地图](./miniprogram/tcb-demo-foodmap) - 基于云开发的美食地图小程序
 - [表白墙](./miniprogram/tcb-demo-hole) - 基于云开发的表白墙小程序
 - [名片小程序](./miniprogram/tcb-demo-namecard) - 基于云开发的名片小程序
-- [名片小程序专业版](./miniprogram/tcb-demo-namecard-pro) - 基于云开发的名片小程序专业版
 - [OCR 识别](./miniprogram/tcb-demo-ocr) - 基于云开发的 OCR 文字识别小程序
-- [AI 应用](./miniprogram/tcb-demo-ai) - 基于云开发的 AI 应用示例
 - [订阅消息](./miniprogram/tcb-demo-subscribeMessage) - 基于云开发的订阅消息示例
 - [短信验证码](./miniprogram/tcb-demo-sms) - 基于云开发的短信验证码示例
 - [安全示例](./miniprogram/tcb-demo-sec) - 基于云开发的安全功能示例
@@ -62,7 +60,7 @@
 - [弹幕应用](./miniprogram/tcb-demo-danmu) - 基于云开发的弹幕应用示例
 - [相册应用](./miniprogram/tcb-demo-album) - 基于云开发的相册应用示例
 - [头像编辑器](./miniprogram/tcb-demo-avatar) - 基于云开发的头像编辑器示例
-- [小程序转微信小商店](./miniprogram/tcb-demo-mpToWxStore) - 小程序转微信小商店示例
+- [小程序跳转微信小店](./miniprogram/tcb-demo-mpToWxStore) - 小程序跳转微信小店示例
 - [消息推送](./miniprogram/tcb-demo-messsend) - 基于云开发的消息推送示例
 - [祝福小程序](./miniprogram/tcb-demo-happy) - 基于云开发的祝福小程序
 - [商城示例](./miniprogram/tcb-shop) - 基于云开发的商城小程序
