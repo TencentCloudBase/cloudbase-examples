@@ -4,20 +4,6 @@
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-
-<<<<<<< HEAD
-- android: 存放 Android 端 Demo / Workshop
-- ios: 存放 iOS 端 Demo / Workshop
-- minigame: 存放小游戏端 Demo / Workshop
-- miniprogram: 存放小程序端 Demo / Workshop
-- server: 存放服务端 Demo / Workshop
-- web: 存放 Web 端 Demo / Workshop
-- cloudbaserun: 存放 云应用 端 Demo / Workshop
-- cloudrunfunctions: 存放 `函数型云托管` Demo
-- lowcode: 存放微搭低代码应用
-=======
->>>>>>> 1c1d250 (doc: 更新文档)
-
 > 精选的腾讯云开发（CloudBase）示例项目和资源列表
 
 [云开发（CloudBase）](https://cloud.tencent.com/product/tcb) 是腾讯云提供的云原生一体化开发环境和工具平台，为开发者提供高可用、自动弹性扩缩的后端云服务，包含计算、存储、托管等能力，可用于构建多种应用场景下的应用系统。
