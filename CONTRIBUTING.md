@@ -30,9 +30,10 @@
    - 完整的源代码
    - 必要的配置文件
    - 依赖管理文件（如 package.json, requirements.txt 等）
-5. 提交您的更改 (`git commit -m '添加一个很棒的示例'`)
-6. 推送到您的分支 (`git push origin feature/amazing-example`)
-7. 创建一个新的 Pull Request
+5. 在项目根目录的 README.md 中添加您的示例项目链接 
+6. 提交您的更改 (`git commit -m '添加一个很棒的示例'`)
+7. 推送到您的分支 (`git push origin feature/amazing-example`)
+8. 创建一个新的 Pull Request
 
 ### 改进现有示例
 
