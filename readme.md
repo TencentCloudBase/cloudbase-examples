@@ -80,19 +80,19 @@
 
 ### 🤖 AI Agent 服务
 
-- [DeepSeek Agent](./cloudrunfunctions/deepseek-agent) - DeepSeek 大模型代理示例
-- [Manus Agent](./cloudrunfunctions/manus-agent) - Manus 代理示例
-- [Mastra Agent](./cloudrunfunctions/mastra-agent) - Mastra 代理示例
-- [元器 Agent](./cloudrunfunctions/yuanqi-agent) - 源起代理示例
-- [空白 Agent 模板](./cloudrunfunctions/empty-agent) - 代理空白模板
-- [大模型天气 Agent](./cloudrunfunctions/llm-based-weather-agent) - 基于大模型的天气代理示例
+- [DeepSeek Agent](./cloudrunfunctions/deepseek-agent) - DeepSeek 大模型 Agent 示例
+- [Manus Agent](./cloudrunfunctions/manus-agent) - Manus Agent 示例
+- [Mastra Agent](./cloudrunfunctions/mastra-agent) - Mastra Agent 示例
+- [元器 Agent](./cloudrunfunctions/yuanqi-agent) - 元器 Agent示例
+- [空白 Agent 模板](./cloudrunfunctions/empty-agent) - 空白 Agent 模板
+- [大模型天气 Agent](./cloudrunfunctions/llm-based-weather-agent) - 基于大模型的天气 Agent 示例
 - [腾讯云智能体开发平台Agent](./cloudrunfunctions/lke-agent) - 腾讯云智能体开发平台 Agent 示例
 
 ### 🔗 MCP Server
 
-- [混元 3D MCP](./cloudrunfunctions/cloudrun-mcp-hunyuan-3d) - 混元 3D 生成代理示例
-- [Manus MCP](./cloudrunfunctions/cloudrun-mcp-mini-manus) - Manus 迷你代理示例
-- [模拟医院 MCP](./cloudrunfunctions/cloudrun-mcp-mock-hospital) - 模拟医院代理示例
+- [混元 3D MCP](./cloudrunfunctions/cloudrun-mcp-hunyuan-3d) - 混元 3D 生成 MCP 示例
+- [Manus MCP](./cloudrunfunctions/cloudrun-mcp-mini-manus) - Manus MCP 示例
+- [模拟医院 MCP](./cloudrunfunctions/cloudrun-mcp-mock-hospital) - 模拟医院 MCP 示例
 
 
 ### 🔧 低代码应用
