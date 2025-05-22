@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "dev": "tcb cloudfunction run -w",
-    "tcb-ff": "tcb-ff",
-    "deploy": "tcb cloudfunction deploy"
+    "login": "tcb login",
+    "dev": "tcb cloudrunfunction run -w",
+    "deploy": "tcb cloudrunfunction deploy"
   },
   "dependencies": {
     "@cloudbase/aiagent-framework": "^1.0.0-beta.10",
