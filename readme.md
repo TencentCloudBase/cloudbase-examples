@@ -2,8 +2,6 @@
 
 # Awesome CloudBase Examples
 
-[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
-
 > 精选的腾讯云开发（CloudBase）示例项目和资源列表
 
 [云开发（CloudBase）](https://cloud.tencent.com/product/tcb) 是腾讯云提供的云原生一体化开发环境和工具平台，为开发者提供高可用、自动弹性扩缩的后端云服务，包含计算、存储、托管等能力，可用于构建多种应用场景下的应用系统。
