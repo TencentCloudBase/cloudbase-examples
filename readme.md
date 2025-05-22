@@ -8,19 +8,20 @@
 
 ## 目录
 
-- [官方资源](#官方资源)
-- [示例项目](#示例项目)
-  - [Web 应用](#web-应用)
-  - [小程序](#小程序)
-  - [小游戏](#小游戏)
-  - [云托管应用](#云托管应用)
-  - [函数型托管](#函数型托管)
-  - [AI Agent 服务](#ai-agent-服务)
-  - [MCP Server](#mcp-server)
-  - [低代码应用](#低代码应用)
-- [贡献指南](#贡献指南)
-- [联系我们](#联系我们)
-- [许可证](#许可证)
+- [Awesome CloudBase Examples](#awesome-cloudbase-examples)
+  - [目录](#目录)
+  - [📚 官方资源](#-官方资源)
+  - [💡 示例项目](#-示例项目)
+    - [🌐 Web 应用](#-web-应用)
+    - [📱 小程序](#-小程序)
+    - [🎮 小游戏](#-小游戏)
+    - [⚡ 函数型托管](#-函数型托管)
+    - [🤖 AI Agent 服务](#-ai-agent-服务)
+    - [🔗 MCP Server](#-mcp-server)
+    - [🔧 低代码应用](#-低代码应用)
+  - [🤝 贡献指南](#-贡献指南)
+  - [📞 联系我们](#-联系我们)
+  - [📄 许可证](#-许可证)
 
 ## 📚 官方资源
 
@@ -36,13 +37,11 @@
 
 - [React 应用模板](./web/cloudbase-react-template) - 基于 React 的云开发应用模板
 - [文件上传下载](./web/tcb-demo-files) - 云开发文件存储示例
-- [自定义登录](./web/custom-login) - Web 端自定义登录认证示例
-- [下载代理示例](./web/download-agent-demo) - 云开发下载代理示例
 - [截图工具](./web/snapshots) - 网页快照与截图工具
 
 ### 📱 小程序
 
-- [AgentUI](./miniprogram/tcb-agent-ui) - 云开发Agent UI AI 小程序
+- [AgentUI](./miniprogram/tcb-agent-ui) - 云开发 Agent UI AI 智能对话小程序
 - [AI 相机](./miniprogram/tcb-demo-AICamera) - 基于云开发的 AI 相机小程序
 - [博客](./miniprogram/tcb-demo-blog) - 基于云开发的博客小程序
 - [论坛](./miniprogram/tcb-demo-bbs) - 基于云开发的论坛小程序
@@ -81,7 +80,6 @@
 ### 🤖 AI Agent 服务
 
 - [DeepSeek Agent](./cloudrunfunctions/deepseek-agent) - DeepSeek 大模型 Agent 示例
-- [Manus Agent](./cloudrunfunctions/manus-agent) - Manus Agent 示例
 - [Mastra Agent](./cloudrunfunctions/mastra-agent) - Mastra Agent 示例
 - [元器 Agent](./cloudrunfunctions/yuanqi-agent) - 元器 Agent示例
 - [空白 Agent 模板](./cloudrunfunctions/empty-agent) - 空白 Agent 模板
