@@ -72,17 +72,6 @@
 - [五子棋](./minigame/tcb-demo-gomoku) - 基于云开发的五子棋小游戏
 
 
-
-### ☁️ 云托管应用
-
-- [Node.js 应用](./cloudbaserun/node) - 基于云应用的 Node.js 示例
-- [PHP 应用](./cloudbaserun/php) - 基于云应用的 PHP 示例
-- [Java 应用](./cloudbaserun/java) - 基于云应用的 Java 示例
-- [Go 应用](./cloudbaserun/go) - 基于云应用的 Go 示例
-- [Python 应用](./cloudbaserun/python) - 基于云应用的 Python 示例
-- [Spring Cloud Docker](./cloudbaserun/spring-cloud-docker-demo) - 基于 Spring Cloud 的 Docker 示例
-- [Hello World](./cloudbaserun/helloworld) - 云应用入门示例
-
 ### ⚡ 函数型托管
 
 - [TypeScript 多函数](./cloudrunfunctions/ts-multiple-functions) - 基于 TypeScript 的多函数示例
