@@ -1,0 +1,350 @@
+{
+  "name": "Agent for cloudbase",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## AI Agent with Webhook for tencent cloudbase",
+        "height": 525,
+        "width": 1596,
+        "color": 6
+      },
+      "id": "311f1c66-2a4d-4081-9651-0c145fbbfdc9",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        400,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "ba32e0f3-69a9-4985-b3cf-bb9397c8d5a5",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1760,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "invoke-n8n-agent",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "38450b83-7618-4b84-9f02-745bcc661179",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        460,
+        180
+      ],
+      "webhookId": "7f8a71dd-b98a-4c87-aa3c-c0f7c3b63535",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "7VvbFImfNAaqGzdJ",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d264444f-c01a-4fa0-86a4-c0bf0e4c8537",
+              "name": "output",
+              "value": "={{ $json.output || $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1540,
+        100
+      ],
+      "id": "8d37a08b-4a17-4f50-af46-69b46ff29396",
+      "name": "Edit Fields (Set Output Field)"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.chatInput }}",
+        "options": {
+          "systemMessage": "You are a personal assistant who helps answer questions.\n\nYou are given tools to perform search.\n\nAlways tell the user if you didn't find the answer. Don't make something up just to please them."
+        }
+      },
+      "id": "f338f417-723a-4f06-99e8-23785f035162",
+      "name": "Primary AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        1060,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        360
+      ],
+      "id": "816769d8-c7eb-4d6f-bbe7-16621f83c36b",
+      "name": "DeepSeek Chat Model1",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "kejR9i5f71CrhQ6s",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{$json.body.sessionId}}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1360,
+        400
+      ],
+      "id": "5610992c-163a-4736-9fec-031f9e60966d",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "sseEndpoint": "your-mcp-server-url",
+        "authentication": "bearerAuth",
+        "include": "selected",
+        "includeTools": [
+          "search_web",
+          "analyze_vision"
+        ]
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        1560,
+        400
+      ],
+      "id": "5b1e9eeb-e39e-4556-9371-2abcca92d14e",
+      "name": "MCP Client",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "lWfZJdkiY6AQQpeu",
+          "name": "Bearer Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        900,
+        440
+      ],
+      "id": "fbf08793-fd6f-42bc-aa7e-c00b63b27f4b",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "kejR9i5f71CrhQ6s",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "f5ebbd4f-6549-4a31-b3f8-eee7634dc439",
+              "leftValue": "={{ $json.body.sessionId }}",
+              "rightValue": "None or Undefined",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        660,
+        180
+      ],
+      "id": "34b51990-9751-4b38-8534-4ff49e8a4bba",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Webhook').item.json.body.chatInput }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "You are a helpful assistant that recommends similar or related questions based on user input. Your task is to:\n\n1. Analyze the user's question to understand its core topic and intent\n2. Generate 3 related questions that:\n   - Cover different aspects of the same topic\n   - Ask for more specific details\n   - Explore related concepts\n   - Help users get more comprehensive information\n\nGuidelines for generating questions:\n- Keep questions clear and concise\n- Ensure questions are relevant to the original topic\n- Avoid repetitive or redundant questions\n- Use natural, conversational language\n- Consider different user knowledge levels\n\nFormat your response as a numbered list of questions, with each question on a new line.\n\nExample:\nIf user asks: \"How do I make chocolate cake?\"\nYou might recommend:\n1. What are the essential ingredients for a chocolate cake?\n2. How long should I bake a chocolate cake?\n3. What's the best way to frost a chocolate cake?\n"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.5,
+      "position": [
+        860,
+        280
+      ],
+      "id": "0f19d6b5-e665-42eb-92a3-f4d993f21e23",
+      "name": "Secondary LLM"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields (Set Output Field)": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Primary AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields (Set Output Field)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Primary AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Primary AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "Primary AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Primary AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Secondary LLM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Secondary LLM": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields (Set Output Field)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Secondary LLM",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "6e671464-eb69-4704-8944-277e9a61a253",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2042190337e3d75f5eece6b584e8f5a21b6f341d14fef52aa71e880eecc94c70"
+  },
+  "id": "9qvi17nCV6nvO9TS",
+  "tags": []
+}

@@ -85,6 +85,7 @@
 - [空白 Agent 模板](./cloudrunfunctions/empty-agent) - 空白 Agent 模板
 - [大模型天气 Agent](./cloudrunfunctions/llm-based-weather-agent) - 基于大模型的天气 Agent 示例
 - [腾讯云智能体开发平台Agent](./cloudrunfunctions/lke-agent) - 腾讯云智能体开发平台 Agent 示例
+- [n8n Agent](./cloudrunfunctions/n8n-agent) - 对接 n8n workflow 的 Agent 示例
 
 ### 🔗 MCP Server
 
