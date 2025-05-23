@@ -1,0 +1,15 @@
+{
+  "paths": [
+    "web/cloudbase-react-template"
+  ],
+  "exclude": [
+    "node_modules/**",
+    ".git/**",
+    "dist/**",
+    "build/**",
+    "*.log",
+    ".DS_Store",
+    "coverage/**",
+    ".env*"
+  ]
+} 
