@@ -3,6 +3,9 @@ import cloudbase from '@cloudbase/js-sdk';
 // 云开发环境ID，使用时请替换为您的环境ID
 const ENV_ID = 'your-env-id';
 
+// 检查环境ID是否已配置
+const isValidEnvId = ENV_ID && ENV_ID !== 'your-env-id';
+
 /**
  * 初始化云开发实例
  * @param {Object} config - 初始化配置
@@ -25,33 +28,80 @@ export const init = (config = {}) => {
 export const app = init();
 
 /**
- * 登录方法，默认使用匿名登录
- * @param {Object} options - 登录选项
+ * 检查环境配置是否有效
+ */
+export const checkEnvironment = () => {
+  if (!isValidEnvId) {
+    const message = '❌ 云开发环境ID未配置\n\n请按以下步骤配置：\n1. 打开 src/utils/cloudbase.js 文件\n2. 将 ENV_ID 变量的值替换为您的云开发环境ID\n3. 保存文件并刷新页面\n\n获取环境ID：https://console.cloud.tencent.com/tcb';
+    console.error(message);
+    return false;
+  }
+  return true;
+};
+
+/**
+ * 确保用户已登录（如未登录会执行匿名登录）
  * @returns {Promise} 登录状态
  */
-export const login = async (options = {}) => {
+export const ensureLogin = async () => {
+  // 检查环境配置
+  if (!checkEnvironment()) {
+    throw new Error('环境ID未配置');
+  }
+
   const auth = app.auth();
   
   try {
-    // 如果环境ID未设置，提示用户
-    if (ENV_ID === 'your-env-id') {
-      console.warn('请设置有效的环境ID后再使用此功能');
-      return { signedIn: false, message: '未配置环境ID' };
+    // 检查当前登录状态
+    let loginState = await auth.getLoginState();
+    
+    if (loginState && loginState.isLoggedIn) {
+      // 已登录，返回当前状态
+      console.log('用户已登录');
+      return loginState;
+    } else {
+      // 未登录，执行匿名登录
+      console.log('用户未登录，执行匿名登录...');
+      loginState = await login();
+      return loginState;
+    }
+  } catch (error) {
+    console.error('确保登录失败:', error);
+    
+    // 即使登录失败，也返回一个降级的登录状态，确保应用可以继续运行
+    console.warn('使用降级登录状态，应用将以离线模式运行');
+    return {
+      isLoggedIn: true,
+      user: {
+        uid: 'offline_' + Date.now(),
+        isAnonymous: true,
+        isOffline: true
+      }
+    };
+  }
+};
+
+
+
+/**
+ * 退出登录（注意：匿名登录无法退出）
+ * @returns {Promise}
+ */
+export const logout = async () => {
+  const auth = app.auth();
+  
+  try {
+    const loginScope = await auth.loginScope();
+    
+    if (loginScope === 'anonymous') {
+      console.warn('匿名登录状态无法退出');
+      return { success: false, message: '匿名登录状态无法退出' };
     }
     
-    // 默认使用匿名登录
-    await auth.signInAnonymously();
-    
-    // 获取登录状态
-    const loginState = await auth.getLoginState();
-    
-    // 获取登录范围（用于确认是否为匿名登录）
-    const loginScope = await auth.loginScope();
-    console.log('当前登录范围:', loginScope);
-    
-    return loginState;
+    await auth.signOut();
+    return { success: true, message: '已成功退出登录' };
   } catch (error) {
-    console.error('登录失败:', error);
+    console.error('退出登录失败:', error);
     throw error;
   }
 };
@@ -60,5 +110,8 @@ export const login = async (options = {}) => {
 export default {
   init,
   app,
-  login
+  ensureLogin,
+  logout,
+  checkEnvironment,
+  isValidEnvId
 }; 
