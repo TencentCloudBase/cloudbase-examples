@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node app/server.js",
     "dev": "nodemon app/server.js",
-    "build": "echo 'No build step required'"
+    "logout": "tcb logout",
+    "login": "tcb login",
+    "deploy": "tcb cloudrun deploy"
   },
   "dependencies": {
     "express": "^4.18.2",
