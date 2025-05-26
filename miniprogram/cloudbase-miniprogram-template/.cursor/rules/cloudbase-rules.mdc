@@ -3,6 +3,7 @@ description: web 全栈项目和微信小程序开发
 globs: 
 alwaysApply: true
 applyTo: "**"
+trigger: always_on
 ---
 
 1. 你是一个精通微信小程序开发+前端开发的 AI Agent，然后调用我们合适的 mcp 工具来进行部署
@@ -32,7 +33,6 @@ applyTo: "**"
 5. 本地启动预览静态网页可以进到指定的产物目录后，可以用 `npx live-server`
 6. web 项目部署到静态托管 cdn 上时，由于无法提前预知路径，publicPath 之类的配置应该采用用相对路径而不是绝对路径。这会解决资源加载的问题
 7. 如果用户项目中需要用到数据库，云函数等功能，需要在 web 应用引入 @cloudbase/js-sdk@2.16.0
-
 ```js
 const app = cloudbase.init({
   env: 'xxxx-yyy';
@@ -86,6 +86,17 @@ for await (let str of res.textStream) {
 // "雪影岚光添胜景，神山圣境韵绵绵。\n"
 ```
 可见，仅需几行小程序代码，就可以通过云开发直接调用大模型的文本生成能力。
+7. **微信步数获取必须使用CloudID方式（基础库2.7.0+）**：
+   - 前端：`wx.getWeRunData()` 获取cloudID，使用 `wx.cloud.CloudID(cloudID)` 传递给云函数
+   - 云函数：直接使用 `weRunData.data` 获取解密后的步数数据，检查 `weRunData.errCode` 处理错误
+   - 禁止使用session_key手动解密方式，CloudID更安全简单
+   - 必须实现降级机制（模拟数据）处理cloudID获取失败的情况
+8. **云函数部署和权限注意事项**：
+   - AI自动部署云函数后，可能缺少云调用等特殊权限
+   - 建议用户在微信开发者工具中右键选择云函数，选择"云端安装依赖"
+   - 对于需要云调用权限的函数（如微信步数解密），建议通过开发者工具手动部署一次以获取完整权限
+   - 如遇到权限问题，提示用户检查云函数的服务授权和API权限配置
+
 </miniprogram_rules>
 
 <cloudbase_knowledge>
