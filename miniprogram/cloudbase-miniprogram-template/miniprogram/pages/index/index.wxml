@@ -1,0 +1,3 @@
+<view class="container">
+  <text>您的OpenID是：{{openid}}</text>
+</view>
