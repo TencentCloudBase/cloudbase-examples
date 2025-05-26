@@ -1,6 +1,7 @@
 {
   "paths": [
-    "web/cloudbase-react-template"
+    "web/cloudbase-react-template",
+    "miniprogram/cloudbase-miniprogram-template"
   ],
   "exclude": [
     "node_modules/**",
