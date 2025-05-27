@@ -2,6 +2,12 @@
 
 基于 React、Vite 和腾讯云开发（CloudBase）的现代化 Web 应用模板，为开发者提供了快速构建全栈应用的能力。
 
+
+[![Powered by CloudBase AI-Deploy MCP](https://img.shields.io/badge/Powered%20by-CloudBase%20AI--Deploy%20MCP-blue?style=flat-square)](https://github.com/TencentCloudBase/cloudbase-ai-deploy-mcp)  
+
+> 本项目基于 [**CloudBase AI-Deploy MCP**](https://github.com/TencentCloudBase/cloudbase-ai-deploy-mcp) 开发，支持AI生成全栈代码、一键部署至腾讯云开发（免服务器）、智能日志修复。  
+源代码开源（MIT协议）：[Github仓库](https://github.com/TencentCloudBase/cloudbase-ai-deploy-mcp)，支持 web 、小程序全栈应用等
+
 ## 项目特点
 
 - 🚀 基于 Vite 构建，提供极速的开发体验
