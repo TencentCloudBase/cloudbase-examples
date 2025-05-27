@@ -35,13 +35,13 @@
 
 ### 🌐 Web 应用
 
-- [React 应用模板](./web/cloudbase-react-template) - 基于 React 的云开发应用模板，支持 [`CloudBase AI Deploy MCP`](https://github.com/TencentCloudBase/cloudbase-ai-deploy-mcp)
+- [React 应用模板](./web/cloudbase-react-template) - 基于 React 的云开发应用模板，支持 [`CloudBase AI ToolKit`](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 - [文件上传下载](./web/tcb-demo-files) - 云开发文件存储示例
 - [截图工具](./web/snapshots) - 网页快照与截图工具
 
 ### 📱 小程序
 
-- [小程序应用模板](./web/cloudbase-react-template) - 小程序云开发应用模板，支持 [`CloudBase AI Deploy MCP`](https://github.com/TencentCloudBase/cloudbase-ai-deploy-mcp)
+- [小程序应用模板](./web/cloudbase-react-template) - 小程序云开发应用模板，支持 [`CloudBase AI ToolKit`](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 - [AgentUI](./miniprogram/tcb-agent-ui) - 云开发 Agent UI AI 智能对话小程序
 - [AI 相机](./miniprogram/tcb-demo-AICamera) - 基于云开发的 AI 相机小程序
 - [博客](./miniprogram/tcb-demo-blog) - 基于云开发的博客小程序
