@@ -2,13 +2,9 @@
 
 本项目是一个基于小程序 + 云开发的空白项目，提供了基本的云开发能力演示，帮助开发者快速上手小程序云开发。
 
+[![Powered by CloudBase-AI-ToolKit](https://img.shields.io/badge/Powered%20by-CloudBase%20AI%20ToolKit-blue?style=flat-square)](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)  
 
-[![Powered by CloudBase AI-Deploy MCP](https://img.shields.io/badge/Powered%20by-CloudBase%20AI--Deploy%20MCP-blue?style=flat-square)](https://github.com/TencentCloudBase/cloudbase-ai-deploy-mcp)  
-
-
-本项目基于 [**CloudBase AI-Deploy MCP**](https://github.com/TencentCloudBase/cloudbase-ai-deploy-mcp) 开发，支持 **AI生成全栈代码、一键部署至腾讯云开发（Serverless免服务器）、智能日志修复**。  
-
-**源代码开源**（MIT协议）：[Github仓库](https://github.com/TencentCloudBase/cloudbase-ai-deploy-mcp)，支持 **Web、小程序全栈应用开发**。
+> 本项目基于 [**CloudBase AI ToolKit**](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit) 开发，通过AI提示词和 MCP 协议+云开发，让开发更智能、更高效，支持AI生成全栈代码、一键部署至腾讯云开发（免服务器）、智能日志修复。
 
 ## 项目特点
 
