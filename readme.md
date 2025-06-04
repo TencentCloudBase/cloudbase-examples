@@ -29,7 +29,6 @@
 - [云开发控制台](https:/tcb.cloud.tencent.com/dev) - 云开发管理控制台
 - [云开发产品文档](https://cloud.tencent.com/document/product/876) - 官方文档
 - [云开发技术文档](https://docs.cloudbase.net/) - 技术文档
-- [云开发 CLI](https://github.com/TencentCloudBase/cloudbase-cli) - 云开发命令行工具
 
 ## 💡 示例项目
 
