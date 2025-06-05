@@ -13,6 +13,4 @@ coverage
 .history
 .DS_Store
 logs
-.vscode
-
 env
