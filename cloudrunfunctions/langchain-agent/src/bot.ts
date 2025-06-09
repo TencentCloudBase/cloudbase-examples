@@ -1,0 +1,139 @@
+import { BotCore, IBot, SendMessageInput } from "@cloudbase/aiagent-framework";
+import { DynamicTool, StructuredTool } from "langchain/tools";
+import { MemoryVectorStore } from "langchain/vectorstores/memory";
+import { ChatDeepSeek } from "@langchain/deepseek";
+import { TavilySearch } from "@langchain/tavily";
+import { HumanMessage, SystemMessage } from "@langchain/core/messages";
+import { TencentHunyuanEmbeddings } from "@langchain/community/embeddings/tencent_hunyuan";
+import { CheerioWebBaseLoader } from "@langchain/community/document_loaders/web/cheerio";
+import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
+
+export class MyBot extends BotCore implements IBot {
+  private tools: any[] = []
+  private toolsByName: any = {}
+  constructor(context: any) {
+    super(context)
+    // 初始化工具列表
+    this.tools = []
+    this.toolsByName = {}
+  }
+
+  async getSearchTool() {
+    const searchTool = new TavilySearch({
+      maxResults: 5,
+      topic: "general",
+    });
+    return searchTool
+  }
+
+  async getRetrieverTool() {
+    const embeddings = new TencentHunyuanEmbeddings();
+    const loader = new CheerioWebBaseLoader(
+      "https://docs.cloudbase.net/ai/FAQ"
+    );
+    const docs = await loader.load();
+    console.log('docs', docs)
+    const splitter = new RecursiveCharacterTextSplitter({
+      chunkSize: 500,
+      chunkOverlap: 100,
+    });
+    const documents = await splitter.splitDocuments(docs);
+    console.log('documents', documents)
+    const vectorStore = await MemoryVectorStore.fromDocuments(
+      documents,
+      embeddings
+    );
+    const retriever = vectorStore.asRetriever();
+
+    const retrieverTool = new DynamicTool({
+      name: "tcb_faq_rag",
+      description: "在云开发AI FAQ 知识库中检索相关内容",
+      func: async (input: string) => {
+        const docs = await retriever.getRelevantDocuments(input);
+        console.log('retrieve docs', docs)
+        return docs.map(d => d.pageContent).join("\n");
+      },
+    });
+
+    // const retrieverTool = tool(
+    //   async ({ input }, config) => {
+    //     const docs = await retriever.invoke(input, config);
+    //     console.log("retrieverTool docs", docs)
+    //     return docs.map((doc) => doc.pageContent).join("\n\n");
+    //   },
+    //   {
+    //     name: "tcb_faq_rag",
+    //     description:
+    //       "查询云开发AI 相关的问题. 对任何询问云开发 AI 相关问题，必须使用该工具!",
+    //     schema: z.object({
+    //       input: z.string(),
+    //     }),
+    //   }
+    // );
+    return retrieverTool
+  }
+
+  async sendMessage({ msg }: SendMessageInput): Promise<void> {
+    // console.log("context", this.context)
+
+    // 初始化 LLM
+    const llm = new ChatDeepSeek({
+      streaming: false,
+      model: "deepseek-chat"
+    });
+
+    const streamingLLM = new ChatDeepSeek({
+      streaming: true,
+      model: "deepseek-chat"
+    });
+
+    let tools = this.tools
+    if (tools.length === 0) {
+      const searchTool = await this.getSearchTool()
+      const retrieverTool = await this.getRetrieverTool()
+      tools = [searchTool, retrieverTool]
+      this.tools = tools
+      this.toolsByName = {
+        tavily_search: searchTool,
+        tcb_faq_rag: retrieverTool,
+      };
+    }
+
+    const llmWithTools = llm.bindTools(tools)
+
+    // 构建工具列表
+    const messages = [new SystemMessage("你是一个智能助手，遇到无法直接回答的问题时，可以调用联网搜索工具，或在云开发AI FAQ 知识库中检索相关内容"), new HumanMessage(msg)];
+
+    const aiMessage = await llmWithTools.invoke(messages);
+    console.log(aiMessage);
+    messages.push(aiMessage);
+
+    for (const toolCall of aiMessage.tool_calls as any) {
+      const selectedTool = this.toolsByName[toolCall.name];
+      const toolMessage = await selectedTool.invoke(toolCall);
+      messages.push(toolMessage);
+    }
+
+    console.log('final messages', messages);
+
+    // 生成最终答案
+    const finalStream = await streamingLLM.stream(messages);
+    let fullResponse = "";
+
+    for await (const chunk of finalStream) {
+      fullResponse += chunk.content;
+      console.log("chunk", chunk.content)
+      this.sseSender.send({
+        data: {
+          content: chunk.content as string ?? "",
+          role: 'assistant',
+          type: 'text',
+          model: "deepseek-v3-0324",
+          finish_reason: "",
+        },
+      });
+    }
+    console.log('fullResponse', fullResponse);
+    this.sseSender.end();
+  }
+}
