@@ -62,7 +62,7 @@ export const ensureLogin = async () => {
     } else {
       // 未登录，执行匿名登录
       console.log('用户未登录，执行匿名登录...');
-      loginState = await login();
+      loginState = await auth.signInAnonymously();
       return loginState;
     }
   } catch (error) {
