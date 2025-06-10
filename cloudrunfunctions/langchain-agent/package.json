@@ -7,7 +7,7 @@
 		"logout": "tcb logout",
 		"build": "tsc",
 		"build:w": "tsc -w",
-		"dev": "dotenvx run -- tcb cloudrunfunction run -w",
+		"dev": "dotenvx run -f .env.development -- tcb cloudrunfunction run -w",
 		"deploy": "tcb cloudrunfunction deploy"
 	},
 	"exports": {
