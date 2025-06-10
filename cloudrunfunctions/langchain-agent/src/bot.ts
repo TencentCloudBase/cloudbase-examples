@@ -1,5 +1,5 @@
 import { BotCore, IBot, SendMessageInput } from "@cloudbase/aiagent-framework";
-import { DynamicTool, StructuredTool } from "langchain/tools";
+import { DynamicTool } from "langchain/tools";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { ChatDeepSeek } from "@langchain/deepseek";
 import { TavilySearch } from "@langchain/tavily";
@@ -70,21 +70,44 @@ export class MyBot extends BotCore implements IBot {
     //     }),
     //   }
     // );
-    return retrieverTool
+    return retrieverTool;
   }
 
   async sendMessage({ msg }: SendMessageInput): Promise<void> {
-    // console.log("context", this.context)
+    const envId =
+      this.context.extendedContext?.envId || process.env.CLOUDBASE_ENV_ID;
+
+    !envId &&
+      console.warn(
+        "Missing envId, if running locally, please configure \`CLOUDBASE_ENV_ID\` environment variable."
+      );
+
+    const cloudbaseToken =
+      this.context.extendedContext?.accessToken ||
+      process.env.CLOUDBASE_API_KEY;
+
+    !cloudbaseToken &&
+      console.warn(
+        "Missing cloudbase access token, if running locally, please configure \`CLOUDBASE_API_KEY\` environment variable."
+      );
 
     // 初始化 LLM
     const llm = new ChatDeepSeek({
       streaming: false,
-      model: "deepseek-chat"
+      model: "deepseek-v3-0324",
+      apiKey: cloudbaseToken,
+      configuration: {
+        baseURL: `https://${envId}.api.tcloudbasegateway.com/v1/ai/deepseek/v1`,
+      },
     });
 
     const streamingLLM = new ChatDeepSeek({
       streaming: true,
-      model: "deepseek-chat"
+      model: "deepseek-v3-0324",
+      apiKey: cloudbaseToken,
+      configuration: {
+        baseURL: `https://${envId}.api.tcloudbasegateway.com/v1/ai/deepseek/v1`,
+      },
     });
 
     let tools = this.tools
