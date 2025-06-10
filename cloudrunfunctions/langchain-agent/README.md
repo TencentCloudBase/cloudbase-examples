@@ -19,15 +19,17 @@
 
 <img src="https://qcloudimg.tencent-cloud.cn/raw/541e24f06da76fb80fd7b5748c724f46.png" width="375" />
 
-
 ## 环境变量
 
-请参考 `.env.template`，配置如下环境变量：
+本项目提供了环境变量模板 `.env.template`，可将其重命名为 `.env.development` 后进行编辑。 `.env.development` 将会在本地调试时生效，部署至线上时，可通过[命令行进行传参](https://docs.cloudbase.net/cli-v1/runf/deploy#%E8%BF%9B%E9%98%B6%E7%94%A8%E6%B3%95)，或者部署后前往云开发平台进行环境变量配置。
+
+> 部分环境变量只在本地调试需要，部署至线上时可以不对这些环境变量进行配置。
 
 - `TAVILY_API_KEY`：Tavily 搜索工具的 API Key（联网搜索用）
 - `TENCENT_SECRET_ID`：腾讯云 SecretID (腾讯混元向量化模型用)
 - `TENCENT_SECRET_KEY`：腾讯云 SecretKey (腾讯混元向量化模型用)
-- `DEEPSEEK_API_KEY`：DeepSeek API Key （DeepSeek 大模型对话能力）
+- `CLOUDBASE_ENV_ID`：云开发环境 ID（仅本地调试使用）
+- `CLOUDBASE_API_KEY`：云开发 API Key（用于 DeepSeek 大模型对话能力）（仅本地调试使用）[前往云开发平台获取](https://tcb.cloud.tencent.com/dev#/env/apikey)
 
 如需自定义模型/embedding 服务，可扩展相关环境变量。
 
@@ -39,7 +41,7 @@ npm install
 
 ## 本地调试
 
-1. 配置好 `.env` 环境变量
+1. 配置好 `.env.development` 环境变量
 2. 启动本地服务
 
 ```shell
@@ -76,5 +78,3 @@ npm run deploy
 - [腾讯云开发 AI+](https://docs.cloudbase.net/ai/introduce)
 - [函数型云托管](https://docs.cloudbase.net/cbrf/intro)
 - [Tavily 官方文档](https://docs.tavily.com/)
-
-
