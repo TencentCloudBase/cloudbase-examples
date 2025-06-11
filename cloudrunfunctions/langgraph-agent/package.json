@@ -15,17 +15,18 @@
 		"./src": "./src/index.ts"
 	},
 	"dependencies": {
-		"@cloudbase/aiagent-framework": "1.0.0-beta.9", 
+		"@cloudbase/aiagent-framework": "1.0.0-beta.9",
 		"@cloudbase/mcp": "1.0.0-beta.26",
 		"@langchain/community": "^0.3.45",
 		"@langchain/core": "^0.3.57",
 		"@langchain/deepseek": "^0.0.1",
 		"@langchain/langgraph": "^0.3.1",
-		"@langchain/langgraph-supervisor": "^0.0.13", 
+		"@langchain/langgraph-supervisor": "^0.0.13",
 		"@langchain/tavily": "^0.1.2",
 		"@langchain/textsplitters": "^0.1.0",
-		"@modelcontextprotocol/sdk": "^1.12.1", 
+		"@modelcontextprotocol/sdk": "^1.12.1",
 		"langchain": "^0.3.27",
+		"remeda": "^2.23.0",
 		"zod": "^3.25.56"
 	},
 	"devDependencies": {

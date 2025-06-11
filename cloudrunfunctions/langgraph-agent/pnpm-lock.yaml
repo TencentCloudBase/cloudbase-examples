@@ -41,13 +41,16 @@ importers:
       langchain:
         specifier: ^0.3.27
         version: 0.3.27(@langchain/core@0.3.57(openai@4.96.0(ws@8.18.1)(zod@3.25.56)))(@langchain/deepseek@0.0.1(@langchain/core@0.3.57(openai@4.96.0(ws@8.18.1)(zod@3.25.56)))(ws@8.18.1))(axios@1.9.0)(cheerio@1.0.0)(openai@4.96.0(ws@8.18.1)(zod@3.25.56))(ws@8.18.1)
+      remeda:
+        specifier: ^2.23.0
+        version: 2.23.0
       zod:
         specifier: ^3.25.56
         version: 3.25.56
     devDependencies:
       '@cloudbase/cli':
         specifier: ^2.6.16
-        version: 2.6.16(@cloudbase/weda-cloud-sdk@1.0.102(@cloudbase/js-sdk@1.7.2)(mobx@5.15.7))(@vue/compiler-sfc@3.5.13)(@zxing/library@0.18.6)(babel-core@6.26.3)(decimal.js@10.5.0)(ejs@3.1.10)(eslint@8.57.1)(papaparse@5.5.2)(prettier@3.5.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(sockjs-client@1.6.1)(type-fest@1.4.0)(xlsx@0.18.5)
+        version: 2.6.16(@cloudbase/weda-cloud-sdk@1.0.102(@cloudbase/js-sdk@1.7.2)(mobx@5.15.7))(@vue/compiler-sfc@3.5.13)(@zxing/library@0.18.6)(babel-core@6.26.3)(decimal.js@10.5.0)(ejs@3.1.10)(eslint@8.57.1)(papaparse@5.5.2)(prettier@3.5.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(sockjs-client@1.6.1)(type-fest@4.41.0)(xlsx@0.18.5)
       '@cloudbase/functions-typings':
         specifier: ^1.0.0
         version: 1.1.0
@@ -8304,6 +8307,9 @@ packages:
     resolution: {integrity: sha512-G08Dxvm4iDN3MLM0EsP62EDV9IuhXPR6blNz6Utcp7zyV3tr4HVNINt6MpaRWbxoOHT3Q7YN2P+jaHX8vUbgog==}
     engines: {node: '>= 0.10'}
 
+  remeda@2.23.0:
+    resolution: {integrity: sha512-0mPy6q4ZMkAyrmucV6U6RaQ4GaJ7PLy9kTCNzC4k99DY6kQZXQIU8lxUVV4ocCWcjPvl7PSpOa42oPJWQiGouA==}
+
   remove-trailing-separator@1.1.0:
     resolution: {integrity: sha512-/hS+Y0u3aOfIETiaiirUFwDBDzmXPvO+jAfKTitUngIPzdKc6Z0LoFjM/CK5PL4C+eKwHohlHAb6H0VFfmmUsw==}
 
@@ -9192,6 +9198,10 @@ packages:
   type-fest@1.4.0:
     resolution: {integrity: sha512-yGSza74xk0UG8k+pLh5oeoYirvIiWo5t0/o3zHHAO2tRDiZcxWP7fywNlXhqb6/r6sWvwi+RsyQMWhVLe4BVuA==}
     engines: {node: '>=10'}
+
+  type-fest@4.41.0:
+    resolution: {integrity: sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==}
+    engines: {node: '>=16'}
 
   type-is@1.6.18:
     resolution: {integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==}
@@ -12514,13 +12524,13 @@ snapshots:
       postcss-less: 6.0.0(postcss@8.5.3)
       tinycolor2: 1.6.0
 
-  '@cloudbase/cli@2.6.16(@cloudbase/weda-cloud-sdk@1.0.102(@cloudbase/js-sdk@1.7.2)(mobx@5.15.7))(@vue/compiler-sfc@3.5.13)(@zxing/library@0.18.6)(babel-core@6.26.3)(decimal.js@10.5.0)(ejs@3.1.10)(eslint@8.57.1)(papaparse@5.5.2)(prettier@3.5.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(sockjs-client@1.6.1)(type-fest@1.4.0)(xlsx@0.18.5)':
+  '@cloudbase/cli@2.6.16(@cloudbase/weda-cloud-sdk@1.0.102(@cloudbase/js-sdk@1.7.2)(mobx@5.15.7))(@vue/compiler-sfc@3.5.13)(@zxing/library@0.18.6)(babel-core@6.26.3)(decimal.js@10.5.0)(ejs@3.1.10)(eslint@8.57.1)(papaparse@5.5.2)(prettier@3.5.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(sockjs-client@1.6.1)(type-fest@4.41.0)(xlsx@0.18.5)':
     dependencies:
       '@cloudbase/cloud-api': 0.5.5
       '@cloudbase/framework-core': 1.9.7
       '@cloudbase/functions-framework': 1.12.0
       '@cloudbase/iac-core': 0.0.3-alpha.9
-      '@cloudbase/lowcode-cli': 0.22.2(@cloudbase/weda-cloud-sdk@1.0.102(@cloudbase/js-sdk@1.7.2)(mobx@5.15.7))(@vue/compiler-sfc@3.5.13)(@zxing/library@0.18.6)(babel-core@6.26.3)(decimal.js@10.5.0)(ejs@3.1.10)(eslint@8.57.1)(papaparse@5.5.2)(prettier@3.5.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(sockjs-client@1.6.1)(type-fest@1.4.0)(xlsx@0.18.5)
+      '@cloudbase/lowcode-cli': 0.22.2(@cloudbase/weda-cloud-sdk@1.0.102(@cloudbase/js-sdk@1.7.2)(mobx@5.15.7))(@vue/compiler-sfc@3.5.13)(@zxing/library@0.18.6)(babel-core@6.26.3)(decimal.js@10.5.0)(ejs@3.1.10)(eslint@8.57.1)(papaparse@5.5.2)(prettier@3.5.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(sockjs-client@1.6.1)(type-fest@4.41.0)(xlsx@0.18.5)
       '@cloudbase/manager-node': 4.2.8
       '@cloudbase/toolbox': 0.7.5
       address: 1.2.2
@@ -12828,7 +12838,7 @@ snapshots:
       - webpack-command
       - xlsx
 
-  '@cloudbase/lowcode-cli@0.22.2(@cloudbase/weda-cloud-sdk@1.0.102(@cloudbase/js-sdk@1.7.2)(mobx@5.15.7))(@vue/compiler-sfc@3.5.13)(@zxing/library@0.18.6)(babel-core@6.26.3)(decimal.js@10.5.0)(ejs@3.1.10)(eslint@8.57.1)(papaparse@5.5.2)(prettier@3.5.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(sockjs-client@1.6.1)(type-fest@1.4.0)(xlsx@0.18.5)':
+  '@cloudbase/lowcode-cli@0.22.2(@cloudbase/weda-cloud-sdk@1.0.102(@cloudbase/js-sdk@1.7.2)(mobx@5.15.7))(@vue/compiler-sfc@3.5.13)(@zxing/library@0.18.6)(babel-core@6.26.3)(decimal.js@10.5.0)(ejs@3.1.10)(eslint@8.57.1)(papaparse@5.5.2)(prettier@3.5.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(sockjs-client@1.6.1)(type-fest@4.41.0)(xlsx@0.18.5)':
     dependencies:
       '@babel/core': 7.26.10
       '@babel/plugin-proposal-decorators': 7.25.9(@babel/core@7.26.10)
@@ -12846,7 +12856,7 @@ snapshots:
       '@cloudbase/toolbox': 0.7.5
       '@koa/cors': 3.4.3
       '@koa/router': 10.1.1
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.16(react-refresh@0.13.0)(sockjs-client@1.6.1)(type-fest@1.4.0)(webpack-dev-server@4.15.2(debug@4.4.0)(webpack@5.99.7(@swc/core@1.11.21)))(webpack@5.99.7(@swc/core@1.11.21))
+      '@pmmmwh/react-refresh-webpack-plugin': 0.5.16(react-refresh@0.13.0)(sockjs-client@1.6.1)(type-fest@4.41.0)(webpack-dev-server@4.15.2(debug@4.4.0)(webpack@5.99.7(@swc/core@1.11.21)))(webpack@5.99.7(@swc/core@1.11.21))
       '@shopify/semaphore': 3.1.0
       '@swc/core': 1.11.21
       ast-types: 0.14.2
@@ -12915,7 +12925,7 @@ snapshots:
       veaury: 2.6.2(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       vm-browserify: 1.1.2
       vue: 3.5.13(typescript@4.9.5)
-      vue-loader: 17.4.2(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@5.8.3))(webpack@5.99.7(@swc/core@1.11.21))
+      vue-loader: 17.4.2(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@4.9.5))(webpack@5.99.7(@swc/core@1.11.21))
       vue-loader-for-vue2: vue-loader@15.11.1(@vue/compiler-sfc@3.5.13)(babel-core@6.26.3)(css-loader@5.2.7(webpack@5.99.7(@swc/core@1.11.21)))(ejs@3.1.10)(lodash@4.17.21)(prettier@3.5.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(webpack@5.99.7(@swc/core@1.11.21))
       webpack: 5.99.7(@swc/core@1.11.21)
       webpack-bundle-analyzer: 4.10.2
@@ -13973,7 +13983,7 @@ snapshots:
     dependencies:
       playwright: 1.52.0
 
-  '@pmmmwh/react-refresh-webpack-plugin@0.5.16(react-refresh@0.13.0)(sockjs-client@1.6.1)(type-fest@1.4.0)(webpack-dev-server@4.15.2(debug@4.4.0)(webpack@5.99.7(@swc/core@1.11.21)))(webpack@5.99.7(@swc/core@1.11.21))':
+  '@pmmmwh/react-refresh-webpack-plugin@0.5.16(react-refresh@0.13.0)(sockjs-client@1.6.1)(type-fest@4.41.0)(webpack-dev-server@4.15.2(debug@4.4.0)(webpack@5.99.7(@swc/core@1.11.21)))(webpack@5.99.7(@swc/core@1.11.21))':
     dependencies:
       ansi-html: 0.0.9
       core-js-pure: 3.41.0
@@ -13986,7 +13996,7 @@ snapshots:
       webpack: 5.99.7(@swc/core@1.11.21)
     optionalDependencies:
       sockjs-client: 1.6.1(supports-color@6.1.0)
-      type-fest: 1.4.0
+      type-fest: 4.41.0
       webpack-dev-server: 4.15.2(debug@4.4.0)(webpack@5.99.7(@swc/core@1.11.21))
 
   '@polka/url@1.0.0-next.29': {}
@@ -20701,6 +20711,10 @@ snapshots:
 
   relateurl@0.2.7: {}
 
+  remeda@2.23.0:
+    dependencies:
+      type-fest: 4.41.0
+
   remove-trailing-separator@1.1.0: {}
 
   repeat-element@1.1.4: {}
@@ -21694,6 +21708,8 @@ snapshots:
 
   type-fest@1.4.0: {}
 
+  type-fest@4.41.0: {}
+
   type-is@1.6.18:
     dependencies:
       media-typer: 0.3.0
@@ -21975,7 +21991,7 @@ snapshots:
       - walrus
       - whiskers
 
-  vue-loader@17.4.2(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@5.8.3))(webpack@5.99.7(@swc/core@1.11.21)):
+  vue-loader@17.4.2(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@4.9.5))(webpack@5.99.7(@swc/core@1.11.21)):
     dependencies:
       chalk: 4.1.2
       hash-sum: 2.0.0

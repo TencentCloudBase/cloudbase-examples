@@ -1,7 +1,6 @@
 import { Tool } from "@modelcontextprotocol/sdk/types.js";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { BaseCallbackHandler } from "@langchain/core/callbacks/base";
-import { LLMResult } from "@langchain/core/outputs";
 import { StructuredTool } from "langchain/tools";
 import { z, ZodTypeAny } from "zod";
 
@@ -60,6 +59,7 @@ export function filterLog() {
   const FILTER_MESSAGES = [
     "already exists in this message chunk",
     "Failed to calculate number of tokens, falling back to",
+    "This will become an error in a future version of the SDK.",
   ];
 
   const oldWarn = console.warn;
@@ -84,27 +84,6 @@ class LLMInterceptorCallback extends BaseCallbackHandler {
     this.logSeparator();
     console.log("🚀 LLM 请求开始:", llm);
     console.log("发送的 Prompts:", JSON.stringify(prompts, null, 2));
-    this.logSeparator();
-  }
-
-  async handleLLMEnd(output: LLMResult) {
-    this.logSeparator();
-    console.log("✅ LLM 请求结束:");
-    console.log("原始响应:", JSON.stringify(output, null, 2));
-    this.logSeparator();
-  }
-
-  async handleLLMError(err: Error) {
-    this.logSeparator();
-    console.log("❌ LLM 请求错误:");
-    console.log("错误:", err.message);
-    this.logSeparator();
-  }
-
-  async handleText(text: string) {
-    this.logSeparator();
-    console.log("📝 处理文本:");
-    console.log("文本内容:", text);
     this.logSeparator();
   }
 }

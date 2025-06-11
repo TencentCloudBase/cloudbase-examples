@@ -8,6 +8,7 @@ import { PostClientTransport } from "@cloudbase/mcp/transport/client/post";
 import { retrieverTool, searchTool } from "./tools.js";
 import { createGeneralAgent } from "./generalAgent.js";
 import { llmCallback } from "./util.js";
+import { omit } from "remeda";
 
 export class MyBot extends BotCore implements IBot {
   private mcpClient: Client | null = null;
@@ -44,7 +45,6 @@ export class MyBot extends BotCore implements IBot {
         baseURL: `https://${envId}.api.tcloudbasegateway.com/v1/ai/deepseek/v1`,
       },
       callbacks: [llmCallback],
-      verbose: true,
     });
     // 子Agent
     const faqAgent = createReactAgent({
@@ -77,7 +77,6 @@ export class MyBot extends BotCore implements IBot {
         baseURL: `https://${envId}.api.tcloudbasegateway.com/v1/ai/deepseek/v1`,
       },
       callbacks: [llmCallback],
-      verbose: true,
     });
     // Supervisor prompt
     const supervisorPrompt =
@@ -85,7 +84,8 @@ export class MyBot extends BotCore implements IBot {
       "对于云开发 AI 相关的问题，交给 faqAgent。" +
       "对于互联网搜索相关的问题，交给 searchAgent。" +
       "对于其他问题，交给 generalAgent。" +
-      "如果某个专家表示无法完成任务，你也应该 fallback 给 generalAgent 处理。";
+      "如果某个专家表示无法完成任务，你也应该 fallback 给 generalAgent 处理。" +
+      "如果你给出的最后答复不能解决用户的问题，你应该检查是否至少交给 generalAgent 处理过一次。如果 generalAgent 一次都没有处理过，你应该把问题交给 generalAgent 处理。";
     // 创建 Supervisor
     const agents = [faqAgent, searchAgent];
     if (generalAgent) {
@@ -100,21 +100,10 @@ export class MyBot extends BotCore implements IBot {
       llm: supervisorLLM,
       prompt: supervisorPrompt,
     }).compile();
-    // 启动流式协作
-    const stream = await supervisor.stream({
+    // 启动协作，无需流式
+    const result = await supervisor.invoke({
       messages: [new HumanMessage(msg)],
     });
-
-    let finalMessages: any[] = [];
-    for await (const chunk of stream) {
-      console.log("agent 工具 chunk", chunk);
-      // 只流式输出最终AI回复
-      if (chunk?.supervisor?.messages) {
-        // 只取supervisor的messages,
-        const messages = chunk.supervisor.messages;
-        finalMessages = messages as any[];
-      }
-    }
 
     // 用 finalMessages 作为 prompt，流式总结
     const streamingLLM = new ChatDeepSeek({
@@ -125,9 +114,20 @@ export class MyBot extends BotCore implements IBot {
         baseURL: `https://${envId}.api.tcloudbasegateway.com/v1/ai/deepseek/v1`,
       },
     });
-    const summaryStream = await streamingLLM.stream(finalMessages);
+    const summaryStream = await streamingLLM.stream(result.messages);
+
     for await (const chunk of summaryStream) {
-      console.log("summary chunk", chunk);
+      console.log(
+        "summary chunk",
+        omit(chunk, [
+          "response_metadata",
+          "usage_metadata",
+          "lc_kwargs",
+          "additional_kwargs",
+          "lc_namespace",
+          "lc_serializable",
+        ])
+      );
       this.sseSender.send({
         data: {
           content: chunk.content as string,
