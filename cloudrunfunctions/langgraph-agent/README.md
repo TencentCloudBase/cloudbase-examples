@@ -16,7 +16,32 @@
 
 ### 多Agent 协作架构
 
-![](https://qcloudimg.tencent-cloud.cn/raw/5fca7334d5a552d4a8d4f9a6c6d423ab.png)
+```mermaid
+flowchart TD
+    A[用户输入] --> B[Supervisor<br/>主管Agent]
+    
+    B --> C[FAQ Agent<br/>知识库检索]
+    B --> D[Search Agent<br/>联网搜索]
+    B --> E[Mcp Agent<br/>可调用 MCP 工具]
+    
+    C -->|回复/中间结果| B
+    D -->|回复/中间结果| B
+    E -->|回复/中间结果| B
+    
+    B -->|最终消息流| F[总结LLM<br/>流式输出]
+    F -->|token流式输出| A
+    
+    %% 添加一些样式
+    classDef userInput fill:#e1f5fe
+    classDef supervisor fill:#f3e5f5
+    classDef agents fill:#e8f5e8
+    classDef summary fill:#fff3e0
+    
+    class A userInput
+    class B supervisor
+    class C,D,E agents
+    class F summary
+```
 
 > **说明：**
 > - 用户输入首先由 Supervisor 主管 Agent 解析，自动分配给最合适的子 Agent（FAQ、搜索、地图等）。
@@ -36,7 +61,7 @@
 - **Search Agent**  
   内置联网搜索工具（如 Tavily），补充最新互联网信息。
 
-- **Map Agent**  
+- **MCP Agent**  
   动态注入 MCP 工具（如地图/导航/自定义 API），自动适配 JSON Schema → zod schema，支持 StructuredTool 方式调用。
 
 - **总结 LLM**  
@@ -46,16 +71,16 @@
 
 ## 环境变量
 
-请参考 `.env.template`，配置如下环境变量：
+本项目提供了环境变量模板 `.env.template`，可将其重命名为 `.env.development` 后进行编辑。 `.env.development` 将会在本地调试时生效，部署至线上时，可通过[命令行进行传参](https://docs.cloudbase.net/cli-v1/runf/deploy#%E8%BF%9B%E9%98%B6%E7%94%A8%E6%B3%95)，或者部署后前往云开发平台进行环境变量配置。
+
+> 部分环境变量只在本地调试需要，部署至线上时可以不对这些环境变量进行配置。
 
 - `TAVILY_API_KEY`：Tavily 搜索工具的 API Key（联网搜索用）
 - `TENCENT_SECRET_ID`：腾讯云 SecretID (腾讯混元向量化模型用)
 - `TENCENT_SECRET_KEY`：腾讯云 SecretKey (腾讯混元向量化模型用)
-- `DEEPSEEK_API_KEY`：DeepSeek API Key （DeepSeek 大模型对话能力）
 - `MCP_SERVER_URL`：您的云开发 MCP Server URL (云开发MCP Server 服务url，例：https://your-env-id.api.tcloudbasegateway.com/v1/cloudrun/your-service-name/messages)
-
-本地调试时可配置
-- `TCB_API_KEY`： 云开发 API Key
+- `CLOUDBASE_ENV_ID`：云开发环境 ID（仅本地调试使用）
+- `CLOUDBASE_API_KEY`：云开发 API Key（用于 DeepSeek 大模型对话能力）（仅本地调试使用）[前往云开发平台获取](https://tcb.cloud.tencent.com/dev#/env/apikey)
 
 如需自定义模型/embedding 能力，可改造相关环境变量。
 
@@ -67,7 +92,7 @@ npm install
 
 ## 本地调试
 
-1. 配置好 `.env` 环境变量
+1. 配置好 `.env.development` 环境变量
 2. 启动本地服务
 
 ```shell
