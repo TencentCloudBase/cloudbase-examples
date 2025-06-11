@@ -46,10 +46,12 @@ export function mcpToolToStructuredTool(mcpTool: Tool, mcpClient: Client) {
     description = mcpTool.description || "";
     schema = zodSchema;
     async _call(input: any) {
+      console.log("Calling MCP tool", mcpTool.name, input)
       const result = await mcpClient.callTool({
         name: mcpTool.name,
         arguments: input,
       });
+      console.log("MCP tool result ", mcpTool.name, input, result)
       return typeof result === "string" ? result : JSON.stringify(result);
     }
   })();

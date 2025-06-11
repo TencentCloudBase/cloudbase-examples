@@ -36,8 +36,8 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0(@langchain/core@0.3.57(openai@4.96.0(ws@8.18.1)(zod@3.25.56)))
       '@modelcontextprotocol/sdk':
-        specifier: ^1.12.1
-        version: 1.12.1
+        specifier: 1.11.3
+        version: 1.11.3
       langchain:
         specifier: ^0.3.27
         version: 0.3.27(@langchain/core@0.3.57(openai@4.96.0(ws@8.18.1)(zod@3.25.56)))(@langchain/deepseek@0.0.1(@langchain/core@0.3.57(openai@4.96.0(ws@8.18.1)(zod@3.25.56)))(ws@8.18.1))(axios@1.9.0)(cheerio@1.0.0)(openai@4.96.0(ws@8.18.1)(zod@3.25.56))(ws@8.18.1)
@@ -2585,10 +2585,6 @@ packages:
 
   '@modelcontextprotocol/sdk@1.11.3':
     resolution: {integrity: sha512-rmOWVRUbUJD7iSvJugjUbFZshTAuJ48MXoZ80Osx1GM0K/H1w7rSEvmw8m6vdWxNASgtaHIhAgre4H/E9GJiYQ==}
-    engines: {node: '>=18'}
-
-  '@modelcontextprotocol/sdk@1.12.1':
-    resolution: {integrity: sha512-KG1CZhZfWg+u8pxeM/mByJDScJSrjjxLc8fwQqbsS8xCjBmQfMNEBTotYdNanKekepnfRI85GtgQlctLFpcYPw==}
     engines: {node: '>=18'}
 
   '@mrmlnc/readdir-enhanced@2.2.1':
@@ -12925,7 +12921,7 @@ snapshots:
       veaury: 2.6.2(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       vm-browserify: 1.1.2
       vue: 3.5.13(typescript@4.9.5)
-      vue-loader: 17.4.2(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@4.9.5))(webpack@5.99.7(@swc/core@1.11.21))
+      vue-loader: 17.4.2(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@5.8.3))(webpack@5.99.7(@swc/core@1.11.21))
       vue-loader-for-vue2: vue-loader@15.11.1(@vue/compiler-sfc@3.5.13)(babel-core@6.26.3)(css-loader@5.2.7(webpack@5.99.7(@swc/core@1.11.21)))(ejs@3.1.10)(lodash@4.17.21)(prettier@3.5.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(webpack@5.99.7(@swc/core@1.11.21))
       webpack: 5.99.7(@swc/core@1.11.21)
       webpack-bundle-analyzer: 4.10.2
@@ -13853,22 +13849,6 @@ snapshots:
 
   '@modelcontextprotocol/sdk@1.11.3':
     dependencies:
-      content-type: 1.0.5
-      cors: 2.8.5
-      cross-spawn: 7.0.6
-      eventsource: 3.0.7
-      express: 5.1.0
-      express-rate-limit: 7.5.0(express@5.1.0)
-      pkce-challenge: 5.0.0
-      raw-body: 3.0.0
-      zod: 3.25.56
-      zod-to-json-schema: 3.24.5(zod@3.25.56)
-    transitivePeerDependencies:
-      - supports-color
-
-  '@modelcontextprotocol/sdk@1.12.1':
-    dependencies:
-      ajv: 6.12.6
       content-type: 1.0.5
       cors: 2.8.5
       cross-spawn: 7.0.6
@@ -21991,7 +21971,7 @@ snapshots:
       - walrus
       - whiskers
 
-  vue-loader@17.4.2(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@4.9.5))(webpack@5.99.7(@swc/core@1.11.21)):
+  vue-loader@17.4.2(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@5.8.3))(webpack@5.99.7(@swc/core@1.11.21)):
     dependencies:
       chalk: 4.1.2
       hash-sum: 2.0.0

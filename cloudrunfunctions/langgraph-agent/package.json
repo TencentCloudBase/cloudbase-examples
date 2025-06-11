@@ -24,7 +24,7 @@
 		"@langchain/langgraph-supervisor": "^0.0.13",
 		"@langchain/tavily": "^0.1.2",
 		"@langchain/textsplitters": "^0.1.0",
-		"@modelcontextprotocol/sdk": "^1.12.1",
+		"@modelcontextprotocol/sdk": "1.11.3",
 		"langchain": "^0.3.27",
 		"remeda": "^2.23.0",
 		"zod": "^3.25.56"

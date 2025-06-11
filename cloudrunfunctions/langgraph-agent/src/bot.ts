@@ -28,6 +28,17 @@ export class MyBot extends BotCore implements IBot {
         "Missing envId, if running locally, please configure \`CLOUDBASE_ENV_ID\` environment variable."
       );
 
+    const createDeepseek = () =>
+      new ChatDeepSeek({
+        streaming: true,
+        model: "deepseek-v3-0324",
+        apiKey: this.apiKey,
+        configuration: {
+          baseURL: `https://${envId}.api.tcloudbasegateway.com/v1/ai/deepseek/v1`,
+        },
+        callbacks: [llmCallback],
+      });
+
     if (!this.mcpClient) {
       try {
         this.mcpClient = await this.getMCPClient();
@@ -37,15 +48,7 @@ export class MyBot extends BotCore implements IBot {
     }
 
     // LLM
-    const llm = new ChatDeepSeek({
-      streaming: false,
-      model: "deepseek-v3-0324",
-      apiKey: this.apiKey,
-      configuration: {
-        baseURL: `https://${envId}.api.tcloudbasegateway.com/v1/ai/deepseek/v1`,
-      },
-      callbacks: [llmCallback],
-    });
+    const llm = createDeepseek();
     // 子Agent
     const faqAgent = createReactAgent({
       llm,
@@ -62,35 +65,35 @@ export class MyBot extends BotCore implements IBot {
       name: "searchAgent",
     });
 
-    let generalAgent = null;
+    let generalAgentInfo = null;
 
     if (this.mcpClient) {
-      generalAgent = await createGeneralAgent(this.mcpClient, llm);
+      generalAgentInfo = await createGeneralAgent(this.mcpClient, llm);
     }
 
     // Supervisor LLM
-    const supervisorLLM = new ChatDeepSeek({
-      streaming: true,
-      model: "deepseek-v3-0324",
-      apiKey: this.apiKey,
-      configuration: {
-        baseURL: `https://${envId}.api.tcloudbasegateway.com/v1/ai/deepseek/v1`,
-      },
-      callbacks: [llmCallback],
-    });
+    const supervisorLLM = createDeepseek();
     // Supervisor prompt
-    const supervisorPrompt =
+    let supervisorPrompt =
       "你拥有一个强大的 Agent 团队。" +
       "对于云开发 AI 相关的问题，交给 faqAgent。" +
-      "对于互联网搜索相关的问题，交给 searchAgent。" +
-      "对于其他问题，交给 generalAgent。" +
-      "如果某个专家表示无法完成任务，你也应该 fallback 给 generalAgent 处理。" +
-      "如果你给出的最后答复不能解决用户的问题，你应该检查是否至少交给 generalAgent 处理过一次。如果 generalAgent 一次都没有处理过，你应该把问题交给 generalAgent 处理。";
+      "对于互联网搜索相关的问题，交给 searchAgent。";
+
     // 创建 Supervisor
     const agents = [faqAgent, searchAgent];
-    if (generalAgent) {
-      agents.push(generalAgent);
+    if (generalAgentInfo) {
+      supervisorPrompt +=
+        "对于其他问题，交给 generalAgent。" +
+        `generalAgent 的能力非常强大，这是 generalAgent 的描述
+=== generalAgent 描述 start ===
+${generalAgentInfo.description}
+=== generalAgent 描述 end ===` +
+        "如果某个专家表示无法完成任务，你也应该 fallback 给 generalAgent 处理。" +
+        "如果你给出的最后答复不能解决用户的问题，你应该检查是否至少交给 generalAgent 处理过一次。如果 generalAgent 一次都没有处理过，你应该把问题交给 generalAgent 处理。";
+
+      agents.push(generalAgentInfo.agent);
     }
+
     console.log(
       "agents",
       agents.map((x) => x.name)
@@ -106,14 +109,7 @@ export class MyBot extends BotCore implements IBot {
     });
 
     // 用 finalMessages 作为 prompt，流式总结
-    const streamingLLM = new ChatDeepSeek({
-      streaming: true,
-      model: "deepseek-v3-0324",
-      apiKey: this.apiKey,
-      configuration: {
-        baseURL: `https://${envId}.api.tcloudbasegateway.com/v1/ai/deepseek/v1`,
-      },
-    });
+    const streamingLLM = createDeepseek();
     const summaryStream = await streamingLLM.stream(result.messages);
 
     for await (const chunk of summaryStream) {
