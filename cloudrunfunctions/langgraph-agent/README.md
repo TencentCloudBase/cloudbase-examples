@@ -16,7 +16,32 @@
 
 ### 多Agent 协作架构
 
-![](https://qcloudimg.tencent-cloud.cn/raw/5fca7334d5a552d4a8d4f9a6c6d423ab.png)
+```mermaid
+flowchart TD
+    A[用户输入] --> B[Supervisor<br/>主管Agent]
+    
+    B --> C[FAQ Agent<br/>知识库检索]
+    B --> D[Search Agent<br/>联网搜索]
+    B --> E[Mcp Agent<br/>可调用 MCP 工具]
+    
+    C -->|回复/中间结果| B
+    D -->|回复/中间结果| B
+    E -->|回复/中间结果| B
+    
+    B -->|最终消息流| F[总结LLM<br/>流式输出]
+    F -->|token流式输出| A
+    
+    %% 添加一些样式
+    classDef userInput fill:#e1f5fe
+    classDef supervisor fill:#f3e5f5
+    classDef agents fill:#e8f5e8
+    classDef summary fill:#fff3e0
+    
+    class A userInput
+    class B supervisor
+    class C,D,E agents
+    class F summary
+```
 
 > **说明：**
 > - 用户输入首先由 Supervisor 主管 Agent 解析，自动分配给最合适的子 Agent（FAQ、搜索、地图等）。
@@ -36,7 +61,7 @@
 - **Search Agent**  
   内置联网搜索工具（如 Tavily），补充最新互联网信息。
 
-- **Map Agent**  
+- **MCP Agent**  
   动态注入 MCP 工具（如地图/导航/自定义 API），自动适配 JSON Schema → zod schema，支持 StructuredTool 方式调用。
 
 - **总结 LLM**  
