@@ -1,6 +1,7 @@
 {
   "paths": [
     "web/cloudbase-react-template",
+    "web/cloudbase-vue-template",
     "web/cloudbase-project",
     "miniprogram/cloudbase-miniprogram-template"
   ],
