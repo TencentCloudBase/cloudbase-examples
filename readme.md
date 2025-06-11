@@ -35,6 +35,7 @@
 ### 🌐 Web 应用
 
 - [React 应用模板](./web/cloudbase-react-template) - 基于 React 的云开发应用模板，支持 [`CloudBase AI ToolKit`](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
+- [Vue 应用模板](./web/cloudbase-vue-template) - 基于 React 的云开发应用模板，支持 [`CloudBase AI ToolKit`](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)
 - [文件上传下载](./web/tcb-demo-files) - 云开发文件存储示例
 - [截图工具](./web/snapshots) - 网页快照与截图工具
 
