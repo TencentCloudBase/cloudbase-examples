@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "CloudBase 小程序模板",
+  "usingComponents": {
+    "cloudbase-badge": "/components/cloudbase-badge/index"
+  }
 }

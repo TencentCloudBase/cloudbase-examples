@@ -23,7 +23,16 @@ const Footer = () => {
         </div>
         <div>
           <p className="mt-4">基于 React + Vite + CloudBase 构建</p>
-          <p className="text-xs opacity-50">Copyright © {new Date().getFullYear()} - All rights reserved</p>
+          <div className="mt-4">
+            <a href="https://github.com/TencentCloudBase/CloudBase-AI-ToolKit" target="_blank" rel="noopener noreferrer">
+              <img 
+                src="https://7463-tcb-advanced-a656fc-1257967285.tcb.qcloud.la/mcp/powered-by-cloudbase-badge.svg" 
+                alt="Powered by CloudBase" 
+                className="h-8"
+              />
+            </a>
+          </div>
+          <p className="text-xs opacity-50 mt-2">Copyright © {new Date().getFullYear()} - All rights reserved</p>
         </div>
       </div>
     </footer>

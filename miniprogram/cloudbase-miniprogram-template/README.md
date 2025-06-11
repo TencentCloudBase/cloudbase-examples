@@ -2,7 +2,7 @@
 
 本项目是一个基于小程序 + 云开发的空白项目，提供了基本的云开发能力演示，帮助开发者快速上手小程序云开发。
 
-[![Powered by CloudBase-AI-ToolKit](https://img.shields.io/badge/Powered%20by-CloudBase%20AI%20ToolKit-blue?style=flat-square)](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)  
+[![Powered by CloudBase](https://7463-tcb-advanced-a656fc-1257967285.tcb.qcloud.la/mcp/powered-by-cloudbase-badge.svg)](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit)  
 
 > 本项目基于 [**CloudBase AI ToolKit**](https://github.com/TencentCloudBase/CloudBase-AI-ToolKit) 开发，通过AI提示词和 MCP 协议+云开发，让开发更智能、更高效，支持AI生成全栈代码、一键部署至腾讯云开发（免服务器）、智能日志修复。
 
@@ -20,7 +20,10 @@
 - `getOpenId`：用于获取用户的 `openid`、`appid` 和 `unionid`。
 
 ### 小程序页面
-- `index`：初始页面，用于展示获取到的 `openid`。
+- `index`：首页，展示项目信息、用户OpenID和CloudBase功能特点。
+
+### 自定义组件
+- `cloudbase-badge`：CloudBase品牌标识组件，可复用的badge显示组件。
 
 ## 开始使用
 
@@ -57,6 +60,13 @@ wx.cloud.init({
 │   ├── app.json
 │   ├── app.wxss
 │   ├── components/
+│   │   └── cloudbase-badge/      # CloudBase徽章组件
+│   │       ├── index.js
+│   │       ├── index.json
+│   │       ├── index.wxml
+│   │       └── index.wxss
+│   ├── images/
+│   │   └── powered-by-cloudbase-badge.svg  # CloudBase徽章图标
 │   ├── pages/
 │   │   └── index/
 │   │       ├── index.js

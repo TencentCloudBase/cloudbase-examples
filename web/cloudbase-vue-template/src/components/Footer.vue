@@ -8,12 +8,15 @@
         <a href="https://cloud.tencent.com/product/tcb" target="_blank" class="link link-primary">腾讯云开发</a>
         构建
       </p>
-      <p class="text-xs text-gray-400 mt-2">
-        Powered by 
-        <a href="https://github.com/TencentCloudBase/CloudBase-AI-ToolKit" target="_blank" class="link">
-          CloudBase AI ToolKit
+      <div class="mt-4">
+        <a href="https://github.com/TencentCloudBase/CloudBase-AI-ToolKit" target="_blank">
+          <img 
+            src="https://7463-tcb-advanced-a656fc-1257967285.tcb.qcloud.la/mcp/powered-by-cloudbase-badge.svg" 
+            alt="Powered by CloudBase" 
+            class="h-8"
+          />
         </a>
-      </p>
+      </div>
     </aside>
   </footer>
 </template>
