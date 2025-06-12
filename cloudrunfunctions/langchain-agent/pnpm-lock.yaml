@@ -11,9 +11,6 @@ importers:
       '@cloudbase/aiagent-framework':
         specifier: 1.0.0-beta.9
         version: 1.0.0-beta.9
-      '@cloudbase/functions-typings':
-        specifier: ^1.0.0
-        version: 1.1.0
       '@langchain/community':
         specifier: ^0.3.45
         version: 0.3.45(@browserbasehq/sdk@2.6.0)(@browserbasehq/stagehand@1.14.0(@playwright/test@1.52.0)(deepmerge@4.3.1)(dotenv@16.5.0)(openai@4.96.0(ws@8.18.1)(zod@3.25.56))(zod@3.25.56))(@ibm-cloud/watsonx-ai@1.6.7)(@langchain/core@0.3.57(openai@4.96.0(ws@8.18.1)(zod@3.25.56)))(@langchain/deepseek@0.0.1(@langchain/core@0.3.57(openai@4.96.0(ws@8.18.1)(zod@3.25.56)))(ws@8.18.1))(axios@1.9.0)(cheerio@1.0.0)(crypto-js@4.2.0)(fast-xml-parser@4.2.5)(ibm-cloud-sdk-core@5.4.0)(ignore@5.3.2)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.96.0(ws@8.18.1)(zod@3.25.56))(playwright@1.52.0)(weaviate-client@3.6.0)(ws@8.18.1)
@@ -23,27 +20,15 @@ importers:
       '@langchain/deepseek':
         specifier: ^0.0.1
         version: 0.0.1(@langchain/core@0.3.57(openai@4.96.0(ws@8.18.1)(zod@3.25.56)))(ws@8.18.1)
-      '@langchain/openai':
-        specifier: ^0.5.12
-        version: 0.5.12(@langchain/core@0.3.57(openai@4.96.0(ws@8.18.1)(zod@3.25.56)))(ws@8.18.1)
       '@langchain/tavily':
         specifier: ^0.1.2
         version: 0.1.2(@langchain/core@0.3.57(openai@4.96.0(ws@8.18.1)(zod@3.25.56)))
       '@langchain/textsplitters':
         specifier: ^0.1.0
         version: 0.1.0(@langchain/core@0.3.57(openai@4.96.0(ws@8.18.1)(zod@3.25.56)))
-      cheerio:
-        specifier: ^1.0.0
-        version: 1.0.0
       langchain:
         specifier: ^0.3.27
         version: 0.3.27(@langchain/core@0.3.57(openai@4.96.0(ws@8.18.1)(zod@3.25.56)))(@langchain/deepseek@0.0.1(@langchain/core@0.3.57(openai@4.96.0(ws@8.18.1)(zod@3.25.56)))(ws@8.18.1))(axios@1.9.0)(cheerio@1.0.0)(openai@4.96.0(ws@8.18.1)(zod@3.25.56))(ws@8.18.1)
-      openai:
-        specifier: ^4.77.3
-        version: 4.96.0(ws@8.18.1)(zod@3.25.56)
-      prompts:
-        specifier: link:@langchain/core/prompts
-        version: link:@langchain/core/prompts
       zod:
         specifier: ^3.25.56
         version: 3.25.56
@@ -51,6 +36,9 @@ importers:
       '@cloudbase/cli':
         specifier: ^2.6.16
         version: 2.6.16(@cloudbase/weda-cloud-sdk@1.0.102(@cloudbase/js-sdk@1.7.2)(mobx@5.15.7))(@vue/compiler-sfc@3.5.13)(@zxing/library@0.18.6)(babel-core@6.26.3)(decimal.js@10.5.0)(ejs@3.1.10)(eslint@8.57.1)(papaparse@5.5.2)(prettier@3.5.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(sockjs-client@1.6.1)(type-fest@1.4.0)(xlsx@0.18.5)
+      '@cloudbase/functions-typings':
+        specifier: ^1.0.0
+        version: 1.1.0
       '@dotenvx/dotenvx':
         specifier: ^1.38.4
         version: 1.41.0
@@ -10477,7 +10465,7 @@ snapshots:
       '@babel/traverse': 7.27.0
       '@babel/types': 7.27.0
       convert-source-map: 1.9.0
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -10497,7 +10485,7 @@ snapshots:
       '@babel/traverse': 7.27.0
       '@babel/types': 7.27.0
       convert-source-map: 2.0.0
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -10622,7 +10610,7 @@ snapshots:
       '@babel/core': 7.21.4
       '@babel/helper-compilation-targets': 7.27.0
       '@babel/helper-plugin-utils': 7.26.5
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
       lodash.debounce: 4.0.8
       resolve: 1.22.10
       semver: 6.3.1
@@ -10634,7 +10622,7 @@ snapshots:
       '@babel/core': 7.26.10
       '@babel/helper-compilation-targets': 7.27.0
       '@babel/helper-plugin-utils': 7.26.5
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
       lodash.debounce: 4.0.8
       resolve: 1.22.10
     transitivePeerDependencies:
@@ -12274,7 +12262,7 @@ snapshots:
       '@babel/helper-split-export-declaration': 7.22.6
       '@babel/parser': 7.27.0
       '@babel/types': 7.27.0
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -12286,7 +12274,7 @@ snapshots:
       '@babel/parser': 7.27.0
       '@babel/template': 7.27.0
       '@babel/types': 7.27.0
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -12406,7 +12394,7 @@ snapshots:
       nodemon: 3.1.10
       open: 7.4.2
       ora: 4.1.1
-      portfinder: 1.0.37(supports-color@6.1.0)
+      portfinder: 1.0.37
       progress: 2.0.3
       query-string: 6.14.1
       reflect-metadata: 0.1.14
@@ -12627,7 +12615,7 @@ snapshots:
       camelcase-keys: 7.0.2
       cos-nodejs-sdk-v5: 2.14.7
       crypto-js: 4.2.0
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
       dotenv: 16.5.0
       execa: 5.1.1
       finalhandler: 1.3.1(supports-color@6.1.0)
@@ -12724,7 +12712,7 @@ snapshots:
       crypto-browserify: 3.12.1
       css-loader: 5.2.7(webpack@5.99.7(@swc/core@1.11.21))
       dayjs: 1.11.13
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
       domain-browser: 4.23.0
       enquirer: 2.4.1
       extract-loader: 5.1.0
@@ -12777,7 +12765,7 @@ snapshots:
       veaury: 2.6.2(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       vm-browserify: 1.1.2
       vue: 3.5.13(typescript@4.9.5)
-      vue-loader: 17.4.2(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@4.9.5))(webpack@5.99.7(@swc/core@1.11.21))
+      vue-loader: 17.4.2(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@5.8.3))(webpack@5.99.7(@swc/core@1.11.21))
       vue-loader-for-vue2: vue-loader@15.11.1(@vue/compiler-sfc@3.5.13)(babel-core@6.26.3)(css-loader@5.2.7(webpack@5.99.7(@swc/core@1.11.21)))(ejs@3.1.10)(lodash@4.17.21)(prettier@3.5.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(webpack@5.99.7(@swc/core@1.11.21))
       webpack: 5.99.7(@swc/core@1.11.21)
       webpack-bundle-analyzer: 4.10.2
@@ -13027,7 +13015,7 @@ snapshots:
       open: 7.1.0
       parse-json: 5.2.0
       path-type: 4.0.0
-      portfinder: 1.0.37(supports-color@6.1.0)
+      portfinder: 1.0.37
       query-string: 6.14.1
       yaml: 1.10.2
       yargs: 15.4.1
@@ -13057,7 +13045,7 @@ snapshots:
       ora: 5.4.1
       parse-json: 5.2.0
       path-type: 4.0.0
-      portfinder: 1.0.37(supports-color@6.1.0)
+      portfinder: 1.0.37
       query-string: 6.14.1
       terminal-link: 2.1.1
       yaml: 1.10.2
@@ -13139,7 +13127,7 @@ snapshots:
   '@eslint/eslintrc@2.1.4':
     dependencies:
       ajv: 6.12.6
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
       espree: 9.6.1
       globals: 13.24.0
       ignore: 5.3.2
@@ -13177,7 +13165,7 @@ snapshots:
   '@humanwhocodes/config-array@0.13.0':
     dependencies:
       '@humanwhocodes/object-schema': 2.0.3
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
       minimatch: 3.1.2
     transitivePeerDependencies:
       - supports-color
@@ -13533,7 +13521,7 @@ snapshots:
 
   '@koa/router@10.1.1':
     dependencies:
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
       http-errors: 1.8.1
       koa-compose: 4.1.0
       methods: 1.1.2
@@ -14484,7 +14472,7 @@ snapshots:
 
   agent-base@6.0.2:
     dependencies:
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -14778,14 +14766,14 @@ snapshots:
 
   axios@0.27.2:
     dependencies:
-      follow-redirects: 1.15.9(debug@4.4.0)
+      follow-redirects: 1.15.9(debug@4.4.0(supports-color@6.1.0))
       form-data: 4.0.2
     transitivePeerDependencies:
       - debug
 
   axios@1.9.0(debug@4.4.0):
     dependencies:
-      follow-redirects: 1.15.9(debug@4.4.0)
+      follow-redirects: 1.15.9(debug@4.4.0(supports-color@6.1.0))
       form-data: 4.0.2
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -15837,6 +15825,7 @@ snapshots:
       domelementtype: 2.3.0
       domhandler: 5.0.3
       domutils: 3.2.2
+    optional: true
 
   cheerio@1.0.0:
     dependencies:
@@ -15851,6 +15840,7 @@ snapshots:
       parse5-parser-stream: 7.1.2
       undici: 6.21.3
       whatwg-mimetype: 4.0.0
+    optional: true
 
   chokidar@2.1.8(supports-color@6.1.0):
     dependencies:
@@ -16853,6 +16843,7 @@ snapshots:
     dependencies:
       iconv-lite: 0.6.3
       whatwg-encoding: 3.1.1
+    optional: true
 
   end-of-stream@1.4.4:
     dependencies:
@@ -16878,7 +16869,8 @@ snapshots:
 
   entities@4.5.0: {}
 
-  entities@6.0.0: {}
+  entities@6.0.0:
+    optional: true
 
   env-paths@2.2.1: {}
 
@@ -16978,7 +16970,7 @@ snapshots:
       ajv: 6.12.6
       chalk: 4.1.2
       cross-spawn: 7.0.6
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
       doctrine: 3.0.0
       escape-string-regexp: 4.0.0
       eslint-scope: 7.2.2
@@ -17370,9 +17362,13 @@ snapshots:
 
   fn.name@1.1.0: {}
 
-  follow-redirects@1.15.9(debug@4.4.0):
+  follow-redirects@1.15.9(debug@4.4.0(supports-color@6.1.0)):
     optionalDependencies:
       debug: 4.4.0(supports-color@6.1.0)
+
+  follow-redirects@1.15.9(debug@4.4.0):
+    optionalDependencies:
+      debug: 4.4.0(supports-color@5.5.0)
 
   for-each@0.3.5:
     dependencies:
@@ -17827,6 +17823,7 @@ snapshots:
       domhandler: 5.0.3
       domutils: 3.2.2
       entities: 4.5.0
+    optional: true
 
   http-assert@1.5.0:
     dependencies:
@@ -17866,13 +17863,13 @@ snapshots:
     dependencies:
       '@tootallnate/once': 2.0.0
       agent-base: 6.0.2
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
 
-  http-proxy-middleware@0.19.1(debug@4.4.0)(supports-color@6.1.0):
+  http-proxy-middleware@0.19.1(debug@4.4.0(supports-color@6.1.0))(supports-color@6.1.0):
     dependencies:
-      http-proxy: 1.18.1(debug@4.4.0)
+      http-proxy: 1.18.1(debug@4.4.0(supports-color@6.1.0))
       is-glob: 4.0.3
       lodash: 4.17.21
       micromatch: 3.1.10(supports-color@6.1.0)
@@ -17889,6 +17886,14 @@ snapshots:
       micromatch: 4.0.8
     optionalDependencies:
       '@types/express': 4.17.21
+    transitivePeerDependencies:
+      - debug
+
+  http-proxy@1.18.1(debug@4.4.0(supports-color@6.1.0)):
+    dependencies:
+      eventemitter3: 4.0.7
+      follow-redirects: 1.15.9(debug@4.4.0(supports-color@6.1.0))
+      requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
 
@@ -17911,7 +17916,7 @@ snapshots:
   https-proxy-agent@5.0.1:
     dependencies:
       agent-base: 6.0.2
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -17930,7 +17935,7 @@ snapshots:
       '@types/tough-cookie': 4.0.5
       axios: 1.9.0(debug@4.4.0)
       camelcase: 6.3.0
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
       dotenv: 16.5.0
       extend: 3.0.2
       file-type: 16.5.4
@@ -17938,7 +17943,7 @@ snapshots:
       isstream: 0.1.2
       jsonwebtoken: 9.0.2
       mime-types: 2.1.35
-      retry-axios: 2.6.0(axios@1.9.0)
+      retry-axios: 2.6.0(axios@1.9.0(debug@4.4.0))
       tough-cookie: 4.1.4
     transitivePeerDependencies:
       - supports-color
@@ -18479,14 +18484,14 @@ snapshots:
 
   koa-mount@4.2.0:
     dependencies:
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
       koa-compose: 4.1.0
     transitivePeerDependencies:
       - supports-color
 
   koa-send@5.0.1:
     dependencies:
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
       http-errors: 1.8.1
       resolve-path: 1.4.0
     transitivePeerDependencies:
@@ -18502,7 +18507,7 @@ snapshots:
   koa-websocket@7.0.0:
     dependencies:
       co: 4.6.0
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
       koa-compose: 4.1.0
       ws: 8.18.1
     transitivePeerDependencies:
@@ -18517,7 +18522,7 @@ snapshots:
       content-disposition: 0.5.4
       content-type: 1.0.5
       cookies: 0.9.1
-      debug: 4.4.0(supports-color@6.1.0)
+      debug: 4.4.0(supports-color@5.5.0)
       delegates: 1.0.0
       depd: 2.0.0
       destroy: 1.2.0
@@ -19626,14 +19631,17 @@ snapshots:
     dependencies:
       domhandler: 5.0.3
       parse5: 7.3.0
+    optional: true
 
   parse5-parser-stream@7.1.2:
     dependencies:
       parse5: 7.3.0
+    optional: true
 
   parse5@7.3.0:
     dependencies:
       entities: 6.0.0
+    optional: true
 
   parseurl@1.3.3: {}
 
@@ -19745,6 +19753,13 @@ snapshots:
   pngjs@3.4.0: {}
 
   pngjs@5.0.0: {}
+
+  portfinder@1.0.37:
+    dependencies:
+      async: 3.2.6
+      debug: 4.4.0(supports-color@5.5.0)
+    transitivePeerDependencies:
+      - supports-color
 
   portfinder@1.0.37(supports-color@6.1.0):
     dependencies:
@@ -20432,7 +20447,7 @@ snapshots:
 
   ret@0.2.2: {}
 
-  retry-axios@2.6.0(axios@1.9.0):
+  retry-axios@2.6.0(axios@1.9.0(debug@4.4.0)):
     dependencies:
       axios: 1.9.0(debug@4.4.0)
 
@@ -20831,6 +20846,17 @@ snapshots:
 
   spdx-license-ids@3.0.21: {}
 
+  spdy-transport@3.0.0:
+    dependencies:
+      debug: 4.4.0(supports-color@5.5.0)
+      detect-node: 2.1.0
+      hpack.js: 2.1.6
+      obuf: 1.1.2
+      readable-stream: 3.6.2
+      wbuf: 1.7.3
+    transitivePeerDependencies:
+      - supports-color
+
   spdy-transport@3.0.0(supports-color@6.1.0):
     dependencies:
       debug: 4.4.0(supports-color@6.1.0)
@@ -20839,6 +20865,16 @@ snapshots:
       obuf: 1.1.2
       readable-stream: 3.6.2
       wbuf: 1.7.3
+    transitivePeerDependencies:
+      - supports-color
+
+  spdy@4.0.2:
+    dependencies:
+      debug: 4.4.0(supports-color@5.5.0)
+      handle-thing: 2.0.1
+      http-deceiver: 1.2.7
+      select-hose: 2.0.0
+      spdy-transport: 3.0.0
     transitivePeerDependencies:
       - supports-color
 
@@ -21353,7 +21389,8 @@ snapshots:
 
   undici-types@6.21.0: {}
 
-  undici@6.21.3: {}
+  undici@6.21.3:
+    optional: true
 
   unicode-canonical-property-names-ecmascript@2.0.1: {}
 
@@ -21584,7 +21621,7 @@ snapshots:
       - walrus
       - whiskers
 
-  vue-loader@17.4.2(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@4.9.5))(webpack@5.99.7(@swc/core@1.11.21)):
+  vue-loader@17.4.2(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@5.8.3))(webpack@5.99.7(@swc/core@1.11.21)):
     dependencies:
       chalk: 4.1.2
       hash-sum: 2.0.0
@@ -21709,7 +21746,7 @@ snapshots:
       del: 4.1.1
       express: 4.21.2(supports-color@6.1.0)
       html-entities: 1.4.0
-      http-proxy-middleware: 0.19.1(debug@4.4.0)(supports-color@6.1.0)
+      http-proxy-middleware: 0.19.1(debug@4.4.0(supports-color@6.1.0))(supports-color@6.1.0)
       import-local: 2.0.0
       internal-ip: 4.3.0
       ip: 1.1.9
@@ -21767,7 +21804,7 @@ snapshots:
       selfsigned: 2.4.1
       serve-index: 1.9.1(supports-color@6.1.0)
       sockjs: 0.3.24
-      spdy: 4.0.2(supports-color@6.1.0)
+      spdy: 4.0.2
       webpack-dev-middleware: 5.3.4(webpack@5.99.7(@swc/core@1.11.21))
       ws: 8.18.1
     optionalDependencies:
@@ -21860,6 +21897,7 @@ snapshots:
   whatwg-encoding@3.1.1:
     dependencies:
       iconv-lite: 0.6.3
+    optional: true
 
   whatwg-mimetype@4.0.0: {}
 

@@ -1,6 +1,6 @@
 {
-	"name": "lke-agent",
-	"description": "LKE 函数型智能体模板",
+	"name": "langchain-agent",
+	"description": "langchain 函数型智能体模板",
 	"main": "src/index.ts",
 	"scripts": {
 		"login": "tcb login",

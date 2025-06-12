@@ -8,6 +8,35 @@ import { TencentHunyuanEmbeddings } from "@langchain/community/embeddings/tencen
 import { CheerioWebBaseLoader } from "@langchain/community/document_loaders/web/cheerio";
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 
+async function wrapResult<T>(
+  fn: () => T
+): Promise<
+  { success: true; data: Awaited<T> } | { success: false; error: unknown }
+> {
+  try {
+    const data = await Promise.resolve(fn());
+    return {
+      success: true,
+      data,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error,
+    };
+  }
+}
+
+async function logIfError<T>(fn: () => T, log: (error: unknown) => void) {
+  const result = await wrapResult(fn);
+  if (result.success) {
+    return result.data;
+  } else {
+    log(result.error)
+    throw result.error
+  }
+}
+
 export class MyBot extends BotCore implements IBot {
   private tools: any[] = []
   private toolsByName: any = {}
@@ -82,38 +111,37 @@ export class MyBot extends BotCore implements IBot {
         "Missing envId, if running locally, please configure \`CLOUDBASE_ENV_ID\` environment variable."
       );
 
-    const cloudbaseToken =
-      this.context.extendedContext?.accessToken ||
-      process.env.CLOUDBASE_API_KEY;
-
-    !cloudbaseToken &&
-      console.warn(
-        "Missing cloudbase access token, if running locally, please configure \`CLOUDBASE_API_KEY\` environment variable."
-      );
-
     // 初始化 LLM
-    const llm = new ChatDeepSeek({
-      streaming: false,
-      model: "deepseek-v3-0324",
-      apiKey: cloudbaseToken,
-      configuration: {
-        baseURL: `https://${envId}.api.tcloudbasegateway.com/v1/ai/deepseek/v1`,
-      },
-    });
+    const llm  = await logIfError(
+      () =>
+        new ChatDeepSeek({
+          streaming: false,
+          model: "deepseek-v3-0324",
+          apiKey: this.apiKey,
+          configuration: {
+            baseURL: `https://${envId}.api.tcloudbasegateway.com/v1/ai/deepseek/v1`,
+          },
+        }),
+        (e) => console.error(`create deepseek failed`, e)
+    ); 
 
-    const streamingLLM = new ChatDeepSeek({
-      streaming: true,
-      model: "deepseek-v3-0324",
-      apiKey: cloudbaseToken,
-      configuration: {
-        baseURL: `https://${envId}.api.tcloudbasegateway.com/v1/ai/deepseek/v1`,
-      },
-    });
+    const streamingLLM  = await logIfError(
+      () =>
+        new ChatDeepSeek({
+          streaming: true,
+          model: "deepseek-v3-0324",
+          apiKey: this.apiKey,
+          configuration: {
+            baseURL: `https://${envId}.api.tcloudbasegateway.com/v1/ai/deepseek/v1`,
+          },
+        }),
+        (e) => console.error(`create streaming deepseek failed`, e)
+    ); 
 
     let tools = this.tools
     if (tools.length === 0) {
-      const searchTool = await this.getSearchTool()
-      const retrieverTool = await this.getRetrieverTool()
+      const searchTool = await logIfError(() => this.getSearchTool(), (e) => console.error(`create search tool failed`, e))
+      const retrieverTool = await logIfError(() => this.getRetrieverTool(), (e) => console.error(`create retriever tool failed`, e))
       tools = [searchTool, retrieverTool]
       this.tools = tools
       this.toolsByName = {
@@ -127,20 +155,20 @@ export class MyBot extends BotCore implements IBot {
     // 构建工具列表
     const messages = [new SystemMessage("你是一个智能助手，遇到无法直接回答的问题时，可以调用联网搜索工具，或在云开发AI FAQ 知识库中检索相关内容"), new HumanMessage(msg)];
 
-    const aiMessage = await llmWithTools.invoke(messages);
+    const aiMessage = await logIfError(() => llmWithTools.invoke(messages), (e) => console.error(`invoke llm failed`, e, messages))
     console.log(aiMessage);
     messages.push(aiMessage);
 
     for (const toolCall of aiMessage.tool_calls as any) {
       const selectedTool = this.toolsByName[toolCall.name];
-      const toolMessage = await selectedTool.invoke(toolCall);
+      const toolMessage = await logIfError(() => selectedTool.invoke(toolCall), (e) => console.error(`invoke tool failed`, e, toolCall))
       messages.push(toolMessage);
     }
 
     console.log('final messages', messages);
 
     // 生成最终答案
-    const finalStream = await streamingLLM.stream(messages);
+    const finalStream = await logIfError(() => streamingLLM.stream(messages), (e) => console.error(`stream llm failed`, e, messages))
     let fullResponse = "";
 
     for await (const chunk of finalStream) {
@@ -158,5 +186,16 @@ export class MyBot extends BotCore implements IBot {
     }
     console.log('fullResponse', fullResponse);
     this.sseSender.end();
+  }
+
+  get apiKey() {
+    const accessToken =
+      this.context?.extendedContext?.accessToken ||
+      process.env.CLOUDBASE_API_KEY;
+    if (typeof accessToken !== "string") {
+      throw new Error("Invalid accessToken");
+    }
+
+    return accessToken.replace("Bearer", "").trim();
   }
 }
